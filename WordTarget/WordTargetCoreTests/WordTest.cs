@@ -8,7 +8,7 @@ namespace WordTargetCore
         [TestMethod]
         public void WordCreation()
         {
-            Word w = new Word();
+            Word w = new Word("cat");
         }
     }
 }
