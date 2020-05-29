@@ -4,11 +4,11 @@ namespace WordTargetCore
 {
     public class Word
     {
-        private string text;
+        public string Text { get; }
 
         public Word(string text)
         {
-            this.text = text;
+            Text = text;
         }
     }
 }

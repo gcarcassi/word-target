@@ -8,7 +8,8 @@ namespace WordTargetCore
         [TestMethod]
         public void WordCreation()
         {
-            Word w = new Word("cat");
+            Word word = new Word("cat");
+            Assert.AreEqual("cat", word.Text);
         }
     }
 }
