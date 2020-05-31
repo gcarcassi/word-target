@@ -17,6 +17,11 @@ namespace WordTargetCore
             this.WordA = wordA;
             this.WordB = wordB;
             this.Type = type;
+
+            if (type == LinkType.Anagram && !LinkTypes.IsAnagram(WordA.Text, WordB.Text))
+            {
+                throw new Exception(WordA.Text + " is not an anagram of " + WordB.Text);
+            }
         }
 
 

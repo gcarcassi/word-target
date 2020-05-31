@@ -14,6 +14,13 @@ namespace WordTargetCore
             Assert.AreEqual(LinkType.OneLetterChange, link.Type);
         }
 
+        [TestMethod]
+        public void VerifyAnagram()
+        {
+            Link link = new Link(new Word("bat"), new Word("tab"), LinkType.Anagram);
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("bat"), LinkType.Anagram));
+        }
+
 
         /*        [TestMethod]
                 public void VerifyOneLetterChange()
