@@ -6,15 +6,19 @@ namespace WordTargetCore
 {
     public class Link
     {
-        private Word wordA;
-        private Word wordB;
-        private LinkType type;
+        public Word WordA { get; }
+        public Word WordB { get; }
+        public LinkType Type { get; }
+
+        
 
         public Link(Word wordA, Word wordB, LinkType type)
         {
-            this.wordA = wordA;
-            this.wordB = wordB;
-            this.type = type;
+            this.WordA = wordA;
+            this.WordB = wordB;
+            this.Type = type;
         }
+
+
     }
 }

@@ -5,15 +5,15 @@ namespace WordTargetCore
     [TestClass]
     public class LinkTest
     {
-        /*        [TestMethod]
-                public void LinkCreation()
-                {
-                    Link link = new Link(new Word("cat"), new Word("bat"), LinkType.OneLetterChange);
-                    Assert.AreEqual("cat", link.WordA);
-                    Assert.AreEqual("bat", link.WordB);
-                    Assert.AreEqual(LinkType.OneLetterChange, link.Type);
-                }
-        */
+        [TestMethod]
+        public void LinkCreation()
+        {
+            Link link = new Link(new Word("cat"), new Word("bat"), LinkType.OneLetterChange);
+            Assert.AreEqual("cat", link.WordA.Text);
+            Assert.AreEqual("bat", link.WordB.Text);
+            Assert.AreEqual(LinkType.OneLetterChange, link.Type);
+        }
+
 
         /*        [TestMethod]
                 public void VerifyOneLetterChange()
