@@ -22,14 +22,14 @@ namespace WordTargetCore
         }
 
 
-        /*        [TestMethod]
-                public void VerifyOneLetterChange()
-                {
-                    Link link = new Link(new Word("cat"), new Word("bat"), LinkType.OneLetterChange);
-                    Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("brat"), LinkType.OneLetterChange));
-                    Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("bit"), LinkType.OneLetterChange));
-                    Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("cat"), LinkType.OneLetterChange));
-                }
-        */
+        [TestMethod]
+        public void VerifyOneLetterChange()
+        {
+            Link link = new Link(new Word("cat"), new Word("bat"), LinkType.OneLetterChange);
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("brat"), LinkType.OneLetterChange));
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("bit"), LinkType.OneLetterChange));
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("cat"), LinkType.OneLetterChange));
+        }
+
     }
 }
