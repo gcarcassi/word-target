@@ -54,6 +54,16 @@ namespace WordTargetCore
             Assert.IsFalse(LinkTypes.IsAnagram("cat", "angle"));
         }
 
+        [TestMethod]
+        public void IsOneLetterChange()
+        {
+            Assert.IsTrue(LinkTypes.IsOneLetterChange("moon", "moan"));
+            Assert.IsTrue(LinkTypes.IsOneLetterChange("cart", "care"));
+            Assert.IsFalse(LinkTypes.IsOneLetterChange("cat", "bit"));
+            Assert.IsFalse(LinkTypes.IsOneLetterChange("cat", "angle"));
+            Assert.IsFalse(LinkTypes.IsOneLetterChange("cat", "cat"));
+        }
+
 
     }
 }

@@ -87,6 +87,32 @@ namespace WordTargetCore
         {
             return CountLetters(textA).Equals(CountLetters(textB));
         }
+
+        public static bool IsOneLetterChange(string textA, string textB)
+        {
+            if (textA.Length != textB.Length)
+            {
+                return false;
+            }
+
+            bool firstLetterChange = false;
+            for (int i = 0; i < textA.Length; i++)
+            {
+                if (textA[i] != textB[i])
+                {
+                    if (firstLetterChange)
+                    {
+                        return false;
+                    } 
+                    else
+                    {
+                        firstLetterChange = true;
+                    }
+                
+                }
+            }
+            return firstLetterChange;
+        }
     }
 
 }
