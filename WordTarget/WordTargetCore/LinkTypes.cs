@@ -113,6 +113,33 @@ namespace WordTargetCore
             }
             return firstLetterChange;
         }
+
+        public static bool IsOneLetterAdd(string textA, string textB)
+        {
+            if (textA.Length - textB.Length != -1)
+            {
+                return false;
+            }
+            
+            bool firstLetterAdded = false;
+            for (int i = 0; i < textA.Length; i++)
+            {
+                int offset = firstLetterAdded ? 1 : 0;
+                if (textA[i] != textB[i + offset])
+                {
+                    if (firstLetterAdded)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        firstLetterAdded = true;
+                        i--;
+                    }
+                }
+            }
+            return true;
+        }
     }
 
 }
