@@ -30,6 +30,15 @@ namespace WordTargetCore
             Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("bit"), LinkType.OneLetterChange));
             Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("cat"), LinkType.OneLetterChange));
         }
+        
+        [TestMethod]
+        public void VerifyOneLetterAdd()
+        {
+            Link link = new Link(new Word("cat"), new Word("cart"), LinkType.OneLetterAdd);
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("brat"), LinkType.OneLetterAdd));
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("bit"), LinkType.OneLetterAdd));
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("cat"), LinkType.OneLetterAdd));
+        }
 
     }
 }

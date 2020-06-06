@@ -26,6 +26,11 @@ namespace WordTargetCore
             {
                 throw new Exception(WordA.Text + " is not a letter change from " + WordB.Text);
             }
+            if (type == LinkType.OneLetterAdd && !LinkTypes.IsOneLetterAdd(WordA.Text, WordB.Text))
+            {
+                throw new Exception(WordA.Text + " is not a letter additon to " + WordB.Text);
+            }
+
 
         }
 
