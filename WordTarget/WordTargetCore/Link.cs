@@ -30,6 +30,14 @@ namespace WordTargetCore
             {
                 throw new Exception(WordA.Text + " is not a letter additon to " + WordB.Text);
             }
+            if (type == LinkType.OneLetterAdd && !LinkTypes.IsOneLetterAdd(WordA.Text, WordB.Text))
+            {
+                throw new Exception(WordA.Text + " is not a letter additon to " + WordB.Text);
+            }
+            if (type == LinkType.OneLetterRemove && !LinkTypes.IsOneLetterRemove(WordA.Text, WordB.Text))
+            {
+                throw new Exception(WordA.Text + " is not a letter subtraction to " + WordB.Text);
+            }
 
 
         }

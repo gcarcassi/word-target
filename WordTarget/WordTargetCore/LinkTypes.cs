@@ -140,6 +140,11 @@ namespace WordTargetCore
             }
             return true;
         }
+
+        public static bool IsOneLetterRemove(string textA, string textB)
+        {
+            return IsOneLetterAdd(textB, textA);
+        }
     }
 
 }

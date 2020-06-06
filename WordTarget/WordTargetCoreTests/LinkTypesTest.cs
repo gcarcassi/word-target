@@ -73,6 +73,16 @@ namespace WordTargetCore
             Assert.IsFalse(LinkTypes.IsOneLetterAdd("raw", "straw"));
             Assert.IsFalse(LinkTypes.IsOneLetterAdd("cat", "cat"));
         }
+        
+        [TestMethod]
+        public void IsOneLetterRemove()
+        {
+            Assert.IsTrue(LinkTypes.IsOneLetterRemove("pain", "pan"));
+            Assert.IsTrue(LinkTypes.IsOneLetterRemove("cart", "car"));
+            Assert.IsFalse(LinkTypes.IsOneLetterRemove("cat", "bite"));
+            Assert.IsFalse(LinkTypes.IsOneLetterRemove("straw", "raw"));
+            Assert.IsFalse(LinkTypes.IsOneLetterRemove("cat", "cat"));
+        }
 
 
     }
