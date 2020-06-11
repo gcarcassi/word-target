@@ -47,5 +47,51 @@ namespace WordTargetCore
             chain.prepend(catBat);
             Assert.AreEqual(catBat, chain[0]);
         }
+
+        [TestMethod]
+        public void ValidChainAddingToEachOther()
+        {
+            Word cat = new Word("cat");
+            Word bat = new Word("bat");
+            Word baseball = new Word("baseball");
+            Word sport = new Word("sport");
+            Word ports = new Word("ports");
+            Word parts = new Word("parts");
+            Link catBat = new Link(cat, bat, LinkType.OneLetterChange);
+            Link batBaseball = new Link(bat, baseball, LinkType.WordAssociation);
+            Link baseballSports = new Link(baseball, sport, LinkType.WordAssociation);
+            Link sportPorts = new Link(sport, ports, LinkType.Anagram);
+            Link portsParts = new Link(ports, parts, LinkType.OneLetterChange);
+            Chain chain1 = new Chain();
+            chain1.add(catBat);
+            chain1.add(batBaseball);
+            chain1.add(baseballSports);
+            Chain chain2 = new Chain();
+            chain2.add(sportPorts);
+            chain2.add(portsParts);
+            Chain chain3 = new Chain();
+            chain1.add(chain2);
+            Assert.AreEqual(5, chain1.Count);
+            Assert.AreEqual(catBat, chain1[0]);
+            Assert.AreEqual(batBaseball, chain1[1]);
+            Assert.AreEqual(baseballSports, chain1[2]);
+            Assert.AreEqual(sportPorts, chain1[3]);
+            Assert.AreEqual(portsParts, chain1[4]);
+            chain1.add(chain3);
+            Assert.AreEqual(5, chain1.Count);
+            Assert.AreEqual(catBat, chain1[0]);
+            Assert.AreEqual(batBaseball, chain1[1]);
+            Assert.AreEqual(baseballSports, chain1[2]);
+            Assert.AreEqual(sportPorts, chain1[3]);
+            Assert.AreEqual(portsParts, chain1[4]);
+            chain3.add(chain1);
+            Assert.AreEqual(5, chain3.Count);
+            Assert.AreEqual(catBat, chain3[0]);
+            Assert.AreEqual(batBaseball, chain3[1]);
+            Assert.AreEqual(baseballSports, chain3[2]);
+            Assert.AreEqual(sportPorts, chain3[3]);
+            Assert.AreEqual(portsParts, chain3[4]);
+
+        }
     }
 }

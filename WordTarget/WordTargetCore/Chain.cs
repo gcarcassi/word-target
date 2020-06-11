@@ -22,6 +22,21 @@ namespace WordTargetCore
             links.Add(newLink);
         }
 
+        public void add(Chain newChain)
+        { 
+            if (newChain.Count == 0)
+            {
+                return;
+            }
+            
+            if (this.Count != 0 && this.links[links.Count - 1].WordB != newChain.links[0].WordA)
+            {
+                throw new Exception(newChain.links[links.Count - 1] + " is not a valid link with " + newChain);
+            }
+            
+            links.AddRange(newChain.links);
+        }
+
         public void prepend(Link newLink)
         {
             links.Insert(0, newLink);
