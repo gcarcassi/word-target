@@ -1,0 +1,121 @@
+<svg width="500" height="500" viewBox="-700 -700 1400 1400" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .text1 { fill: black; font: 50px sans-serif; }
+    .text2 { fill: white; font: 50px sans-serif; }
+    .line2 { stroke: white; stroke-width:5; }
+    .text3 { fill: black; font: 50px sans-serif; }
+    .line3 { stroke: black; stroke-width:5; }
+    .text4 { fill: white; font: 50px sans-serif; }
+    .line4 { stroke: white; stroke-width:5; }
+    .text5 { fill: black; font: 50px sans-serif; }
+    .line5 { stroke: black; stroke-width:5; }
+  </style>
+
+<circle cx="0" cy="0" r="505" fill="black" />
+<circle cx="0" cy="0" r="500" fill="white" />
+<circle cx="0" cy="0" r="400" fill="black" />
+<circle cx="0" cy="0" r="300" fill="white" />
+<circle cx="0" cy="0" r="200" fill="black" />
+<circle cx="0" cy="0" r="100" fill="white" />
+<line x1="-415" y1="-415" x2="-390" y2="-390" stroke="black" stroke-width="20"/>
+<polygon points="-375 -415, -415 -375, -360 -360" />
+
+<path id="circle2" fill="transparent"
+    d="
+    M 0 0
+    m -130, 0
+    a 130,130 0 1,1 260,0
+    a 130,130 0 1,1 -260,0
+    "
+/>
+<path id="circle3" fill="transparent"
+    d="
+    M 0 0
+    m -230, 0
+    a 230,230 0 1,1 460,0
+    a 230,230 0 1,1 -460,0
+    "
+/>
+<path id="circle4" fill="transparent"
+    d="
+    M 0 0
+    m -330, 0
+    a 330,330 0 1,1 660,0
+    a 330,330 0 1,1 -660,0
+    "
+/>
+<path id="circle5" fill="transparent"
+    d="
+    M 0 0
+    m -430, 0
+    a 430,430 0 1,1 860,0
+    a 430,430 0 1,1 -860,0
+    "
+/>
+
+  <!-- First circle -->
+  <text x="0" y="0" dominant-baseline="middle" text-anchor="middle" class="text1" >FIRME</text>
+
+  <!-- Second circle -->
+  <text transform="rotate(95 0,0)" class="text2" ><textPath href="#circle2">VASTI</textPath></text>
+  <line transform="rotate(173 0,0)" x1="-200" x2="-100" y1="0" y2="0" class="line2"/>
+  <text transform="rotate(185 0,0)" class="text2" ><textPath href="#circle2">MILLER</textPath></text>
+  <line transform="rotate(-80 0,0)" x1="-200" x2="-100" y1="0" y2="0" class="line2"/>
+  <text transform="rotate(-65 0,0)" class="text2" ><textPath href="#circle2">ISPIRATORE</textPath></text>
+  <line transform="rotate(82 0,0)" x1="-200" x2="-100" y1="0" y2="0" class="line2"/>
+
+  <!-- Third circle -->
+  <text transform="rotate(10 0,0)" class="text3" ><textPath href="#circle3">CRITICARE</textPath></text>
+  <line transform="rotate(85 0,0)" x1="-300" x2="-200" y1="0" y2="0" class="line3"/>
+  <text transform="rotate(90 0,0)" class="text3" ><textPath href="#circle3">OSTI</textPath></text>
+  <line transform="rotate(126 0,0)" x1="-300" x2="-200" y1="0" y2="0" class="line3"/>
+  <text transform="rotate(130 0,0)" class="text3" ><textPath href="#circle3">CAVERNE</textPath></text>
+  <line transform="rotate(198 0,0)" x1="-300" x2="-200" y1="0" y2="0" class="line3"/>
+  <text transform="rotate(205 0,0)" class="text3" ><textPath href="#circle3">ALVEARI</textPath></text>
+  <line transform="rotate(-94 0,0)" x1="-300" x2="-200" y1="0" y2="0" class="line3"/>
+  <text transform="rotate(-85 0,0)" class="text3" ><textPath href="#circle3">SPARATORIE</textPath></text>
+  <line transform="rotate(2 0,0)" x1="-300" x2="-200" y1="0" y2="0" class="line3"/>
+
+  <!-- Fourth circle -->
+  <text transform="rotate(0 0,0)" class="text4" ><textPath href="#circle4">EVASI</textPath></text>
+  <line transform="rotate(30 0,0)" x1="-400" x2="-300" y1="0" y2="0" class="line4"/>
+  <text transform="rotate(35 0,0)" class="text4" ><textPath href="#circle4">CONTE</textPath></text>
+  <line transform="rotate(70 0,0)" x1="-400" x2="-300" y1="0" y2="0" class="line4"/>
+  <text transform="rotate(75 0,0)" class="text4" ><textPath href="#circle4">TEX</textPath></text>
+  <line transform="rotate(96 0,0)" x1="-400" x2="-300" y1="0" y2="0" class="line4"/>
+  <text transform="rotate(100 0,0)" class="text4" ><textPath href="#circle4">GOLINO</textPath></text>
+  <line transform="rotate(137 0,0)" x1="-400" x2="-300" y1="0" y2="0" class="line4"/>
+  <text transform="rotate(140 0,0)" class="text4" ><textPath href="#circle4">ELOGIARE</textPath></text>
+  <line transform="rotate(190 0,0)" x1="-400" x2="-300" y1="0" y2="0" class="line4"/>
+  <text transform="rotate(195 0,0)" class="text4" ><textPath href="#circle4">PONTE</textPath></text>
+  <line transform="rotate(230 0,0)" x1="-400" x2="-300" y1="0" y2="0" class="line4"/>
+  <text transform="rotate(235 0,0)" class="text4" ><textPath href="#circle4">ASTI</textPath></text>
+  <line transform="rotate(260 0,0)" x1="-400" x2="-300" y1="0" y2="0" class="line4"/>
+  <text transform="rotate(265 0,0)" class="text4" ><textPath href="#circle4">PREISTORIA</textPath></text>
+  <line transform="rotate(-39 0,0)" x1="-400" x2="-300" y1="0" y2="0" class="line4"/>
+  <text transform="rotate(-35 0,0)" class="text4" ><textPath href="#circle4">MIELE</textPath></text>
+  <line transform="rotate(-5 0,0)" x1="-400" x2="-300" y1="0" y2="0" class="line4"/>
+
+  <!-- Fifth circle -->
+  <text transform="rotate(-5 0,0)" class="text5" ><textPath href="#circle5">VALERIA</textPath></text>
+  <line transform="rotate(26 0,0)" x1="-500" x2="-400" y1="0" y2="0" class="line5"/>
+  <text transform="rotate(30 0,0)" class="text5" ><textPath href="#circle5">LAGO ERIE</textPath></text>
+  <line transform="rotate(71 0,0)" x1="-500" x2="-400" y1="0" y2="0" class="line5"/>
+  <text transform="rotate(75 0,0)" class="text5" ><textPath href="#circle5">FIUME</textPath></text>
+  <line transform="rotate(101 0,0)" x1="-500" x2="-400" y1="0" y2="0" class="line5"/>
+  <text transform="rotate(104 0,0)" class="text5" ><textPath href="#circle5">MILLE</textPath></text>
+  <line transform="rotate(127 0,0)" x1="-500" x2="-400" y1="0" y2="0" class="line5"/>
+  <text transform="rotate(130 0,0)" class="text5" ><textPath href="#circle5">VASI</textPath></text>
+  <line transform="rotate(149 0,0)" x1="-500" x2="-400" y1="0" y2="0" class="line5"/>
+  <text transform="rotate(152 0,0)" class="text5" ><textPath href="#circle5">ASPIRATORE</textPath></text>
+  <line transform="rotate(198 0,0)" x1="-500" x2="-400" y1="0" y2="0" class="line5"/>
+  <text transform="rotate(202 0,0)" class="text5" ><textPath href="#circle5">RICERCATI</textPath></text>
+  <line transform="rotate(241 0,0)" x1="-500" x2="-400" y1="0" y2="0" class="line5"/>
+  <text transform="rotate(244 0,0)" class="text5" ><textPath href="#circle5">UGOLINO</textPath></text>
+  <line transform="rotate(-82 0,0)" x1="-500" x2="-400" y1="0" y2="0" class="line5"/>
+  <text transform="rotate(-78 0,0)" class="text5" ><textPath href="#circle5">TAVERNE</textPath></text>
+  <line transform="rotate(-43 0,0)" x1="-500" x2="-400" y1="0" y2="0" class="line5"/>
+  <text transform="rotate(-38 0,0)" class="text5" ><textPath href="#circle5">WILLER</textPath></text>
+  <line transform="rotate(-9 0,0)" x1="-500" x2="-400" y1="0" y2="0" class="line5"/>
+
+</svg>
