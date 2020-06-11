@@ -21,6 +21,10 @@ namespace WordTargetCore
             }
             links.Add(newLink);
         }
-        
+
+        public void prepend(Link newLink)
+        {
+            links.Insert(0, newLink);
+        }
     }
 }

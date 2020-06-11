@@ -39,9 +39,11 @@ namespace WordTargetCore
                 throw new Exception(WordA.Text + " is not a letter subtraction to " + WordB.Text);
             }
 
-
         }
-
+        public override string ToString()
+        {
+            return WordA + "-" + WordB;
+        }
 
     }
 }

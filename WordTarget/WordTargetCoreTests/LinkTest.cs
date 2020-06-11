@@ -49,5 +49,12 @@ namespace WordTargetCore
             Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("cat"), LinkType.OneLetterRemove));
         }
 
+        [TestMethod]
+        public void LinkStingConversion()
+        {
+            Link link = new Link(new Word("cat"), new Word("bat"), LinkType.OneLetterChange);
+            Assert.AreEqual("cat-bat", link.ToString());
+        }
+
     }
 }

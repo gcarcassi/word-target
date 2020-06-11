@@ -33,5 +33,19 @@ namespace WordTargetCore
             chain.add(batBaseball);
             Assert.ThrowsException<System.Exception>(() => chain.add(catBat));
         }
+        
+        [TestMethod]
+        public void ValidChainAdding()
+        {
+            Word cat = new Word("Cat");
+            Word bat = new Word("Bat");
+            Word baseball = new Word("Baseball");
+            Link catBat = new Link(cat, bat, LinkType.OneLetterChange);
+            Link batBaseball = new Link(bat, baseball, LinkType.WordAssociation);
+            Chain chain = new Chain();
+            chain.add(batBaseball);
+            chain.prepend(catBat);
+            Assert.AreEqual(catBat, chain[0]);
+        }
     }
 }
