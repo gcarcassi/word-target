@@ -5,14 +5,21 @@ namespace WordTargetCore
     [TestClass]
     public class ChainTest
     {
+        static Word cat = new Word("cat");
+        static Word bat = new Word("bat");
+        static Word baseball = new Word("baseball");
+        static Word sport = new Word("sport");
+        static Word ports = new Word("ports");
+        static Word parts = new Word("parts");
+        static Link catBat = new Link(cat, bat, LinkType.OneLetterChange);
+        static Link batBaseball = new Link(bat, baseball, LinkType.WordAssociation);
+        static Link baseballSports = new Link(baseball, sport, LinkType.WordAssociation);
+        static Link sportPorts = new Link(sport, ports, LinkType.Anagram);
+        static Link portsParts = new Link(ports, parts, LinkType.OneLetterChange);
+        
         [TestMethod]
         public void ValidChainCreation()
         {
-            Word cat = new Word("Cat");
-            Word bat = new Word("Bat");
-            Word baseball = new Word("Baseball");
-            Link catBat = new Link(cat, bat, LinkType.OneLetterChange);
-            Link batBaseball = new Link(bat, baseball, LinkType.WordAssociation);
             Chain chain = new Chain();
             chain.add(catBat);
             chain.add(batBaseball);
@@ -24,11 +31,6 @@ namespace WordTargetCore
         [TestMethod]
         public void InvalidChainCreation()
         {
-            Word cat = new Word("Cat");
-            Word bat = new Word("Bat");
-            Word baseball = new Word("Baseball");
-            Link catBat = new Link(cat, bat, LinkType.OneLetterChange);
-            Link batBaseball = new Link(bat, baseball, LinkType.WordAssociation);
             Chain chain = new Chain();
             chain.add(batBaseball);
             Assert.ThrowsException<System.Exception>(() => chain.add(catBat));
@@ -37,11 +39,6 @@ namespace WordTargetCore
         [TestMethod]
         public void ValidChainAdding()
         {
-            Word cat = new Word("Cat");
-            Word bat = new Word("Bat");
-            Word baseball = new Word("Baseball");
-            Link catBat = new Link(cat, bat, LinkType.OneLetterChange);
-            Link batBaseball = new Link(bat, baseball, LinkType.WordAssociation);
             Chain chain = new Chain();
             chain.add(batBaseball);
             chain.prepend(catBat);
@@ -51,17 +48,6 @@ namespace WordTargetCore
         [TestMethod]
         public void ValidChainAddingToEachOther()
         {
-            Word cat = new Word("cat");
-            Word bat = new Word("bat");
-            Word baseball = new Word("baseball");
-            Word sport = new Word("sport");
-            Word ports = new Word("ports");
-            Word parts = new Word("parts");
-            Link catBat = new Link(cat, bat, LinkType.OneLetterChange);
-            Link batBaseball = new Link(bat, baseball, LinkType.WordAssociation);
-            Link baseballSports = new Link(baseball, sport, LinkType.WordAssociation);
-            Link sportPorts = new Link(sport, ports, LinkType.Anagram);
-            Link portsParts = new Link(ports, parts, LinkType.OneLetterChange);
             Chain chain1 = new Chain();
             chain1.add(catBat);
             chain1.add(batBaseball);
@@ -91,24 +77,11 @@ namespace WordTargetCore
             Assert.AreEqual(baseballSports, chain3[2]);
             Assert.AreEqual(sportPorts, chain3[3]);
             Assert.AreEqual(portsParts, chain3[4]);
-
-
         }
 
         [TestMethod]
         public void ValidChainAddingAtTheBeginning()
         {
-            Word cat = new Word("cat");
-            Word bat = new Word("bat");
-            Word baseball = new Word("baseball");
-            Word sport = new Word("sport");
-            Word ports = new Word("ports");
-            Word parts = new Word("parts");
-            Link catBat = new Link(cat, bat, LinkType.OneLetterChange);
-            Link batBaseball = new Link(bat, baseball, LinkType.WordAssociation);
-            Link baseballSports = new Link(baseball, sport, LinkType.WordAssociation);
-            Link sportPorts = new Link(sport, ports, LinkType.Anagram);
-            Link portsParts = new Link(ports, parts, LinkType.OneLetterChange);
             Chain chain1 = new Chain();
             chain1.add(catBat);
             chain1.add(batBaseball);
@@ -128,17 +101,6 @@ namespace WordTargetCore
         [TestMethod]
         public void InvalidChainAddingAtTheBeginning()
         {
-            Word cat = new Word("cat");
-            Word bat = new Word("bat");
-            Word baseball = new Word("baseball");
-            Word sport = new Word("sport");
-            Word ports = new Word("ports");
-            Word parts = new Word("parts");
-            Link catBat = new Link(cat, bat, LinkType.OneLetterChange);
-            Link batBaseball = new Link(bat, baseball, LinkType.WordAssociation);
-            Link baseballSports = new Link(baseball, sport, LinkType.WordAssociation);
-            Link sportPorts = new Link(sport, ports, LinkType.Anagram);
-            Link portsParts = new Link(ports, parts, LinkType.OneLetterChange);
             Chain chain1 = new Chain();
             chain1.add(catBat);
             chain1.add(batBaseball);
