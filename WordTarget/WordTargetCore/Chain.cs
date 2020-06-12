@@ -31,7 +31,7 @@ namespace WordTargetCore
             
             if (this.Count != 0 && this.links[links.Count - 1].WordB != newChain.links[0].WordA)
             {
-                throw new Exception(newChain.links[links.Count - 1] + " is not a valid link with " + newChain);
+                throw new Exception(this.links[links.Count - 1] + " is not a valid link with " + newChain.links[0]);
             }
             
             links.AddRange(newChain.links);
@@ -40,6 +40,19 @@ namespace WordTargetCore
         public void prepend(Link newLink)
         {
             links.Insert(0, newLink);
+        }
+
+        public void prepend(Chain newChain)
+        {
+            if (newChain.Count == 0)
+            {
+                return;
+            }
+            if (this.Count != 0 && this.links[0].WordA != newChain.links[newChain.links.Count - 1].WordB)
+            {
+                throw new Exception(this.links[0] + " is not a valid link with " + newChain.links[newChain.links.Count - 1]);
+            }
+            links.InsertRange(0, newChain.links);
         }
     }
 }
