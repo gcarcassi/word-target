@@ -80,6 +80,20 @@ namespace WordTargetCore
         }
 
         [TestMethod]
+        public void InvalidChainAddingToEachOther()
+        {
+            Chain chain1 = new Chain();
+            chain1.add(catBat);
+            chain1.add(batBaseball);
+            chain1.add(baseballSports);
+            Chain chain2 = new Chain();
+            chain2.add(sportPorts);
+            chain2.add(portsParts);
+            Chain chain3 = new Chain();
+            Assert.ThrowsException<System.Exception>(()=>chain2.add(chain1));
+        }
+
+        [TestMethod]
         public void ValidChainAddingAtTheBeginning()
         {
             Chain chain1 = new Chain();
