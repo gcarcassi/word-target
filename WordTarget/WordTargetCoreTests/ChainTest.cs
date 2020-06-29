@@ -16,7 +16,7 @@ namespace WordTargetCore
         static Link baseballSport = new Link(baseball, sport, LinkType.WordAssociation);
         static Link sportPorts = new Link(sport, ports, LinkType.Anagram);
         static Link portsParts = new Link(ports, parts, LinkType.OneLetterChange);
-        
+
         [TestMethod]
         public void ValidChainCreation()
         {
@@ -74,7 +74,7 @@ namespace WordTargetCore
             Chain chain2 = new Chain();
             chain2.add(sportPorts);
             chain2.add(portsParts);
-            Assert.ThrowsException<System.Exception>(()=>chain2.add(chain1));
+            Assert.ThrowsException<System.Exception>(() => chain2.add(chain1));
         }
 
         [TestMethod]
@@ -145,10 +145,21 @@ namespace WordTargetCore
             chain1.add(catBat);
             chain1.add(batBaseball);
             chain1.add(baseballSport);
-            chain1.invert();
+            chain1.reverse();
             Assert.AreEqual(baseballSport, chain1[0]);
             Assert.AreEqual(batBaseball, chain1[1]);
             Assert.AreEqual(catBat, chain1[2]);
         }
+
+        [TestMethod]
+        public void ChainToStringConversion()
+        {
+            Chain chain1 = new Chain();
+            chain1.add(catBat);
+            chain1.add(batBaseball);
+            chain1.add(baseballSport);
+            Assert.AreEqual("cat-bat-baseball-sport", chain1.ToString());
+        }
+        
     }
 }

@@ -55,9 +55,26 @@ namespace WordTargetCore
             links.InsertRange(0, newChain.links);
         }
 
-        public void invert()
+        public void reverse()
         {
             this.links.Reverse();
+        }
+
+        public override string ToString()
+        {
+            if(this.links.Count == 0)
+            {
+                return "";
+            }
+            string chainString = "";
+            int i = 0;
+            for(; i < this.links.Count; i++)
+            {
+                chainString = chainString + this.links[i].WordA.ToString() + "-";
+                
+            }
+            chainString = chainString + this.links[i-1].WordB.ToString();
+            return chainString;
         }
     }
 }
