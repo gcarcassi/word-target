@@ -54,5 +54,10 @@ namespace WordTargetCore
             }
             links.InsertRange(0, newChain.links);
         }
+
+        public void invert()
+        {
+            this.links.Reverse();
+        }
     }
 }
