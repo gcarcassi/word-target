@@ -76,5 +76,24 @@ namespace WordTargetCore
             chainString = chainString + this.links[i-1].WordB.ToString();
             return chainString;
         }
+
+        public void RemoveFirst()
+        {
+            if (this.links.Count == 0)
+            {
+                throw new Exception("Cannot remove elements from an empty chain");
+            }
+            this.links.RemoveAt(0);
+            
+        }
+
+        public void RemoveLast()
+        {
+            if (this.links.Count == 0)
+            {
+                throw new Exception("Cannot remove elements from an empty chain");
+            }
+            this.links.RemoveAt(links.Count - 1);
+        }
     }
 }

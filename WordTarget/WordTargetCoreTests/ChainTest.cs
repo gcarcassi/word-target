@@ -152,6 +152,14 @@ namespace WordTargetCore
         }
 
         [TestMethod]
+        public void EmptyChainInversion()
+        {
+            Chain chain2 = new Chain();
+            chain2.reverse();
+            Assert.AreEqual("", chain2.ToString());
+        }
+
+        [TestMethod]
         public void ChainToStringConversion()
         {
             Chain chain1 = new Chain();
@@ -159,7 +167,33 @@ namespace WordTargetCore
             chain1.add(batBaseball);
             chain1.add(baseballSport);
             Assert.AreEqual("cat-bat-baseball-sport", chain1.ToString());
+            Chain chain2 = new Chain();
+            Assert.AreEqual("", chain2.ToString());
         }
-        
+
+        [TestMethod]
+        public void ValidLinkRemovalFromChain()
+        {
+            Chain chain1 = new Chain();
+            chain1.add(catBat);
+            chain1.add(batBaseball);
+            chain1.add(baseballSport);
+            chain1.add(sportPorts);
+            chain1.RemoveFirst();
+            Assert.AreEqual(batBaseball, chain1[0]);
+            chain1.RemoveLast();
+            Assert.AreEqual(batBaseball, chain1[0]);
+            Assert.AreEqual(baseballSport, chain1[1]);
+            Assert.AreEqual(2, chain1.Count);
+        }
+
+        [TestMethod]
+        public void InValidLinkRemovalFromChain()
+        {
+            Chain chain1 = new Chain();
+            Assert.ThrowsException<System.Exception>(() => chain1.RemoveFirst());
+            Assert.ThrowsException<System.Exception>(() => chain1.RemoveLast());
+        }
+
     }
 }
