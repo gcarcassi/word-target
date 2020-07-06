@@ -45,5 +45,22 @@ namespace WordTargetCore
             return WordA + "-" + WordB;
         }
 
+        public override bool Equals(object obj)
+        {
+            if(obj is Link other)
+            {
+                return WordA.Equals(other.WordA) && WordB.Equals(other.WordB) && Type.Equals(other.Type);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return WordA.GetHashCode() + WordB.GetHashCode() + Type.GetHashCode();
+        }
+
     }
 }

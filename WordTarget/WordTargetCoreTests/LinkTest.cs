@@ -56,5 +56,14 @@ namespace WordTargetCore
             Assert.AreEqual("cat-bat", link.ToString());
         }
 
+        [TestMethod]
+        public void ValidLinkEquivalency()
+        {
+            Link link1 = new Link(new Word("cat"), new Word("bat"), LinkType.OneLetterChange);
+            Link link2 = new Link(new Word("cat"), new Word("bat"), LinkType.OneLetterChange);
+            Assert.AreEqual(link1, link2);
+            Assert.AreEqual(link1.GetHashCode(), link2.GetHashCode());
+        }
+
     }
 }
