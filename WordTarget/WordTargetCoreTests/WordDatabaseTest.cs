@@ -26,14 +26,21 @@ namespace WordTargetCore
         {
             WordDatabase db = new WordDatabase();
             db.AddWord("cat");
-            db.AddWords(new List<string> { "bat", "baseball", "sports", "parts" });
+            db.AddWords(new List<string> { "bat", "baseball", "sport", "ports" });
             HashSet<Word> words = db.GetAllWords();
             HashSet<string> texts = new HashSet<string>();
+            Word bat = null;
             foreach (Word word in words)
             {
                 texts.Add(word.Text);
+                if (word.Text.Equals("bat"))
+                {
+                    bat = word;
+                }
             }
-            Assert.IsTrue(Enumerable.SequenceEqual(new HashSet<string> { "cat", "bat", "baseball", "sports", "parts" }, texts));
+            Assert.IsTrue(Enumerable.SequenceEqual(new HashSet<string> { "cat", "bat", "baseball", "sport", "ports" }, texts));
+            HashSet<Link> batLinks = db.GetLinksFor(bat);
+            Assert.AreEqual(1, batLinks.Count);
         }
     }
 }
