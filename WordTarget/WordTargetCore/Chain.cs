@@ -13,7 +13,7 @@ namespace WordTargetCore
             get { return links[i]; }
         }
 
-        public void add(Link newLink)
+        public void Add(Link newLink)
         {   
             if (links.Count != 0 && links[links.Count-1].WordB != newLink.WordA)
             {
@@ -22,7 +22,7 @@ namespace WordTargetCore
             links.Add(newLink);
         }
 
-        public void add(Chain newChain)
+        public void Add(Chain newChain)
         { 
             if (newChain.Count == 0)
             {
@@ -37,12 +37,12 @@ namespace WordTargetCore
             links.AddRange(newChain.links);
         }
 
-        public void prepend(Link newLink)
+        public void Prepend(Link newLink)
         {
             links.Insert(0, newLink);
         }
 
-        public void prepend(Chain newChain)
+        public void Prepend(Chain newChain)
         {
             if (newChain.Count == 0)
             {
@@ -55,7 +55,7 @@ namespace WordTargetCore
             links.InsertRange(0, newChain.links);
         }
 
-        public void reverse()
+        public void Reverse()
         {
             this.links.Reverse();
         }

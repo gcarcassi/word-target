@@ -21,8 +21,8 @@ namespace WordTargetCore
         public void ValidChainCreation()
         {
             Chain chain = new Chain();
-            chain.add(catBat);
-            chain.add(batBaseball);
+            chain.Add(catBat);
+            chain.Add(batBaseball);
             Assert.AreEqual(2, chain.Count);
             Assert.AreEqual(catBat, chain[0]);
             Assert.AreEqual(batBaseball, chain[1]);
@@ -32,16 +32,16 @@ namespace WordTargetCore
         public void InvalidChainCreation()
         {
             Chain chain = new Chain();
-            chain.add(batBaseball);
-            Assert.ThrowsException<System.Exception>(() => chain.add(catBat));
+            chain.Add(batBaseball);
+            Assert.ThrowsException<System.Exception>(() => chain.Add(catBat));
         }
 
         [TestMethod]
         public void ValidChainAdding()
         {
             Chain chain = new Chain();
-            chain.add(batBaseball);
-            chain.prepend(catBat);
+            chain.Add(batBaseball);
+            chain.Prepend(catBat);
             Assert.AreEqual(catBat, chain[0]);
         }
 
@@ -49,13 +49,13 @@ namespace WordTargetCore
         public void ValidChainAddingToEachOther()
         {
             Chain chain1 = new Chain();
-            chain1.add(catBat);
-            chain1.add(batBaseball);
-            chain1.add(baseballSport);
+            chain1.Add(catBat);
+            chain1.Add(batBaseball);
+            chain1.Add(baseballSport);
             Chain chain2 = new Chain();
-            chain2.add(sportPorts);
-            chain2.add(portsParts);
-            chain1.add(chain2);
+            chain2.Add(sportPorts);
+            chain2.Add(portsParts);
+            chain1.Add(chain2);
             Assert.AreEqual(5, chain1.Count);
             Assert.AreEqual(catBat, chain1[0]);
             Assert.AreEqual(batBaseball, chain1[1]);
@@ -68,24 +68,24 @@ namespace WordTargetCore
         public void InvalidChainAddingToEachOther()
         {
             Chain chain1 = new Chain();
-            chain1.add(catBat);
-            chain1.add(batBaseball);
-            chain1.add(baseballSport);
+            chain1.Add(catBat);
+            chain1.Add(batBaseball);
+            chain1.Add(baseballSport);
             Chain chain2 = new Chain();
-            chain2.add(sportPorts);
-            chain2.add(portsParts);
-            Assert.ThrowsException<System.Exception>(() => chain2.add(chain1));
+            chain2.Add(sportPorts);
+            chain2.Add(portsParts);
+            Assert.ThrowsException<System.Exception>(() => chain2.Add(chain1));
         }
 
         [TestMethod]
         public void AddingEmptyChainToChain()
         {
             Chain chain1 = new Chain();
-            chain1.add(catBat);
-            chain1.add(batBaseball);
-            chain1.add(baseballSport);
+            chain1.Add(catBat);
+            chain1.Add(batBaseball);
+            chain1.Add(baseballSport);
             Chain chain2 = new Chain();
-            chain1.add(chain2);
+            chain1.Add(chain2);
             Assert.AreEqual(3, chain1.Count);
             Assert.AreEqual(catBat, chain1[0]);
             Assert.AreEqual(batBaseball, chain1[1]);
@@ -95,11 +95,11 @@ namespace WordTargetCore
         public void AddingChainToEmptyChain()
         {
             Chain chain1 = new Chain();
-            chain1.add(catBat);
-            chain1.add(batBaseball);
-            chain1.add(baseballSport);
+            chain1.Add(catBat);
+            chain1.Add(batBaseball);
+            chain1.Add(baseballSport);
             Chain chain2 = new Chain();
-            chain2.add(chain1);
+            chain2.Add(chain1);
             Assert.AreEqual(3, chain2.Count);
             Assert.AreEqual(catBat, chain2[0]);
             Assert.AreEqual(batBaseball, chain2[1]);
@@ -110,13 +110,13 @@ namespace WordTargetCore
         public void ValidChainAddingAtTheBeginning()
         {
             Chain chain1 = new Chain();
-            chain1.add(catBat);
-            chain1.add(batBaseball);
-            chain1.add(baseballSport);
+            chain1.Add(catBat);
+            chain1.Add(batBaseball);
+            chain1.Add(baseballSport);
             Chain chain2 = new Chain();
-            chain2.add(sportPorts);
-            chain2.add(portsParts);
-            chain2.prepend(chain1);
+            chain2.Add(sportPorts);
+            chain2.Add(portsParts);
+            chain2.Prepend(chain1);
             Assert.AreEqual(5, chain2.Count);
             Assert.AreEqual(catBat, chain2[0]);
             Assert.AreEqual(batBaseball, chain2[1]);
@@ -129,23 +129,23 @@ namespace WordTargetCore
         public void InvalidChainAddingAtTheBeginning()
         {
             Chain chain1 = new Chain();
-            chain1.add(catBat);
-            chain1.add(batBaseball);
-            chain1.add(baseballSport);
+            chain1.Add(catBat);
+            chain1.Add(batBaseball);
+            chain1.Add(baseballSport);
             Chain chain2 = new Chain();
-            chain2.add(sportPorts);
-            chain2.add(portsParts);
-            Assert.ThrowsException<System.Exception>(() => chain1.prepend(chain2));
+            chain2.Add(sportPorts);
+            chain2.Add(portsParts);
+            Assert.ThrowsException<System.Exception>(() => chain1.Prepend(chain2));
         }
 
         [TestMethod]
         public void ValidChainInversion()
         {
             Chain chain1 = new Chain();
-            chain1.add(catBat);
-            chain1.add(batBaseball);
-            chain1.add(baseballSport);
-            chain1.reverse();
+            chain1.Add(catBat);
+            chain1.Add(batBaseball);
+            chain1.Add(baseballSport);
+            chain1.Reverse();
             Assert.AreEqual(baseballSport, chain1[0]);
             Assert.AreEqual(batBaseball, chain1[1]);
             Assert.AreEqual(catBat, chain1[2]);
@@ -155,7 +155,7 @@ namespace WordTargetCore
         public void EmptyChainInversion()
         {
             Chain chain2 = new Chain();
-            chain2.reverse();
+            chain2.Reverse();
             Assert.AreEqual("", chain2.ToString());
         }
 
@@ -163,9 +163,9 @@ namespace WordTargetCore
         public void ChainToStringConversion()
         {
             Chain chain1 = new Chain();
-            chain1.add(catBat);
-            chain1.add(batBaseball);
-            chain1.add(baseballSport);
+            chain1.Add(catBat);
+            chain1.Add(batBaseball);
+            chain1.Add(baseballSport);
             Assert.AreEqual("cat-bat-baseball-sport", chain1.ToString());
             Chain chain2 = new Chain();
             Assert.AreEqual("", chain2.ToString());
@@ -175,10 +175,10 @@ namespace WordTargetCore
         public void ValidLinkRemovalFromChain()
         {
             Chain chain1 = new Chain();
-            chain1.add(catBat);
-            chain1.add(batBaseball);
-            chain1.add(baseballSport);
-            chain1.add(sportPorts);
+            chain1.Add(catBat);
+            chain1.Add(batBaseball);
+            chain1.Add(baseballSport);
+            chain1.Add(sportPorts);
             chain1.RemoveFirst();
             Assert.AreEqual(batBaseball, chain1[0]);
             chain1.RemoveLast();
