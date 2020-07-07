@@ -3,8 +3,7 @@
     public enum LinkType
     {
         OneLetterChange,
-        OneLetterAdd,
-        OneLetterRemove,
+        OneLetterAddOrRemove,
         Anagram,
         Synonym,
         Antonym,

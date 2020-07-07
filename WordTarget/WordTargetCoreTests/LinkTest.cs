@@ -34,19 +34,30 @@ namespace WordTargetCore
         [TestMethod]
         public void VerifyOneLetterAdd()
         {
-            Link link = new Link(new Word("cat"), new Word("cart"), LinkType.OneLetterAdd);
-            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("brat"), LinkType.OneLetterAdd));
-            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("bit"), LinkType.OneLetterAdd));
-            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("cat"), LinkType.OneLetterAdd));
+            Link link = new Link(new Word("cat"), new Word("cart"), LinkType.OneLetterAddOrRemove);
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("brat"), LinkType.OneLetterAddOrRemove));
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("bit"), LinkType.OneLetterAddOrRemove));
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("cat"), LinkType.OneLetterAddOrRemove));
         }
         
         [TestMethod]
         public void VerifyOneLetterRemove()
         {
-            Link link = new Link(new Word("cart"), new Word("cat"), LinkType.OneLetterRemove);
-            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("brat"), LinkType.OneLetterRemove));
-            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("bit"), LinkType.OneLetterRemove));
-            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("cat"), LinkType.OneLetterRemove));
+            Link link = new Link(new Word("cart"), new Word("cat"), LinkType.OneLetterAddOrRemove);
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("brat"), LinkType.OneLetterAddOrRemove));
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("bit"), LinkType.OneLetterAddOrRemove));
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("cat"), LinkType.OneLetterAddOrRemove));
+        }
+
+        [TestMethod]
+        public void VerifyOneLetterAddOrRemove()
+        {
+            Link link1 = new Link(new Word("cat"), new Word("cart"), LinkType.OneLetterAddOrRemove);
+            Link link2 = new Link(new Word("cart"), new Word("cat"), LinkType.OneLetterAddOrRemove);
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("brat"), LinkType.OneLetterAddOrRemove));
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("car"), LinkType.OneLetterAddOrRemove));
+            Assert.ThrowsException<System.Exception>(() => new Link(new Word("cat"), new Word("cat"), LinkType.OneLetterAddOrRemove));
+
         }
 
         [TestMethod]
@@ -63,6 +74,17 @@ namespace WordTargetCore
             Link link2 = new Link(new Word("cat"), new Word("bat"), LinkType.OneLetterChange);
             Assert.AreEqual(link1, link2);
             Assert.AreEqual(link1.GetHashCode(), link2.GetHashCode());
+        }
+
+        [TestMethod]
+        public void ValidLinkInversionForOneLetterChange()
+        {
+            Link link1 = new Link(new Word("cat"), new Word("bat"), LinkType.OneLetterChange);
+            Link link2 = link1.Reverse();
+            Assert.AreEqual("cat", link1.WordA.ToString());
+            Assert.AreEqual("bat", link1.WordB.ToString());
+            Assert.AreEqual("bat", link2.WordA.ToString());
+            Assert.AreEqual("cat", link2.WordB.ToString());
         }
 
     }
