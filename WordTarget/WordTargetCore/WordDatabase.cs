@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace WordTargetCore
 {
@@ -73,6 +75,40 @@ namespace WordTargetCore
             } else
             {
                 return new HashSet<Link>();
+            }
+        }
+
+        public void Serialize(TextWriter writer)
+        {
+            writer.WriteLine("Words:");
+            var sortedWords = words.OrderBy(x => x.Text).ToList();
+            Boolean addComma = false;
+            foreach (Word word in sortedWords)
+            {
+                if (addComma)
+                {
+                    writer.Write(", ");
+                }
+
+                writer.Write(word.Text);
+                addComma = true;
+            }
+            writer.WriteLine();
+            writer.WriteLine();
+            writer.WriteLine("Links:");
+
+            foreach (Word word in sortedWords)
+            {
+                var wordLinks = GetLinksFor(word);
+                var sortedLinks = wordLinks.OrderBy(x => x.WordB).ToList();
+                foreach (Link link in sortedLinks)
+                {
+                    writer.Write(link.WordA);
+                    writer.Write(" ");
+                    writer.Write(link.WordB);
+                    writer.Write(" ");
+                    writer.WriteLine(link.Type.ToString());
+                }
             }
         }
     }

@@ -2,6 +2,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.IO;
 using System.Linq;
 
 namespace WordTargetCore
@@ -46,5 +48,25 @@ namespace WordTargetCore
             Assert.AreEqual(1, portsLinks.Count);
             Assert.IsTrue(portsLinks.Contains(new Link(new Word("ports"), new Word("sport"), LinkType.Anagram)));
         }
+
+        [TestMethod]
+        public void SerializeDatabase()
+        {
+            string expected = @"Words:
+baseball, bat, cat, ports, sport
+
+Links:
+bat cat OneLetterChange
+cat bat OneLetterChange
+ports sport Anagram
+sport ports Anagram
+";
+            StringWriter writer = new StringWriter();
+            WordDatabase db = new WordDatabase();
+            db.AddWords(new List<string> { "cat", "bat", "baseball", "sport", "ports" });
+            db.Serialize(writer);
+            Assert.AreEqual(expected, writer.GetStringBuilder().ToString());
+        }
+
     }
 }
