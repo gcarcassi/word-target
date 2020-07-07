@@ -52,6 +52,7 @@ namespace WordTargetCore
             Assert.IsTrue(LinkTypes.IsAnagram("bat", "tab"));
             Assert.IsTrue(LinkTypes.IsAnagram("angel", "angle"));
             Assert.IsFalse(LinkTypes.IsAnagram("cat", "angle"));
+            Assert.IsFalse(LinkTypes.IsAnagram("cat", "cat"));
         }
 
         [TestMethod]

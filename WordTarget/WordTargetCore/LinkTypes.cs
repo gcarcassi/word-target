@@ -85,6 +85,16 @@ namespace WordTargetCore
 
         public static bool IsAnagram(string textA, string textB)
         {
+            if (textA.Length != textB.Length)
+            {
+                return false;
+            }
+
+            if (textA == textB)
+            {
+                return false;
+            }
+
             return CountLetters(textA).Equals(CountLetters(textB));
         }
 
