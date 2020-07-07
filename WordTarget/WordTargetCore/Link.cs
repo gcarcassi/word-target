@@ -26,18 +26,11 @@ namespace WordTargetCore
             {
                 throw new Exception(WordA.Text + " is not a letter change from " + WordB.Text);
             }
-            if (type == LinkType.OneLetterAdd && !LinkTypes.IsOneLetterAdd(WordA.Text, WordB.Text))
+            if (type == LinkType.OneLetterAddOrRemove && !LinkTypes.IsOneLetterAddOrRemove(WordA.Text, WordB.Text))
             {
-                throw new Exception(WordA.Text + " is not a letter additon to " + WordB.Text);
+                throw new Exception(WordA.Text + " is not a letter additon or subtraction to " + WordB.Text);
             }
-            if (type == LinkType.OneLetterAdd && !LinkTypes.IsOneLetterAdd(WordA.Text, WordB.Text))
-            {
-                throw new Exception(WordA.Text + " is not a letter additon to " + WordB.Text);
-            }
-            if (type == LinkType.OneLetterRemove && !LinkTypes.IsOneLetterRemove(WordA.Text, WordB.Text))
-            {
-                throw new Exception(WordA.Text + " is not a letter subtraction to " + WordB.Text);
-            }
+            
 
         }
         public override string ToString()
@@ -62,5 +55,9 @@ namespace WordTargetCore
             return WordA.GetHashCode() + WordB.GetHashCode() + Type.GetHashCode();
         }
 
+        public Link Reverse()
+        {
+            return new Link(this.WordB, this.WordA, this.Type);
+        }
     }
 }
