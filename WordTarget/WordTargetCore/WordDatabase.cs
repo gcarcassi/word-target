@@ -23,6 +23,11 @@ namespace WordTargetCore
                     Link link = new Link(newWord, other, LinkType.OneLetterChange);
                     AddLink(link);
                 }
+                if (LinkTypes.IsAnagram(word, other.Text))
+                {
+                    Link link = new Link(newWord, other, LinkType.Anagram);
+                    AddLink(link);
+                }
             }
         }
 

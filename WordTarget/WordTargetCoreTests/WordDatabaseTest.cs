@@ -41,6 +41,10 @@ namespace WordTargetCore
             Assert.IsTrue(Enumerable.SequenceEqual(new HashSet<string> { "cat", "bat", "baseball", "sport", "ports" }, texts));
             HashSet<Link> batLinks = db.GetLinksFor(bat);
             Assert.AreEqual(1, batLinks.Count);
+            Assert.IsTrue(batLinks.Contains(new Link(new Word("bat"), new Word("cat"), LinkType.OneLetterChange)));
+            HashSet<Link> portsLinks = db.GetLinksFor(new Word("ports"));
+            Assert.AreEqual(1, portsLinks.Count);
+            Assert.IsTrue(portsLinks.Contains(new Link(new Word("ports"), new Word("sport"), LinkType.Anagram)));
         }
     }
 }
