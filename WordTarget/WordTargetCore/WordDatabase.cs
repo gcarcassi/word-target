@@ -25,6 +25,11 @@ namespace WordTargetCore
                     Link link = new Link(newWord, other, LinkType.OneLetterChange);
                     AddLink(link);
                 }
+                if (LinkTypes.IsOneLetterAddOrRemove(word, other.Text))
+                {
+                    Link link = new Link(newWord, other, LinkType.OneLetterAddOrRemove);
+                    AddLink(link);
+                }
                 if (LinkTypes.IsAnagram(word, other.Text))
                 {
                     Link link = new Link(newWord, other, LinkType.Anagram);
@@ -37,7 +42,7 @@ namespace WordTargetCore
         {
             links.Add(link);
             AddLinkForWord(link.WordA, link);
-            AddLinkForWord(link.WordB, new Link(link.WordB, link.WordA, link.Type));
+            AddLinkForWord(link.WordB, link.Reverse());
         }
 
         private void AddLinkForWord(Word word, Link link)
@@ -100,7 +105,7 @@ namespace WordTargetCore
             foreach (Word word in sortedWords)
             {
                 var wordLinks = GetLinksFor(word);
-                var sortedLinks = wordLinks.OrderBy(x => x.WordB).ToList();
+                var sortedLinks = wordLinks.OrderBy(x => x.WordB.Text).ToList();
                 foreach (Link link in sortedLinks)
                 {
                     writer.Write(link.WordA);

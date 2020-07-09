@@ -28,7 +28,7 @@ namespace WordTargetCore
         {
             WordDatabase db = new WordDatabase();
             db.AddWord("cat");
-            db.AddWords(new List<string> { "bat", "baseball", "sport", "ports" });
+            db.AddWords(new List<string> { "bat", "baseball", "sport", "ports", "port" });
             HashSet<Word> words = db.GetAllWords();
             HashSet<string> texts = new HashSet<string>();
             Word bat = null;
@@ -40,30 +40,35 @@ namespace WordTargetCore
                     bat = word;
                 }
             }
-            Assert.IsTrue(Enumerable.SequenceEqual(new HashSet<string> { "cat", "bat", "baseball", "sport", "ports" }, texts));
+            Assert.IsTrue(Enumerable.SequenceEqual(new HashSet<string> { "cat", "bat", "baseball", "sport", "ports", "port" }, texts));
             HashSet<Link> batLinks = db.GetLinksFor(bat);
             Assert.AreEqual(1, batLinks.Count);
             Assert.IsTrue(batLinks.Contains(new Link(new Word("bat"), new Word("cat"), LinkType.OneLetterChange)));
             HashSet<Link> portsLinks = db.GetLinksFor(new Word("ports"));
-            Assert.AreEqual(1, portsLinks.Count);
+            Assert.AreEqual(2, portsLinks.Count);
             Assert.IsTrue(portsLinks.Contains(new Link(new Word("ports"), new Word("sport"), LinkType.Anagram)));
+            Assert.IsTrue(portsLinks.Contains(new Link(new Word("ports"), new Word("port"), LinkType.OneLetterAddOrRemove)));
         }
 
         [TestMethod]
         public void SerializeDatabase()
         {
             string expected = @"Words:
-baseball, bat, cat, ports, sport
+baseball, bat, cat, port, ports, sport
 
 Links:
 bat cat OneLetterChange
 cat bat OneLetterChange
+port ports OneLetterAddOrRemove
+port sport OneLetterAddOrRemove
+ports port OneLetterAddOrRemove
 ports sport Anagram
+sport port OneLetterAddOrRemove
 sport ports Anagram
 ";
             StringWriter writer = new StringWriter();
             WordDatabase db = new WordDatabase();
-            db.AddWords(new List<string> { "cat", "bat", "baseball", "sport", "ports" });
+            db.AddWords(new List<string> { "cat", "bat", "baseball", "sport", "ports", "port" });
             db.Serialize(writer);
             Assert.AreEqual(expected, writer.GetStringBuilder().ToString());
         }
