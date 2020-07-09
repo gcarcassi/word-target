@@ -116,5 +116,52 @@ namespace WordTargetCore
                 }
             }
         }
+
+        public Chain FindChain(string start, string end)
+        {
+            Chain chain = new Chain();
+            bool result = CompleteChain(chain, new Word(start), new Word(end));
+            if (result)
+            {
+                return chain;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private bool CompleteChain(Chain chain, Word lastWord, Word end)
+        {
+            HashSet<Link> newLinks = GetLinksFor(lastWord);
+            foreach (Link link in newLinks)
+            {
+                Word newLastWord = link.WordB;
+
+                // Check if the new word is the last
+                if (newLastWord.Equals(end))
+                {
+                    chain.Add(link);
+                    return true;
+                }
+
+                // Check the new word does not repeat
+                if (chain.Contains(newLastWord))
+                {
+                    continue;
+                }
+
+                // Try completing the chain
+                chain.Add(link);
+                bool result = CompleteChain(chain, newLastWord, end);
+                if (result)
+                {
+                    return true;
+                }
+                chain.RemoveLast();
+            }
+
+            return false;
+        }
     }
 }

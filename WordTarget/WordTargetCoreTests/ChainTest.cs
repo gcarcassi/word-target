@@ -195,5 +195,20 @@ namespace WordTargetCore
             Assert.ThrowsException<System.Exception>(() => chain1.RemoveLast());
         }
 
+        [TestMethod]
+        public void Contains()
+        {
+            Chain chain1 = new Chain();
+            Assert.IsFalse(chain1.Contains(cat));
+            chain1.Add(catBat);
+            chain1.Add(batBaseball);
+            Assert.IsTrue(chain1.Contains(cat));
+            Assert.IsTrue(chain1.Contains(bat));
+            Assert.IsTrue(chain1.Contains(baseball));
+            Assert.IsFalse(chain1.Contains(sport));
+            Assert.IsFalse(chain1.Contains(ports));
+        }
+
+
     }
 }

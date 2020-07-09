@@ -15,7 +15,7 @@ namespace WordTargetCore
 
         public void Add(Link newLink)
         {   
-            if (links.Count != 0 && links[links.Count-1].WordB != newLink.WordA)
+            if (links.Count != 0 && !(links[links.Count-1].WordB.Equals(newLink.WordA)))
             {
                 throw new Exception(links[links.Count - 1] + " is not a valid link with " + newLink);
             }
@@ -94,6 +94,24 @@ namespace WordTargetCore
                 throw new Exception("Cannot remove elements from an empty chain");
             }
             this.links.RemoveAt(links.Count - 1);
+        }
+
+        public bool Contains(Word word)
+        {
+            if (Count == 0)
+            {
+                return false;
+            }
+
+            foreach (Link link in links)
+            {
+                if (word.Equals(link.WordA))
+                {
+                    return true;
+                }
+            }
+
+            return word.Equals(this[Count - 1].WordB);
         }
     }
 }

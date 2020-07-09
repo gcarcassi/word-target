@@ -73,5 +73,21 @@ sport ports Anagram
             Assert.AreEqual(expected, writer.GetStringBuilder().ToString());
         }
 
+        [TestMethod]
+        public void FindChain()
+        {
+            WordDatabase db = new WordDatabase();
+            db.AddWords(new List<string> { "cat", "bat", "baseball", "sport", "ports", "port" });
+            db.AddLink(new Link(new Word("bat"), new Word("baseball"), LinkType.WordAssociation));
+            db.AddLink(new Link(new Word("sport"), new Word("baseball"), LinkType.WordAssociation));
+            Chain chain = db.FindChain("cat", "port");
+            Assert.AreEqual(5, chain.Count);
+            Assert.AreEqual(new Link(new Word("cat"), new Word("bat"), LinkType.OneLetterChange), chain[0]);
+            Assert.AreEqual(new Link(new Word("bat"), new Word("baseball"), LinkType.WordAssociation), chain[1]);
+            Assert.AreEqual(new Link(new Word("baseball"), new Word("sport"), LinkType.WordAssociation), chain[2]);
+            Assert.AreEqual(new Link(new Word("sport"), new Word("ports"), LinkType.Anagram), chain[3]);
+            Assert.AreEqual(new Link(new Word("ports"), new Word("port"), LinkType.OneLetterAddOrRemove), chain[4]);
+        }
+
     }
 }
