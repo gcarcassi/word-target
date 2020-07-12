@@ -28,6 +28,8 @@ namespace WordTargetCore
 ";
             List<string> words = new List<string> { "STARE", "RIGHT", "UNCLEAR" };
             Assert.AreEqual(expected, Renderer.LayoutWord(words, 2, 80));
+            Assert.ThrowsException<System.Exception>(() => Renderer.LayoutWord(new List<string> { "STARE", "RIGHT", "VERYBIGWORDTHATISTOOLONG" }, 2, 80));
+            Assert.ThrowsException<System.Exception>(() => Renderer.LayoutWord(new List<string> { "TOO", "MANY", "WORDS", "TO", "DISPLAY", "IN", "ONE", "CIRCLE" }, 2, 80));
         }
 
         [TestMethod]
