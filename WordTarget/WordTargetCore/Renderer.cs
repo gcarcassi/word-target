@@ -68,6 +68,40 @@ namespace WordTargetCore
             { 'Z', 14 }
         };
 
+        private static List<double> minFracBetweenWords = new List<double> { 0.0, 0.0, 20.0 / 360.0 };
+
+        public static string LayoutWord(List<string> words, int circle, int startingAngleDegrees)
+        {
+            List<double> fractions = new List<double>();
+            double total = 0.0;
+            foreach (string word in words)
+            {
+                double frac = FracForWord(word, circle);
+                fractions.Add(frac);
+                total += frac;
+            }
+
+            double spaceBetweenWords = (1 - total) / words.Count;
+
+            if (spaceBetweenWords < minFracBetweenWords[circle])
+            {
+                throw new Exception("Words do not fit in the circle");
+            }
+
+            double circleSoFar = 0.0;
+            StringBuilder str = new StringBuilder();
+            for(int i = 0; i < words.Count; i++)
+            {
+                str.AppendLine(SvgForCircleSeparator(startingAngleDegrees + (int) (circleSoFar * 360), circle));
+                circleSoFar += spaceBetweenWords / 2;
+                str.AppendLine(SvgForCircleWord(startingAngleDegrees + (int) (circleSoFar * 360), words[i], circle));
+                circleSoFar += fractions[i];
+                circleSoFar += spaceBetweenWords / 2;
+            }
+
+            return str.ToString();
+        }
+
         public static string SvgForCircleWord(int angleDegrees, string word, int circle)
         {
             StringBuilder str = new StringBuilder();
