@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Text;
+using System.Threading;
 
 namespace WordTargetCore
 {
@@ -11,30 +12,30 @@ namespace WordTargetCore
         {
             { 'A', 24 },
             { 'B', 24 },
-            { 'C', 24 },
-            { 'D', 24 },
+            { 'C', 22 },
+            { 'D', 22 },
             { 'E', 24 },
-            { 'F', 24 },
-            { 'G', 24 },
-            { 'H', 24 },
+            { 'F', 26 },
+            { 'G', 21 },
+            { 'H', 22 },
             { 'I', 59 },
-            { 'J', 24 },
+            { 'J', 32 },
             { 'K', 24 },
-            { 'L', 24 },
-            { 'M', 24 },
-            { 'N', 24 },
-            { 'O', 24 },
+            { 'L', 29 },
+            { 'M', 19 },
+            { 'N', 22 },
+            { 'O', 21 },
             { 'P', 24 },
-            { 'Q', 24 },
-            { 'R', 24 },
+            { 'Q', 21 },
+            { 'R', 22 },
             { 'S', 24 },
-            { 'T', 24 },
-            { 'U', 24 },
+            { 'T', 26 },
+            { 'U', 22 },
             { 'V', 24 },
-            { 'W', 24 },
+            { 'W', 17 },
             { 'X', 24 },
             { 'Y', 24 },
-            { 'Z', 24 }
+            { 'Z', 26 }
         };
 
         private static Dictionary<char, int> pixelsByChar = new Dictionary<char, int>
@@ -66,6 +67,39 @@ namespace WordTargetCore
             { 'Y', 16 },
             { 'Z', 14 }
         };
+
+        public static string SvgForCircleWord(int angleDegrees, string word, int circle)
+        {
+            StringBuilder str = new StringBuilder();
+            str.Append("  <text transform=\"rotate(")
+                .Append(angleDegrees)
+                .Append(" 0,0)\" class=\"text")
+                .Append(circle)
+                .Append("\"><textPath href=\"#circle")
+                .Append(circle)
+                .Append("\">")
+                .Append(word)
+                .Append("</textPath></text>");
+            return str.ToString();
+        }
+
+        public static string SvgForCircleSeparator(int angleDegrees, int circle)
+        {
+            int x1 = circle * -100;
+            int x2 = (circle - 1) * -100;
+            //     <line transform="rotate(125 0,0)" x1="-200" x2="-100" y1="0" y2="0" class="line2"/>
+            StringBuilder str = new StringBuilder();
+            str.Append("  <line transform=\"rotate(")
+                .Append(angleDegrees)
+                .Append(" 0,0)\" x1=\"")
+                .Append(x1)
+                .Append("\" x2=\"")
+                .Append(x2)
+                .Append("\" y1=\"0\" y2=\"0\" class=\"line")
+                .Append(circle)
+                .Append("\"/>");
+            return str.ToString();
+        }
 
         public static double FracForWord(string word, int circle)
         {
