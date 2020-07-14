@@ -35,7 +35,39 @@ namespace WordTargetCore
             { 'W', 17 },
             { 'X', 24 },
             { 'Y', 24 },
-            { 'Z', 26 }
+            { 'Z', 26 },
+            { ' ', 59 }
+        };
+
+        private static Dictionary<char, int> charsInCircle3 = new Dictionary<char, int>
+        {
+            { 'A', 44 },
+            { 'B', 44 },
+            { 'C', 41 },
+            { 'D', 41 },
+            { 'E', 44 },
+            { 'F', 48 },
+            { 'G', 38 },
+            { 'H', 41 },
+            { 'I', 105 },
+            { 'J', 59 },
+            { 'K', 44 },
+            { 'L', 53 },
+            { 'M', 35 },
+            { 'N', 41 },
+            { 'O', 38 },
+            { 'P', 44 },
+            { 'Q', 38 },
+            { 'R', 41 },
+            { 'S', 44 },
+            { 'T', 48 },
+            { 'U', 41 },
+            { 'V', 44 },
+            { 'W', 31 },
+            { 'X', 44 },
+            { 'Y', 44 },
+            { 'Z', 48 },
+            { ' ', 105 }
         };
 
         private static Dictionary<char, int> pixelsByChar = new Dictionary<char, int>
@@ -68,7 +100,7 @@ namespace WordTargetCore
             { 'Z', 14 }
         };
 
-        private static List<double> minFracBetweenWords = new List<double> { 0.0, 0.0, 20.0 / 360.0 };
+        private static List<double> minFracBetweenWords = new List<double> { 0.0, 0.0, 20.0 / 360.0, 20.0 / 360.0 };
 
         public static string LayoutWord(List<string> words, int circle, int startingAngleDegrees)
         {
@@ -139,10 +171,21 @@ namespace WordTargetCore
         {
             word = word.ToUpper();
             double frac = 0;
-            foreach (char ch in word)
+            if (circle == 2)
             {
-                frac = frac + 1.0 / charsInCircle2[ch];
+                foreach (char ch in word)
+                {
+                    frac = frac + 1.0 / charsInCircle2[ch];
+                }
             }
+            if (circle == 3)
+            {
+                foreach (char ch in word)
+                {
+                    frac = frac + 1.0 / charsInCircle3[ch];
+                }
+            }
+
             return frac;
         }
     }

@@ -44,6 +44,44 @@ namespace WordTargetCore
             Assert.AreEqual("  <line transform=\"rotate(125 0,0)\" x1=\"-200\" x2=\"-100\" y1=\"0\" y2=\"0\" class=\"line2\"/>", Renderer.SvgForCircleSeparator(125, 2));
         }
 
+        [TestMethod]
+        public void WordFracCircle3()
+        {
+            Assert.AreEqual(0.125, Renderer.FracForWord("TENNIS", 3), 0.001);
+            Assert.AreEqual(0.254, Renderer.FracForWord("ACCOUNTABLE", 3), 0.001);
+            Assert.AreEqual(0.068, Renderer.FracForWord("CAT", 3), 0.001);
+            Assert.AreEqual(0.174, Renderer.FracForWord("BASEBALL", 3), 0.001);
+        }
+
+        [TestMethod]
+        public void SvgForCircleSeparator3()
+        {
+            Assert.AreEqual("  <line transform=\"rotate(65 0,0)\" x1=\"-300\" x2=\"-200\" y1=\"0\" y2=\"0\" class=\"line3\"/>", Renderer.SvgForCircleSeparator(65, 3));
+        }
+
+        [TestMethod]
+        public void SvgForCircleWord3()
+        {
+            Assert.AreEqual("  <text transform=\"rotate(10 0,0)\" class=\"text3\"><textPath href=\"#circle3\">BASEBALL</textPath></text>", Renderer.SvgForCircleWord(10, "BASEBALL", 3));
+        }
+
+        [TestMethod]
+        public void PrepareWordsInCircle3()
+        {
+            string expected = @" <line transform=""rotate(80 0,0)"" x1=""-300"" x2=""-200"" y1=""0"" y2=""0"" class=""line3""/>
+  <text transform=""rotate(91 0,0)"" class=""text3""><textPath href=""#circle3"">SPARE</textPath></text>
+  <line transform=""rotate(145 0,0)"" x1=""-300"" x2=""-200"" y1=""0"" y2=""0"" class=""line3""/>
+  <text transform=""rotate(157 0,0)"" class=""text3""><textPath href=""#circle3"">VALUE</textPath></text>
+  <line transform=""rotate(209 0,0)"" x1=""-300"" x2=""-200"" y1=""0"" y2=""0"" class=""line3""/>
+  <text transform=""rotate(221 0,0)"" class=""text3""><textPath href=""#circle3"">POLARS</textPath></text>
+  <line transform=""rotate(282 0,0)"" x1=""-300"" x2=""-200"" y1=""0"" y2=""0"" class=""line3""/>
+  <text transform=""rotate(294 0,0)"" class=""text3""><textPath href=""#circle3"">STATEN</textPath></text>
+  <line transform=""rotate(354 0,0)"" x1=""-300"" x2=""-200"" y1=""0"" y2=""0"" class=""line3""/>
+  <text transform=""rotate(366 0,0)"" class=""text3""><textPath href=""#circle3"">VITAMIN A</textPath></text>
+";
+            List<string> words = new List<string> { "SPARE", "VALUE", "POLARS", "STATEN", "VITAMIN A"};
+            Assert.AreEqual(expected, Renderer.LayoutWord(words, 3, 80));
+        }
 
     }
 }
