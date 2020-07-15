@@ -100,7 +100,7 @@ namespace WordTargetCore
             { 'Z', 14 }
         };
 
-        private static List<double> minFracBetweenWords = new List<double> { 0.0, 0.0, 20.0 / 360.0, 20.0 / 360.0 };
+        private static List<double> minFracBetweenWords = new List<double> { 0.0, 0.0, 20.0 / 360.0, 12.0 / 360.0, 10.0 / 360.0, 8.0 / 360.0 };
 
         public static string LayoutWord(List<string> words, int circle, int startingAngleDegrees)
         {
