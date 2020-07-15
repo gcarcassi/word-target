@@ -70,6 +70,8 @@ namespace WordTargetCore
             { ' ', 105 }
         };
 
+        private static List<Dictionary<char, int>> charsInCircle = new List<Dictionary<char, int>>() { null, null, charsInCircle2, charsInCircle3 };
+
         private static Dictionary<char, int> pixelsByChar = new Dictionary<char, int>
         {
             { 'A', 17 },
@@ -171,19 +173,9 @@ namespace WordTargetCore
         {
             word = word.ToUpper();
             double frac = 0;
-            if (circle == 2)
+            foreach (char ch in word)
             {
-                foreach (char ch in word)
-                {
-                    frac = frac + 1.0 / charsInCircle2[ch];
-                }
-            }
-            if (circle == 3)
-            {
-                foreach (char ch in word)
-                {
-                    frac = frac + 1.0 / charsInCircle3[ch];
-                }
+                frac = frac + 1.0 / charsInCircle[circle][ch];
             }
 
             return frac;
