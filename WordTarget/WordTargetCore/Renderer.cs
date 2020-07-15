@@ -8,6 +8,37 @@ namespace WordTargetCore
 {
     public class Renderer
     {
+        private static Dictionary<char, int> charsInCircle1 = new Dictionary<char, int>
+        {
+            { 'A', 5 },
+            { 'B', 5 },
+            { 'C', 5 },
+            { 'D', 5 },
+            { 'E', 5 },
+            { 'F', 5 },
+            { 'G', 5 },
+            { 'H', 5 },
+            { 'I', 12 },
+            { 'J', 6 },
+            { 'K', 5 },
+            { 'L', 6 },
+            { 'M', 4 },
+            { 'N', 5 },
+            { 'O', 5 },
+            { 'P', 5 },
+            { 'Q', 5 },
+            { 'R', 5 },
+            { 'S', 5 },
+            { 'T', 5 },
+            { 'U', 5 },
+            { 'V', 5 },
+            { 'W', 4 },
+            { 'X', 5 },
+            { 'Y', 5 },
+            { 'Z', 6 },
+            { ' ', 12 }
+        };
+
         private static Dictionary<char, int> charsInCircle2 = new Dictionary<char, int>
         {
             { 'A', 24 },
@@ -70,7 +101,7 @@ namespace WordTargetCore
             { ' ', 105 }
         };
 
-        private static List<Dictionary<char, int>> charsInCircle = new List<Dictionary<char, int>>() { null, null, charsInCircle2, charsInCircle3 };
+        private static List<Dictionary<char, int>> charsInCircle = new List<Dictionary<char, int>>() { null, charsInCircle1, charsInCircle2, charsInCircle3 };
 
         private static Dictionary<char, int> pixelsByChar = new Dictionary<char, int>
         {
@@ -103,6 +134,21 @@ namespace WordTargetCore
         };
 
         private static List<double> minFracBetweenWords = new List<double> { 0.0, 0.0, 20.0 / 360.0, 12.0 / 360.0, 10.0 / 360.0, 8.0 / 360.0 };
+
+        public static string LayoutWordCenter(string word)
+        {
+            double frac = FracForWord(word, 1);
+            if (frac > 1)
+            {
+                throw new Exception("Word does not fit in center");
+            }
+            StringBuilder str = new StringBuilder();
+            str.Append("  <text x=\"0\" y=\"0\" dominant-baseline=\"middle\" text-anchor=\"middle\" class=\"text1\">")
+                .Append(word)
+                .AppendLine("</text>");
+            return str.ToString();
+
+        }
 
         public static string LayoutWord(List<string> words, int circle, int startingAngleDegrees)
         {

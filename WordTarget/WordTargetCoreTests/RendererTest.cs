@@ -17,6 +17,16 @@ namespace WordTargetCore
         }
 
         [TestMethod]
+        public void PrepareWordsInCenter()
+        {
+            string expected = @"  <text x=""0"" y=""0"" dominant-baseline=""middle"" text-anchor=""middle"" class=""text1"">STARE</text>
+";
+            Assert.AreEqual(expected, Renderer.LayoutWordCenter("STARE"));
+            Assert.ThrowsException<System.Exception>(() => Renderer.LayoutWordCenter("THISISAVERYLONGWORD"));
+            Assert.ThrowsException<System.Exception>(() => Renderer.LayoutWordCenter("AAAAAA"));
+        }
+
+        [TestMethod]
         public void PrepareWordsInCircle2()
         {
             string expected = @"  <line transform=""rotate(80 0,0)"" x1=""-200"" x2=""-100"" y1=""0"" y2=""0"" class=""line2""/>
