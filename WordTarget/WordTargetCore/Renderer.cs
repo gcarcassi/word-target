@@ -70,7 +70,38 @@ namespace WordTargetCore
             { ' ', 105 }
         };
 
-        private static List<Dictionary<char, int>> charsInCircle = new List<Dictionary<char, int>>() { null, null, charsInCircle2, charsInCircle3 };
+        private static Dictionary<char, int> charsInCircle4 = new Dictionary<char, int>
+        {
+            { 'A', 62 },
+            { 'B', 62 },
+            { 'C', 57 },
+            { 'D', 57 },
+            { 'E', 62 },
+            { 'F', 68 },
+            { 'G', 53 },
+            { 'H', 57 },
+            { 'I', 149 },
+            { 'J', 83 },
+            { 'K', 62 },
+            { 'L', 74 },
+            { 'M', 49 },
+            { 'N', 57 },
+            { 'O', 53 },
+            { 'P', 62 },
+            { 'Q', 53 },
+            { 'R', 57 },
+            { 'S', 62 },
+            { 'T', 68 },
+            { 'U', 57 },
+            { 'V', 62 },
+            { 'W', 44 },
+            { 'X', 62 },
+            { 'Y', 62 },
+            { 'Z', 68 },
+            { ' ', 149 }
+        };
+
+        private static List<Dictionary<char, int>> charsInCircle = new List<Dictionary<char, int>>() { null, null, charsInCircle2, charsInCircle3, charsInCircle4 };
 
         private static Dictionary<char, int> pixelsByChar = new Dictionary<char, int>
         {
