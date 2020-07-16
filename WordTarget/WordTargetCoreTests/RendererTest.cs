@@ -139,5 +139,57 @@ namespace WordTargetCore
             List<string> words = new List<string> { "ANGLE", "STAR", "JOIN", "CORE", "STATION", "POLAR", "VAGUE", "R", "COORDINATES" };
             Assert.AreEqual(expected, Renderer.LayoutWord(words, 4, 80));
         }
+
+        [TestMethod]
+        public void WordFracCircle5()
+        {
+            Assert.AreEqual(0.101, Renderer.FracForWord("ENVELOPE", 5), 0.001);
+            Assert.AreEqual(0.264, Renderer.FracForWord("OVERCOMMERCIALIZATIONS", 5), 0.001);
+            Assert.AreEqual(0.037, Renderer.FracForWord("CAT", 5), 0.001);
+            Assert.AreEqual(0.096, Renderer.FracForWord("BASEBALL", 5), 0.001);
+        }
+
+        [TestMethod]
+        public void SvgForCircleSeparator5()
+        {
+            Assert.AreEqual("  <line transform=\"rotate(65 0,0)\" x1=\"-500\" x2=\"-400\" y1=\"0\" y2=\"0\" class=\"line5\"/>", Renderer.SvgForCircleSeparator(65, 5));
+        }
+
+        [TestMethod]
+        public void SvgForCircleWord5()
+        {
+            Assert.AreEqual("  <text transform=\"rotate(90 0,0)\" class=\"text5\"><textPath href=\"#circle5\">BASEBALL</textPath></text>", Renderer.SvgForCircleWord(90, "BASEBALL", 5));
+        }
+
+        [TestMethod]
+        public void PrepareWordsInCircle5()
+        {
+            string expected = @"  <line transform=""rotate(80 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(84 0,0)"" class=""text5""><textPath href=""#circle5"">VARIABLE</textPath></text>
+  <line transform=""rotate(120 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(124 0,0)"" class=""text5""><textPath href=""#circle5"">SIGHT</textPath></text>
+  <line transform=""rotate(149 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(153 0,0)"" class=""text5""><textPath href=""#circle5"">NUCLEAR</textPath></text>
+  <line transform=""rotate(189 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(193 0,0)"" class=""text5""><textPath href=""#circle5"">SPACE</textPath></text>
+  <line transform=""rotate(219 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(223 0,0)"" class=""text5""><textPath href=""#circle5"">JOINT</textPath></text>
+  <line transform=""rotate(247 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(251 0,0)"" class=""text5""><textPath href=""#circle5"">POLARIS</textPath></text>
+  <line transform=""rotate(284 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(288 0,0)"" class=""text5""><textPath href=""#circle5"">VAGUE</textPath></text>
+  <line transform=""rotate(315 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(319 0,0)"" class=""text5""><textPath href=""#circle5"">COIN</textPath></text>
+  <line transform=""rotate(340 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(344 0,0)"" class=""text5""><textPath href=""#circle5"">CAROTENOIDS</textPath></text>
+  <line transform=""rotate(397 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(401 0,0)"" class=""text5""><textPath href=""#circle5"">ANKLE</textPath></text>
+  <line transform=""rotate(427 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(431 0,0)"" class=""text5""><textPath href=""#circle5"">S</textPath></text>
+";
+
+            List<string> words = new List<string> { "VARIABLE", "SIGHT", "NUCLEAR", "SPACE", "JOINT", "POLARIS", "VAGUE", "COIN", "CAROTENOIDS", "ANKLE", "S" };
+            Assert.AreEqual(expected, Renderer.LayoutWord(words, 5, 80));
+        }
     }
 }
