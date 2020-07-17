@@ -191,5 +191,141 @@ namespace WordTargetCore
             List<string> words = new List<string> { "VARIABLE", "SIGHT", "NUCLEAR", "SPACE", "JOINT", "POLARIS", "VAGUE", "COIN", "CAROTENOIDS", "ANKLE", "S" };
             Assert.AreEqual(expected, Renderer.LayoutWord(words, 5, 80));
         }
+
+        [TestMethod]
+        public void RenderWordTarget()
+        {
+            string expected = @"<svg width=""500"" height=""500"" viewBox=""-700 -700 1400 1400"" xmlns=""http://www.w3.org/2000/svg"">
+  <style>
+    .text1 { fill: black; font: 50px sans-serif; }
+    .text2 { fill: white; font: 50px sans-serif; }
+    .line2 { stroke: white; stroke-width:5; }
+    .text3 { fill: black; font: 50px sans-serif; }
+    .line3 { stroke: black; stroke-width:5; }
+    .text4 { fill: white; font: 50px sans-serif; }
+    .line4 { stroke: white; stroke-width:5; }
+    .text5 { fill: black; font: 50px sans-serif; }
+    .line5 { stroke: black; stroke-width:5; }
+  </style>
+
+  <circle cx=""0"" cy=""0"" r=""505"" fill=""black"" />
+  <circle cx=""0"" cy=""0"" r=""500"" fill=""white"" />
+  <circle cx=""0"" cy=""0"" r=""400"" fill=""black"" />
+  <circle cx=""0"" cy=""0"" r=""300"" fill=""white"" />
+  <circle cx=""0"" cy=""0"" r=""200"" fill=""black"" />
+  <circle cx=""0"" cy=""0"" r=""100"" fill=""white"" />
+  <line x1=""-415"" y1=""-415"" x2=""-390"" y2=""-390"" stroke=""black"" stroke-width=""20""/>
+  <polygon points=""-375 -415, -415 -375, -360 -360"" />
+
+  <path id=""circle2"" fill=""transparent""
+      d=""
+      M 0 0
+      m -130, 0
+      a 130,130 0 1,1 260,0
+      a 130,130 0 1,1 -260,0
+      ""
+  />
+  <path id=""circle3"" fill=""transparent""
+      d=""
+      M 0 0
+      m -230, 0
+      a 230,230 0 1,1 460,0
+      a 230,230 0 1,1 -460,0
+      ""
+  />
+  <path id=""circle4"" fill=""transparent""
+      d=""
+      M 0 0
+      m -330, 0
+      a 330,330 0 1,1 660,0
+      a 330,330 0 1,1 -660,0
+      ""
+  />
+  <path id=""circle5"" fill=""transparent""
+      d=""
+      M 0 0
+      m -430, 0
+      a 430,430 0 1,1 860,0
+      a 430,430 0 1,1 -860,0
+      ""
+  />
+
+  <!-- First circle -->
+  <text x=""0"" y=""0"" dominant-baseline=""middle"" text-anchor=""middle"" class=""text1"">STATE</text>
+
+  <!-- Second circle -->
+  <line transform=""rotate(80 0,0)"" x1=""-200"" x2=""-100"" y1=""0"" y2=""0"" class=""line2""/>
+  <text transform=""rotate(92 0,0)"" class=""text2""><textPath href=""#circle2"">STARE</textPath></text>
+  <line transform=""rotate(181 0,0)"" x1=""-200"" x2=""-100"" y1=""0"" y2=""0"" class=""line2""/>
+  <text transform=""rotate(194 0,0)"" class=""text2""><textPath href=""#circle2"">STAR</textPath></text>
+  <line transform=""rotate(267 0,0)"" x1=""-200"" x2=""-100"" y1=""0"" y2=""0"" class=""line2""/>
+  <text transform=""rotate(280 0,0)"" class=""text2""><textPath href=""#circle2"">JOIN</textPath></text>
+  <line transform=""rotate(344 0,0)"" x1=""-200"" x2=""-100"" y1=""0"" y2=""0"" class=""line2""/>
+  <text transform=""rotate(357 0,0)"" class=""text2""><textPath href=""#circle2"">RIGHT</textPath></text>
+
+  <!-- Third circle -->
+  <line transform=""rotate(0 0,0)"" x1=""-300"" x2=""-200"" y1=""0"" y2=""0"" class=""line3""/>
+  <text transform=""rotate(6 0,0)"" class=""text3""><textPath href=""#circle3"">SPARE</textPath></text>
+  <line transform=""rotate(55 0,0)"" x1=""-300"" x2=""-200"" y1=""0"" y2=""0"" class=""line3""/>
+  <text transform=""rotate(62 0,0)"" class=""text3""><textPath href=""#circle3"">CORN</textPath></text>
+  <line transform=""rotate(105 0,0)"" x1=""-300"" x2=""-200"" y1=""0"" y2=""0"" class=""line3""/>
+  <text transform=""rotate(112 0,0)"" class=""text3""><textPath href=""#circle3"">VALUE</textPath></text>
+  <line transform=""rotate(159 0,0)"" x1=""-300"" x2=""-200"" y1=""0"" y2=""0"" class=""line3""/>
+  <text transform=""rotate(165 0,0)"" class=""text3""><textPath href=""#circle3"">POLARS</textPath></text>
+  <line transform=""rotate(222 0,0)"" x1=""-300"" x2=""-200"" y1=""0"" y2=""0"" class=""line3""/>
+  <text transform=""rotate(229 0,0)"" class=""text3""><textPath href=""#circle3"">STATEN</textPath></text>
+  <line transform=""rotate(284 0,0)"" x1=""-300"" x2=""-200"" y1=""0"" y2=""0"" class=""line3""/>
+  <text transform=""rotate(291 0,0)"" class=""text3""><textPath href=""#circle3"">VITAMIN A</textPath></text>
+
+  <!-- Fourth circle -->
+  <line transform=""rotate(5 0,0)"" x1=""-400"" x2=""-300"" y1=""0"" y2=""0"" class=""line4""/>
+  <text transform=""rotate(11 0,0)"" class=""text4""><textPath href=""#circle4"">ANGLE</textPath></text>
+  <line transform=""rotate(48 0,0)"" x1=""-400"" x2=""-300"" y1=""0"" y2=""0"" class=""line4""/>
+  <text transform=""rotate(55 0,0)"" class=""text4""><textPath href=""#circle4"">UNCLEAR</textPath></text>
+  <line transform=""rotate(103 0,0)"" x1=""-400"" x2=""-300"" y1=""0"" y2=""0"" class=""line4""/>
+  <text transform=""rotate(110 0,0)"" class=""text4""><textPath href=""#circle4"">STATIN</textPath></text>
+  <line transform=""rotate(148 0,0)"" x1=""-400"" x2=""-300"" y1=""0"" y2=""0"" class=""line4""/>
+  <text transform=""rotate(155 0,0)"" class=""text4""><textPath href=""#circle4"">STATION</textPath></text>
+  <line transform=""rotate(199 0,0)"" x1=""-400"" x2=""-300"" y1=""0"" y2=""0"" class=""line4""/>
+  <text transform=""rotate(206 0,0)"" class=""text4""><textPath href=""#circle4"">POLAR</textPath></text>
+  <line transform=""rotate(243 0,0)"" x1=""-400"" x2=""-300"" y1=""0"" y2=""0"" class=""line4""/>
+  <text transform=""rotate(249 0,0)"" class=""text4""><textPath href=""#circle4"">VAGUE</textPath></text>
+  <line transform=""rotate(287 0,0)"" x1=""-400"" x2=""-300"" y1=""0"" y2=""0"" class=""line4""/>
+  <text transform=""rotate(294 0,0)"" class=""text4""><textPath href=""#circle4"">COORDINATES</textPath></text>
+
+  <!-- Fifth circle -->
+  <line transform=""rotate(0 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(3 0,0)"" class=""text5""><textPath href=""#circle5"">VARIABLE</textPath></text>
+  <line transform=""rotate(39 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(42 0,0)"" class=""text5""><textPath href=""#circle5"">SIGHT</textPath></text>
+  <line transform=""rotate(66 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(69 0,0)"" class=""text5""><textPath href=""#circle5"">NUCLEAR</textPath></text>
+  <line transform=""rotate(105 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(108 0,0)"" class=""text5""><textPath href=""#circle5"">SPACE</textPath></text>
+  <line transform=""rotate(134 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(137 0,0)"" class=""text5""><textPath href=""#circle5"">JOINT</textPath></text>
+  <line transform=""rotate(160 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(163 0,0)"" class=""text5""><textPath href=""#circle5"">POLARIS</textPath></text>
+  <line transform=""rotate(196 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(199 0,0)"" class=""text5""><textPath href=""#circle5"">VAGUE</textPath></text>
+  <line transform=""rotate(226 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(229 0,0)"" class=""text5""><textPath href=""#circle5"">COIN</textPath></text>
+  <line transform=""rotate(249 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(253 0,0)"" class=""text5""><textPath href=""#circle5"">CAROTENOIDS</textPath></text>
+  <line transform=""rotate(305 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(308 0,0)"" class=""text5""><textPath href=""#circle5"">ANKLE</textPath></text>
+  <line transform=""rotate(334 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(337 0,0)"" class=""text5""><textPath href=""#circle5"">CORE</textPath></text>
+
+</svg>
+";
+            string wordTarget = Renderer.RenderWordTarget("STATE", new List<string> { "STARE", "STAR", "JOIN", "RIGHT" },
+                new List<string> { "SPARE", "CORN", "VALUE", "POLARS", "STATEN", "VITAMIN A" },
+                new List<string> { "ANGLE", "UNCLEAR", "STATIN", "STATION", "POLAR", "VAGUE", "COORDINATES" },
+                new List<string> { "VARIABLE", "SIGHT", "NUCLEAR", "SPACE", "JOINT", "POLARIS", "VAGUE", "COIN", "CAROTENOIDS", "ANKLE", "CORE" },
+                80, 0, 5);
+            Assert.AreEqual(expected, wordTarget);
+//            System.IO.File.WriteAllText(@"C:\Users\carcassi\Google Drive\Foundations of Physics\WordTarget\output.svg", wordTarget);
+        }
     }
 }
