@@ -294,28 +294,28 @@ namespace WordTargetCore
   <text transform=""rotate(294 0,0)"" class=""text4""><textPath href=""#circle4"">COORDINATES</textPath></text>
 
   <!-- Fifth circle -->
-  <line transform=""rotate(0 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(3 0,0)"" class=""text5""><textPath href=""#circle5"">VARIABLE</textPath></text>
-  <line transform=""rotate(39 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(42 0,0)"" class=""text5""><textPath href=""#circle5"">SIGHT</textPath></text>
-  <line transform=""rotate(66 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(69 0,0)"" class=""text5""><textPath href=""#circle5"">NUCLEAR</textPath></text>
-  <line transform=""rotate(105 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(108 0,0)"" class=""text5""><textPath href=""#circle5"">SPACE</textPath></text>
-  <line transform=""rotate(134 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(137 0,0)"" class=""text5""><textPath href=""#circle5"">JOINT</textPath></text>
+  <line transform=""rotate(26 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(29 0,0)"" class=""text5""><textPath href=""#circle5"">VARIABLE</textPath></text>
+  <line transform=""rotate(65 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(68 0,0)"" class=""text5""><textPath href=""#circle5"">SIGHT</textPath></text>
+  <line transform=""rotate(92 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(95 0,0)"" class=""text5""><textPath href=""#circle5"">NUCLEAR</textPath></text>
+  <line transform=""rotate(131 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(134 0,0)"" class=""text5""><textPath href=""#circle5"">SPACE</textPath></text>
   <line transform=""rotate(160 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(163 0,0)"" class=""text5""><textPath href=""#circle5"">POLARIS</textPath></text>
-  <line transform=""rotate(196 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(199 0,0)"" class=""text5""><textPath href=""#circle5"">VAGUE</textPath></text>
-  <line transform=""rotate(226 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(229 0,0)"" class=""text5""><textPath href=""#circle5"">COIN</textPath></text>
-  <line transform=""rotate(249 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(253 0,0)"" class=""text5""><textPath href=""#circle5"">CAROTENOIDS</textPath></text>
-  <line transform=""rotate(305 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(308 0,0)"" class=""text5""><textPath href=""#circle5"">ANKLE</textPath></text>
-  <line transform=""rotate(334 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(337 0,0)"" class=""text5""><textPath href=""#circle5"">CORE</textPath></text>
+  <text transform=""rotate(163 0,0)"" class=""text5""><textPath href=""#circle5"">JOINT</textPath></text>
+  <line transform=""rotate(186 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(189 0,0)"" class=""text5""><textPath href=""#circle5"">POLARIS</textPath></text>
+  <line transform=""rotate(222 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(225 0,0)"" class=""text5""><textPath href=""#circle5"">VAGUE</textPath></text>
+  <line transform=""rotate(252 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(255 0,0)"" class=""text5""><textPath href=""#circle5"">COIN</textPath></text>
+  <line transform=""rotate(275 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(279 0,0)"" class=""text5""><textPath href=""#circle5"">CAROTENOIDS</textPath></text>
+  <line transform=""rotate(331 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(334 0,0)"" class=""text5""><textPath href=""#circle5"">ANKLE</textPath></text>
+  <line transform=""rotate(360 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(363 0,0)"" class=""text5""><textPath href=""#circle5"">CORE</textPath></text>
 
 </svg>
 ";
@@ -324,8 +324,8 @@ namespace WordTargetCore
                 new List<string> { "ANGLE", "UNCLEAR", "STATIN", "STATION", "POLAR", "VAGUE", "COORDINATES" },
                 new List<string> { "VARIABLE", "SIGHT", "NUCLEAR", "SPACE", "JOINT", "POLARIS", "VAGUE", "COIN", "CAROTENOIDS", "ANKLE", "CORE" },
                 80, 0, 5);
+            System.IO.File.WriteAllText(@"C:\Users\carcassi\Google Drive\Foundations of Physics\WordTarget\output.svg", wordTarget);
             Assert.AreEqual(expected, wordTarget);
-//            System.IO.File.WriteAllText(@"C:\Users\carcassi\Google Drive\Foundations of Physics\WordTarget\output.svg", wordTarget);
         }
     }
 }

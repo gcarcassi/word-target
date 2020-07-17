@@ -232,6 +232,11 @@ namespace WordTargetCore
                 throw new Exception("Words do not fit in the circle");
             }
 
+            if (startingAngleDegrees == int.MaxValue)
+            {
+                startingAngleDegrees = 45 - (int) (360 * (fractions[0] + spaceBetweenWords) / 2);
+            }
+
             double circleSoFar = 0.0;
             StringBuilder str = new StringBuilder();
             for(int i = 0; i < words.Count; i++)
@@ -368,7 +373,7 @@ namespace WordTargetCore
             str.Append(@"
   <!-- Fifth circle -->
 ");
-            str.Append(LayoutWord(circle5, 5, 0));
+            str.Append(LayoutWord(circle5, 5, int.MaxValue));
             str.Append(@"
 </svg>
 ");
