@@ -18,5 +18,18 @@ namespace WordTargetCore
             Assert.AreEqual("STATE", layout.WordInCenter);
         }
 
+        // Assign word to a circle: error if it's not in the list or if it's first/last word; remove from other circles if there;
+        // add to the target circle at the end of the list; calcualte the fraction and add it to the list of fractions for the circle
+
+        // Calculate empty space for circle: add up all the fractions, add min space for separator, return what's left
+        
+        // Is circle full? Check that there is no more space in the circle
+
+        // Where is the word? Return the circle or null if not assigned
+
+        // Get previous and next words
+
+        // Get words that are not assigned
+
     }
 }
