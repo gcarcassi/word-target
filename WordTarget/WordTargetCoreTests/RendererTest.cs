@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace WordTargetCore
@@ -324,7 +325,9 @@ namespace WordTargetCore
                 new List<string> { "ANGLE", "UNCLEAR", "STATIN", "STATION", "POLAR", "VAGUE", "COORDINATES" },
                 new List<string> { "VARIABLE", "SIGHT", "NUCLEAR", "SPACE", "JOINT", "POLARIS", "VAGUE", "COIN", "CAROTENOIDS", "ANKLE", "CORE" },
                 80, 0, 5);
-            System.IO.File.WriteAllText(@"C:\Users\carcassi\Google Drive\Foundations of Physics\WordTarget\output.svg", wordTarget);
+
+            ;
+            //System.IO.File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\WordTargetOutput.svg", wordTarget);
             Assert.AreEqual(expected, wordTarget);
         }
     }
