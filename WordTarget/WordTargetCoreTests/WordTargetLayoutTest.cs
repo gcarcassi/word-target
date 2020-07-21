@@ -18,11 +18,29 @@ namespace WordTargetCore
             Assert.AreEqual("STATE", layout.WordInCenter);
         }
 
+        [TestMethod]
+        public void AssignWord()
+        {
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "UNCLEAR", "STATE" });
+            layout.AssignWord("VALUE", 3);
+            layout.AssignWord("UNCLEAR", 4);
+            Assert.ThrowsException<System.Exception>(() => layout.AssignWord("NUCLEAR", 2));
+            Assert.ThrowsException<System.Exception>(() => layout.AssignWord("VARIABLE", 3));
+            Assert.ThrowsException<System.Exception>(() => layout.AssignWord("STATE", 1));
+            Assert.ThrowsException<System.Exception>(() => layout.AssignWord("VALUE", 1));
+            Assert.AreEqual("STATE", layout.WordInCenter);
+            Assert.AreEqual(1, layout.WordsInCircle3.Count);
+            Assert.AreEqual(1, layout.WordsInCircle4.Count);
+            Assert.AreEqual("VALUE", layout.WordsInCircle3[0]);
+            Assert.AreEqual("UNCLEAR", layout.WordsInCircle4[0]);
+
+
+        }
         // Assign word to a circle: error if it's not in the list or if it's first/last word; remove from other circles if there;
         // add to the target circle at the end of the list; calcualte the fraction and add it to the list of fractions for the circle
 
         // Calculate empty space for circle: add up all the fractions, add min space for separator, return what's left
-        
+
         // Is circle full? Check that there is no more space in the circle
 
         // Where is the word? Return the circle or null if not assigned

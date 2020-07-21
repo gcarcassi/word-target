@@ -20,11 +20,31 @@ namespace WordTargetCore
         public ReadOnlyCollection<string> WordsInCircle2 => wordsInCircle2.AsReadOnly();
         public string WordInCenter => words[words.Count - 1];
 
+        private List<List<string>> wordsInCircle;
+
         public WordTargetLayout(List<string> words)
         {
             this.words = words;
             wordsInCircle5.Add(words[0]);
+            wordsInCircle = new List<List<string>>() { null, null, wordsInCircle2, wordsInCircle3, wordsInCircle4, wordsInCircle5 };
+
         }
 
+        public void AssignWord(string word, int circle)
+        {
+            if(!this.words.Contains(word))
+            {
+                throw new Exception("This word is not in the list of words");
+            }
+            if(word.Equals(this.words[0]) || word.Equals(this.WordInCenter))
+            {
+                throw new Exception("The first and last word cannot be assigned to a different circle");
+            }
+            if(circle <= 1 || circle > 5)
+            {
+                throw new Exception("Words can only be assigned to circles 2-5");
+            }
+            wordsInCircle[circle].Add(word);
+        }
     }
 }

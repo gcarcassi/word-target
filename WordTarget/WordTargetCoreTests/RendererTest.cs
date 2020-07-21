@@ -326,7 +326,6 @@ namespace WordTargetCore
                 new List<string> { "VARIABLE", "SIGHT", "NUCLEAR", "SPACE", "JOINT", "POLARIS", "VAGUE", "COIN", "CAROTENOIDS", "ANKLE", "CORE" },
                 80, 0, 5);
 
-            ;
             //System.IO.File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\WordTargetOutput.svg", wordTarget);
             Assert.AreEqual(expected, wordTarget);
         }
