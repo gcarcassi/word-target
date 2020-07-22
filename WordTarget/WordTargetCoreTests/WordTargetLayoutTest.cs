@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace WordTargetCore
@@ -18,6 +19,7 @@ namespace WordTargetCore
             Assert.AreEqual("STATE", layout.WordInCenter);
         }
 
+        // Assign word to a circle: error if it's not in the list or if it's first/last word;
         [TestMethod]
         public void AssignWord()
         {
@@ -36,7 +38,24 @@ namespace WordTargetCore
 
 
         }
-        // Assign word to a circle: error if it's not in the list or if it's first/last word; remove from other circles if there;
+
+        // Remove from other circles if there;
+        [TestMethod]
+        public void RemoveWord()
+        {
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "UNCLEAR", "STATE" });
+            layout.AssignWord("VALUE", 3);
+            layout.AssignWord("UNCLEAR", 4);
+            Assert.ThrowsException<System.Exception>(() => layout.RemoveWord("NUCLEAR", 2));
+            Assert.ThrowsException<System.Exception>(() => layout.RemoveWord("UNCLEAR", 3));
+            Assert.ThrowsException<System.Exception>(() => layout.RemoveWord("VARIABLE", 5));
+            Assert.ThrowsException<System.Exception>(() => layout.RemoveWord("STATE", 1));
+            layout.RemoveWord("VALUE", 3);
+            Assert.AreEqual(0, layout.WordsInCircle3.Count);
+            Assert.AreEqual(1, layout.WordsInCircle4.Count);
+            Assert.AreEqual("UNCLEAR", layout.WordsInCircle4[0]);
+        }
+
         // add to the target circle at the end of the list; calcualte the fraction and add it to the list of fractions for the circle
 
         // Calculate empty space for circle: add up all the fractions, add min space for separator, return what's left

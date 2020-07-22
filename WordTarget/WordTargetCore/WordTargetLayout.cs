@@ -32,19 +32,33 @@ namespace WordTargetCore
 
         public void AssignWord(string word, int circle)
         {
-            if(!this.words.Contains(word))
-            {
-                throw new Exception("This word is not in the list of words");
-            }
-            if(word.Equals(this.words[0]) || word.Equals(this.WordInCenter))
+            if (word.Equals(this.words[0]) || word.Equals(this.WordInCenter))
             {
                 throw new Exception("The first and last word cannot be assigned to a different circle");
             }
-            if(circle <= 1 || circle > 5)
+            if (circle <= 1 || circle > 5)
             {
                 throw new Exception("Words can only be assigned to circles 2-5");
             }
+            if (!this.words.Contains(word))
+            {
+                throw new Exception("This word is not in the list of words");
+            }
+            
             wordsInCircle[circle].Add(word);
+        }
+
+        public void RemoveWord(string word, int circle)
+        {
+            if (word.Equals(this.words[0]) || word.Equals(this.WordInCenter))
+            {
+                throw new Exception("The first and last word cannot be removed");
+            }
+            if (!this.wordsInCircle[circle].Contains(word))
+            {
+                throw new Exception("This word is not found in this circle");
+            }
+            wordsInCircle[circle].Remove(word);
         }
     }
 }
