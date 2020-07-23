@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Linq;
+
 
 namespace WordTargetCore
 {
@@ -72,6 +74,11 @@ namespace WordTargetCore
             int wordPosition = wordsInCircle[circle].IndexOf(word);
             wordsInCircle[circle].RemoveAt(wordPosition);
             fracsInCircle[circle].RemoveAt(wordPosition);
+        }
+
+        public double EmptySpace(int circle)
+        {
+            return 1 - fracsInCircle[circle].Sum();
         }
     }
 }

@@ -84,7 +84,16 @@ namespace WordTargetCore
         }
 
         // Calculate empty space for circle: add up all the fractions, add min space for separator, return what's left
-
+        [TestMethod]
+        public void EmptySpace()
+        {
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "UNCLEAR", "STATE" });
+            layout.AssignWord("VALUE", 3);
+            layout.AssignWord("UNCLEAR", 3);
+            Assert.AreEqual(0.727, layout.EmptySpace(3), 0.001);
+            Assert.AreEqual(1.0, layout.EmptySpace(4));
+            Assert.AreEqual(0.909, layout.EmptySpace(5), 0.001);
+        }
         // Is circle full? Check that there is no more space in the circle
 
         // Where is the word? Return the circle or null if not assigned
