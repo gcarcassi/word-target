@@ -13,21 +13,32 @@ namespace WordTargetCore
         private readonly List<string> wordsInCircle3 = new List<string>();
         private readonly List<string> wordsInCircle2 = new List<string>();
 
+        private readonly List<double> fracsInCircle5 = new List<double>();
+        private readonly List<double> fracsInCircle4 = new List<double>();
+        private readonly List<double> fracsInCircle3 = new List<double>();
+        private readonly List<double> fracsInCircle2 = new List<double>();
         public ReadOnlyCollection<string> Words => words.AsReadOnly();
         public ReadOnlyCollection<string> WordsInCircle5 => wordsInCircle5.AsReadOnly();
         public ReadOnlyCollection<string> WordsInCircle4 => wordsInCircle4.AsReadOnly();
         public ReadOnlyCollection<string> WordsInCircle3 => wordsInCircle3.AsReadOnly();
         public ReadOnlyCollection<string> WordsInCircle2 => wordsInCircle2.AsReadOnly();
+
+        public ReadOnlyCollection<double> FracsInCircle5 => fracsInCircle5.AsReadOnly();
+        public ReadOnlyCollection<double> FracsInCircle4 => fracsInCircle4.AsReadOnly();
+        public ReadOnlyCollection<double> FracsInCircle3 => fracsInCircle3.AsReadOnly();
+        public ReadOnlyCollection<double> FracsInCircle2 => fracsInCircle2.AsReadOnly();
         public string WordInCenter => words[words.Count - 1];
 
         private List<List<string>> wordsInCircle;
+        private List<List<double>> fracsInCircle;
 
         public WordTargetLayout(List<string> words)
         {
             this.words = words;
             wordsInCircle5.Add(words[0]);
+            fracsInCircle5.Add(Renderer.FracForWord(words[0], 5));
             wordsInCircle = new List<List<string>>() { null, null, wordsInCircle2, wordsInCircle3, wordsInCircle4, wordsInCircle5 };
-
+            fracsInCircle = new List<List<double>>() { null, null, fracsInCircle2, fracsInCircle3, fracsInCircle4, fracsInCircle5 };
         }
 
         public void AssignWord(string word, int circle)
@@ -44,8 +55,8 @@ namespace WordTargetCore
             {
                 throw new Exception("This word is not in the list of words");
             }
-            
             wordsInCircle[circle].Add(word);
+            fracsInCircle[circle].Add(Renderer.FracForWord(word, circle));
         }
 
         public void RemoveWord(string word, int circle)
@@ -58,7 +69,9 @@ namespace WordTargetCore
             {
                 throw new Exception("This word is not found in this circle");
             }
-            wordsInCircle[circle].Remove(word);
+            int wordPosition = wordsInCircle[circle].IndexOf(word);
+            wordsInCircle[circle].RemoveAt(wordPosition);
+            fracsInCircle[circle].RemoveAt(wordPosition);
         }
     }
 }

@@ -57,6 +57,31 @@ namespace WordTargetCore
         }
 
         // add to the target circle at the end of the list; calcualte the fraction and add it to the list of fractions for the circle
+        [TestMethod]
+        public void FracsWhenAssigningWords()
+        {
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "UNCLEAR", "STATE" });
+            Assert.AreEqual(0, layout.FracsInCircle3.Count);
+            layout.AssignWord("VALUE", 3);
+            Assert.AreEqual(1, layout.FracsInCircle3.Count);
+            Assert.AreEqual(0.111, layout.FracsInCircle3[0], 0.001);
+            layout.AssignWord("UNCLEAR", 3);
+            Assert.AreEqual(2, layout.FracsInCircle3.Count);
+            Assert.AreEqual(0.162, layout.FracsInCircle3[1], 0.001);
+        }
+
+        [TestMethod]
+        public void FracsWhenRemovingWords()
+        {
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "UNCLEAR", "STATE" });
+            layout.AssignWord("VALUE", 3);
+            layout.AssignWord("UNCLEAR", 3);
+            Assert.AreEqual(2, layout.FracsInCircle3.Count);
+            layout.RemoveWord("UNCLEAR", 3);
+            Assert.AreEqual(1, layout.FracsInCircle3.Count);
+            layout.RemoveWord("VALUE", 3);
+            Assert.AreEqual(0, layout.FracsInCircle3.Count);
+        }
 
         // Calculate empty space for circle: add up all the fractions, add min space for separator, return what's left
 
