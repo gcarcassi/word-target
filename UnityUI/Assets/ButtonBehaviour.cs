@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using WordTargetCore;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class ButtonBehaviour : MonoBehaviour
 {
     public TextMeshProUGUI text;
+    public GameObject content;
 
     int n;
     public void OnButtonPress()
@@ -14,6 +16,6 @@ public class ButtonBehaviour : MonoBehaviour
         n++;
         Debug.Log("New link: " + new Word("cat"));
         Debug.Log("New element: " + text);
-        text.SetText("Changing " + n);
+        text.SetText("Changing " + n + " Content " + content);
     }
 }
