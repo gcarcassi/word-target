@@ -23,13 +23,14 @@ namespace WordTargetCore
         [TestMethod]
         public void AssignWord()
         {
-            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "UNCLEAR", "STATE" });
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "STATE" });
             layout.AssignWord("VALUE", 3);
             layout.AssignWord("UNCLEAR", 4);
             Assert.ThrowsException<System.Exception>(() => layout.AssignWord("NUCLEAR", 2));
             Assert.ThrowsException<System.Exception>(() => layout.AssignWord("VARIABLE", 3));
             Assert.ThrowsException<System.Exception>(() => layout.AssignWord("STATE", 1));
-            Assert.ThrowsException<System.Exception>(() => layout.AssignWord("VALUE", 1));
+            Assert.ThrowsException<System.Exception>(() => layout.AssignWord("VAGUE", 1));
+            Assert.ThrowsException<System.Exception>(() => layout.AssignWord("VALUE", 4));
             Assert.AreEqual("STATE", layout.WordInCenter);
             Assert.AreEqual(1, layout.WordsInCircle3.Count);
             Assert.AreEqual(1, layout.WordsInCircle4.Count);

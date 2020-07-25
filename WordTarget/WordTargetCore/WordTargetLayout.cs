@@ -60,6 +60,13 @@ namespace WordTargetCore
             {
                 throw new Exception("This word is not in the list of words");
             }
+            for(int i = 2; i <= 5; i++)
+            {
+                if(this.wordsInCircle[i].Contains(word))
+                {
+                    throw new Exception("This word has already been assigned to a circle");
+                }
+            }
             wordsInCircle[circle].Add(word);
             fracsInCircle[circle].Add(Renderer.FracForWord(word, circle));
         }
