@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using TMPro;
@@ -9,6 +10,9 @@ using WordTargetCore;
 public class WordDatabaseUIHandler : MonoBehaviour
 {
     public GameObject listItemTemplate;
+
+    public GameObject selectedWordField;
+    public GameObject selectedLinkField;
 
     public GameObject wordListBoxContent;
     public GameObject linkListBoxContent;
@@ -40,13 +44,39 @@ public class WordDatabaseUIHandler : MonoBehaviour
 
     void ChangeSelectedWord(Word selectedWord)
     {
+        TMP_InputField field = selectedWordField.GetComponent<TMP_InputField>();
+        field.text = selectedWord.Text;
+
+        // Should check whether the current linked word matches
+        string currentLink = selectedLinkField.GetComponent<TMP_InputField>().text;
+        bool keepLink = false;
+
         ClearListBox(linkListBoxContent);
         foreach (Link link in db.GetLinksFor(selectedWord))
         {
             var copy = Instantiate(listItemTemplate);
             copy.transform.SetParent(linkListBoxContent.transform);
             copy.GetComponentInChildren<TextMeshProUGUI>().SetText(link.WordB.Text);
+            if (link.WordB.Text.Equals(currentLink)) keepLink = true;
+            copy.GetComponentInChildren<Button>().onClick.AddListener(
+                () =>
+                {
+                    ChangeSelectedLink(link);
+                }
+            );
         }
+
+        if (!keepLink)
+        {
+            selectedLinkField.GetComponent<TMP_InputField>().text = "";
+        }
+    }
+
+    void ChangeSelectedLink(Link selectedLink)
+    {
+        TMP_InputField field = selectedLinkField.GetComponent<TMP_InputField>();
+        Debug.Log("Field " + field);
+        field.text = selectedLink.WordB.Text;
     }
 
     void ClearListBox(GameObject listBoxContent)
