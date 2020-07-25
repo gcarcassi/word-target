@@ -34,6 +34,8 @@ namespace WordTargetCore
         private List<List<string>> wordsInCircle;
         private List<List<double>> fracsInCircle;
 
+        private static List<double> minFracBetweenWords = new List<double> { 0.0, 0.0, 20.0 / 360.0, 12.0 / 360.0, 10.0 / 360.0, 6.0 / 360.0 };
+
         public WordTargetLayout(List<string> words)
         {
             this.words = words;
@@ -43,6 +45,7 @@ namespace WordTargetCore
             fracsInCircle = new List<List<double>>() { null, null, fracsInCircle2, fracsInCircle3, fracsInCircle4, fracsInCircle5 };
         }
 
+        // TODO Make sure that same word cant be entered twice
         public void AssignWord(string word, int circle)
         {
             if (word.Equals(this.words[0]) || word.Equals(this.WordInCenter))
@@ -76,9 +79,19 @@ namespace WordTargetCore
             fracsInCircle[circle].RemoveAt(wordPosition);
         }
 
-        public double EmptySpace(int circle)
+        public double GetEmptySpace(int circle)
         {
-            return 1 - fracsInCircle[circle].Sum();
+            return 1 - fracsInCircle[circle].Sum() - (minFracBetweenWords[circle] * wordsInCircle[circle].Count);
+        }
+
+        public bool IsCircleFull(int circle)
+        {
+            if(GetEmptySpace(circle) < 0 + minFracBetweenWords[circle])
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

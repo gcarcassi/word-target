@@ -90,12 +90,29 @@ namespace WordTargetCore
             WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "UNCLEAR", "STATE" });
             layout.AssignWord("VALUE", 3);
             layout.AssignWord("UNCLEAR", 3);
-            Assert.AreEqual(0.727, layout.EmptySpace(3), 0.001);
-            Assert.AreEqual(1.0, layout.EmptySpace(4));
-            Assert.AreEqual(0.909, layout.EmptySpace(5), 0.001);
+            Assert.AreEqual(0.660, layout.GetEmptySpace(3), 0.001);
+            Assert.AreEqual(1.0, layout.GetEmptySpace(4));
+            Assert.AreEqual(0.892, layout.GetEmptySpace(5), 0.001);
         }
-        // Is circle full? Check that there is no more space in the circle
 
+        // Is circle full? Check that there is no more space in the circle
+        [TestMethod]
+        public void IsCircleFull()
+        {
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "NUCLEAR", "CORE", "CORN", "COIN", "JOIN", "STATE" });
+            layout.AssignWord("VALUE", 3);
+            layout.AssignWord("VAGUE", 3);
+            layout.AssignWord("UNCLEAR", 3);
+            layout.AssignWord("NUCLEAR", 3);
+            Assert.AreEqual(false, layout.IsCircleFull(3));
+            layout.AssignWord("CORE", 3);
+            layout.AssignWord("CORN", 3);
+            layout.AssignWord("COIN", 3);
+            layout.AssignWord("JOIN", 3);
+
+            Assert.AreEqual(true, layout.IsCircleFull(3));
+
+        }
         // Where is the word? Return the circle or null if not assigned
 
         // Get previous and next words
