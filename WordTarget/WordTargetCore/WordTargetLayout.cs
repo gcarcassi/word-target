@@ -45,7 +45,6 @@ namespace WordTargetCore
             fracsInCircle = new List<List<double>>() { null, null, fracsInCircle2, fracsInCircle3, fracsInCircle4, fracsInCircle5 };
         }
 
-        // TODO Make sure that same word cant be entered twice
         public void AssignWord(string word, int circle)
         {
             if (word.Equals(this.words[0]) || word.Equals(this.WordInCenter))
@@ -115,6 +114,28 @@ namespace WordTargetCore
                 }
             }
             return null;
+        }
+
+
+        public string GetNextWord(string word)
+        {
+            int position = this.words.IndexOf(word);
+            if(position == words.Count - 1)
+            {
+                return null;
+            }
+            position++;
+            return words[position];
+        }
+        public string GetPreviousWord(string word)
+        {
+            int position = this.words.IndexOf(word);
+            if (position == 0)
+            {
+                return null;
+            }
+            position--;
+            return words[position];
         }
     }
 }

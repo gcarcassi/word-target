@@ -132,6 +132,23 @@ namespace WordTargetCore
         }
 
         // Get previous and next words
+        [TestMethod]
+        public void GetNextWord()
+        {
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "STATE" });
+            Assert.AreEqual("VALUE", layout.GetNextWord("VARIABLE"));
+            Assert.AreEqual("VAGUE", layout.GetNextWord("VALUE"));
+            Assert.AreEqual(null, layout.GetNextWord("STATE"));
+        }
+
+        [TestMethod]
+        public void GetPreviousWord()
+        {
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "STATE" });
+            Assert.AreEqual(null, layout.GetPreviousWord("VARIABLE"));
+            Assert.AreEqual("VARIABLE", layout.GetPreviousWord("VALUE"));
+            Assert.AreEqual("UNCLEAR", layout.GetPreviousWord("STATE"));
+        }
 
         // Get words that are not assigned
 
