@@ -100,5 +100,21 @@ namespace WordTargetCore
 
             return false;
         }
+
+        public int? FindWord(string word)
+        {
+            if(word.Equals(this.WordInCenter))
+            {
+                return 1;
+            }
+            for(int i = 2; i <= 5; i++)
+            {
+                if (this.wordsInCircle[i].Contains(word))
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
     }
 }

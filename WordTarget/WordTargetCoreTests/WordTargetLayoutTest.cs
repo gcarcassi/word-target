@@ -74,7 +74,7 @@ namespace WordTargetCore
         [TestMethod]
         public void FracsWhenRemovingWords()
         {
-            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "UNCLEAR", "STATE" });
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "STATE" });
             layout.AssignWord("VALUE", 3);
             layout.AssignWord("UNCLEAR", 3);
             Assert.AreEqual(2, layout.FracsInCircle3.Count);
@@ -88,7 +88,7 @@ namespace WordTargetCore
         [TestMethod]
         public void EmptySpace()
         {
-            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "UNCLEAR", "STATE" });
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "STATE" });
             layout.AssignWord("VALUE", 3);
             layout.AssignWord("UNCLEAR", 3);
             Assert.AreEqual(0.660, layout.GetEmptySpace(3), 0.001);
@@ -114,7 +114,22 @@ namespace WordTargetCore
             Assert.AreEqual(true, layout.IsCircleFull(3));
 
         }
+
         // Where is the word? Return the circle or null if not assigned
+        [TestMethod]
+        public void FindWord()
+        {
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "STATE" });
+            layout.AssignWord("VALUE", 3);
+            layout.AssignWord("UNCLEAR", 4);
+            layout.AssignWord("VAGUE", 2);
+            Assert.AreEqual(2, layout.FindWord("VAGUE"));
+            Assert.AreEqual(3, layout.FindWord("VALUE"));
+            Assert.AreEqual(4, layout.FindWord("UNCLEAR"));
+            Assert.AreEqual(5, layout.FindWord("VARIABLE"));
+            Assert.AreEqual(1, layout.FindWord("STATE"));
+            Assert.AreEqual(null, layout.FindWord("NUCLEAR"));
+        }
 
         // Get previous and next words
 
