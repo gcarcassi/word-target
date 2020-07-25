@@ -75,7 +75,6 @@ public class WordDatabaseUIHandler : MonoBehaviour
     void ChangeSelectedLink(Link selectedLink)
     {
         TMP_InputField field = selectedLinkField.GetComponent<TMP_InputField>();
-        Debug.Log("Field " + field);
         field.text = selectedLink.WordB.Text;
     }
 
