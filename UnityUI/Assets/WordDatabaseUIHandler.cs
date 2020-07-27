@@ -42,6 +42,13 @@ public class WordDatabaseUIHandler : MonoBehaviour
         }
     }
 
+    private Dictionary<LinkType, Color32> colorForLinkType = new Dictionary<LinkType, Color32>() { { LinkType.OneLetterChange, new Color32(0, 128, 128, 255) },
+        { LinkType.OneLetterAddOrRemove, new Color32(0, 0, 255, 255) },
+        { LinkType.Anagram, new Color32(128, 0, 128, 255) },
+        { LinkType.Synonym, new Color32(0, 128, 0, 255) },
+        { LinkType.Antonym, new Color32(192, 0, 0, 255) },
+        { LinkType.WordAssociation, new Color32(0, 0, 0, 255) } };
+
     void ChangeSelectedWord(Word selectedWord)
     {
         TMP_InputField field = selectedWordField.GetComponent<TMP_InputField>();
@@ -56,6 +63,7 @@ public class WordDatabaseUIHandler : MonoBehaviour
         {
             var copy = Instantiate(listItemTemplate);
             copy.transform.SetParent(linkListBoxContent.transform);
+            copy.GetComponentInChildren<TextMeshProUGUI>().color = colorForLinkType[link.Type];
             copy.GetComponentInChildren<TextMeshProUGUI>().SetText(link.WordB.Text);
             if (link.WordB.Text.Equals(currentLink)) keepLink = true;
             copy.GetComponentInChildren<Button>().onClick.AddListener(
