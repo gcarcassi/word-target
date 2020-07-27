@@ -137,5 +137,12 @@ namespace WordTargetCore
             position--;
             return words[position];
         }
+
+        public List<string> GetUnAssignedWords()
+        {
+            List<string> unassigned = words.Except(wordsInCircle2).Except(wordsInCircle3).Except(wordsInCircle4).Except(wordsInCircle5).ToList();
+            unassigned.Remove(words[words.Count - 1]);
+            return unassigned;
+        }
     }
 }

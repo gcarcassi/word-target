@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WordTargetCore
 {
@@ -151,6 +152,15 @@ namespace WordTargetCore
         }
 
         // Get words that are not assigned
+        [TestMethod]
+        public void GetUnAssignedWords()
+        {
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "NUCLEAR", "STATE" });
+            layout.AssignWord("VALUE", 2);
+            layout.AssignWord("VAGUE", 2);
+            List<string> unassigned = new List<string> { "UNCLEAR", "NUCLEAR" };
+            Assert.IsTrue(Enumerable.SequenceEqual(unassigned, layout.GetUnAssignedWords()));
+        }
 
     }
 }
