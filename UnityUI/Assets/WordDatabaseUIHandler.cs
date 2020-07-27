@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WordTargetCore;
+using System.Linq;
 
 public class WordDatabaseUIHandler : MonoBehaviour
 {
@@ -29,7 +30,8 @@ public class WordDatabaseUIHandler : MonoBehaviour
 
     void SynchWords()
     {
-        foreach (Word word in db.GetAllWords()) {
+        ClearListBox(wordListBoxContent);
+        foreach (Word word in db.GetAllWords().OrderBy(x => x.Text).ToList()) {
             var copy = Instantiate(listItemTemplate);
             copy.transform.SetParent(wordListBoxContent.transform);
             copy.GetComponentInChildren<TextMeshProUGUI>().SetText(word.Text);
@@ -59,7 +61,7 @@ public class WordDatabaseUIHandler : MonoBehaviour
         bool keepLink = false;
 
         ClearListBox(linkListBoxContent);
-        foreach (Link link in db.GetLinksFor(selectedWord))
+        foreach (Link link in db.GetLinksFor(selectedWord).OrderBy(x => x.WordB.Text).ToList())
         {
             var copy = Instantiate(listItemTemplate);
             copy.transform.SetParent(linkListBoxContent.transform);
@@ -78,6 +80,15 @@ public class WordDatabaseUIHandler : MonoBehaviour
         {
             selectedLinkField.GetComponent<TMP_InputField>().text = "";
         }
+    }
+    public void OnAddWordButton()
+    {
+        TMP_InputField field = selectedWordField.GetComponent<TMP_InputField>();
+        string newWord = field.text;
+
+        db.AddWord(newWord);
+        SynchWords();
+        ChangeSelectedWord(new Word(newWord));
     }
 
     void ChangeSelectedLink(Link selectedLink)
