@@ -95,6 +95,9 @@ namespace WordTargetCore
             Assert.AreEqual(0.660, layout.GetEmptySpace(3), 0.001);
             Assert.AreEqual(1.0, layout.GetEmptySpace(4));
             Assert.AreEqual(0.892, layout.GetEmptySpace(5), 0.001);
+            Assert.ThrowsException<System.Exception>(() => layout.GetEmptySpace(6));
+            Assert.ThrowsException<System.Exception>(() => layout.GetEmptySpace(1));
+
         }
 
         // Is circle full? Check that there is no more space in the circle
@@ -111,7 +114,8 @@ namespace WordTargetCore
             layout.AssignWord("CORN", 3);
             layout.AssignWord("COIN", 3);
             layout.AssignWord("JOIN", 3);
-
+            Assert.ThrowsException<System.Exception>(() => layout.IsCircleFull(1));
+            Assert.ThrowsException<System.Exception>(() => layout.IsCircleFull(6));
             Assert.AreEqual(true, layout.IsCircleFull(3));
 
         }
@@ -140,7 +144,7 @@ namespace WordTargetCore
             Assert.AreEqual("VALUE", layout.GetNextWord("VARIABLE"));
             Assert.AreEqual("VAGUE", layout.GetNextWord("VALUE"));
             Assert.AreEqual(null, layout.GetNextWord("STATE"));
-            // TODO: throw exception Assert.AreEqual(null, layout.GetNextWord("NOTTHERE"));
+            Assert.ThrowsException<System.Exception>(() => layout.GetNextWord("NOTTHERE"));
         }
 
         [TestMethod]
@@ -150,6 +154,7 @@ namespace WordTargetCore
             Assert.AreEqual(null, layout.GetPreviousWord("VARIABLE"));
             Assert.AreEqual("VARIABLE", layout.GetPreviousWord("VALUE"));
             Assert.AreEqual("UNCLEAR", layout.GetPreviousWord("STATE"));
+            Assert.ThrowsException<System.Exception>(() => layout.GetNextWord("NOTTHERE"));
         }
 
         // Get words that are not assigned

@@ -110,7 +110,6 @@ namespace WordTargetCore
                     return true;
                 }
             }
-
             return word.Equals(this[Count - 1].WordB);
         }
     }

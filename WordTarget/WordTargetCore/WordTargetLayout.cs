@@ -76,6 +76,10 @@ namespace WordTargetCore
             {
                 throw new Exception("The first and last word cannot be removed");
             }
+            if (circle <= 1 || circle > 5)
+            {
+                throw new Exception("Words can only be removed from circles 2-5");
+            }
             if (!this.wordsInCircle[circle].Contains(word))
             {
                 throw new Exception("This word is not found in this circle");
@@ -87,6 +91,10 @@ namespace WordTargetCore
 
         public double GetEmptySpace(int circle)
         {
+            if (circle <= 1 || circle > 5)
+            {
+                throw new Exception("Invalid input");
+            }
             return 1 - fracsInCircle[circle].Sum() - (minFracBetweenWords[circle] * wordsInCircle[circle].Count);
         }
 
@@ -119,6 +127,10 @@ namespace WordTargetCore
 
         public string GetNextWord(string word)
         {
+            if(this.words.Contains(word) == false)
+            {
+                throw new Exception("Word is not in the list of words");
+            }
             int position = this.words.IndexOf(word);
             if(position == words.Count - 1)
             {
@@ -129,6 +141,10 @@ namespace WordTargetCore
         }
         public string GetPreviousWord(string word)
         {
+            if (this.words.Contains(word) == false)
+            {
+                throw new Exception("Word is not in the list of words");
+            }
             int position = this.words.IndexOf(word);
             if (position == 0)
             {
