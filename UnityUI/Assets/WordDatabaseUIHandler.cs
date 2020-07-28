@@ -113,6 +113,36 @@ public class WordDatabaseUIHandler : MonoBehaviour
             LinkType.WordAssociation);
     }
 
+    string GetSelectedWordA()
+    {
+        return selectedWordField.GetComponent<TMP_InputField>().text.ToUpper();
+    }
+
+    string GetSelectedWordB()
+    {
+        return selectedLinkField.GetComponent<TMP_InputField>().text.ToUpper();
+    }
+
+    public void OnDeleteWordButton()
+    {
+        db.RemoveWord(new Word(GetSelectedWordA()));
+        SynchWords();
+        selectedWordField.GetComponent<TMP_InputField>().text = "";
+        ClearListBox(linkListBoxContent);
+    }
+
+    public void OnDeleteLinkButton()
+    {
+        Word wordA = new Word(GetSelectedWordA());
+        Word wordB = new Word(GetSelectedWordB());
+        Link link = db.GetLinksFor(wordA).First(x => x.WordB.Equals(wordB));
+        if (link != null)
+        {
+            db.RemoveLink(link);
+        }
+        ChangeSelectedWord(wordA);
+    }
+
     void AddLink(String wordAText, String wordBText, LinkType type)
     {
         Word wordA = new Word(wordAText);

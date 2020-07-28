@@ -94,6 +94,40 @@ namespace WordTargetCore
             }
         }
 
+        // Add tests
+        public void RemoveLink(Link link)
+        {
+            // TODO: we are not checking whether the link is not there
+
+            if (linksByWord.ContainsKey(link.WordA))
+            {
+                linksByWord[link.WordA].Remove(link);
+            }
+            else
+            {
+                throw new Exception("Word " + link.WordA + " not present");
+            }
+
+            if (linksByWord.ContainsKey(link.WordB))
+            {
+                linksByWord[link.WordB].Remove(link.Reverse());
+            }
+            else
+            {
+                throw new Exception("Word " + link.WordB + " not present");
+            }
+        }
+
+        public void RemoveWord(Word word)
+        {
+            List<Link> links = new List<Link>(GetLinksFor(word));
+            foreach (Link link in links)
+            {
+                RemoveLink(link);
+            }
+            words.Remove(word);
+        }
+
         public void Serialize(TextWriter writer)
         {
             writer.WriteLine("Words:");
