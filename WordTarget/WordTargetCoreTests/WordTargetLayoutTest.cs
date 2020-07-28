@@ -140,6 +140,7 @@ namespace WordTargetCore
             Assert.AreEqual("VALUE", layout.GetNextWord("VARIABLE"));
             Assert.AreEqual("VAGUE", layout.GetNextWord("VALUE"));
             Assert.AreEqual(null, layout.GetNextWord("STATE"));
+            // TODO: throw exception Assert.AreEqual(null, layout.GetNextWord("NOTTHERE"));
         }
 
         [TestMethod]

@@ -24,17 +24,17 @@ namespace WordTargetCore
         public ReadOnlyCollection<string> WordsInCircle4 => wordsInCircle4.AsReadOnly();
         public ReadOnlyCollection<string> WordsInCircle3 => wordsInCircle3.AsReadOnly();
         public ReadOnlyCollection<string> WordsInCircle2 => wordsInCircle2.AsReadOnly();
+        public string WordInCenter => words[words.Count - 1];
 
         public ReadOnlyCollection<double> FracsInCircle5 => fracsInCircle5.AsReadOnly();
         public ReadOnlyCollection<double> FracsInCircle4 => fracsInCircle4.AsReadOnly();
         public ReadOnlyCollection<double> FracsInCircle3 => fracsInCircle3.AsReadOnly();
         public ReadOnlyCollection<double> FracsInCircle2 => fracsInCircle2.AsReadOnly();
-        public string WordInCenter => words[words.Count - 1];
 
-        private List<List<string>> wordsInCircle;
-        private List<List<double>> fracsInCircle;
+        private readonly List<List<string>> wordsInCircle;
+        private readonly List<List<double>> fracsInCircle;
 
-        private static List<double> minFracBetweenWords = new List<double> { 0.0, 0.0, 20.0 / 360.0, 12.0 / 360.0, 10.0 / 360.0, 6.0 / 360.0 };
+        private static readonly List<double> minFracBetweenWords = new List<double> { 0.0, 0.0, 20.0 / 360.0, 12.0 / 360.0, 10.0 / 360.0, 6.0 / 360.0 };
 
         public WordTargetLayout(List<string> words)
         {
