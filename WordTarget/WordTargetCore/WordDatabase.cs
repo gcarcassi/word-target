@@ -12,6 +12,7 @@ namespace WordTargetCore
         private HashSet<Link> links = new HashSet<Link>();
         private Dictionary<Word, HashSet<Link>> linksByWord = new Dictionary<Word, HashSet<Link>>();
 
+        // TODO: protect from adding the same word twice
         public void AddWord(string word)
         {
             Word newWord = new Word(word);
@@ -35,6 +36,16 @@ namespace WordTargetCore
                     Link link = new Link(newWord, other, LinkType.Anagram);
                     AddLink(link);
                 }
+            }
+        }
+
+        // TODO: add tests
+        public void AddWordIfMissing(string word)
+        {
+            Word newWord = new Word(word);
+            if (!words.Contains(newWord))
+            {
+                AddWord(word);
             }
         }
 

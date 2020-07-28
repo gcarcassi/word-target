@@ -81,14 +81,50 @@ public class WordDatabaseUIHandler : MonoBehaviour
             selectedLinkField.GetComponent<TMP_InputField>().text = "";
         }
     }
+
     public void OnAddWordButton()
     {
         TMP_InputField field = selectedWordField.GetComponent<TMP_InputField>();
-        string newWord = field.text;
+        string newWord = field.text.ToUpper();
 
         db.AddWord(newWord);
         SynchWords();
         ChangeSelectedWord(new Word(newWord));
+    }
+
+    public void OnAddSynonymButton()
+    {
+        AddLink(selectedWordField.GetComponent<TMP_InputField>().text.ToUpper(),
+            selectedLinkField.GetComponent<TMP_InputField>().text.ToUpper(),
+            LinkType.Synonym);
+    }
+
+    public void OnAddAntonymButton()
+    {
+        AddLink(selectedWordField.GetComponent<TMP_InputField>().text.ToUpper(),
+            selectedLinkField.GetComponent<TMP_InputField>().text.ToUpper(),
+            LinkType.Antonym);
+    }
+
+    public void OnAddAssociationButton()
+    {
+        AddLink(selectedWordField.GetComponent<TMP_InputField>().text.ToUpper(),
+            selectedLinkField.GetComponent<TMP_InputField>().text.ToUpper(),
+            LinkType.WordAssociation);
+    }
+
+    void AddLink(String wordAText, String wordBText, LinkType type)
+    {
+        Word wordA = new Word(wordAText);
+        Word wordB = new Word(wordBText);
+
+        db.AddWordIfMissing(wordAText);
+        db.AddWordIfMissing(wordBText);
+        Link link = new Link(wordA, wordB, type);
+        db.AddLink(link);
+        SynchWords();
+        ChangeSelectedWord(wordA);
+        ChangeSelectedLink(link);
     }
 
     void ChangeSelectedLink(Link selectedLink)
