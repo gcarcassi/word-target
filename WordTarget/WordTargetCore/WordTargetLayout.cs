@@ -31,8 +31,8 @@ namespace WordTargetCore
         public ReadOnlyCollection<double> FracsInCircle3 => fracsInCircle3.AsReadOnly();
         public ReadOnlyCollection<double> FracsInCircle2 => fracsInCircle2.AsReadOnly();
 
-        private readonly List<List<string>> wordsInCircle;
-        private readonly List<List<double>> fracsInCircle;
+        public readonly List<List<string>> wordsInCircle;
+        public readonly List<List<double>> fracsInCircle;
 
         private static readonly List<double> minFracBetweenWords = new List<double> { 0.0, 0.0, 20.0 / 360.0, 12.0 / 360.0, 10.0 / 360.0, 6.0 / 360.0 };
 
@@ -100,7 +100,7 @@ namespace WordTargetCore
 
         public bool IsCircleFull(int circle)
         {
-            if(GetEmptySpace(circle) < 0 + minFracBetweenWords[circle])
+            if(GetEmptySpace(circle) < minFracBetweenWords[circle])
             {
                 return true;
             }

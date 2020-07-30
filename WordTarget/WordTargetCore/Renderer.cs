@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Text;
-using System.Threading;
+using System.Linq;
 
 namespace WordTargetCore
 {
@@ -214,7 +214,7 @@ namespace WordTargetCore
 
         }
 
-        public static string LayoutWord(List<string> words, int circle, int startingAngleDegrees)
+/*        public static string LayoutWord(List<string> words, int circle, int startingAngleDegrees)
         {
             List<double> fractions = new List<double>();
             double total = 0.0;
@@ -249,8 +249,37 @@ namespace WordTargetCore
             }
 
             return str.ToString();
-        }
+        }*/
 
+        public static string LayoutWord(WordTargetLayout words, int circle, int startingAngleDegrees)
+        {
+            List<double> fractions = words.fracsInCircle[circle];
+
+            double spaceBetweenWords = (1 - words.fracsInCircle[circle].Sum()) / words.wordsInCircle[circle].Count;
+
+            if (words.IsCircleFull(circle))
+            {
+                throw new Exception("Words do not fit in the circle");
+            }
+
+            if (startingAngleDegrees == int.MaxValue)
+            {
+                startingAngleDegrees = 45 - (int)(360 * (fractions[0] + spaceBetweenWords) / 2);
+            }
+
+            double circleSoFar = 0.0;
+            StringBuilder str = new StringBuilder();
+            for (int i = 0; i < words.wordsInCircle[circle].Count; i++)
+            {
+                str.AppendLine(SvgForCircleSeparator(startingAngleDegrees + (int)(circleSoFar * 360), circle));
+                circleSoFar += spaceBetweenWords / 2;
+                str.AppendLine(SvgForCircleWord(startingAngleDegrees + (int)(circleSoFar * 360), words.wordsInCircle[circle][i], circle));
+                circleSoFar += fractions[i];
+                circleSoFar += spaceBetweenWords / 2;
+            }
+
+            return str.ToString();
+        }
         public static string SvgForCircleWord(int angleDegrees, string word, int circle)
         {
             StringBuilder str = new StringBuilder();
@@ -296,8 +325,7 @@ namespace WordTargetCore
             return frac;
         }
 
-        public static string RenderWordTarget(string centerWord, List<string> circle2, List<string> circle3, List<string> circle4, List<string> circle5,
-            int startingAngle2, int startingAngle3, int startingAngle4)
+        public static string RenderWordTarget(WordTargetLayout wordList, int startingAngle2, int startingAngle3, int startingAngle4)
         {
             StringBuilder str = new StringBuilder();
             str.Append(@"<svg width=""500"" height=""500"" viewBox=""-700 -700 1400 1400"" xmlns=""http://www.w3.org/2000/svg"">
@@ -357,23 +385,23 @@ namespace WordTargetCore
 
   <!-- First circle -->
 ");
-            str.Append(LayoutWordCenter(centerWord));
+            str.Append(LayoutWordCenter(wordList.WordInCenter));
             str.Append(@"
   <!-- Second circle -->
 ");
-            str.Append(LayoutWord(circle2, 2, startingAngle2));
+            str.Append(LayoutWord(wordList, 2, startingAngle2));
             str.Append(@"
   <!-- Third circle -->
 ");
-            str.Append(LayoutWord(circle3, 3, startingAngle3));
+            str.Append(LayoutWord(wordList, 3, startingAngle3));
             str.Append(@"
   <!-- Fourth circle -->
 ");
-            str.Append(LayoutWord(circle4, 4, startingAngle4));
+            str.Append(LayoutWord(wordList, 4, startingAngle4));
             str.Append(@"
   <!-- Fifth circle -->
 ");
-            str.Append(LayoutWord(circle5, 5, int.MaxValue));
+            str.Append(LayoutWord(wordList, 5, int.MaxValue));
             str.Append(@"
 </svg>
 ");
