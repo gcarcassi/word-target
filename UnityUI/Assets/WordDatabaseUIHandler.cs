@@ -81,14 +81,80 @@ public class WordDatabaseUIHandler : MonoBehaviour
             selectedLinkField.GetComponent<TMP_InputField>().text = "";
         }
     }
+
     public void OnAddWordButton()
     {
         TMP_InputField field = selectedWordField.GetComponent<TMP_InputField>();
-        string newWord = field.text;
+        string newWord = field.text.ToUpper();
 
         db.AddWord(newWord);
         SynchWords();
         ChangeSelectedWord(new Word(newWord));
+    }
+
+    public void OnAddSynonymButton()
+    {
+        AddLink(selectedWordField.GetComponent<TMP_InputField>().text.ToUpper(),
+            selectedLinkField.GetComponent<TMP_InputField>().text.ToUpper(),
+            LinkType.Synonym);
+    }
+
+    public void OnAddAntonymButton()
+    {
+        AddLink(selectedWordField.GetComponent<TMP_InputField>().text.ToUpper(),
+            selectedLinkField.GetComponent<TMP_InputField>().text.ToUpper(),
+            LinkType.Antonym);
+    }
+
+    public void OnAddAssociationButton()
+    {
+        AddLink(selectedWordField.GetComponent<TMP_InputField>().text.ToUpper(),
+            selectedLinkField.GetComponent<TMP_InputField>().text.ToUpper(),
+            LinkType.WordAssociation);
+    }
+
+    string GetSelectedWordA()
+    {
+        return selectedWordField.GetComponent<TMP_InputField>().text.ToUpper();
+    }
+
+    string GetSelectedWordB()
+    {
+        return selectedLinkField.GetComponent<TMP_InputField>().text.ToUpper();
+    }
+
+    public void OnDeleteWordButton()
+    {
+        db.RemoveWord(new Word(GetSelectedWordA()));
+        SynchWords();
+        selectedWordField.GetComponent<TMP_InputField>().text = "";
+        ClearListBox(linkListBoxContent);
+    }
+
+    public void OnDeleteLinkButton()
+    {
+        Word wordA = new Word(GetSelectedWordA());
+        Word wordB = new Word(GetSelectedWordB());
+        Link link = db.GetLinksFor(wordA).First(x => x.WordB.Equals(wordB));
+        if (link != null)
+        {
+            db.RemoveLink(link);
+        }
+        ChangeSelectedWord(wordA);
+    }
+
+    void AddLink(String wordAText, String wordBText, LinkType type)
+    {
+        Word wordA = new Word(wordAText);
+        Word wordB = new Word(wordBText);
+
+        db.AddWordIfMissing(wordAText);
+        db.AddWordIfMissing(wordBText);
+        Link link = new Link(wordA, wordB, type);
+        db.AddLink(link);
+        SynchWords();
+        ChangeSelectedWord(wordA);
+        ChangeSelectedLink(link);
     }
 
     void ChangeSelectedLink(Link selectedLink)
