@@ -63,27 +63,46 @@ public class WordDatabaseUIHandler : MonoBehaviour
         removeLinkButton = removeLinkButtonObject.GetComponent<Button>();
     }
 
-    void onSelectedWordChange(string text)
+    /// <summary>
+    /// Updates the UI when the selected word is changed.
+    /// </summary>
+    /// <param name="textA">the new word selected</param>
+    void onSelectedWordChange(string textA)
     {
-        addWordButton.interactable = text != "" && !db.ContainsWord(text);
-        removeWordButton.interactable = text != "" && db.ContainsWord(text);
-        onSelectedLinkChange(text, selectedLinkTMPField.text);
+        // Determine whether the word can be added/removed
+        bool canAdd = textA != "" && !db.ContainsWord(textA);
+        bool canRemove = textA != "" && db.ContainsWord(textA);
+
+        // Update the UI accordingly
+        addWordButton.interactable = canAdd;
+        removeWordButton.interactable = canRemove;
+
+        // If the word is changed, the link is changed as well
+        onSelectedLinkChange(textA, selectedLinkTMPField.text);
     }
 
+    /// <summary>
+    /// Updates the UI when the selected words are changed.
+    /// </summary>
+    /// <param name="textA">the new word selecte</param>
+    /// <param name="textB">the new link destination</param>
     void onSelectedLinkChange(string textA, string textB)
     {
-        // Determine whether a link between the selected word can 
+        // Determine whether a link between the selected word can be added/removed
         Link link = db.GetLinkBetween(textA, textB);
         bool canAdd = textA != "" && textB != "" && link == null;
         bool canRemove = textA != "" && textB != "" && link != null && !link.Type.IsAutomatic();
 
-        // Enable/disable buttons accordingly
+        // Update the UI accordingly
         addAssociationButton.interactable = canAdd;
         addSynonymButton.interactable = canAdd;
         addAntonymButton.interactable = canAdd;
         removeLinkButton.interactable = canRemove;
     }
 
+    /// <summary>
+    /// Synchronizes the words in the db with the ones displayed in the word ListBox
+    /// </summary>
     void SynchWords()
     {
         ClearListBox(wordListBoxContent);
@@ -94,7 +113,7 @@ public class WordDatabaseUIHandler : MonoBehaviour
             copy.GetComponentInChildren<Button>().onClick.AddListener(
                 () =>
                 {
-                    ChangeSelectedWord(word);
+                    onWordListBoxSelection(word);
                 }
             );
         }
@@ -107,13 +126,17 @@ public class WordDatabaseUIHandler : MonoBehaviour
         { LinkType.Antonym, new Color32(192, 0, 0, 255) },
         { LinkType.WordAssociation, new Color32(0, 0, 0, 255) } };
 
-    void ChangeSelectedWord(Word selectedWord)
+
+    /// <summary>
+    /// Responds to a selection in the word ListBox
+    /// </summary>
+    /// <param name="selectedWord">the selected word</param>
+    void onWordListBoxSelection(Word selectedWord)
     {
-        TMP_InputField field = selectedWordField.GetComponent<TMP_InputField>();
-        field.text = selectedWord.Text;
+        selectedWordTMPField.text = selectedWord.Text;
 
         // Should check whether the current linked word matches
-        string currentLink = selectedLinkField.GetComponent<TMP_InputField>().text;
+        string currentLink = selectedLinkTMPField.text;
         bool keepLink = false;
 
         ClearListBox(linkListBoxContent);
@@ -127,61 +150,50 @@ public class WordDatabaseUIHandler : MonoBehaviour
             copy.GetComponentInChildren<Button>().onClick.AddListener(
                 () =>
                 {
-                    ChangeSelectedLink(link);
+                    onLinkListBoxSelection(link);
                 }
             );
         }
 
         if (!keepLink)
         {
-            selectedLinkField.GetComponent<TMP_InputField>().text = "";
+            selectedLinkTMPField.text = "";
         }
     }
 
     public void OnAddWordButton()
     {
-        TMP_InputField field = selectedWordField.GetComponent<TMP_InputField>();
-        string newWord = field.text.ToUpper();
+        string newWord = selectedWordTMPField.text.ToUpper();
 
         db.AddWord(newWord);
         SynchWords();
-        ChangeSelectedWord(new Word(newWord));
+        onWordListBoxSelection(new Word(newWord));
     }
 
     public void OnAddSynonymButton()
     {
-        AddLink(selectedWordField.GetComponent<TMP_InputField>().text.ToUpper(),
-            selectedLinkField.GetComponent<TMP_InputField>().text.ToUpper(),
+        AddLink(selectedWordTMPField.text.ToUpper(),
+            selectedLinkTMPField.text.ToUpper(),
             LinkType.Synonym);
     }
 
     public void OnAddAntonymButton()
     {
-        AddLink(selectedWordField.GetComponent<TMP_InputField>().text.ToUpper(),
-            selectedLinkField.GetComponent<TMP_InputField>().text.ToUpper(),
+        AddLink(selectedWordTMPField.text.ToUpper(),
+            selectedLinkTMPField.text.ToUpper(),
             LinkType.Antonym);
     }
 
     public void OnAddAssociationButton()
     {
-        AddLink(selectedWordField.GetComponent<TMP_InputField>().text.ToUpper(),
-            selectedLinkField.GetComponent<TMP_InputField>().text.ToUpper(),
+        AddLink(selectedWordTMPField.text.ToUpper(),
+            selectedLinkTMPField.text.ToUpper(),
             LinkType.WordAssociation);
-    }
-
-    string GetSelectedWordA()
-    {
-        return selectedWordField.GetComponent<TMP_InputField>().text.ToUpper();
-    }
-
-    string GetSelectedWordB()
-    {
-        return selectedLinkField.GetComponent<TMP_InputField>().text.ToUpper();
     }
 
     public void OnDeleteWordButton()
     {
-        db.RemoveWord(new Word(GetSelectedWordA()));
+        db.RemoveWord(new Word(selectedWordTMPField.text.ToUpper()));
         SynchWords();
         selectedWordField.GetComponent<TMP_InputField>().text = "";
         ClearListBox(linkListBoxContent);
@@ -189,14 +201,14 @@ public class WordDatabaseUIHandler : MonoBehaviour
 
     public void OnDeleteLinkButton()
     {
-        Word wordA = new Word(GetSelectedWordA());
-        Word wordB = new Word(GetSelectedWordB());
+        Word wordA = new Word(selectedWordTMPField.text.ToUpper());
+        Word wordB = new Word(selectedLinkTMPField.text.ToUpper());
         Link link = db.GetLinksFor(wordA).First(x => x.WordB.Equals(wordB));
         if (link != null)
         {
             db.RemoveLink(link);
         }
-        ChangeSelectedWord(wordA);
+        onWordListBoxSelection(wordA);
     }
 
     void AddLink(String wordAText, String wordBText, LinkType type)
@@ -209,11 +221,11 @@ public class WordDatabaseUIHandler : MonoBehaviour
         Link link = new Link(wordA, wordB, type);
         db.AddLink(link);
         SynchWords();
-        ChangeSelectedWord(wordA);
-        ChangeSelectedLink(link);
+        onWordListBoxSelection(wordA);
+        onLinkListBoxSelection(link);
     }
 
-    void ChangeSelectedLink(Link selectedLink)
+    void onLinkListBoxSelection(Link selectedLink)
     {
         TMP_InputField field = selectedLinkField.GetComponent<TMP_InputField>();
         field.text = selectedLink.WordB.Text;
