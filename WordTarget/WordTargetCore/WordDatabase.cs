@@ -63,6 +63,14 @@ namespace WordTargetCore
             return words.Contains(theWordA) && GetLinksFor(theWordA).FirstOrDefault(x => x.WordB.Equals(theWordB)) != null;
         }
 
+        // TODO: add tests
+        public Link GetLinkBetween(string wordA, string wordB)
+        {
+            Word theWordA = new Word(wordA.ToUpper());
+            Word theWordB = new Word(wordB.ToUpper());
+            return words.Contains(theWordA) ? GetLinksFor(theWordA).FirstOrDefault(x => x.WordB.Equals(theWordB)) : null;
+        }
+
         public void AddLink(Link link)
         {
             links.Add(link);

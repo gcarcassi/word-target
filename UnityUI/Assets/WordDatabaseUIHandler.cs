@@ -72,10 +72,16 @@ public class WordDatabaseUIHandler : MonoBehaviour
 
     void onSelectedLinkChange(string textA, string textB)
     {
-        addAssociationButton.interactable = textA != "" && textB != "" && !db.ContainsLink(textA, textB);
-        addSynonymButton.interactable = textA != "" && textB != "" && !db.ContainsLink(textA, textB);
-        addAntonymButton.interactable = textA != "" && textB != "" && !db.ContainsLink(textA, textB);
-        removeLinkButton.interactable = textA != "" && textB != "" && db.ContainsLink(textA, textB);
+        // Determine whether a link between the selected word can 
+        Link link = db.GetLinkBetween(textA, textB);
+        bool canAdd = textA != "" && textB != "" && link == null;
+        bool canRemove = textA != "" && textB != "" && link != null && !link.Type.IsAutomatic();
+
+        // Enable/disable buttons accordingly
+        addAssociationButton.interactable = canAdd;
+        addSynonymButton.interactable = canAdd;
+        addAntonymButton.interactable = canAdd;
+        removeLinkButton.interactable = canRemove;
     }
 
     void SynchWords()
