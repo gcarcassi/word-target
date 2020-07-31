@@ -257,7 +257,7 @@ namespace WordTargetCore
 
             double spaceBetweenWords = (1 - words.fracsInCircle[circle].Sum()) / words.wordsInCircle[circle].Count;
 
-            if (words.IsCircleFull(circle))
+            if (spaceBetweenWords < minFracBetweenWords[circle])
             {
                 throw new Exception("Words do not fit in the circle");
             }
