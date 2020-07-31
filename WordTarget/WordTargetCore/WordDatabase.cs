@@ -49,6 +49,20 @@ namespace WordTargetCore
             }
         }
 
+        // TODO: add tests
+        public bool ContainsWord(string word)
+        {
+            return words.Contains(new Word(word.ToUpper()));
+        }
+
+        // TODO: add tests
+        public bool ContainsLink(string wordA, string wordB)
+        {
+            Word theWordA = new Word(wordA.ToUpper());
+            Word theWordB = new Word(wordB.ToUpper());
+            return words.Contains(theWordA) && GetLinksFor(theWordA).FirstOrDefault(x => x.WordB.Equals(theWordB)) != null;
+        }
+
         public void AddLink(Link link)
         {
             links.Add(link);

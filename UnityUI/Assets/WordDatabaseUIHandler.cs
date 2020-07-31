@@ -13,10 +13,31 @@ public class WordDatabaseUIHandler : MonoBehaviour
     public GameObject listItemTemplate;
 
     public GameObject selectedWordField;
+    TMP_InputField selectedWordTMPField;
+
     public GameObject selectedLinkField;
+    TMP_InputField selectedLinkTMPField;
 
     public GameObject wordListBoxContent;
     public GameObject linkListBoxContent;
+
+    public GameObject addWordButtonObject;
+    private Button addWordButton;
+
+    public GameObject addAssociationButtonObject;
+    private Button addAssociationButton;
+
+    public GameObject addSynonymButtonObject;
+    private Button addSynonymButton;
+
+    public GameObject addAntonymButtonObject;
+    private Button addAntonymButton;
+
+    public GameObject removeWordButtonObject;
+    private Button removeWordButton;
+
+    public GameObject removeLinkButtonObject;
+    private Button removeLinkButton;
 
     private WordDatabase db = new WordDatabase();
 
@@ -26,6 +47,35 @@ public class WordDatabaseUIHandler : MonoBehaviour
         db.AddLink(new Link(new Word("BAT"), new Word("BASEBALL"), LinkType.WordAssociation));
         db.AddLink(new Link(new Word("SPORT"), new Word("BASEBALL"), LinkType.WordAssociation));
         SynchWords();
+
+        selectedWordTMPField = selectedWordField.GetComponent<TMP_InputField>();
+        selectedWordTMPField.onValueChanged.AddListener(text => onSelectedWordChange(text));
+
+        selectedLinkTMPField = selectedLinkField.GetComponent<TMP_InputField>();
+        selectedLinkTMPField.onValueChanged.AddListener(text => onSelectedLinkChange(selectedWordTMPField.text, text));
+
+        addWordButton = addWordButtonObject.GetComponent<Button>();
+        addAssociationButton = addAssociationButtonObject.GetComponent<Button>();
+        addSynonymButton = addSynonymButtonObject.GetComponent<Button>();
+        addAntonymButton = addAntonymButtonObject.GetComponent<Button>();
+
+        removeWordButton = removeWordButtonObject.GetComponent<Button>();
+        removeLinkButton = removeLinkButtonObject.GetComponent<Button>();
+    }
+
+    void onSelectedWordChange(string text)
+    {
+        addWordButton.interactable = text != "" && !db.ContainsWord(text);
+        removeWordButton.interactable = text != "" && db.ContainsWord(text);
+        onSelectedLinkChange(text, selectedLinkTMPField.text);
+    }
+
+    void onSelectedLinkChange(string textA, string textB)
+    {
+        addAssociationButton.interactable = textA != "" && textB != "" && !db.ContainsLink(textA, textB);
+        addSynonymButton.interactable = textA != "" && textB != "" && !db.ContainsLink(textA, textB);
+        addAntonymButton.interactable = textA != "" && textB != "" && !db.ContainsLink(textA, textB);
+        removeLinkButton.interactable = textA != "" && textB != "" && db.ContainsLink(textA, textB);
     }
 
     void SynchWords()
