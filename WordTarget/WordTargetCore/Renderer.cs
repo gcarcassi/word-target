@@ -289,7 +289,7 @@ namespace WordTargetCore
             return frac;
         }
 
-        public static string RenderWordTarget(WordTargetLayout wordList, int startingAngle2, int startingAngle3, int startingAngle4)
+        public static string RenderWordTarget(WordTargetLayout wordList)
         {
             StringBuilder str = new StringBuilder();
             str.Append(@"<svg width=""500"" height=""500"" viewBox=""-700 -700 1400 1400"" xmlns=""http://www.w3.org/2000/svg"">
@@ -353,15 +353,15 @@ namespace WordTargetCore
             str.Append(@"
   <!-- Second circle -->
 ");
-            str.Append(LayoutWord(wordList, 2, startingAngle2));
+            str.Append(LayoutWord(wordList, 2, wordList.startingAngle2));
             str.Append(@"
   <!-- Third circle -->
 ");
-            str.Append(LayoutWord(wordList, 3, startingAngle3));
+            str.Append(LayoutWord(wordList, 3, wordList.startingAngle3));
             str.Append(@"
   <!-- Fourth circle -->
 ");
-            str.Append(LayoutWord(wordList, 4, startingAngle4));
+            str.Append(LayoutWord(wordList, 4, wordList.startingAngle4));
             str.Append(@"
   <!-- Fifth circle -->
 ");

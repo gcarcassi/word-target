@@ -366,7 +366,7 @@ namespace WordTargetCore
             wordTargetLayout.AssignWord("CAROTENOIDS", 5);
             wordTargetLayout.AssignWord("ANKLE", 5);
             wordTargetLayout.AssignWord("CORE", 5);
-            string wordTarget = Renderer.RenderWordTarget(wordTargetLayout, 80, 0, 5);
+            string wordTarget = Renderer.RenderWordTarget(wordTargetLayout);
 
             //System.IO.File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\WordTargetOutput.svg", wordTarget);
             Assert.AreEqual(expected, wordTarget);
