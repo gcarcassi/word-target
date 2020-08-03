@@ -31,6 +31,11 @@ namespace WordTargetCore
         public ReadOnlyCollection<double> FracsInCircle3 => fracsInCircle3.AsReadOnly();
         public ReadOnlyCollection<double> FracsInCircle2 => fracsInCircle2.AsReadOnly();
 
+        public double startingAngle2 { get; set; }
+        public double startingAngle3 { get; set; }
+        public double startingAngle4 { get; set; }
+
+
         public readonly List<List<string>> wordsInCircle;
         public readonly List<List<double>> fracsInCircle;
 
@@ -43,6 +48,9 @@ namespace WordTargetCore
             fracsInCircle5.Add(Renderer.FracForWord(words[0], 5));
             wordsInCircle = new List<List<string>>() { null, null, wordsInCircle2, wordsInCircle3, wordsInCircle4, wordsInCircle5 };
             fracsInCircle = new List<List<double>>() { null, null, fracsInCircle2, fracsInCircle3, fracsInCircle4, fracsInCircle5 };
+            startingAngle2 = 80.0;
+            startingAngle3 = 0.0;
+            startingAngle4 = 5.0;
         }
 
         public void AssignWord(string word, int circle)
@@ -154,7 +162,7 @@ namespace WordTargetCore
             return words[position];
         }
 
-        public List<string> GetUnAssignedWords()
+        public List<string> GetUnassignedWords()
         {
             List<string> unassigned = words.Except(wordsInCircle2).Except(wordsInCircle3).Except(wordsInCircle4).Except(wordsInCircle5).ToList();
             unassigned.Remove(words[words.Count - 1]);

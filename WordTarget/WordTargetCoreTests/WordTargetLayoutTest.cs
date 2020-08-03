@@ -159,13 +159,22 @@ namespace WordTargetCore
 
         // Get words that are not assigned
         [TestMethod]
-        public void GetUnAssignedWords()
+        public void GetUnassignedWords()
         {
             WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "NUCLEAR", "STATE" });
             layout.AssignWord("VALUE", 2);
             layout.AssignWord("VAGUE", 2);
             List<string> unassigned = new List<string> { "UNCLEAR", "NUCLEAR" };
-            Assert.IsTrue(Enumerable.SequenceEqual(unassigned, layout.GetUnAssignedWords()));
+            Assert.IsTrue(Enumerable.SequenceEqual(unassigned, layout.GetUnassignedWords()));
+        }
+
+        [TestMethod]
+        public void StartingAngles()
+        {
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "NUCLEAR", "STATE" });
+            Assert.AreEqual(80, layout.startingAngle2);
+            Assert.AreEqual(0, layout.startingAngle3);
+            Assert.AreEqual(5, layout.startingAngle4);
         }
 
     }
