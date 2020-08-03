@@ -109,6 +109,7 @@ public class WordDatabaseUIHandler : MonoBehaviour
         foreach (Word word in db.GetAllWords().OrderBy(x => x.Text).ToList()) {
             var copy = Instantiate(listItemTemplate);
             copy.transform.SetParent(wordListBoxContent.transform);
+            copy.transform.localScale = new Vector3(1, 1, 1);
             copy.GetComponentInChildren<TextMeshProUGUI>().SetText(word.Text);
             copy.GetComponentInChildren<Button>().onClick.AddListener(
                 () =>
@@ -144,6 +145,7 @@ public class WordDatabaseUIHandler : MonoBehaviour
         {
             var copy = Instantiate(listItemTemplate);
             copy.transform.SetParent(linkListBoxContent.transform);
+            copy.transform.localScale = new Vector3(1, 1, 1);
             copy.GetComponentInChildren<TextMeshProUGUI>().color = colorForLinkType[link.Type];
             copy.GetComponentInChildren<TextMeshProUGUI>().SetText(link.WordB.Text);
             if (link.WordB.Text.Equals(currentLink)) keepLink = true;
