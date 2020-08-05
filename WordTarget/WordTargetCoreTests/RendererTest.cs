@@ -28,7 +28,7 @@ namespace WordTargetCore
             Assert.ThrowsException<System.Exception>(() => Renderer.LayoutWordCenter("AAAAAA"));
         }
 
-        private static WordTargetLayout createTextLayout(List<string> words, int circle)
+        private static WordTargetLayout createTextLayout(List<string> words, int circle, int startingAngle)
         {
             List<string> allWords = new List<string>();
             if(circle != 5)
@@ -38,6 +38,10 @@ namespace WordTargetCore
             allWords.AddRange(words);
             allWords.Add("LAST");
             WordTargetLayout layout = new WordTargetLayout(allWords);
+            if (circle != 5)
+            {
+                layout.SetStartingAngle(circle, startingAngle);
+            }
             foreach (string word in words)
             {
                 if (circle == 5 && word == words[0])
@@ -57,9 +61,9 @@ namespace WordTargetCore
   <line transform=""rotate(296 0,0)"" x1=""-200"" x2=""-100"" y1=""0"" y2=""0"" class=""line2""/>
   <text transform=""rotate(314 0,0)"" class=""text2""><textPath href=""#circle2"">UNCLEAR</textPath></text>
 ";
-            Assert.AreEqual(expected, Renderer.LayoutWord(createTextLayout(new List<string> { "STARE", "RIGHT", "UNCLEAR" }, 2), 2, 80));
-            Assert.ThrowsException<System.Exception>(() => Renderer.LayoutWord(createTextLayout(new List<string> { "STARE", "RIGHT", "VERYBIGWORDTHATISTOOLONG" }, 2), 2, 80));
-            Assert.ThrowsException<System.Exception>(() => Renderer.LayoutWord(createTextLayout(new List<string> { "TOO", "MANY", "WORDS", "TO", "DISPLAY", "IN", "ONE", "CIRCLE" }, 2), 2, 80));
+            Assert.AreEqual(expected, Renderer.LayoutWord(createTextLayout(new List<string> { "STARE", "RIGHT", "UNCLEAR" }, 2, 80), 2));
+            Assert.ThrowsException<System.Exception>(() => Renderer.LayoutWord(createTextLayout(new List<string> { "STARE", "RIGHT", "VERYBIGWORDTHATISTOOLONG" }, 2, 80), 2));
+            Assert.ThrowsException<System.Exception>(() => Renderer.LayoutWord(createTextLayout(new List<string> { "TOO", "MANY", "WORDS", "TO", "DISPLAY", "IN", "ONE", "CIRCLE" }, 2, 80), 2));
         }
 
 
@@ -111,8 +115,8 @@ namespace WordTargetCore
   <line transform=""rotate(354 0,0)"" x1=""-300"" x2=""-200"" y1=""0"" y2=""0"" class=""line3""/>
   <text transform=""rotate(366 0,0)"" class=""text3""><textPath href=""#circle3"">VITAMIN A</textPath></text>
 ";
-            WordTargetLayout words = createTextLayout(new List<string> { "SPARE", "VALUE", "POLARS", "STATEN", "VITAMIN A" }, 3);
-            Assert.AreEqual(expected, Renderer.LayoutWord(words, 3, 80));
+            WordTargetLayout words = createTextLayout(new List<string> { "SPARE", "VALUE", "POLARS", "STATEN", "VITAMIN A" }, 3, 80);
+            Assert.AreEqual(expected, Renderer.LayoutWord(words, 3));
         }
 
         [TestMethod]
@@ -158,8 +162,8 @@ namespace WordTargetCore
   <line transform=""rotate(365 0,0)"" x1=""-400"" x2=""-300"" y1=""0"" y2=""0"" class=""line4""/>
   <text transform=""rotate(370 0,0)"" class=""text4""><textPath href=""#circle4"">COORDINATES</textPath></text>
 ";
-            WordTargetLayout words = createTextLayout(new List<string> { "ANGLE", "STAR", "JOIN", "CORE", "STATION", "POLAR", "VAGUE", "R", "COORDINATES" }, 4);
-            Assert.AreEqual(expected, Renderer.LayoutWord(words, 4, 80));
+            WordTargetLayout words = createTextLayout(new List<string> { "ANGLE", "STAR", "JOIN", "CORE", "STATION", "POLAR", "VAGUE", "R", "COORDINATES" }, 4, 80);
+            Assert.AreEqual(expected, Renderer.LayoutWord(words, 4));
         }
 
         [TestMethod]
@@ -186,32 +190,32 @@ namespace WordTargetCore
         [TestMethod]
         public void PrepareWordsInCircle5()
         {
-            string expected = @"  <line transform=""rotate(80 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(84 0,0)"" class=""text5""><textPath href=""#circle5"">VARIABLE</textPath></text>
-  <line transform=""rotate(120 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(124 0,0)"" class=""text5""><textPath href=""#circle5"">SIGHT</textPath></text>
-  <line transform=""rotate(149 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(153 0,0)"" class=""text5""><textPath href=""#circle5"">NUCLEAR</textPath></text>
-  <line transform=""rotate(189 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(193 0,0)"" class=""text5""><textPath href=""#circle5"">SPACE</textPath></text>
-  <line transform=""rotate(219 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(223 0,0)"" class=""text5""><textPath href=""#circle5"">JOINT</textPath></text>
-  <line transform=""rotate(247 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(251 0,0)"" class=""text5""><textPath href=""#circle5"">POLARIS</textPath></text>
-  <line transform=""rotate(284 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(288 0,0)"" class=""text5""><textPath href=""#circle5"">VAGUE</textPath></text>
-  <line transform=""rotate(315 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(319 0,0)"" class=""text5""><textPath href=""#circle5"">COIN</textPath></text>
-  <line transform=""rotate(340 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(344 0,0)"" class=""text5""><textPath href=""#circle5"">CAROTENOIDS</textPath></text>
-  <line transform=""rotate(397 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(401 0,0)"" class=""text5""><textPath href=""#circle5"">ANKLE</textPath></text>
-  <line transform=""rotate(427 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(431 0,0)"" class=""text5""><textPath href=""#circle5"">S</textPath></text>
+            string expected = @"  <line transform=""rotate(25 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(29 0,0)"" class=""text5""><textPath href=""#circle5"">VARIABLE</textPath></text>
+  <line transform=""rotate(65 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(69 0,0)"" class=""text5""><textPath href=""#circle5"">SIGHT</textPath></text>
+  <line transform=""rotate(94 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(98 0,0)"" class=""text5""><textPath href=""#circle5"">NUCLEAR</textPath></text>
+  <line transform=""rotate(134 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(138 0,0)"" class=""text5""><textPath href=""#circle5"">SPACE</textPath></text>
+  <line transform=""rotate(164 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(168 0,0)"" class=""text5""><textPath href=""#circle5"">JOINT</textPath></text>
+  <line transform=""rotate(192 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(196 0,0)"" class=""text5""><textPath href=""#circle5"">POLARIS</textPath></text>
+  <line transform=""rotate(229 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(233 0,0)"" class=""text5""><textPath href=""#circle5"">VAGUE</textPath></text>
+  <line transform=""rotate(260 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(264 0,0)"" class=""text5""><textPath href=""#circle5"">COIN</textPath></text>
+  <line transform=""rotate(285 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(289 0,0)"" class=""text5""><textPath href=""#circle5"">CAROTENOIDS</textPath></text>
+  <line transform=""rotate(342 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(346 0,0)"" class=""text5""><textPath href=""#circle5"">ANKLE</textPath></text>
+  <line transform=""rotate(372 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(376 0,0)"" class=""text5""><textPath href=""#circle5"">S</textPath></text>
 ";
 
-            WordTargetLayout words = createTextLayout(new List<string> { "VARIABLE", "SIGHT", "NUCLEAR", "SPACE", "JOINT", "POLARIS", "VAGUE", "COIN", "CAROTENOIDS", "ANKLE", "S" }, 5);
-            Assert.AreEqual(expected, Renderer.LayoutWord(words, 5, 80));
+            WordTargetLayout words = createTextLayout(new List<string> { "VARIABLE", "SIGHT", "NUCLEAR", "SPACE", "JOINT", "POLARIS", "VAGUE", "COIN", "CAROTENOIDS", "ANKLE", "S" }, 5, 80);
+            Assert.AreEqual(expected, Renderer.LayoutWord(words, 5));
         }
 
         [TestMethod]

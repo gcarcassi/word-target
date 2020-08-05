@@ -214,7 +214,7 @@ namespace WordTargetCore
 
         }
 
-        public static string LayoutWord(WordTargetLayout layout, int circle, int? startingAngleDegrees)
+        public static string LayoutWord(WordTargetLayout layout, int circle)
         {
             double spaceBetweenWords = (1 - layout.GetFracsInCircle(circle).Sum()) / layout.GetFracsInCircle(circle).Count;
 
@@ -223,9 +223,14 @@ namespace WordTargetCore
                 throw new Exception("Words do not fit in the circle");
             }
 
-            if (startingAngleDegrees == null)
+            int startingAngleDegrees;
+            if (circle == 5)
             {
                 startingAngleDegrees = 45 - (int)(360 * (layout.GetFracsInCircle(circle)[0] + spaceBetweenWords) / 2);
+            }
+            else
+            {
+                startingAngleDegrees = layout.GetStartingAngle(circle);
             }
 
             double circleSoFar = 0.0;
@@ -351,19 +356,19 @@ namespace WordTargetCore
             str.Append(@"
   <!-- Second circle -->
 ");
-            str.Append(LayoutWord(layout, 2, layout.GetStartingAngle(2)));
+            str.Append(LayoutWord(layout, 2));
             str.Append(@"
   <!-- Third circle -->
 ");
-            str.Append(LayoutWord(layout, 3, layout.GetStartingAngle(3)));
+            str.Append(LayoutWord(layout, 3));
             str.Append(@"
   <!-- Fourth circle -->
 ");
-            str.Append(LayoutWord(layout, 4, layout.GetStartingAngle(4)));
+            str.Append(LayoutWord(layout, 4));
             str.Append(@"
   <!-- Fifth circle -->
 ");
-            str.Append(LayoutWord(layout, 5, null));
+            str.Append(LayoutWord(layout, 5));
             str.Append(@"
 </svg>
 ");
