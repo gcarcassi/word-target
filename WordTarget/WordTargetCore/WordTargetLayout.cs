@@ -10,47 +10,57 @@ namespace WordTargetCore
     public class WordTargetLayout
     {
         private readonly List<string> words;
-        private readonly List<string> wordsInCircle5 = new List<string>();
-        private readonly List<string> wordsInCircle4 = new List<string>();
-        private readonly List<string> wordsInCircle3 = new List<string>();
-        private readonly List<string> wordsInCircle2 = new List<string>();
+        private List<List<string>> wordsInCircle = new List<List<string>>() { null, null, new List<string>(), new List<string>(), new List<string>(), new List<string>() };
+        private List<List<double>> fracsInCircle = new List<List<double>>() { null, null, new List<double>(), new List<double>(), new List<double>(), new List<double>() };
+        private List<int> startingAngles = new List<int>() {0, 0, 0, 0, 0, 0 };
 
-        private readonly List<double> fracsInCircle5 = new List<double>();
-        private readonly List<double> fracsInCircle4 = new List<double>();
-        private readonly List<double> fracsInCircle3 = new List<double>();
-        private readonly List<double> fracsInCircle2 = new List<double>();
         public ReadOnlyCollection<string> Words => words.AsReadOnly();
-        public ReadOnlyCollection<string> WordsInCircle5 => wordsInCircle5.AsReadOnly();
-        public ReadOnlyCollection<string> WordsInCircle4 => wordsInCircle4.AsReadOnly();
-        public ReadOnlyCollection<string> WordsInCircle3 => wordsInCircle3.AsReadOnly();
-        public ReadOnlyCollection<string> WordsInCircle2 => wordsInCircle2.AsReadOnly();
+
+        public ReadOnlyCollection<string> GetWordsInCircle(int circle)
+        {
+            if (circle < 2 || circle > 5)
+            {
+                throw new Exception("Circle must be between 2 and 5");
+            }
+            return wordsInCircle[circle].AsReadOnly();
+        }
+
+        public ReadOnlyCollection<double> GetFracsInCircle(int circle)
+        {
+            if (circle < 2 || circle > 5)
+            {
+                throw new Exception("Circle must be between 2 and 5");
+            }
+            return fracsInCircle[circle].AsReadOnly();
+        }
+
+        public int GetStartingAngle(int circle)
+        {
+            if (circle < 2 || circle > 5)
+            {
+                throw new Exception("Circle must be between 2 and 5");
+            }
+            return startingAngles[circle];
+        }
+
+        public void SetStartingAngle(int circle, int startingAngle)
+        {
+            if (circle < 2 || circle > 4)
+            {
+                throw new Exception("Circle must be between 2 and 4");
+            }
+            startingAngles[circle] = startingAngle;
+        }
+
         public string WordInCenter => words[words.Count - 1];
-
-        public ReadOnlyCollection<double> FracsInCircle5 => fracsInCircle5.AsReadOnly();
-        public ReadOnlyCollection<double> FracsInCircle4 => fracsInCircle4.AsReadOnly();
-        public ReadOnlyCollection<double> FracsInCircle3 => fracsInCircle3.AsReadOnly();
-        public ReadOnlyCollection<double> FracsInCircle2 => fracsInCircle2.AsReadOnly();
-
-        public int startingAngle2 { get; set; }
-        public int startingAngle3 { get; set; }
-        public int startingAngle4 { get; set; }
-
-
-        public readonly List<List<string>> wordsInCircle;
-        public readonly List<List<double>> fracsInCircle;
 
         private static readonly List<double> minFracBetweenWords = new List<double> { 0.0, 0.0, 20.0 / 360.0, 12.0 / 360.0, 10.0 / 360.0, 6.0 / 360.0 };
 
         public WordTargetLayout(List<string> words)
         {
             this.words = words;
-            wordsInCircle5.Add(words[0]);
-            fracsInCircle5.Add(Renderer.FracForWord(words[0], 5));
-            wordsInCircle = new List<List<string>>() { null, null, wordsInCircle2, wordsInCircle3, wordsInCircle4, wordsInCircle5 };
-            fracsInCircle = new List<List<double>>() { null, null, fracsInCircle2, fracsInCircle3, fracsInCircle4, fracsInCircle5 };
-            startingAngle2 = 80;
-            startingAngle3 = 0;
-            startingAngle4 = 5;
+            wordsInCircle[5].Add(words[0]);
+            fracsInCircle[5].Add(Renderer.FracForWord(words[0], 5));
         }
 
         public void AssignWord(string word, int circle)
@@ -69,7 +79,7 @@ namespace WordTargetCore
             }
             for(int i = 2; i <= 5; i++)
             {
-                if(this.wordsInCircle[i].Contains(word))
+                if(this.GetWordsInCircle(i).Contains(word))
                 {
                     throw new Exception("This word has already been assigned to a circle");
                 }
@@ -164,7 +174,7 @@ namespace WordTargetCore
 
         public List<string> GetUnassignedWords()
         {
-            List<string> unassigned = words.Except(wordsInCircle2).Except(wordsInCircle3).Except(wordsInCircle4).Except(wordsInCircle5).ToList();
+            List<string> unassigned = words.Except(wordsInCircle[2]).Except(wordsInCircle[3]).Except(wordsInCircle[4]).Except(wordsInCircle[5]).ToList();
             unassigned.Remove(words[words.Count - 1]);
             return unassigned;
         }

@@ -214,11 +214,9 @@ namespace WordTargetCore
 
         }
 
-        public static string LayoutWord(WordTargetLayout words, int circle, int? startingAngleDegrees)
+        public static string LayoutWord(WordTargetLayout layout, int circle, int? startingAngleDegrees)
         {
-            List<double> fractions = words.fracsInCircle[circle];
-
-            double spaceBetweenWords = (1 - words.fracsInCircle[circle].Sum()) / words.wordsInCircle[circle].Count;
+            double spaceBetweenWords = (1 - layout.GetFracsInCircle(circle).Sum()) / layout.GetFracsInCircle(circle).Count;
 
             if (spaceBetweenWords < minFracBetweenWords[circle])
             {
@@ -227,17 +225,17 @@ namespace WordTargetCore
 
             if (startingAngleDegrees == null)
             {
-                startingAngleDegrees = 45 - (int)(360 * (fractions[0] + spaceBetweenWords) / 2);
+                startingAngleDegrees = 45 - (int)(360 * (layout.GetFracsInCircle(circle)[0] + spaceBetweenWords) / 2);
             }
 
             double circleSoFar = 0.0;
             StringBuilder str = new StringBuilder();
-            for (int i = 0; i < words.wordsInCircle[circle].Count; i++)
+            for (int i = 0; i < layout.GetWordsInCircle(circle).Count; i++)
             {
                 str.AppendLine(SvgForCircleSeparator((int) startingAngleDegrees + (int)(circleSoFar * 360), circle));
                 circleSoFar += spaceBetweenWords / 2;
-                str.AppendLine(SvgForCircleWord((int) startingAngleDegrees + (int)(circleSoFar * 360), words.wordsInCircle[circle][i], circle));
-                circleSoFar += fractions[i];
+                str.AppendLine(SvgForCircleWord((int) startingAngleDegrees + (int)(circleSoFar * 360), layout.GetWordsInCircle(circle)[i], circle));
+                circleSoFar += layout.GetFracsInCircle(circle)[i];
                 circleSoFar += spaceBetweenWords / 2;
             }
 
@@ -289,7 +287,7 @@ namespace WordTargetCore
             return frac;
         }
 
-        public static string RenderWordTarget(WordTargetLayout wordList)
+        public static string RenderWordTarget(WordTargetLayout layout)
         {
             StringBuilder str = new StringBuilder();
             str.Append(@"<svg width=""500"" height=""500"" viewBox=""-700 -700 1400 1400"" xmlns=""http://www.w3.org/2000/svg"">
@@ -349,23 +347,23 @@ namespace WordTargetCore
 
   <!-- First circle -->
 ");
-            str.Append(LayoutWordCenter(wordList.WordInCenter));
+            str.Append(LayoutWordCenter(layout.WordInCenter));
             str.Append(@"
   <!-- Second circle -->
 ");
-            str.Append(LayoutWord(wordList, 2, wordList.startingAngle2));
+            str.Append(LayoutWord(layout, 2, layout.GetStartingAngle(2)));
             str.Append(@"
   <!-- Third circle -->
 ");
-            str.Append(LayoutWord(wordList, 3, wordList.startingAngle3));
+            str.Append(LayoutWord(layout, 3, layout.GetStartingAngle(3)));
             str.Append(@"
   <!-- Fourth circle -->
 ");
-            str.Append(LayoutWord(wordList, 4, wordList.startingAngle4));
+            str.Append(LayoutWord(layout, 4, layout.GetStartingAngle(4)));
             str.Append(@"
   <!-- Fifth circle -->
 ");
-            str.Append(LayoutWord(wordList, 5, null));
+            str.Append(LayoutWord(layout, 5, null));
             str.Append(@"
 </svg>
 ");

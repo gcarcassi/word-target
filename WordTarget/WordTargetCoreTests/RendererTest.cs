@@ -366,6 +366,9 @@ namespace WordTargetCore
             wordTargetLayout.AssignWord("CAROTENOIDS", 5);
             wordTargetLayout.AssignWord("ANKLE", 5);
             wordTargetLayout.AssignWord("CORE", 5);
+            wordTargetLayout.SetStartingAngle(2, 80);
+            wordTargetLayout.SetStartingAngle(3, 0);
+            wordTargetLayout.SetStartingAngle(4, 5);
             string wordTarget = Renderer.RenderWordTarget(wordTargetLayout);
 
             //System.IO.File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\WordTargetOutput.svg", wordTarget);

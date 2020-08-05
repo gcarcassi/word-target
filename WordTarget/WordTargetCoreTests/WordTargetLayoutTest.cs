@@ -12,11 +12,11 @@ namespace WordTargetCore
         public void LinkCreation()
         {
             WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "NUCLEAR", "CORE", "CORN", "COIN", "JOIN", "JOINT", "ANKLE", "ANGLE", "RIGHT", "SIGHT", "VITAMIN A", "CAROTENOIDS", "COORDINATES", "POLAR", "POLARS", "POLARIS", "STAR", "STARE", "SPARE", "SPACE", "STATION", "STATIN", "STATEN", "STATE" });
-            Assert.AreEqual(1, layout.WordsInCircle5.Count);
-            Assert.AreEqual("VARIABLE", layout.WordsInCircle5[0]);
-            Assert.AreEqual(0, layout.WordsInCircle4.Count);
-            Assert.AreEqual(0, layout.WordsInCircle3.Count);
-            Assert.AreEqual(0, layout.WordsInCircle2.Count);
+            Assert.AreEqual(1, layout.GetWordsInCircle(5).Count);
+            Assert.AreEqual("VARIABLE", layout.GetWordsInCircle(5)[0]);
+            Assert.AreEqual(0, layout.GetWordsInCircle(4).Count);
+            Assert.AreEqual(0, layout.GetWordsInCircle(3).Count);
+            Assert.AreEqual(0, layout.GetWordsInCircle(2).Count);
             Assert.AreEqual("STATE", layout.WordInCenter);
         }
 
@@ -33,10 +33,10 @@ namespace WordTargetCore
             Assert.ThrowsException<System.Exception>(() => layout.AssignWord("VAGUE", 1));
             Assert.ThrowsException<System.Exception>(() => layout.AssignWord("VALUE", 4));
             Assert.AreEqual("STATE", layout.WordInCenter);
-            Assert.AreEqual(1, layout.WordsInCircle3.Count);
-            Assert.AreEqual(1, layout.WordsInCircle4.Count);
-            Assert.AreEqual("VALUE", layout.WordsInCircle3[0]);
-            Assert.AreEqual("UNCLEAR", layout.WordsInCircle4[0]);
+            Assert.AreEqual(1, layout.GetWordsInCircle(3).Count);
+            Assert.AreEqual(1, layout.GetWordsInCircle(4).Count);
+            Assert.AreEqual("VALUE", layout.GetWordsInCircle(3)[0]);
+            Assert.AreEqual("UNCLEAR", layout.GetWordsInCircle(4)[0]);
 
 
         }
@@ -53,9 +53,9 @@ namespace WordTargetCore
             Assert.ThrowsException<System.Exception>(() => layout.RemoveWord("VARIABLE", 5));
             Assert.ThrowsException<System.Exception>(() => layout.RemoveWord("STATE", 1));
             layout.RemoveWord("VALUE", 3);
-            Assert.AreEqual(0, layout.WordsInCircle3.Count);
-            Assert.AreEqual(1, layout.WordsInCircle4.Count);
-            Assert.AreEqual("UNCLEAR", layout.WordsInCircle4[0]);
+            Assert.AreEqual(0, layout.GetWordsInCircle(3).Count);
+            Assert.AreEqual(1, layout.GetWordsInCircle(4).Count);
+            Assert.AreEqual("UNCLEAR", layout.GetWordsInCircle(4)[0]);
         }
 
         // add to the target circle at the end of the list; calcualte the fraction and add it to the list of fractions for the circle
@@ -63,13 +63,13 @@ namespace WordTargetCore
         public void FracsWhenAssigningWords()
         {
             WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "UNCLEAR", "STATE" });
-            Assert.AreEqual(0, layout.FracsInCircle3.Count);
+            Assert.AreEqual(0, layout.GetFracsInCircle(3).Count);
             layout.AssignWord("VALUE", 3);
-            Assert.AreEqual(1, layout.FracsInCircle3.Count);
-            Assert.AreEqual(0.111, layout.FracsInCircle3[0], 0.001);
+            Assert.AreEqual(1, layout.GetFracsInCircle(3).Count);
+            Assert.AreEqual(0.111, layout.GetFracsInCircle(3)[0], 0.001);
             layout.AssignWord("UNCLEAR", 3);
-            Assert.AreEqual(2, layout.FracsInCircle3.Count);
-            Assert.AreEqual(0.162, layout.FracsInCircle3[1], 0.001);
+            Assert.AreEqual(2, layout.GetFracsInCircle(3).Count);
+            Assert.AreEqual(0.162, layout.GetFracsInCircle(3)[1], 0.001);
         }
 
         [TestMethod]
@@ -78,11 +78,11 @@ namespace WordTargetCore
             WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "STATE" });
             layout.AssignWord("VALUE", 3);
             layout.AssignWord("UNCLEAR", 3);
-            Assert.AreEqual(2, layout.FracsInCircle3.Count);
+            Assert.AreEqual(2, layout.GetFracsInCircle(3).Count);
             layout.RemoveWord("UNCLEAR", 3);
-            Assert.AreEqual(1, layout.FracsInCircle3.Count);
+            Assert.AreEqual(1, layout.GetFracsInCircle(3).Count);
             layout.RemoveWord("VALUE", 3);
-            Assert.AreEqual(0, layout.FracsInCircle3.Count);
+            Assert.AreEqual(0, layout.GetFracsInCircle(3).Count);
         }
 
         // Calculate empty space for circle: add up all the fractions, add min space for separator, return what's left
@@ -172,9 +172,12 @@ namespace WordTargetCore
         public void StartingAngles()
         {
             WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "NUCLEAR", "STATE" });
-            Assert.AreEqual(80, layout.startingAngle2);
-            Assert.AreEqual(0, layout.startingAngle3);
-            Assert.AreEqual(5, layout.startingAngle4);
+            layout.SetStartingAngle(2, 80);
+            layout.SetStartingAngle(3, 0);
+            layout.SetStartingAngle(4, 5);
+            Assert.AreEqual(80, layout.GetStartingAngle(2));
+            Assert.AreEqual(0, layout.GetStartingAngle(3));
+            Assert.AreEqual(5, layout.GetStartingAngle(4));
         }
 
     }
