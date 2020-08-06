@@ -106,6 +106,7 @@ namespace WordTargetCore
             Assert.AreEqual(LinkType.Synonym, LinkTypes.FromString("Synonym"));
             Assert.AreEqual(LinkType.Antonym, LinkTypes.FromString("Antonym"));
             Assert.AreEqual(LinkType.WordAssociation, LinkTypes.FromString("WordAssociation"));
+            Assert.ThrowsException<System.Exception>(() => LinkTypes.FromString("Wrong"));
         }
 
     }
