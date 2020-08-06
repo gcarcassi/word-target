@@ -12,7 +12,8 @@ namespace WordTargetCore
         private readonly List<string> words;
         private List<List<string>> wordsInCircle = new List<List<string>>() { null, null, new List<string>(), new List<string>(), new List<string>(), new List<string>() };
         private List<List<double>> fracsInCircle = new List<List<double>>() { null, null, new List<double>(), new List<double>(), new List<double>(), new List<double>() };
-        private List<List<int>> layoutOfCircle = new List<List<int>>() { null, null, new List<int>(), new List<int>(), new List<int>(), new List<int>() };
+        private List<List<int>> anglesOfSeparators = new List<List<int>>() { null, null, new List<int>(), new List<int>(), new List<int>(), new List<int>() };
+        private List<List<int>> anglesOfWords = new List<List<int>>() { null, null, new List<int>(), new List<int>(), new List<int>(), new List<int>() };
         private List<int> startingAngles = new List<int>() {0, 0, 0, 0, 0, 0 };
 
         public ReadOnlyCollection<string> Words => words.AsReadOnly();
@@ -53,35 +54,54 @@ namespace WordTargetCore
             startingAngles[circle] = startingAngle;
         }
 
-        public List<int> GetLayoutInCircle(WordTargetLayout layout, int circle)
+        public ReadOnlyCollection<int> GetAnglesOfSeparators(int circle)
         {
-            double spaceBetweenWords = (1 - layout.GetFracsInCircle(circle).Sum()) / layout.GetFracsInCircle(circle).Count;
+            if (circle < 2 || circle > 5)
+            {
+                throw new Exception("Circle must be between 2 and 5");
+            }
+            return anglesOfSeparators[circle].AsReadOnly();
+        }
+        public ReadOnlyCollection<int> GetAnglesOfWords(int circle)
+        {
+            if (circle < 2 || circle > 5)
+            {
+                throw new Exception("Circle must be between 2 and 5");
+            }
+            return anglesOfWords[circle].AsReadOnly();
+        }
 
-            if (spaceBetweenWords < minFracBetweenWords[circle])
+        public void CalculateAnglesInCircle()
+        {
+            for (int circle = 2; circle < 6; circle++)
             {
-                throw new Exception("Words do not fit in the circle");
-            }
+                double spaceBetweenWords = (1 - GetFracsInCircle(circle).Sum()) / GetFracsInCircle(circle).Count;
 
-            int startingAngleDegrees;
-            if (circle == 5)
-            {
-                startingAngleDegrees = 45 - (int)(360 * (layout.GetFracsInCircle(circle)[0] + spaceBetweenWords) / 2);
-            }
-            else
-            {
-                startingAngleDegrees = layout.GetStartingAngle(circle);
-            }
+                if (spaceBetweenWords < minFracBetweenWords[circle])
+                {
+                    throw new Exception("Words do not fit in the circle");
+                }
 
-            double circleSoFar = 0.0;
-            for (int i = 0; i < layout.GetWordsInCircle(circle).Count; i++)
-            {
-                layout.layoutOfCircle[circle].Add(startingAngleDegrees + (int)(circleSoFar * 360));
-                circleSoFar += spaceBetweenWords / 2;
-                layout.layoutOfCircle[circle].Add(startingAngleDegrees + (int)(circleSoFar * 360));
-                circleSoFar += layout.GetFracsInCircle(circle)[i];
-                circleSoFar += spaceBetweenWords / 2;
+                int startingAngleDegrees;
+                if (circle == 5)
+                {
+                    startingAngleDegrees = 45 - (int)(360 * (GetFracsInCircle(circle)[0] + spaceBetweenWords) / 2);
+                }
+                else
+                {
+                    startingAngleDegrees = GetStartingAngle(circle);
+                }
+
+                double circleSoFar = 0.0;
+                for (int i = 0; i < GetWordsInCircle(circle).Count; i++)
+                {
+                    anglesOfSeparators[circle].Add(startingAngleDegrees + (int)(circleSoFar * 360));
+                    circleSoFar += spaceBetweenWords / 2;
+                    anglesOfWords[circle].Add(startingAngleDegrees + (int)(circleSoFar * 360));
+                    circleSoFar += GetFracsInCircle(circle)[i];
+                    circleSoFar += spaceBetweenWords / 2;
+                }
             }
-            return layout.layoutOfCircle[circle];
         }
 
         public string WordInCenter => words[words.Count - 1];

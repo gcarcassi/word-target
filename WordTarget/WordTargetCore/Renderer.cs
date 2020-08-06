@@ -216,21 +216,12 @@ namespace WordTargetCore
 
         public static string LayoutWord(WordTargetLayout layout, int circle)
         {
-
             StringBuilder str = new StringBuilder();
-            List<int> angleList = layout.GetLayoutInCircle(layout, circle);
-            for (int i = 0; i < angleList.Count; i++)
+            for (int i = 0; i < layout.GetWordsInCircle(circle).Count; i++)
             {
-                if(i % 2 == 0)
-                {
-                    str.AppendLine(SvgForCircleSeparator(angleList[i], circle));
-                }
-                else
-                {
-                    str.AppendLine(SvgForCircleWord(angleList[i], layout.GetWordsInCircle(circle)[(i-1)/2], circle));
-                }
+                str.AppendLine(SvgForCircleSeparator(layout.GetAnglesOfSeparators(circle)[i], circle));
+                str.AppendLine(SvgForCircleWord(layout.GetAnglesOfWords(circle)[i], layout.GetWordsInCircle(circle)[i], circle));
             }
-
             return str.ToString();
         }
 
@@ -281,6 +272,7 @@ namespace WordTargetCore
 
         public static string RenderWordTarget(WordTargetLayout layout)
         {
+            layout.CalculateAnglesInCircle();
             StringBuilder str = new StringBuilder();
             str.Append(@"<svg width=""500"" height=""500"" viewBox=""-700 -700 1400 1400"" xmlns=""http://www.w3.org/2000/svg"">
   <style>
