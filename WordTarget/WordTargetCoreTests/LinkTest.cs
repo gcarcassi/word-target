@@ -86,6 +86,5 @@ namespace WordTargetCore
             Assert.AreEqual("bat", link2.WordA.ToString());
             Assert.AreEqual("cat", link2.WordB.ToString());
         }
-
     }
 }

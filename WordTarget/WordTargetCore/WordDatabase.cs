@@ -73,7 +73,10 @@ namespace WordTargetCore
 
         public void AddLink(Link link)
         {
+            if (links.Contains(link))
+                return;
             links.Add(link);
+            links.Add(link.Reverse());
             AddLinkForWord(link.WordA, link);
             AddLinkForWord(link.WordB, link.Reverse());
         }
@@ -148,6 +151,25 @@ namespace WordTargetCore
                 RemoveLink(link);
             }
             words.Remove(word);
+        }
+
+        public static WordDatabase Deserialize(TextReader reader)
+        {
+            WordDatabase db = new WordDatabase();
+            reader.ReadLine();
+            foreach (string word in reader.ReadLine().Split(','))
+            {
+                db.AddWord(word.Trim());
+            }
+
+            reader.ReadLine();
+            reader.ReadLine();
+            while (reader.Peek() >= 0)
+            {
+                string[] tokens = reader.ReadLine().Split(' ');
+                db.AddLink(new Link(new Word(tokens[0]), new Word(tokens[1]), LinkTypes.FromString(tokens[2])));
+            }
+            return db;
         }
 
         public void Serialize(TextWriter writer)

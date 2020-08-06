@@ -74,6 +74,32 @@ sport ports Anagram
         }
 
         [TestMethod]
+        public void DeserializeDatabase()
+        {
+            string expected = @"Words:
+BASEBALL, BAT, CAT, PORT, PORTS, SPORT
+
+Links:
+BASEBALL BAT WordAssociation
+BAT BASEBALL WordAssociation
+BAT CAT OneLetterChange
+CAT BAT OneLetterChange
+PORT PORTS OneLetterAddOrRemove
+PORT SPORT OneLetterAddOrRemove
+PORTS PORT OneLetterAddOrRemove
+PORTS SPORT Anagram
+SPORT PORT OneLetterAddOrRemove
+SPORT PORTS Anagram
+";
+            StringReader reader = new StringReader(expected);
+            WordDatabase db = WordDatabase.Deserialize(reader);
+            Assert.IsTrue(db.GetAllWords().SetEquals(new HashSet<Word> { new Word("BASEBALL"), new Word("BAT"), new Word("CAT"), new Word("SPORT"), new Word("PORTS"), new Word("PORT") }));
+            Assert.IsTrue(db.ContainsLink("BASEBALL", "BAT"));
+            Assert.IsTrue(db.ContainsLink("BAT", "BASEBALL"));
+            Assert.IsTrue(db.ContainsLink("PORTS", "SPORT"));
+        }
+
+        [TestMethod]
         public void FindChain()
         {
             WordDatabase db = new WordDatabase();

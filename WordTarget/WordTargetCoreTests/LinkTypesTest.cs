@@ -86,5 +86,27 @@ namespace WordTargetCore
         }
 
 
+        [TestMethod]
+        public void ToString1()
+        {
+            Assert.AreEqual("OneLetterChange", LinkType.OneLetterChange.ToString());
+            Assert.AreEqual("OneLetterAddOrRemove", LinkType.OneLetterAddOrRemove.ToString());
+            Assert.AreEqual("Anagram", LinkType.Anagram.ToString());
+            Assert.AreEqual("Synonym", LinkType.Synonym.ToString());
+            Assert.AreEqual("Antonym", LinkType.Antonym.ToString());
+            Assert.AreEqual("WordAssociation", LinkType.WordAssociation.ToString());
+        }
+
+        [TestMethod]
+        public void FromString1()
+        {
+            Assert.AreEqual(LinkType.OneLetterChange, LinkTypes.FromString("OneLetterChange"));
+            Assert.AreEqual(LinkType.OneLetterAddOrRemove, LinkTypes.FromString("OneLetterAddOrRemove"));
+            Assert.AreEqual(LinkType.Anagram, LinkTypes.FromString("Anagram"));
+            Assert.AreEqual(LinkType.Synonym, LinkTypes.FromString("Synonym"));
+            Assert.AreEqual(LinkType.Antonym, LinkTypes.FromString("Antonym"));
+            Assert.AreEqual(LinkType.WordAssociation, LinkTypes.FromString("WordAssociation"));
+        }
+
     }
 }

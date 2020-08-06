@@ -14,6 +14,7 @@ namespace WordTargetCore
 
     public static class LinkTypeExtensions
     {
+
         public static bool IsAutomatic(this LinkType type)
         {
             switch (type)

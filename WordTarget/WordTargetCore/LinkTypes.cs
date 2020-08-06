@@ -160,6 +160,26 @@ namespace WordTargetCore
         {
             return IsOneLetterAdd(textA, textB) || IsOneLetterRemove(textA, textB);
         }
+        public static LinkType FromString(string token)
+        {
+            switch (token)
+            {
+                case "OneLetterChange":
+                    return LinkType.OneLetterChange;
+                case "OneLetterAddOrRemove":
+                    return LinkType.OneLetterAddOrRemove;
+                case "Anagram":
+                    return LinkType.Anagram;
+                case "Synonym":
+                    return LinkType.Synonym;
+                case "Antonym":
+                    return LinkType.Antonym;
+                case "WordAssociation":
+                    return LinkType.WordAssociation;
+                default:
+                    throw new Exception("The string " + token + " does not correspond to a valid link type");
+            }
+        }
     }
 
 }
