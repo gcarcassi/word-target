@@ -48,6 +48,7 @@ namespace WordTargetCore
                     continue;
                 layout.AssignWord(word, circle);
             }
+            layout.CalculateAnglesInCircle();
             return layout;
         }
 
