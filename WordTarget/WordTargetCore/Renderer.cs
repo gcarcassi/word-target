@@ -216,32 +216,19 @@ namespace WordTargetCore
 
         public static string LayoutWord(WordTargetLayout layout, int circle)
         {
-            double spaceBetweenWords = (1 - layout.GetFracsInCircle(circle).Sum()) / layout.GetFracsInCircle(circle).Count;
 
-            if (spaceBetweenWords < minFracBetweenWords[circle])
-            {
-                throw new Exception("Words do not fit in the circle");
-            }
-
-            int startingAngleDegrees;
-            if (circle == 5)
-            {
-                startingAngleDegrees = 45 - (int)(360 * (layout.GetFracsInCircle(circle)[0] + spaceBetweenWords) / 2);
-            }
-            else
-            {
-                startingAngleDegrees = layout.GetStartingAngle(circle);
-            }
-
-            double circleSoFar = 0.0;
             StringBuilder str = new StringBuilder();
-            for (int i = 0; i < layout.GetWordsInCircle(circle).Count; i++)
+            List<int> angleList = layout.GetLayoutInCircle(layout, circle);
+            for (int i = 0; i < angleList.Count; i++)
             {
-                str.AppendLine(SvgForCircleSeparator((int) startingAngleDegrees + (int)(circleSoFar * 360), circle));
-                circleSoFar += spaceBetweenWords / 2;
-                str.AppendLine(SvgForCircleWord((int) startingAngleDegrees + (int)(circleSoFar * 360), layout.GetWordsInCircle(circle)[i], circle));
-                circleSoFar += layout.GetFracsInCircle(circle)[i];
-                circleSoFar += spaceBetweenWords / 2;
+                if(i % 2 == 0)
+                {
+                    str.AppendLine(SvgForCircleSeparator(angleList[i], circle));
+                }
+                else
+                {
+                    str.AppendLine(SvgForCircleWord(angleList[i], layout.GetWordsInCircle(circle)[(i-1)/2], circle));
+                }
             }
 
             return str.ToString();
