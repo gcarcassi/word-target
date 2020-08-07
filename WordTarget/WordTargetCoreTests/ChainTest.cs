@@ -166,7 +166,7 @@ namespace WordTargetCore
             chain1.Add(catBat);
             chain1.Add(batBaseball);
             chain1.Add(baseballSport);
-            Assert.AreEqual("cat-bat-baseball-sport", chain1.ToString());
+            Assert.AreEqual("CAT-BAT-BASEBALL-SPORT", chain1.ToString());
             Chain chain2 = new Chain();
             Assert.AreEqual("", chain2.ToString());
         }

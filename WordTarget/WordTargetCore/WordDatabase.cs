@@ -15,25 +15,28 @@ namespace WordTargetCore
         // TODO: protect from adding the same word twice
         public void AddWord(string word)
         {
-            Word newWord = new Word(word);
-            words.Add(newWord);
+            AddWord(new Word(word));
+        }
+        public void AddWord(Word word)
+        {
+            words.Add(word);
 
             // Check if word can be linked to others
             foreach (Word other in words)
             {
-                if (LinkTypes.IsOneLetterChange(word, other.Text))
+                if (LinkTypes.IsOneLetterChange(word.Text, other.Text))
                 {
-                    Link link = new Link(newWord, other, LinkType.OneLetterChange);
+                    Link link = new Link(word, other, LinkType.OneLetterChange);
                     AddLink(link);
                 }
-                if (LinkTypes.IsOneLetterAddOrRemove(word, other.Text))
+                if (LinkTypes.IsOneLetterAddOrRemove(word.Text, other.Text))
                 {
-                    Link link = new Link(newWord, other, LinkType.OneLetterAddOrRemove);
+                    Link link = new Link(word, other, LinkType.OneLetterAddOrRemove);
                     AddLink(link);
                 }
-                if (LinkTypes.IsAnagram(word, other.Text))
+                if (LinkTypes.IsAnagram(word.Text, other.Text))
                 {
-                    Link link = new Link(newWord, other, LinkType.Anagram);
+                    Link link = new Link(word, other, LinkType.Anagram);
                     AddLink(link);
                 }
             }

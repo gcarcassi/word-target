@@ -9,7 +9,7 @@ namespace WordTargetCore
 
         public Word(string text)
         {
-            Text = text;
+            Text = text.ToUpper();
         }
 
         public override string ToString()
