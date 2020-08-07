@@ -12,11 +12,12 @@ namespace WordTargetCore
         private HashSet<Link> links = new HashSet<Link>();
         private Dictionary<Word, HashSet<Link>> linksByWord = new Dictionary<Word, HashSet<Link>>();
 
-        // TODO: protect from adding the same word twice
         public void AddWord(string word)
         {
             AddWord(new Word(word));
         }
+
+        // TODO: Ignore if the same word is added twice
         public void AddWord(Word word)
         {
             words.Add(word);
@@ -42,7 +43,7 @@ namespace WordTargetCore
             }
         }
 
-        // TODO: add tests
+        // TODO: can be removed
         public void AddWordIfMissing(string word)
         {
             Word newWord = new Word(word);
@@ -55,18 +56,24 @@ namespace WordTargetCore
         // TODO: add tests
         public bool ContainsWord(string word)
         {
-            return words.Contains(new Word(word.ToUpper()));
+            return ContainsWord(new Word(word));
         }
 
         // TODO: add tests
+        public bool ContainsWord(Word word)
+        {
+            return words.Contains(word);
+        }
+
+        // TODO: add tests / implement also in terms of Word object
         public bool ContainsLink(string wordA, string wordB)
         {
-            Word theWordA = new Word(wordA.ToUpper());
-            Word theWordB = new Word(wordB.ToUpper());
+            Word theWordA = new Word(wordA);
+            Word theWordB = new Word(wordB);
             return words.Contains(theWordA) && GetLinksFor(theWordA).FirstOrDefault(x => x.WordB.Equals(theWordB)) != null;
         }
 
-        // TODO: add tests
+        // TODO: add tests / implement also in terms of Word object
         public Link GetLinkBetween(string wordA, string wordB)
         {
             Word theWordA = new Word(wordA.ToUpper());
@@ -122,7 +129,7 @@ namespace WordTargetCore
             }
         }
 
-        // Add tests
+        // TODO: Add tests
         public void RemoveLink(Link link)
         {
             // TODO: we are not checking whether the link is not there
@@ -146,6 +153,7 @@ namespace WordTargetCore
             }
         }
 
+        // TODO: add tests?
         public void RemoveWord(Word word)
         {
             List<Link> links = new List<Link>(GetLinksFor(word));
@@ -209,10 +217,10 @@ namespace WordTargetCore
             }
         }
 
-        public Chain FindChain(string start, string end)
+        public Chain FindChain(Word start, Word end)
         {
             Chain chain = new Chain();
-            bool result = CompleteChain(chain, new Word(start), new Word(end));
+            bool result = CompleteChain(chain, start, end);
             if (result)
             {
                 return chain;

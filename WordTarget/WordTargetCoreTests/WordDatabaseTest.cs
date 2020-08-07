@@ -11,6 +11,7 @@ namespace WordTargetCore
     [TestClass]
     public class WordDatabaseTest
     {
+        // TODO: use the common objects in all tests
         static Word cat = new Word("cat");
         static Word bat = new Word("bat");
         static Word baseball = new Word("baseball");
@@ -96,7 +97,7 @@ SPORT PORTS Anagram
             db.AddWords(new List<string> { "cat", "bat", "baseball", "sport", "ports", "port" });
             db.AddLink(new Link(new Word("bat"), new Word("baseball"), LinkType.WordAssociation));
             db.AddLink(new Link(new Word("sport"), new Word("baseball"), LinkType.WordAssociation));
-            Chain chain = db.FindChain("cat", "port");
+            Chain chain = db.FindChain(cat, port);
             Assert.AreEqual(5, chain.Count);
             Assert.AreEqual(new Link(new Word("cat"), new Word("bat"), LinkType.OneLetterChange), chain[0]);
             Assert.AreEqual(new Link(new Word("bat"), new Word("baseball"), LinkType.WordAssociation), chain[1]);

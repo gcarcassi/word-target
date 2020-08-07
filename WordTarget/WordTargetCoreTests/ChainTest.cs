@@ -1,21 +1,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static WordTargetCore.CommonTestObjects;
 
 namespace WordTargetCore
 {
     [TestClass]
     public class ChainTest
     {
-        static Word cat = new Word("cat");
-        static Word bat = new Word("bat");
-        static Word baseball = new Word("baseball");
-        static Word sport = new Word("sport");
-        static Word ports = new Word("ports");
-        static Word parts = new Word("parts");
-        static Link catBat = new Link(cat, bat, LinkType.OneLetterChange);
-        static Link batBaseball = new Link(bat, baseball, LinkType.WordAssociation);
-        static Link baseballSport = new Link(baseball, sport, LinkType.WordAssociation);
-        static Link sportPorts = new Link(sport, ports, LinkType.Anagram);
-        static Link portsParts = new Link(ports, parts, LinkType.OneLetterChange);
 
         [TestMethod]
         public void ValidChainCreation()
