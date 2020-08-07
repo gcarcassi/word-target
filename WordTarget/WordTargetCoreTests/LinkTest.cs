@@ -1,18 +1,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static WordTargetCore.CommonTestObjects;
 
 namespace WordTargetCore
 {
     [TestClass]
     public class LinkTest
     {
-
-        static Word cat = new Word("cat");
-        static Word car = new Word("car");
-        static Word cart = new Word("cart");
-        static Word bat = new Word("bat");
-        static Word bit = new Word("bit");
-        static Word brat = new Word("brat");
-        static Word tab = new Word("tab");
 
         [TestMethod]
         public void LinkCreation()

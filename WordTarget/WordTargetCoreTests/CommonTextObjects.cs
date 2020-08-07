@@ -10,7 +10,13 @@ namespace WordTargetCore
         public static Word baseball = new Word("baseball");
         public static Word sport = new Word("sport");
         public static Word ports = new Word("ports");
+        public static Word port = new Word("port");
         public static Word parts = new Word("parts");
+        public static Word bit = new Word("bit");
+        public static Word brat = new Word("brat");
+        public static Word tab = new Word("tab");
+        public static Word car = new Word("car");
+        public static Word cart = new Word("cart");
         public static Link catBat = new Link(cat, bat, LinkType.OneLetterChange);
         public static Link batBaseball = new Link(bat, baseball, LinkType.WordAssociation);
         public static Link baseballSport = new Link(baseball, sport, LinkType.WordAssociation);

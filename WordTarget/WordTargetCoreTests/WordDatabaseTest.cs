@@ -1,29 +1,14 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Buffers;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.IO;
-using System.Linq;
+using static WordTargetCore.CommonTestObjects;
 
 namespace WordTargetCore
 {
     [TestClass]
     public class WordDatabaseTest
     {
-        // TODO: use the common objects in all tests
-        static Word cat = new Word("cat");
-        static Word bat = new Word("bat");
-        static Word baseball = new Word("baseball");
-        static Word sport = new Word("sport");
-        static Word ports = new Word("ports");
-        static Word port = new Word("port");
-        static Word parts = new Word("parts");
-        static Link catBat = new Link(cat, bat, LinkType.OneLetterChange);
-        static Link batBaseball = new Link(bat, baseball, LinkType.WordAssociation);
-        static Link baseballSports = new Link(baseball, sport, LinkType.WordAssociation);
-        static Link sportPorts = new Link(sport, ports, LinkType.Anagram);
-        static Link portsParts = new Link(ports, parts, LinkType.OneLetterChange);
+
 
         [TestMethod]
         public void PopulatingDatabase()
