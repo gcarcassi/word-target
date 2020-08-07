@@ -17,9 +17,13 @@ namespace WordTargetCore
             AddWord(new Word(word));
         }
 
-        // TODO: Ignore if the same word is added twice
+        // TODO: test that same words are ignored
         public void AddWord(Word word)
         {
+            if (!words.Contains(word))
+            {
+                AddWord(word);
+            }
             words.Add(word);
 
             // Check if word can be linked to others
@@ -43,16 +47,6 @@ namespace WordTargetCore
             }
         }
 
-        // TODO: can be removed
-        public void AddWordIfMissing(string word)
-        {
-            Word newWord = new Word(word);
-            if (!words.Contains(newWord))
-            {
-                AddWord(word);
-            }
-        }
-
         // TODO: add tests
         public bool ContainsWord(string word)
         {
@@ -65,7 +59,7 @@ namespace WordTargetCore
             return words.Contains(word);
         }
 
-        // TODO: add tests / implement also in terms of Word object
+        // TODO: add tests 
         public bool ContainsLink(string wordA, string wordB)
         {
             Word theWordA = new Word(wordA);
@@ -73,12 +67,22 @@ namespace WordTargetCore
             return words.Contains(theWordA) && GetLinksFor(theWordA).FirstOrDefault(x => x.WordB.Equals(theWordB)) != null;
         }
 
-        // TODO: add tests / implement also in terms of Word object
+        public bool ContainsLink(Word wordA, Word wordB)
+        {
+            return words.Contains(wordA) && GetLinksFor(wordA).FirstOrDefault(x => x.WordB.Equals(wordB)) != null;
+        }
+
+
+        // TODO: add tests
         public Link GetLinkBetween(string wordA, string wordB)
         {
-            Word theWordA = new Word(wordA.ToUpper());
-            Word theWordB = new Word(wordB.ToUpper());
+            Word theWordA = new Word(wordA);
+            Word theWordB = new Word(wordB);
             return words.Contains(theWordA) ? GetLinksFor(theWordA).FirstOrDefault(x => x.WordB.Equals(theWordB)) : null;
+        }
+        public Link GetLinkBetween(Word wordA, Word wordB)
+        {
+            return words.Contains(wordA) ? GetLinksFor(wordA).FirstOrDefault(x => x.WordB.Equals(wordB)) : null;
         }
 
         public void AddLink(Link link)
