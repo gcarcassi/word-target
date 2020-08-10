@@ -20,9 +20,9 @@ namespace WordTargetCore
         // TODO: test that same words are ignored
         public void AddWord(Word word)
         {
-            if (!words.Contains(word))
+            if (words.Contains(word))
             {
-                AddWord(word);
+                return;
             }
             words.Add(word);
 
@@ -112,6 +112,13 @@ namespace WordTargetCore
         public void AddWords(List<string> words)
         {
             foreach (string word in words)
+            {
+                AddWord(word);
+            }
+        }
+        public void AddWords(List<Word> words)
+        {
+            foreach (Word word in words)
             {
                 AddWord(word);
             }
