@@ -91,6 +91,42 @@ SPORT PORTS Anagram
             Assert.AreEqual(portsPort, chain[4]);
         }
 
+        [TestMethod]
+        public void ImproperWordAdd()
+        {
+            WordDatabase db = new WordDatabase();
+            db.AddWord(cat);
+            Assert.IsTrue(db.GetAllWords().SetEquals(new HashSet<Word> { cat }));
+            db.AddWord(cat);
+            Assert.AreEqual(1, db.GetAllWords().Count);
+            Assert.IsTrue(db.GetAllWords().SetEquals(new HashSet<Word> { cat }));
+        }
 
+        [TestMethod]
+        public void ContainsWord()
+        {
+            WordDatabase db = new WordDatabase();
+            db.AddWords(new List<Word> { cat, bat, baseball });
+            Assert.IsTrue(db.ContainsWord(cat));
+            Assert.IsTrue(db.ContainsWord("BAT"));
+            Assert.IsTrue(db.ContainsWord(baseball));
+            Assert.IsFalse(db.ContainsWord(ports));
+            Assert.IsFalse(db.ContainsWord("SPORT"));
+            Assert.IsFalse(db.ContainsWord(""));
+        }
+
+        [TestMethod]
+        public void ContainsLink()
+        {
+            WordDatabase db = new WordDatabase();
+            db.AddWords(new List<Word> { cat, bat, baseball, sport, ports, port });
+            db.AddLink(new Link(bat, baseball, LinkType.WordAssociation));
+            Assert.IsTrue(db.ContainsLink(cat, bat));
+            Assert.IsTrue(db.ContainsLink(bat, cat));
+            Assert.IsTrue(db.ContainsLink(bat, baseball));
+            Assert.IsTrue(db.ContainsLink("SPORT", "PORTS"));
+            Assert.IsFalse(db.ContainsLink(cat, sport));
+            Assert.IsFalse(db.ContainsLink("CAT", "RAT"));
+        }
     }
 }

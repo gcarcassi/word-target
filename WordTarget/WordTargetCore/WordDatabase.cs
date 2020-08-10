@@ -16,8 +16,6 @@ namespace WordTargetCore
         {
             AddWord(new Word(word));
         }
-
-        // TODO: test that same words are ignored
         public void AddWord(Word word)
         {
             if (words.Contains(word))
@@ -47,13 +45,11 @@ namespace WordTargetCore
             }
         }
 
-        // TODO: add tests
         public bool ContainsWord(string word)
         {
             return ContainsWord(new Word(word));
         }
 
-        // TODO: add tests
         public bool ContainsWord(Word word)
         {
             return words.Contains(word);
