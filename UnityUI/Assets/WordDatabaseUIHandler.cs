@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using WordTargetCore;
 using System.Linq;
 using UnityEditor;
+using System.IO;
 
 public class WordDatabaseUIHandler : MonoBehaviour
 {
@@ -40,10 +41,16 @@ public class WordDatabaseUIHandler : MonoBehaviour
     public GameObject removeLinkButtonObject;
     private Button removeLinkButton;
 
+    public GameObject saveButtonObject;
+    private Button saveButton;
+
     private WordDatabase db = new WordDatabase();
+    private string filename = null;
 
     void Start()
     {
+        saveButton = saveButtonObject.GetComponent<Button>();
+
         db.AddWords(new List<string>() { "BAT", "CAT", "BASEBALL", "SPORT", "PORTS", "PORT" });
         db.AddLink(new Link(new Word("BAT"), new Word("BASEBALL"), LinkType.WordAssociation));
         db.AddLink(new Link(new Word("SPORT"), new Word("BASEBALL"), LinkType.WordAssociation));
@@ -119,6 +126,8 @@ public class WordDatabaseUIHandler : MonoBehaviour
                 }
             );
         }
+
+        saveButton.interactable = (filename != null);
     }
 
     private Dictionary<LinkType, Color32> colorForLinkType = new Dictionary<LinkType, Color32>() { { LinkType.OneLetterChange, new Color32(0, 128, 128, 255) },
@@ -251,8 +260,34 @@ public class WordDatabaseUIHandler : MonoBehaviour
 
     public void Load()
     {
-        var paths = SFB.StandaloneFileBrowser.OpenFilePanel("Open File", "", "png", false);
-        Debug.Log("Chosen " + paths);
+        string[] paths = SFB.StandaloneFileBrowser.OpenFilePanel("Open Word Target Database", "", "wtdb", false);
+        if (paths.Length == 1)
+        {
+            StreamReader file = System.IO.File.OpenText(paths[0]);
+            db = WordDatabase.Deserialize(file);
+            SynchWords();
+            filename = paths[0];
+        }
+    }
+
+    public void SaveAs()
+    {
+        string path = SFB.StandaloneFileBrowser.SaveFilePanel("Save Word Target Database", "", "", "wtdb");
+        if (path != "")
+        {
+            filename = path;
+            Save();
+        }
+    }
+
+    public void Save()
+    {
+        if (filename != null)
+        {
+            StreamWriter file = System.IO.File.CreateText(filename);
+            db.Serialize(file);
+            file.Close();
+        }
     }
 
     public void Quit()
