@@ -251,8 +251,8 @@ public class WordDatabaseUIHandler : MonoBehaviour
 
     public void Load()
     {
-        string path = EditorUtility.OpenFilePanel("Open Word Target DB", "", "wtdb");
-        Debug.Log("Chosen " + path);
+        var paths = SFB.StandaloneFileBrowser.OpenFilePanel("Open File", "", "png", false);
+        Debug.Log("Chosen " + paths);
     }
 
     public void Quit()
