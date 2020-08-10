@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WordTargetCore;
 using System.Linq;
+using UnityEditor;
 
 public class WordDatabaseUIHandler : MonoBehaviour
 {
@@ -247,6 +248,13 @@ public class WordDatabaseUIHandler : MonoBehaviour
     {
         
     }
+
+    public void Load()
+    {
+        string path = EditorUtility.OpenFilePanel("Open Word Target DB", "", "wtdb");
+        Debug.Log("Chosen " + path);
+    }
+
     public void Quit()
     {
 #if UNITY_EDITOR
