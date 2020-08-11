@@ -180,5 +180,23 @@ namespace WordTargetCore
             Assert.AreEqual(5, layout.GetStartingAngle(4));
         }
 
+        [TestMethod]
+        public void DistributeRandomly()
+        {
+            Random rand = new Random(235);
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "NUCLEAR", "CORE", "CORN", "COIN", "JOIN", "JOINT", "ANKLE", "ANGLE", "RIGHT", "SIGHT", "VITAMIN A", "CAROTENOIDS", "COORDINATES", "POLAR", "POLARS", "POLARIS", "STAR", "STARE", "SPARE", "SPACE", "STATION", "STATIN", "STATEN", "STATE" });
+            layout.DistributeRandomly(rand);
+            // TODO complete method
+        }
+
+        [TestMethod]
+        public void EquilibrateOnce()
+        {
+            Random rand = new Random(236);
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "NUCLEAR", "CORE", "CORN", "COIN", "JOIN", "JOINT", "ANKLE", "ANGLE", "RIGHT", "SIGHT", "VITAMIN A", "CAROTENOIDS", "COORDINATES", "POLAR", "POLARS", "POLARIS", "STAR", "STARE", "SPARE", "SPACE", "STATION", "STATIN", "STATEN", "STATE" });
+            layout.DistributeRandomly(rand);
+            layout.EquilibrateOnce(rand);
+            // TODO complete method
+        }
     }
 }

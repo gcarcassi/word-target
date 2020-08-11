@@ -168,6 +168,12 @@ namespace WordTargetCore
             return 1 - fracsInCircle[circle].Sum() - (minFracBetweenWords[circle] * wordsInCircle[circle].Count);
         }
 
+        public double GetRescaledEmptySpace(int circle)
+        {
+            double scaleFactor = minFracBetweenWords[circle] / minFracBetweenWords[5];
+            return GetEmptySpace(circle) * scaleFactor;
+        }
+
         public bool IsCircleFull(int circle)
         {
             if(GetEmptySpace(circle) < minFracBetweenWords[circle])
@@ -229,6 +235,71 @@ namespace WordTargetCore
             List<string> unassigned = words.Except(wordsInCircle[2]).Except(wordsInCircle[3]).Except(wordsInCircle[4]).Except(wordsInCircle[5]).ToList();
             unassigned.Remove(words[words.Count - 1]);
             return unassigned;
+        }
+
+        private int[] weights = new int[] { 3, 5, 7, 10 };
+
+        private int pickCircle(Random rand, int circleToAvoid)
+        {
+            int weightSum = weights.Sum();
+            while (true) {
+                int i = rand.Next(weightSum);
+                int circle = 0;
+                while (i >= weights[circle])
+                {
+                    i -= weights[circle];
+                    circle++;
+                }
+                circle += 2;
+                if (circle != circleToAvoid)
+                {
+                    return circle;
+                }
+            }
+        }
+
+        public void DistributeRandomly(Random rand)
+        {
+            List<string> words = GetUnassignedWords();
+
+            int previousCircle = -1;
+            foreach (string word in words)
+            {
+                int circle = pickCircle(rand, previousCircle);
+                AssignWord(word, circle);
+                Console.WriteLine(word + " " + circle);
+                previousCircle = circle;
+            }
+        }
+
+        public void EquilibrateOnce(Random rand)
+        {
+            int originCircle = 0;
+            int destinationCircle = 0;
+            for (int circle = 2; circle < 6; circle++)
+            {
+                if (GetRescaledEmptySpace(circle) < 0)
+                {
+                    if (originCircle == 0 || GetRescaledEmptySpace(circle) < GetRescaledEmptySpace(originCircle))
+                    {
+                        originCircle = circle;
+                    }
+                }
+                if (GetRescaledEmptySpace(circle) > 0)
+                {
+                    if (destinationCircle == 0 || GetRescaledEmptySpace(circle) > GetRescaledEmptySpace(originCircle))
+                    {
+                        destinationCircle = circle;
+                    }
+                }
+            }
+            if (originCircle != 0 && destinationCircle != 0)
+            {
+                int min = originCircle == 5 ? 1 : 0;
+                string word = GetWordsInCircle(originCircle)[rand.Next(min, GetWordsInCircle(originCircle).Count)];
+                RemoveWord(word, originCircle);
+                AssignWord(word, destinationCircle);
+            }
         }
     }
 }
