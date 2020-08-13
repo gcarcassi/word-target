@@ -75,6 +75,9 @@ namespace WordTargetCore
         {
             for (int circle = 2; circle < 6; circle++)
             {
+                anglesOfSeparators[circle].Clear();
+                anglesOfWords[circle].Clear();
+
                 double spaceBetweenWords = (1 - GetFracsInCircle(circle).Sum()) / GetFracsInCircle(circle).Count;
 
                 if (spaceBetweenWords < minFracBetweenWords[circle])
@@ -95,9 +98,9 @@ namespace WordTargetCore
                 double circleSoFar = 0.0;
                 for (int i = 0; i < GetWordsInCircle(circle).Count; i++)
                 {
-                    anglesOfSeparators[circle].Add(startingAngleDegrees + (int)(circleSoFar * 360));
+                    anglesOfSeparators[circle].Add((startingAngleDegrees + (int)(circleSoFar * 360) ) % 360);
                     circleSoFar += spaceBetweenWords / 2;
-                    anglesOfWords[circle].Add(startingAngleDegrees + (int)(circleSoFar * 360));
+                    anglesOfWords[circle].Add((startingAngleDegrees + (int)(circleSoFar * 360)) % 360);
                     circleSoFar += GetFracsInCircle(circle)[i];
                     circleSoFar += spaceBetweenWords / 2;
                 }
@@ -287,7 +290,7 @@ namespace WordTargetCore
                 }
                 if (GetRescaledEmptySpace(circle) > 0)
                 {
-                    if (destinationCircle == 0 || GetRescaledEmptySpace(circle) > GetRescaledEmptySpace(originCircle))
+                    if (destinationCircle == 0 || GetRescaledEmptySpace(circle) > GetRescaledEmptySpace(destinationCircle))
                     {
                         destinationCircle = circle;
                     }
@@ -300,6 +303,74 @@ namespace WordTargetCore
                 RemoveWord(word, originCircle);
                 AssignWord(word, destinationCircle);
             }
+        }
+
+        public bool IsAnyCircleOverflowing()
+        {
+            for (int circle = 2; circle < 6; circle++)
+            {
+                if (GetRescaledEmptySpace(circle) < 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool IsAllCirclesOverflowing()
+        {
+            for (int circle = 2; circle < 6; circle++)
+            {
+                if (GetRescaledEmptySpace(circle) > 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool IsAngleBetweenCiclesGood(int extCircle, int intCircle)
+        {
+            List<int> all = GetAnglesOfSeparators(extCircle).Concat(GetAnglesOfSeparators(intCircle)).OrderBy(x => x).ToList();
+            for (int i = 0; i < all.Count - 1; i++)
+            {
+                if (Math.Abs(all[i+1]-all[i]) < 5)
+                {
+                    return false;
+                }
+            }
+            if (Math.Abs(all[0] - all[all.Count - 1]) % 360 < 5)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void DoLayout(Random rand)
+        {
+            DistributeRandomly(rand);
+            while (IsAnyCircleOverflowing())
+            {
+                EquilibrateOnce(rand);
+                if (IsAllCirclesOverflowing())
+                {
+                    return;
+                }
+            }
+            for (int circle = 2; circle < 5; circle++)
+            {
+                SetStartingAngle(circle, rand.Next(-30, 30));
+            }
+            CalculateAnglesInCircle();
+            for (int circle = 4; circle >= 2; circle--)
+            {
+                while (!IsAngleBetweenCiclesGood(circle + 1, circle))
+                {
+                    SetStartingAngle(circle, GetStartingAngle(circle) + 1);
+                    CalculateAnglesInCircle();
+                }
+            }
+            return;
         }
     }
 }

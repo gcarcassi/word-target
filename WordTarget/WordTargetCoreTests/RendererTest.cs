@@ -114,7 +114,7 @@ namespace WordTargetCore
   <line transform=""rotate(282 0,0)"" x1=""-300"" x2=""-200"" y1=""0"" y2=""0"" class=""line3""/>
   <text transform=""rotate(294 0,0)"" class=""text3""><textPath href=""#circle3"">STATEN</textPath></text>
   <line transform=""rotate(354 0,0)"" x1=""-300"" x2=""-200"" y1=""0"" y2=""0"" class=""line3""/>
-  <text transform=""rotate(366 0,0)"" class=""text3""><textPath href=""#circle3"">VITAMIN A</textPath></text>
+  <text transform=""rotate(6 0,0)"" class=""text3""><textPath href=""#circle3"">VITAMIN A</textPath></text>
 ";
             WordTargetLayout words = createTextLayout(new List<string> { "SPARE", "VALUE", "POLARS", "STATEN", "VITAMIN A" }, 3, 80);
             Assert.AreEqual(expected, Renderer.LayoutWord(words, 3));
@@ -160,8 +160,8 @@ namespace WordTargetCore
   <text transform=""rotate(313 0,0)"" class=""text4""><textPath href=""#circle4"">VAGUE</textPath></text>
   <line transform=""rotate(348 0,0)"" x1=""-400"" x2=""-300"" y1=""0"" y2=""0"" class=""line4""/>
   <text transform=""rotate(354 0,0)"" class=""text4""><textPath href=""#circle4"">R</textPath></text>
-  <line transform=""rotate(365 0,0)"" x1=""-400"" x2=""-300"" y1=""0"" y2=""0"" class=""line4""/>
-  <text transform=""rotate(370 0,0)"" class=""text4""><textPath href=""#circle4"">COORDINATES</textPath></text>
+  <line transform=""rotate(5 0,0)"" x1=""-400"" x2=""-300"" y1=""0"" y2=""0"" class=""line4""/>
+  <text transform=""rotate(10 0,0)"" class=""text4""><textPath href=""#circle4"">COORDINATES</textPath></text>
 ";
             WordTargetLayout words = createTextLayout(new List<string> { "ANGLE", "STAR", "JOIN", "CORE", "STATION", "POLAR", "VAGUE", "R", "COORDINATES" }, 4, 80);
             Assert.AreEqual(expected, Renderer.LayoutWord(words, 4));
@@ -211,8 +211,8 @@ namespace WordTargetCore
   <text transform=""rotate(289 0,0)"" class=""text5""><textPath href=""#circle5"">CAROTENOIDS</textPath></text>
   <line transform=""rotate(342 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
   <text transform=""rotate(346 0,0)"" class=""text5""><textPath href=""#circle5"">ANKLE</textPath></text>
-  <line transform=""rotate(372 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
-  <text transform=""rotate(376 0,0)"" class=""text5""><textPath href=""#circle5"">S</textPath></text>
+  <line transform=""rotate(12 0,0)"" x1=""-500"" x2=""-400"" y1=""0"" y2=""0"" class=""line5""/>
+  <text transform=""rotate(16 0,0)"" class=""text5""><textPath href=""#circle5"">S</textPath></text>
 ";
 
             WordTargetLayout words = createTextLayout(new List<string> { "VARIABLE", "SIGHT", "NUCLEAR", "SPACE", "JOINT", "POLARIS", "VAGUE", "COIN", "CAROTENOIDS", "ANKLE", "S" }, 5, 80);

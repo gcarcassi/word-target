@@ -198,5 +198,16 @@ namespace WordTargetCore
             layout.EquilibrateOnce(rand);
             // TODO complete method
         }
+
+        [TestMethod]
+        public void DoLayout()
+        {
+            Random rand = new Random(245);
+            WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "NUCLEAR", "CORE", "CORN", "COIN", "JOIN", "JOINT", "ANKLE", "ANGLE", "RIGHT", "SIGHT", "VITAMIN A", "CAROTENOIDS", "COORDINATES", "POLAR", "POLARS", "POLARIS", "STAR", "STARE", "SPARE", "SPACE", "STATION", "STATIN", "STATEN", "STATE" });
+            layout.DoLayout(rand);
+            // TODO complete method
+            string wordTarget = Renderer.RenderWordTarget(layout);
+            System.IO.File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\WordTargetOutput.svg", wordTarget);
+        }
     }
 }
