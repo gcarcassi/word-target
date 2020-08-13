@@ -339,11 +339,28 @@ namespace WordTargetCore
                     return false;
                 }
             }
-            if (Math.Abs(all[0] - all[all.Count - 1]) % 360 < 5)
+            if (Math.Abs(360 + all[0] - all[all.Count - 1]) % 360 < 5)
             {
                 return false;
             }
             return true;
+        }
+
+        public void ShuffleCircle(int circle, Random rand)
+        {
+            int firstElement = circle != 5 ? 0 : 1;
+            int n = wordsInCircle[circle].Count;
+            while (n > firstElement + 1)
+            {
+                n--;
+                int k = rand.Next(firstElement, n + 1);
+                string word = wordsInCircle[circle][k];
+                wordsInCircle[circle][k] = wordsInCircle[circle][n];
+                wordsInCircle[circle][n] = word;
+                double frac = fracsInCircle[circle][k];
+                fracsInCircle[circle][k] = fracsInCircle[circle][n];
+                fracsInCircle[circle][n] = frac;
+            }
         }
 
         public void DoLayout(Random rand)
@@ -356,6 +373,9 @@ namespace WordTargetCore
                 {
                     return;
                 }
+            }
+            for (int circle = 2; circle < 6; circle++) {
+                ShuffleCircle(circle, rand);
             }
             for (int circle = 2; circle < 5; circle++)
             {

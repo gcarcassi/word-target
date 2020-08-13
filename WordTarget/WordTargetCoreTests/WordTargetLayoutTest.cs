@@ -202,7 +202,7 @@ namespace WordTargetCore
         [TestMethod]
         public void DoLayout()
         {
-            Random rand = new Random(245);
+            Random rand = new Random(249);
             WordTargetLayout layout = new WordTargetLayout(new List<string> { "VARIABLE", "VALUE", "VAGUE", "UNCLEAR", "NUCLEAR", "CORE", "CORN", "COIN", "JOIN", "JOINT", "ANKLE", "ANGLE", "RIGHT", "SIGHT", "VITAMIN A", "CAROTENOIDS", "COORDINATES", "POLAR", "POLARS", "POLARIS", "STAR", "STARE", "SPARE", "SPACE", "STATION", "STATIN", "STATEN", "STATE" });
             layout.DoLayout(rand);
             // TODO complete method
