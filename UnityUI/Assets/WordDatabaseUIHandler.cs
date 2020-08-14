@@ -50,10 +50,6 @@ public class WordDatabaseUIHandler : MonoBehaviour
     void Start()
     {
         saveButton = saveButtonObject.GetComponent<Button>();
-
-        db.AddWords(new List<string>() { "BAT", "CAT", "BASEBALL", "SPORT", "PORTS", "PORT" });
-        db.AddLink(new Link(new Word("BAT"), new Word("BASEBALL"), LinkType.WordAssociation));
-        db.AddLink(new Link(new Word("SPORT"), new Word("BASEBALL"), LinkType.WordAssociation));
         SynchWords();
 
         selectedWordTMPField = selectedWordField.GetComponent<TMP_InputField>();
@@ -69,6 +65,16 @@ public class WordDatabaseUIHandler : MonoBehaviour
 
         removeWordButton = removeWordButtonObject.GetComponent<Button>();
         removeLinkButton = removeLinkButtonObject.GetComponent<Button>();
+    }
+
+    Word GetSelectedWordA()
+    {
+        return new Word(selectedWordTMPField.text.Trim());
+    }
+
+    Word GetSelectedWordB()
+    {
+        return new Word(selectedLinkTMPField.text.Trim());
     }
 
     /// <summary>
@@ -175,31 +181,29 @@ public class WordDatabaseUIHandler : MonoBehaviour
 
     public void OnAddWordButton()
     {
-        string newWord = selectedWordTMPField.text.ToUpper();
-
-        db.AddWord(newWord);
+        db.AddWord(GetSelectedWordA());
         SynchWords();
-        onWordListBoxSelection(new Word(newWord));
+        onWordListBoxSelection(GetSelectedWordA());
     }
 
     public void OnAddSynonymButton()
     {
-        AddLink(selectedWordTMPField.text.ToUpper(),
-            selectedLinkTMPField.text.ToUpper(),
+        AddLink(GetSelectedWordA(),
+            GetSelectedWordB(),
             LinkType.Synonym);
     }
 
     public void OnAddAntonymButton()
     {
-        AddLink(selectedWordTMPField.text.ToUpper(),
-            selectedLinkTMPField.text.ToUpper(),
+        AddLink(GetSelectedWordA(),
+            GetSelectedWordB(),
             LinkType.Antonym);
     }
 
     public void OnAddAssociationButton()
     {
-        AddLink(selectedWordTMPField.text.ToUpper(),
-            selectedLinkTMPField.text.ToUpper(),
+        AddLink(GetSelectedWordA(),
+            GetSelectedWordB(),
             LinkType.WordAssociation);
     }
 
@@ -223,13 +227,10 @@ public class WordDatabaseUIHandler : MonoBehaviour
         onWordListBoxSelection(wordA);
     }
 
-    void AddLink(String wordAText, String wordBText, LinkType type)
+    void AddLink(Word wordA, Word wordB, LinkType type)
     {
-        Word wordA = new Word(wordAText);
-        Word wordB = new Word(wordBText);
-
-        db.AddWordIfMissing(wordAText);
-        db.AddWordIfMissing(wordBText);
+        db.AddWord(wordA);
+        db.AddWord(wordB);
         Link link = new Link(wordA, wordB, type);
         db.AddLink(link);
         SynchWords();
