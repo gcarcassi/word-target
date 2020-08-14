@@ -55,7 +55,6 @@ namespace WordTargetCore
             return words.Contains(word);
         }
 
-        // TODO: add tests 
         public bool ContainsLink(string wordA, string wordB)
         {
             Word theWordA = new Word(wordA);
@@ -68,8 +67,6 @@ namespace WordTargetCore
             return words.Contains(wordA) && GetLinksFor(wordA).FirstOrDefault(x => x.WordB.Equals(wordB)) != null;
         }
 
-
-        // TODO: add tests
         public Link GetLinkBetween(string wordA, string wordB)
         {
             Word theWordA = new Word(wordA);

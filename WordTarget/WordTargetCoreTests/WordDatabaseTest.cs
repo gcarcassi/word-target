@@ -128,5 +128,32 @@ SPORT PORTS Anagram
             Assert.IsFalse(db.ContainsLink(cat, sport));
             Assert.IsFalse(db.ContainsLink("CAT", "RAT"));
         }
+
+        [TestMethod]
+        public void GetLinkBetween()
+        {
+            WordDatabase db = new WordDatabase();
+            db.AddWords(new List<Word> { cat, bat, baseball, sport, ports, port });
+            db.AddLink(batBaseball);
+            db.AddLink(baseballSport);
+            Assert.AreEqual(catBat, db.GetLinkBetween(cat, bat));
+            Assert.AreEqual(baseballSport, db.GetLinkBetween(baseball, sport));
+            Assert.AreEqual(null, db.GetLinkBetween(cat, baseball));
+            Assert.AreEqual(null, db.GetLinkBetween(car, cat));
+            Assert.AreEqual(null, db.GetLinkBetween("", "CAT"));
+        }
+
+        [TestMethod]
+        public void RemoveLink()
+        {
+            WordDatabase db = new WordDatabase();
+            db.AddWords(new List<Word> { cat, bat, baseball, sport, ports, port });
+            db.AddLink(batBaseball);
+            db.AddLink(baseballSport);
+            Assert.IsTrue(db.ContainsLink(sport, port));
+            db.RemoveLink(sportPort);
+            Assert.IsFalse(db.ContainsLink(sport, port));
+            Assert.ThrowsException<System.Exception>(() => db.RemoveLink(portsParts));
+        }
     }
 }
