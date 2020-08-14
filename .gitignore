@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/word-target/word-target-core/nbproject/
+/word-target/word-target-core/target/
