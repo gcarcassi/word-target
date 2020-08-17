@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  */
 public class WordTest {
 
-    @org.junit.Test
+    @Test
     public void testGetText() {
         Word cat = new Word("CAT");
         assertEquals("CAT", cat.getText());

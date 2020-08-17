@@ -22,7 +22,7 @@ public class Word {
         if (text == null)
             throw new NullPointerException("The text of the word cannot be null");
         
-        this.text = text;
+        this.text = text.toUpperCase();
     }
 
     /**
@@ -31,6 +31,11 @@ public class Word {
      * @return the text representation; never null
      */
     public String getText() {
+        return text;
+    }
+
+    @Override
+    public String toString() {
         return text;
     }
     
