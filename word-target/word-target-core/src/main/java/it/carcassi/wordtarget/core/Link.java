@@ -34,6 +34,18 @@ public class Link {
 
     }
 
+    public Word getWordA() {
+        return wordA;
+    }
+
+    public Word getWordB() {
+        return wordB;
+    }
+
+    public LinkType getType() {
+        return type;
+    }
+
     @Override
     public String toString() {
         return wordA + "-" + wordB;
