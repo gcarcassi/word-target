@@ -74,8 +74,8 @@ public class LinkTypes {
         return counter;
     }
 
-    public static bool IsAnagram(string textA, string textB) {
-        if (textA.Length != textB.Length) {
+    public static boolean isAnagram(String textA, String textB) {
+        if (textA.length() != textB.length()) {
             return false;
         }
 
@@ -83,17 +83,17 @@ public class LinkTypes {
             return false;
         }
 
-        return CountLetters(textA).Equals(CountLetters(textB));
+        return countLetters(textA).equals(countLetters(textB));
     }
 
-    public static bool IsOneLetterChange(string textA, string textB) {
-        if (textA.Length != textB.Length) {
+    public static boolean isOneLetterChange(String textA, String textB) {
+        if (textA.length() != textB.length()) {
             return false;
         }
 
-        bool firstLetterChange = false;
-        for (int i = 0; i < textA.Length; i++) {
-            if (textA[i] != textB[i]) {
+        boolean firstLetterChange = false;
+        for (int i = 0; i < textA.length(); i++) {
+            if (textA.charAt(i) != textB.charAt(i)) {
                 if (firstLetterChange) {
                     return false;
                 } else {
@@ -105,15 +105,15 @@ public class LinkTypes {
         return firstLetterChange;
     }
 
-    public static bool IsOneLetterAdd(string textA, string textB) {
-        if (textA.Length - textB.Length != -1) {
+    public static boolean isOneLetterAdd(String textA, String textB) {
+        if (textA.length() - textB.length() != -1) {
             return false;
         }
 
-        bool firstLetterAdded = false;
-        for (int i = 0; i < textA.Length; i++) {
+        boolean firstLetterAdded = false;
+        for (int i = 0; i < textA.length(); i++) {
             int offset = firstLetterAdded ? 1 : 0;
-            if (textA[i] != textB[i + offset]) {
+            if (textA.charAt(i) != textB.charAt(i + offset)) {
                 if (firstLetterAdded) {
                     return false;
                 } else {
@@ -125,31 +125,30 @@ public class LinkTypes {
         return true;
     }
 
-    public static bool IsOneLetterRemove(string textA, string textB) {
-        return IsOneLetterAdd(textB, textA);
+    public static boolean isOneLetterRemove(String textA, String textB) {
+        return isOneLetterAdd(textB, textA);
     }
 
-    public static bool IsOneLetterAddOrRemove(string textA, string textB) {
-        return IsOneLetterAdd(textA, textB) || IsOneLetterRemove(textA, textB);
+    public static boolean isOneLetterAddOrRemove(String textA, String textB) {
+        return isOneLetterAdd(textA, textB) || isOneLetterRemove(textA, textB);
     }
 
-    public static LinkType FromString(string token) {
-        switch (token) {
-            case "OneLetterChange":
-                return LinkType.OneLetterChange;
-            case "OneLetterAddOrRemove":
-                return LinkType.OneLetterAddOrRemove;
-            case "Anagram":
-                return LinkType.Anagram;
-            case "Synonym":
-                return LinkType.Synonym;
-            case "Antonym":
-                return LinkType.Antonym;
-            case "WordAssociation":
-                return LinkType.WordAssociation;
-            default:
-                throw new Exception("The string " + token + " does not correspond to a valid link type");
-        }
-    }
-}
+//    public static LinkType fromString(String token) {
+//        switch (token) {
+//            case "OneLetterChange":
+//                return LinkType.OneLetterChange;
+//            case "OneLetterAddOrRemove":
+//                return LinkType.OneLetterAddOrRemove;
+//            case "Anagram":
+//                return LinkType.Anagram;
+//            case "Synonym":
+//                return LinkType.Synonym;
+//            case "Antonym":
+//                return LinkType.Antonym;
+//            case "WordAssociation":
+//                return LinkType.WordAssociation;
+////            default:
+////                throw new Exception("The string " + token + " does not correspond to a valid link type");
+//        }
+//    }
 }
