@@ -16,7 +16,7 @@ import static it.carcassi.wordtarget.core.CommonTestObjects.*;
 public class LinkTest {
 
     @Test
-    public void linkCreation() {
+    public void testLinkCreation() {
 
         Link link = new Link(cat, bat, LinkType.OneLetterChange);
         assertEquals(cat, link.getWordA());
@@ -25,7 +25,7 @@ public class LinkTest {
     }
 
     @Test
-    public void verifyAnagram() {
+    public void testVerifyAnagram() {
         Link link = new Link(bat, tab, LinkType.Anagram);
         assertThrows(IllegalArgumentException.class, () -> {
             new Link(cat, bat, LinkType.Anagram);
@@ -33,7 +33,7 @@ public class LinkTest {
     }
 
     @Test
-    public void verifyOneLetterChange() {
+    public void testVerifyOneLetterChange() {
         Link link = new Link(cat, bat, LinkType.OneLetterChange);
         assertThrows(IllegalArgumentException.class, () -> {
             new Link(cat, brat, LinkType.OneLetterChange);
@@ -47,28 +47,28 @@ public class LinkTest {
     }
 
     @Test
-    public void verifyOneLetterAddOrRemove() {
+    public void testVerifyOneLetterAddOrRemove() {
         Link link1 = new Link(cat, cart, LinkType.OneLetterAddOrRemove);
         Link link2 = new Link(cart, cat, LinkType.OneLetterAddOrRemove);
         assertThrows(IllegalArgumentException.class, () -> {
-            new Link(cat, brat, LinkType.OneLetterChange);
+            new Link(cat, brat, LinkType.OneLetterAddOrRemove);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            new Link(cat, car, LinkType.OneLetterChange);
+            new Link(cat, car, LinkType.OneLetterAddOrRemove);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            new Link(cat, cat, LinkType.OneLetterChange);
+            new Link(cat, cat, LinkType.OneLetterAddOrRemove);
         });
     }
 
     @Test
-    public void linkStingConversion() {
+    public void testLinkStingConversion() {
         Link link = new Link(cat, bat, LinkType.OneLetterChange);
         assertEquals("CAT-BAT", link.toString());
     }
 
     @Test
-    public void validLinkEquivalency() {
+    public void testValidLinkEquivalency() {
         Link link1 = new Link(cat, bat, LinkType.OneLetterChange);
         Link link2 = new Link(cat, bat, LinkType.OneLetterChange);
         assertEquals(link1, link2);
@@ -76,7 +76,7 @@ public class LinkTest {
     }
 
     @Test
-    public void validLinkInversionForOneLetterChange() {
+    public void testValidLinkInversionForOneLetterChange() {
         Link link1 = new Link(cat, bat, LinkType.OneLetterChange);
         Link link2 = link1.Reverse();
         assertEquals(cat, link1.getWordA());
