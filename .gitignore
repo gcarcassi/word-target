@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 /word-target/word-target-core/nbproject/
 /word-target/word-target-core/target/
+/word-target/word-target-ui/target/
