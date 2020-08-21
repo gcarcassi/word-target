@@ -5,7 +5,24 @@
  */
 package it.carcassi.wordtarget.ui;
 
+import it.carcassi.wordtarget.core.Link;
 import it.carcassi.wordtarget.core.LinkType;
+import it.carcassi.wordtarget.core.Word;
+import it.carcassi.wordtarget.core.WordDatabase;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.Comparator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -19,7 +36,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     public WordDatabaseEditor() {
         initComponents();
         setSize(600, 400);
+        setCurrentFile(null);
     }
+    
+    private DefaultListModel<Word> wordModel = new DefaultListModel<>();
+    private DefaultListModel<Link> linkModel = new DefaultListModel<>();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,6 +82,12 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         getContentPane().add(wordField, gridBagConstraints);
 
+        wordList.setModel(wordModel);
+        wordList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                wordListValueChanged(evt);
+            }
+        });
         wordListScrollPane.setViewportView(wordList);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -81,6 +108,7 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         getContentPane().add(LinkField, gridBagConstraints);
 
+        linkList.setModel(linkModel);
         linkListScrollPane.setViewportView(linkList);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -181,6 +209,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         getContentPane().add(legend, gridBagConstraints);
 
         loadButton.setText("Load...");
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
@@ -197,6 +230,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         getContentPane().add(saveButton, gridBagConstraints);
 
         saveAsButton.setText("Save as...");
+        saveAsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveAsButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 8;
@@ -232,6 +270,68 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteLinkButtonActionPerformed
 
+    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
+        JFileChooser fc = new JFileChooser();
+        int returnVal = fc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            load(fc.getSelectedFile());
+        }
+    }//GEN-LAST:event_loadButtonActionPerformed
+
+    private void saveAsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsButtonActionPerformed
+        JFileChooser fc = new JFileChooser();
+        int returnVal = fc.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            load(fc.getSelectedFile());
+        }
+
+    }//GEN-LAST:event_saveAsButtonActionPerformed
+
+    private void wordListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_wordListValueChanged
+        selectWord(wordList.getSelectedValue());
+    }//GEN-LAST:event_wordListValueChanged
+
+    private File currentFile;
+    private WordDatabase db;
+    
+    private void load(File file) {
+        setCurrentFile(file);
+        try {
+            setDb(WordDatabase.deserialize(new BufferedReader(new FileReader(file))));
+        } catch (IOException ex) {
+            Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void save() {
+        
+    }
+    
+    private void setDb(WordDatabase db) {
+        this.db = db;
+        wordModel.clear();
+        wordModel.addAll(db.getAllWords().stream().sorted(Comparator.comparing(Word::getText)).collect(Collectors.toList()));
+    }
+    
+    private void selectWord(Word word) {
+        if (word != null) {
+            wordField.setText(word.getText());
+            linkModel.clear();
+            linkModel.addAll(db.getLinksFor(word).stream().sorted(Comparator.comparing((x) -> { return x.getWordB().getText();})).collect(Collectors.toList()));
+        } else {
+            wordField.setText("");
+        }
+    }
+    
+    private void setCurrentFile(File file) {
+        currentFile = file;
+        saveButton.setEnabled(file != null);
+    }
+    
+    private void saveAs(File file) {
+        setCurrentFile(file);        
+    }
+    
     private String createLegendText() {
         StringBuilder sb = new StringBuilder("<html>");
         for (LinkType type : LinkType.values()) {
@@ -273,6 +373,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (Exception ex) {
+                    Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 new WordDatabaseEditor().setVisible(true);
             }
         });
@@ -288,14 +393,14 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     private javax.swing.JButton deleteWordButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel legend;
-    private javax.swing.JList<String> linkList;
+    private javax.swing.JList<Link> linkList;
     private javax.swing.JScrollPane linkListScrollPane;
     private javax.swing.JButton loadButton;
     private javax.swing.JButton quitButton;
     private javax.swing.JButton saveAsButton;
     private javax.swing.JButton saveButton;
     private javax.swing.JTextField wordField;
-    private javax.swing.JList<String> wordList;
+    private javax.swing.JList<Word> wordList;
     private javax.swing.JScrollPane wordListScrollPane;
     // End of variables declaration//GEN-END:variables
 }
