@@ -147,8 +147,8 @@ public class LinkTypes {
 //                return LinkType.Antonym;
 //            case "WordAssociation":
 //                return LinkType.WordAssociation;
-////            default:
-////                throw new Exception("The string " + token + " does not correspond to a valid link type");
+//            default:
+//                throw new Exception("The string " + token + " does not correspond to a valid link type");
 //        }
 //    }
 }

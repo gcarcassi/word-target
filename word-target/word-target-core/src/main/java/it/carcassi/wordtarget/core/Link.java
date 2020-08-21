@@ -71,7 +71,7 @@ public class Link {
     }
     
 
-    public Link Reverse() {
+    public Link reverse() {
         return new Link(this.wordB, this.wordA, this.type);
     }
 }

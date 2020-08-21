@@ -78,7 +78,7 @@ public class LinkTest {
     @Test
     public void testValidLinkInversionForOneLetterChange() {
         Link link1 = new Link(cat, bat, LinkType.OneLetterChange);
-        Link link2 = link1.Reverse();
+        Link link2 = link1.reverse();
         assertEquals(cat, link1.getWordA());
         assertEquals(bat, link1.getWordB());
         assertEquals(bat, link2.getWordA());
