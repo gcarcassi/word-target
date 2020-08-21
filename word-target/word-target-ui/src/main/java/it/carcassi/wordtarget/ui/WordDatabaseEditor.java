@@ -18,6 +18,7 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
      */
     public WordDatabaseEditor() {
         initComponents();
+        setSize(600, 400);
     }
 
     /**
