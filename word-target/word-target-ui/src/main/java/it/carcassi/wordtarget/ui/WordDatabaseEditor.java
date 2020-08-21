@@ -30,23 +30,23 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jTextField1 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jTextField2 = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        wordField = new javax.swing.JTextField();
+        wordListScrollPane = new javax.swing.JScrollPane();
+        wordList = new javax.swing.JList<>();
+        LinkField = new javax.swing.JTextField();
+        linkListScrollPane = new javax.swing.JScrollPane();
+        linkList = new javax.swing.JList<>();
         addWordButton = new javax.swing.JButton();
         addAssociationButton = new javax.swing.JButton();
         addSynonymButton = new javax.swing.JButton();
         addAntinomButton = new javax.swing.JButton();
         deleteLinkButton = new javax.swing.JButton();
         deleteWordButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        legend = new javax.swing.JLabel();
+        loadButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        saveAsButton = new javax.swing.JButton();
+        quitButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,9 +58,9 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        getContentPane().add(jTextField1, gridBagConstraints);
+        getContentPane().add(wordField, gridBagConstraints);
 
-        jScrollPane1.setViewportView(jList1);
+        wordListScrollPane.setViewportView(wordList);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -71,16 +71,16 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
-        getContentPane().add(jScrollPane1, gridBagConstraints);
+        getContentPane().add(wordListScrollPane, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        getContentPane().add(jTextField2, gridBagConstraints);
+        getContentPane().add(LinkField, gridBagConstraints);
 
-        jScrollPane2.setViewportView(jList2);
+        linkListScrollPane.setViewportView(linkList);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -91,7 +91,7 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
-        getContentPane().add(jScrollPane2, gridBagConstraints);
+        getContentPane().add(linkListScrollPane, gridBagConstraints);
 
         addWordButton.setText("Add Word");
         addWordButton.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +168,7 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         getContentPane().add(deleteWordButton, gridBagConstraints);
 
-        jLabel1.setText(createLegendText());
+        legend.setText(createLegendText());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
@@ -177,39 +177,39 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        getContentPane().add(jLabel1, gridBagConstraints);
+        getContentPane().add(legend, gridBagConstraints);
 
-        jButton1.setText("Load...");
+        loadButton.setText("Load...");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
-        getContentPane().add(jButton1, gridBagConstraints);
+        getContentPane().add(loadButton, gridBagConstraints);
 
-        jButton2.setText("Save");
+        saveButton.setText("Save");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
-        getContentPane().add(jButton2, gridBagConstraints);
+        getContentPane().add(saveButton, gridBagConstraints);
 
-        jButton3.setText("Save as...");
+        saveAsButton.setText("Save as...");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
-        getContentPane().add(jButton3, gridBagConstraints);
+        getContentPane().add(saveAsButton, gridBagConstraints);
 
-        jButton4.setText("Quit");
+        quitButton.setText("Quit");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        getContentPane().add(jButton4, gridBagConstraints);
+        getContentPane().add(quitButton, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 5;
@@ -278,23 +278,23 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField LinkField;
     private javax.swing.JButton addAntinomButton;
     private javax.swing.JButton addAssociationButton;
     private javax.swing.JButton addSynonymButton;
     private javax.swing.JButton addWordButton;
     private javax.swing.JButton deleteLinkButton;
     private javax.swing.JButton deleteWordButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel legend;
+    private javax.swing.JList<String> linkList;
+    private javax.swing.JScrollPane linkListScrollPane;
+    private javax.swing.JButton loadButton;
+    private javax.swing.JButton quitButton;
+    private javax.swing.JButton saveAsButton;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JTextField wordField;
+    private javax.swing.JList<String> wordList;
+    private javax.swing.JScrollPane wordListScrollPane;
     // End of variables declaration//GEN-END:variables
 }
