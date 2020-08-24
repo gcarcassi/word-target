@@ -28,6 +28,8 @@ import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -40,6 +42,24 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
      */
     public WordDatabaseEditor() {
         initComponents();
+        DocumentListener selectionChanged = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                selectionChanged();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                selectionChanged();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                selectionChanged();
+            }
+        };
+        wordField.getDocument().addDocumentListener(selectionChanged);
+        linkField.getDocument().addDocumentListener(selectionChanged);
         setSize(600, 400);
         setCurrentFile(null);
     }
@@ -319,7 +339,8 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_addAssociationButtonActionPerformed
 
     private void addWordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWordButtonActionPerformed
-        // TODO add your handling code here:
+        db.addWord(getSelectedWordA());
+        refreshDisplayedDb();
     }//GEN-LAST:event_addWordButtonActionPerformed
 
     private void deleteLinkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLinkButtonActionPerformed
@@ -352,7 +373,7 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_linkListValueChanged
 
     private File currentFile;
-    private WordDatabase db;
+    private WordDatabase db = new WordDatabase();
     
     private void load(File file) {
         setCurrentFile(file);
@@ -369,8 +390,17 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     
     private void setDb(WordDatabase db) {
         this.db = db;
+        refreshDisplayedDb();
+    }
+    
+    private void refreshDisplayedDb() {
         wordModel.clear();
         wordModel.addAll(db.getAllWords().stream().sorted(Comparator.comparing(Word::getText)).collect(Collectors.toList()));
+        if (db.containsWord(getSelectedWordA())) {
+            selectWord(getSelectedWordA());
+        } else {
+            selectWord(null);
+        }
     }
     
     private void selectWord(Word word) {
@@ -380,7 +410,34 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
             linkModel.addAll(db.getLinksFor(word).stream().sorted(Comparator.comparing((x) -> { return x.getWordB().getText();})).collect(Collectors.toList()));
         } else {
             wordField.setText("");
+            linkModel.clear();
         }
+    }
+    
+    private Word getSelectedWordA() {
+        return new Word(wordField.getText());
+    }
+    
+    private Word getSelectedWordB() {
+        return new Word(linkField.getText());
+    }
+    
+    private void selectionChanged() {
+        selectionChanged(getSelectedWordA(), getSelectedWordB());
+    }
+    
+    private void selectionChanged(Word wordA, Word wordB) {
+        boolean oldWord = db.containsWord(wordA);
+        Link currentLink = db.getLinkBetween(wordA, wordB);
+        boolean oldLink = currentLink != null;
+        
+        
+        addWordButton.setEnabled(!oldWord);
+        deleteWordButton.setEnabled(oldWord);
+        addAssociationButton.setEnabled(!oldLink);
+        addSynonymButton.setEnabled(!oldLink);
+        addAntinomButton.setEnabled(!oldLink);
+        deleteLinkButton.setEnabled(oldLink && !currentLink.getType().isAutomatic());
     }
     
     private void selectLink(Link link) {
