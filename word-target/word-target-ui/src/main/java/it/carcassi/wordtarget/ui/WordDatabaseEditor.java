@@ -9,6 +9,8 @@ import it.carcassi.wordtarget.core.Link;
 import it.carcassi.wordtarget.core.LinkType;
 import it.carcassi.wordtarget.core.Word;
 import it.carcassi.wordtarget.core.WordDatabase;
+import java.awt.Color;
+import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,8 +21,11 @@ import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -41,6 +46,25 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     
     private DefaultListModel<Word> wordModel = new DefaultListModel<>();
     private DefaultListModel<Link> linkModel = new DefaultListModel<>();
+    private ListCellRenderer<Object> linkRenderer = new DefaultListCellRenderer() {
+        @Override
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            if (value instanceof Link) {
+                String text = coloredString(((Link) value).getWordB().toString(), LinkTypeColor.toColor(((Link) value).getType()));
+                return super.getListCellRendererComponent(list, text, index, isSelected, cellHasFocus);
+            } else {
+                return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            }
+        }
+    
+        private String coloredString(String string, Color color) {
+            StringBuilder sb = new StringBuilder("<html>");
+            String rgb = String.format("#%06X", color.getRGB() & 0xFFFFFF);
+            sb.append("<p style=\"color:").append(rgb).append("\">").append(string).append("</p>");
+            sb.append("</html>");
+            return sb.toString();
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,6 +131,7 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         jPanel1.add(jPanel4);
 
         linkList.setModel(linkModel);
+        linkList.setCellRenderer(linkRenderer);
         linkListScrollPane.setViewportView(linkList);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
