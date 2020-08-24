@@ -82,7 +82,7 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         wordListScrollPane = new javax.swing.JScrollPane();
         wordList = new javax.swing.JList<>();
         jPanel5 = new javax.swing.JPanel();
-        LinkField = new javax.swing.JTextField();
+        linkField = new javax.swing.JTextField();
         linkListScrollPane = new javax.swing.JScrollPane();
         linkList = new javax.swing.JList<>();
         jPanel6 = new javax.swing.JPanel();
@@ -132,6 +132,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
 
         linkList.setModel(linkModel);
         linkList.setCellRenderer(linkRenderer);
+        linkList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                linkListValueChanged(evt);
+            }
+        });
         linkListScrollPane.setViewportView(linkList);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -139,12 +144,12 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(linkListScrollPane)
-            .addComponent(LinkField)
+            .addComponent(linkField)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(LinkField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(linkField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(linkListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
         );
@@ -342,6 +347,10 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         selectWord(wordList.getSelectedValue());
     }//GEN-LAST:event_wordListValueChanged
 
+    private void linkListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_linkListValueChanged
+        selectLink(linkList.getSelectedValue());
+    }//GEN-LAST:event_linkListValueChanged
+
     private File currentFile;
     private WordDatabase db;
     
@@ -371,6 +380,14 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
             linkModel.addAll(db.getLinksFor(word).stream().sorted(Comparator.comparing((x) -> { return x.getWordB().getText();})).collect(Collectors.toList()));
         } else {
             wordField.setText("");
+        }
+    }
+    
+    private void selectLink(Link link) {
+        if (link != null) {
+            linkField.setText(link.getWordB().getText());
+        } else {
+            linkField.setText("");
         }
     }
     
@@ -435,7 +452,6 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField LinkField;
     private javax.swing.JButton addAntinomButton;
     private javax.swing.JButton addAssociationButton;
     private javax.swing.JButton addSynonymButton;
@@ -450,6 +466,7 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel legend;
+    private javax.swing.JTextField linkField;
     private javax.swing.JList<Link> linkList;
     private javax.swing.JScrollPane linkListScrollPane;
     private javax.swing.JButton loadButton;
