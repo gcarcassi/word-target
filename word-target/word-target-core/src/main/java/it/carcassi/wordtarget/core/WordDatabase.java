@@ -183,8 +183,8 @@ public class WordDatabase {
             writer.write(word.getText());
             addComma = true;
         }
-        writer.newLine();
-        writer.newLine();
+        writer.write("\n");
+        writer.write("\n");
         writer.write("Links:\n");
 
         for (Word word : sortedWords) {
@@ -196,10 +196,10 @@ public class WordDatabase {
             for (Link link : sortedLinks) {
                 writer.write(link.getWordA().getText());
                 writer.write(" ");
-                writer.write(link.getWordA().getText());
+                writer.write(link.getWordB().getText());
                 writer.write(" ");
                 writer.write(link.getType().toString());
-                writer.newLine();
+                writer.write("\n");
             }
         }
     }

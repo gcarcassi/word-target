@@ -5,6 +5,8 @@
  */
 package it.carcassi.wordtarget.core;
 
+import java.util.Objects;
+
 /**
  * Represents a word.
  *
@@ -38,6 +40,32 @@ public class Word {
     public String toString() {
         return text;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.text);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Word other = (Word) obj;
+        if (!Objects.equals(this.text, other.text)) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
 }
