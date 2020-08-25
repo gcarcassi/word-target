@@ -16,4 +16,18 @@ public enum LinkType {
     Synonym,
     Antonym,
     WordAssociation;
+
+    public boolean isAutomatic() {
+        switch (this) {
+            case OneLetterChange:
+            case OneLetterAddOrRemove:
+            case Anagram:
+                return true;
+            case Synonym:
+            case Antonym:
+            case WordAssociation:
+            default:
+                return false;
+        }
+    }
 }

@@ -5,7 +5,31 @@
  */
 package it.carcassi.wordtarget.ui;
 
+import it.carcassi.wordtarget.core.Link;
 import it.carcassi.wordtarget.core.LinkType;
+import it.carcassi.wordtarget.core.Word;
+import it.carcassi.wordtarget.core.WordDatabase;
+import java.awt.Color;
+import java.awt.Component;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.Comparator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -18,7 +42,49 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
      */
     public WordDatabaseEditor() {
         initComponents();
+        DocumentListener selectionChanged = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                selectionChanged();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                selectionChanged();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                selectionChanged();
+            }
+        };
+        wordField.getDocument().addDocumentListener(selectionChanged);
+        linkField.getDocument().addDocumentListener(selectionChanged);
+        setSize(600, 400);
+        setCurrentFile(null);
     }
+    
+    private DefaultListModel<Word> wordModel = new DefaultListModel<>();
+    private DefaultListModel<Link> linkModel = new DefaultListModel<>();
+    private ListCellRenderer<Object> linkRenderer = new DefaultListCellRenderer() {
+        @Override
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            if (value instanceof Link) {
+                String text = coloredString(((Link) value).getWordB().toString(), LinkTypeColor.toColor(((Link) value).getType()));
+                return super.getListCellRendererComponent(list, text, index, isSelected, cellHasFocus);
+            } else {
+                return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            }
+        }
+    
+        private String coloredString(String string, Color color) {
+            StringBuilder sb = new StringBuilder("<html>");
+            String rgb = String.format("#%06X", color.getRGB() & 0xFFFFFF);
+            sb.append("<p style=\"color:").append(rgb).append("\">").append(string).append("</p>");
+            sb.append("</html>");
+            return sb.toString();
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,86 +94,137 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        jTextField1 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jTextField2 = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
-        addWordButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        wordField = new javax.swing.JTextField();
+        wordListScrollPane = new javax.swing.JScrollPane();
+        wordList = new javax.swing.JList<>();
+        jPanel5 = new javax.swing.JPanel();
+        linkField = new javax.swing.JTextField();
+        linkListScrollPane = new javax.swing.JScrollPane();
+        linkList = new javax.swing.JList<>();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        quitButton = new javax.swing.JButton();
+        saveAsButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        legend = new javax.swing.JLabel();
+        loadButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         addAssociationButton = new javax.swing.JButton();
+        addWordButton = new javax.swing.JButton();
         addSynonymButton = new javax.swing.JButton();
         addAntinomButton = new javax.swing.JButton();
         deleteLinkButton = new javax.swing.JButton();
         deleteWordButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Word Database Editor");
-        getContentPane().setLayout(new java.awt.GridBagLayout());
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        getContentPane().add(jTextField1, gridBagConstraints);
 
-        jScrollPane1.setViewportView(jList1);
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridheight = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
-        getContentPane().add(jScrollPane1, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        getContentPane().add(jTextField2, gridBagConstraints);
-
-        jScrollPane2.setViewportView(jList2);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridheight = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
-        getContentPane().add(jScrollPane2, gridBagConstraints);
-
-        addWordButton.setText("Add Word");
-        addWordButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addWordButtonActionPerformed(evt);
+        wordList.setModel(wordModel);
+        wordList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                wordListValueChanged(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        getContentPane().add(addWordButton, gridBagConstraints);
+        wordListScrollPane.setViewportView(wordList);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(wordListScrollPane)
+            .addComponent(wordField)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(wordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(wordListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel4);
+
+        linkList.setModel(linkModel);
+        linkList.setCellRenderer(linkRenderer);
+        linkList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                linkListValueChanged(evt);
+            }
+        });
+        linkListScrollPane.setViewportView(linkList);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(linkListScrollPane)
+            .addComponent(linkField)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(linkField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(linkListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel5);
+
+        quitButton.setText("Quit");
+
+        saveAsButton.setText("Save as...");
+        saveAsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveAsButtonActionPerformed(evt);
+            }
+        });
+
+        saveButton.setText("Save");
+
+        legend.setText(createLegendText());
+
+        loadButton.setText("Load...");
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(legend)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(saveAsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(quitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(saveButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(loadButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(loadButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(saveButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(saveAsButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(quitButton))
+                    .addComponent(legend, javax.swing.GroupLayout.Alignment.TRAILING)))
+        );
 
         addAssociationButton.setText("Add Association");
         addAssociationButton.addActionListener(new java.awt.event.ActionListener() {
@@ -115,34 +232,17 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
                 addAssociationButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
-        getContentPane().add(addAssociationButton, gridBagConstraints);
+
+        addWordButton.setText("Add Word");
+        addWordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addWordButtonActionPerformed(evt);
+            }
+        });
 
         addSynonymButton.setText("Add Synonym");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
-        getContentPane().add(addSynonymButton, gridBagConstraints);
 
         addAntinomButton.setText("Add Antinom");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 14;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
-        getContentPane().add(addAntinomButton, gridBagConstraints);
 
         deleteLinkButton.setText("Delete Link");
         deleteLinkButton.addActionListener(new java.awt.event.ActionListener() {
@@ -150,71 +250,86 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
                 deleteLinkButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 22;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
-        getContentPane().add(deleteLinkButton, gridBagConstraints);
 
         deleteWordButton.setText("Delete Word");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        getContentPane().add(deleteWordButton, gridBagConstraints);
 
-        jLabel1.setText(createLegendText());
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridheight = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
-        gridBagConstraints.weighty = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        getContentPane().add(jLabel1, gridBagConstraints);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(deleteWordButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addWordButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(addSynonymButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addAntinomButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteLinkButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addAssociationButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addAssociationButton)
+                    .addComponent(addWordButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(addSynonymButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(addAntinomButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deleteLinkButton)
+                    .addComponent(deleteWordButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        jButton1.setText("Load...");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
-        getContentPane().add(jButton1, gridBagConstraints);
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
-        jButton2.setText("Save");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
-        getContentPane().add(jButton2, gridBagConstraints);
-
-        jButton3.setText("Save as...");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
-        getContentPane().add(jButton3, gridBagConstraints);
-
-        jButton4.setText("Quit");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        getContentPane().add(jButton4, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.weighty = 0.1;
-        getContentPane().add(jLabel2, gridBagConstraints);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -224,13 +339,124 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_addAssociationButtonActionPerformed
 
     private void addWordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWordButtonActionPerformed
-        // TODO add your handling code here:
+        db.addWord(getSelectedWordA());
+        refreshDisplayedDb();
     }//GEN-LAST:event_addWordButtonActionPerformed
 
     private void deleteLinkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLinkButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteLinkButtonActionPerformed
 
+    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
+        JFileChooser fc = new JFileChooser();
+        int returnVal = fc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            load(fc.getSelectedFile());
+        }
+    }//GEN-LAST:event_loadButtonActionPerformed
+
+    private void saveAsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsButtonActionPerformed
+        JFileChooser fc = new JFileChooser();
+        int returnVal = fc.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            load(fc.getSelectedFile());
+        }
+
+    }//GEN-LAST:event_saveAsButtonActionPerformed
+
+    private void wordListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_wordListValueChanged
+        selectWord(wordList.getSelectedValue());
+    }//GEN-LAST:event_wordListValueChanged
+
+    private void linkListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_linkListValueChanged
+        selectLink(linkList.getSelectedValue());
+    }//GEN-LAST:event_linkListValueChanged
+
+    private File currentFile;
+    private WordDatabase db = new WordDatabase();
+    
+    private void load(File file) {
+        setCurrentFile(file);
+        try {
+            setDb(WordDatabase.deserialize(new BufferedReader(new FileReader(file))));
+        } catch (IOException ex) {
+            Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void save() {
+        
+    }
+    
+    private void setDb(WordDatabase db) {
+        this.db = db;
+        refreshDisplayedDb();
+    }
+    
+    private void refreshDisplayedDb() {
+        wordModel.clear();
+        wordModel.addAll(db.getAllWords().stream().sorted(Comparator.comparing(Word::getText)).collect(Collectors.toList()));
+        if (db.containsWord(getSelectedWordA())) {
+            selectWord(getSelectedWordA());
+        } else {
+            selectWord(null);
+        }
+    }
+    
+    private void selectWord(Word word) {
+        if (word != null) {
+            wordField.setText(word.getText());
+            linkModel.clear();
+            linkModel.addAll(db.getLinksFor(word).stream().sorted(Comparator.comparing((x) -> { return x.getWordB().getText();})).collect(Collectors.toList()));
+        } else {
+            wordField.setText("");
+            linkModel.clear();
+        }
+    }
+    
+    private Word getSelectedWordA() {
+        return new Word(wordField.getText());
+    }
+    
+    private Word getSelectedWordB() {
+        return new Word(linkField.getText());
+    }
+    
+    private void selectionChanged() {
+        selectionChanged(getSelectedWordA(), getSelectedWordB());
+    }
+    
+    private void selectionChanged(Word wordA, Word wordB) {
+        boolean oldWord = db.containsWord(wordA);
+        Link currentLink = db.getLinkBetween(wordA, wordB);
+        boolean oldLink = currentLink != null;
+        
+        
+        addWordButton.setEnabled(!oldWord);
+        deleteWordButton.setEnabled(oldWord);
+        addAssociationButton.setEnabled(!oldLink);
+        addSynonymButton.setEnabled(!oldLink);
+        addAntinomButton.setEnabled(!oldLink);
+        deleteLinkButton.setEnabled(oldLink && !currentLink.getType().isAutomatic());
+    }
+    
+    private void selectLink(Link link) {
+        if (link != null) {
+            linkField.setText(link.getWordB().getText());
+        } else {
+            linkField.setText("");
+        }
+    }
+    
+    private void setCurrentFile(File file) {
+        currentFile = file;
+        saveButton.setEnabled(file != null);
+    }
+    
+    private void saveAs(File file) {
+        setCurrentFile(file);        
+    }
+    
     private String createLegendText() {
         StringBuilder sb = new StringBuilder("<html>");
         for (LinkType type : LinkType.values()) {
@@ -272,6 +498,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (Exception ex) {
+                    Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 new WordDatabaseEditor().setVisible(true);
             }
         });
@@ -284,17 +515,23 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     private javax.swing.JButton addWordButton;
     private javax.swing.JButton deleteLinkButton;
     private javax.swing.JButton deleteWordButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JLabel legend;
+    private javax.swing.JTextField linkField;
+    private javax.swing.JList<Link> linkList;
+    private javax.swing.JScrollPane linkListScrollPane;
+    private javax.swing.JButton loadButton;
+    private javax.swing.JButton quitButton;
+    private javax.swing.JButton saveAsButton;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JTextField wordField;
+    private javax.swing.JList<Word> wordList;
+    private javax.swing.JScrollPane wordListScrollPane;
     // End of variables declaration//GEN-END:variables
 }
