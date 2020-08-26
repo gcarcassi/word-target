@@ -276,7 +276,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="addSynonymButton" alignment="1" max="32767" attributes="0"/>
-                          <Component id="addAntinomButton" alignment="1" max="32767" attributes="0"/>
+                          <Component id="addAntonymButton" alignment="1" max="32767" attributes="0"/>
                           <Component id="deleteLinkButton" alignment="1" max="32767" attributes="0"/>
                           <Component id="addAssociationButton" alignment="1" max="32767" attributes="0"/>
                       </Group>
@@ -293,7 +293,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="addSynonymButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="addAntinomButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="addAntonymButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="deleteLinkButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -325,11 +325,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add Synonym"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addSynonymButtonActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="addAntinomButton">
+            <Component class="javax.swing.JButton" name="addAntonymButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add Antinom"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addAntonymButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="deleteLinkButton">
               <Properties>
