@@ -284,6 +284,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         });
 
         deleteWordButton.setText("Delete Word");
+        deleteWordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteWordButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -379,7 +384,8 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_addWordButtonActionPerformed
 
     private void deleteLinkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLinkButtonActionPerformed
-        // TODO add your handling code here:
+        db.removeLink(db.getLinkBetween(getSelectedWordA(), getSelectedWordB()));
+        refreshDisplayedDb();
     }//GEN-LAST:event_deleteLinkButtonActionPerformed
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
@@ -426,6 +432,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_quitButtonActionPerformed
+
+    private void deleteWordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteWordButtonActionPerformed
+        db.removeWord(getSelectedWordA());
+        refreshDisplayedDb();
+    }//GEN-LAST:event_deleteWordButtonActionPerformed
 
     private File currentFile;
     private WordDatabase db = new WordDatabase();
