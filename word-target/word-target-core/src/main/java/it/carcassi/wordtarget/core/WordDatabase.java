@@ -148,7 +148,7 @@ public class WordDatabase {
 
     // TODO: add tests?
     public void removeWord(Word word) {
-        for (Link link : getLinksFor(word)) {
+        for (Link link : new ArrayList<>(getLinksFor(word))) {
             removeLink(link);
         }
         words.remove(word);
