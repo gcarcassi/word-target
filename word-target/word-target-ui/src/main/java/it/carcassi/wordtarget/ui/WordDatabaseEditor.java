@@ -12,14 +12,17 @@ import it.carcassi.wordtarget.core.WordDatabase;
 import java.awt.Color;
 import java.awt.Component;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -63,7 +66,15 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         setSize(600, 400);
         setCurrentFile(null);
         selectionChanged();
+        
+        // Prepare the FileChooser
+        prefs = Preferences.userRoot().node(getClass().getName());
+        fc = new JFileChooser(prefs.get(LAST_USED_FOLDER, new File(".").getAbsolutePath()));
     }
+    
+    private Preferences prefs;
+    private JFileChooser fc;
+    private static String LAST_USED_FOLDER = "LAST_USED_FOLDER";
     
     private DefaultListModel<Word> wordModel = new DefaultListModel<>();
     private DefaultListModel<Link> linkModel = new DefaultListModel<>();
@@ -178,6 +189,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         jPanel1.add(jPanel5);
 
         quitButton.setText("Quit");
+        quitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitButtonActionPerformed(evt);
+            }
+        });
 
         saveAsButton.setText("Save as...");
         saveAsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -187,6 +203,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         });
 
         saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         legend.setText(createLegendText());
 
@@ -362,7 +383,6 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteLinkButtonActionPerformed
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-        JFileChooser fc = new JFileChooser();
         int returnVal = fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             load(fc.getSelectedFile());
@@ -370,7 +390,6 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void saveAsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsButtonActionPerformed
-        JFileChooser fc = new JFileChooser();
         int returnVal = fc.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             saveAs(fc.getSelectedFile());
@@ -399,20 +418,33 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         refreshDisplayedDb();
     }//GEN-LAST:event_addAntonymButtonActionPerformed
 
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        save();
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_quitButtonActionPerformed
+
     private File currentFile;
     private WordDatabase db = new WordDatabase();
     
     private void load(File file) {
         setCurrentFile(file);
-        try {
-            setDb(WordDatabase.deserialize(new BufferedReader(new FileReader(file))));
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            setDb(WordDatabase.deserialize(reader));
         } catch (IOException ex) {
             Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     private void save() {
-        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(currentFile))) {
+            db.serialize(writer);
+        } catch (IOException ex) {
+            Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void setDb(WordDatabase db) {
@@ -483,6 +515,9 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     private void setCurrentFile(File file) {
         currentFile = file;
         saveButton.setEnabled(file != null);
+        if (file != null) {
+            prefs.put(LAST_USED_FOLDER, file.getParent());
+        }
     }
     
     private void saveAs(File file) {
@@ -510,12 +545,7 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(WordDatabaseEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -531,11 +561,6 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (Exception ex) {
-                    Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
-                }
                 new WordDatabaseEditor().setVisible(true);
             }
         });
