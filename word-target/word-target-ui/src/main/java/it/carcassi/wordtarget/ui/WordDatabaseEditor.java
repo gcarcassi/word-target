@@ -12,14 +12,17 @@ import it.carcassi.wordtarget.core.WordDatabase;
 import java.awt.Color;
 import java.awt.Component;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -62,7 +65,16 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         linkField.getDocument().addDocumentListener(selectionChanged);
         setSize(600, 400);
         setCurrentFile(null);
+        selectionChanged();
+        
+        // Prepare the FileChooser
+        prefs = Preferences.userRoot().node(getClass().getName());
+        fc = new JFileChooser(prefs.get(LAST_USED_FOLDER, new File(".").getAbsolutePath()));
     }
+    
+    private Preferences prefs;
+    private JFileChooser fc;
+    private static String LAST_USED_FOLDER = "LAST_USED_FOLDER";
     
     private DefaultListModel<Word> wordModel = new DefaultListModel<>();
     private DefaultListModel<Link> linkModel = new DefaultListModel<>();
@@ -116,7 +128,7 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         addAssociationButton = new javax.swing.JButton();
         addWordButton = new javax.swing.JButton();
         addSynonymButton = new javax.swing.JButton();
-        addAntinomButton = new javax.swing.JButton();
+        addAntonymButton = new javax.swing.JButton();
         deleteLinkButton = new javax.swing.JButton();
         deleteWordButton = new javax.swing.JButton();
 
@@ -177,6 +189,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         jPanel1.add(jPanel5);
 
         quitButton.setText("Quit");
+        quitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitButtonActionPerformed(evt);
+            }
+        });
 
         saveAsButton.setText("Save as...");
         saveAsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -186,6 +203,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         });
 
         saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         legend.setText(createLegendText());
 
@@ -241,8 +263,18 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         });
 
         addSynonymButton.setText("Add Synonym");
+        addSynonymButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addSynonymButtonActionPerformed(evt);
+            }
+        });
 
-        addAntinomButton.setText("Add Antinom");
+        addAntonymButton.setText("Add Antinom");
+        addAntonymButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAntonymButtonActionPerformed(evt);
+            }
+        });
 
         deleteLinkButton.setText("Delete Link");
         deleteLinkButton.addActionListener(new java.awt.event.ActionListener() {
@@ -252,6 +284,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         });
 
         deleteWordButton.setText("Delete Word");
+        deleteWordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteWordButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -265,7 +302,7 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(addSynonymButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addAntinomButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addAntonymButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(deleteLinkButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addAssociationButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -278,7 +315,7 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(addSynonymButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(addAntinomButton)
+                .addComponent(addAntonymButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteLinkButton)
@@ -335,7 +372,10 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addAssociationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAssociationButtonActionPerformed
-        // TODO add your handling code here:
+        db.addWord(getSelectedWordA());
+        db.addWord(getSelectedWordB());
+        db.addLink(new Link(getSelectedWordA(), getSelectedWordB(), LinkType.WordAssociation));
+        refreshDisplayedDb();
     }//GEN-LAST:event_addAssociationButtonActionPerformed
 
     private void addWordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWordButtonActionPerformed
@@ -344,11 +384,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_addWordButtonActionPerformed
 
     private void deleteLinkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLinkButtonActionPerformed
-        // TODO add your handling code here:
+        db.removeLink(db.getLinkBetween(getSelectedWordA(), getSelectedWordB()));
+        refreshDisplayedDb();
     }//GEN-LAST:event_deleteLinkButtonActionPerformed
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-        JFileChooser fc = new JFileChooser();
         int returnVal = fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             load(fc.getSelectedFile());
@@ -356,12 +396,10 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void saveAsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsButtonActionPerformed
-        JFileChooser fc = new JFileChooser();
         int returnVal = fc.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            load(fc.getSelectedFile());
+            saveAs(fc.getSelectedFile());
         }
-
     }//GEN-LAST:event_saveAsButtonActionPerformed
 
     private void wordListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_wordListValueChanged
@@ -372,20 +410,52 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         selectLink(linkList.getSelectedValue());
     }//GEN-LAST:event_linkListValueChanged
 
+    private void addSynonymButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSynonymButtonActionPerformed
+        db.addWord(getSelectedWordA());
+        db.addWord(getSelectedWordB());
+        db.addLink(new Link(getSelectedWordA(), getSelectedWordB(), LinkType.Synonym));
+        refreshDisplayedDb();
+    }//GEN-LAST:event_addSynonymButtonActionPerformed
+
+    private void addAntonymButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAntonymButtonActionPerformed
+        db.addWord(getSelectedWordA());
+        db.addWord(getSelectedWordB());
+        db.addLink(new Link(getSelectedWordA(), getSelectedWordB(), LinkType.Antonym));
+        refreshDisplayedDb();
+    }//GEN-LAST:event_addAntonymButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        save();
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_quitButtonActionPerformed
+
+    private void deleteWordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteWordButtonActionPerformed
+        db.removeWord(getSelectedWordA());
+        refreshDisplayedDb();
+    }//GEN-LAST:event_deleteWordButtonActionPerformed
+
     private File currentFile;
     private WordDatabase db = new WordDatabase();
     
     private void load(File file) {
         setCurrentFile(file);
-        try {
-            setDb(WordDatabase.deserialize(new BufferedReader(new FileReader(file))));
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            setDb(WordDatabase.deserialize(reader));
         } catch (IOException ex) {
             Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     private void save() {
-        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(currentFile))) {
+            db.serialize(writer);
+        } catch (IOException ex) {
+            Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void setDb(WordDatabase db) {
@@ -394,9 +464,10 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     }
     
     private void refreshDisplayedDb() {
+        Word wordA = getSelectedWordA();
         wordModel.clear();
         wordModel.addAll(db.getAllWords().stream().sorted(Comparator.comparing(Word::getText)).collect(Collectors.toList()));
-        if (db.containsWord(getSelectedWordA())) {
+        if (db.containsWord(wordA)) {
             selectWord(getSelectedWordA());
         } else {
             selectWord(null);
@@ -406,8 +477,10 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     private void selectWord(Word word) {
         if (word != null) {
             wordField.setText(word.getText());
+            Word wordB = getSelectedWordB();
             linkModel.clear();
             linkModel.addAll(db.getLinksFor(word).stream().sorted(Comparator.comparing((x) -> { return x.getWordB().getText();})).collect(Collectors.toList()));
+            selectLink(db.getLinkBetween(getSelectedWordA(), wordB));
         } else {
             wordField.setText("");
             linkModel.clear();
@@ -415,11 +488,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     }
     
     private Word getSelectedWordA() {
-        return new Word(wordField.getText());
+        return Word.of(wordField.getText());
     }
     
     private Word getSelectedWordB() {
-        return new Word(linkField.getText());
+        return Word.of(linkField.getText());
     }
     
     private void selectionChanged() {
@@ -427,17 +500,19 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     }
     
     private void selectionChanged(Word wordA, Word wordB) {
-        boolean oldWord = db.containsWord(wordA);
+        boolean wordToRemove = db.containsWord(wordA);
+        boolean wordToAdd = wordA != null && !wordToRemove;
         Link currentLink = db.getLinkBetween(wordA, wordB);
-        boolean oldLink = currentLink != null;
+        boolean linkToRemove = currentLink != null && !currentLink.getType().isAutomatic();
+        boolean linkToAdd = currentLink == null && wordA != null && wordB != null;
         
         
-        addWordButton.setEnabled(!oldWord);
-        deleteWordButton.setEnabled(oldWord);
-        addAssociationButton.setEnabled(!oldLink);
-        addSynonymButton.setEnabled(!oldLink);
-        addAntinomButton.setEnabled(!oldLink);
-        deleteLinkButton.setEnabled(oldLink && !currentLink.getType().isAutomatic());
+        addWordButton.setEnabled(wordToAdd);
+        deleteWordButton.setEnabled(wordToRemove);
+        addAssociationButton.setEnabled(linkToAdd);
+        addSynonymButton.setEnabled(linkToAdd);
+        addAntonymButton.setEnabled(linkToAdd);
+        deleteLinkButton.setEnabled(linkToRemove);
     }
     
     private void selectLink(Link link) {
@@ -451,10 +526,14 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
     private void setCurrentFile(File file) {
         currentFile = file;
         saveButton.setEnabled(file != null);
+        if (file != null) {
+            prefs.put(LAST_USED_FOLDER, file.getParent());
+        }
     }
     
     private void saveAs(File file) {
-        setCurrentFile(file);        
+        setCurrentFile(file);
+        save();
     }
     
     private String createLegendText() {
@@ -477,12 +556,7 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(WordDatabaseEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -498,18 +572,13 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (Exception ex) {
-                    Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
-                }
                 new WordDatabaseEditor().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addAntinomButton;
+    private javax.swing.JButton addAntonymButton;
     private javax.swing.JButton addAssociationButton;
     private javax.swing.JButton addSynonymButton;
     private javax.swing.JButton addWordButton;

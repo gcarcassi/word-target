@@ -67,5 +67,20 @@ public class Word {
     }
     
     
+    // TODO add tests
+    /**
+     * Converts a String to a Word, returning null if the String has only
+     * empty characters.
+     * 
+     * @param text
+     * @return a Word or null
+     */
+    public static Word of(String text) {
+        if (text.trim().isEmpty()) {
+            return null;
+        } else {
+            return new Word(text);
+        }
+    }
     
 }
