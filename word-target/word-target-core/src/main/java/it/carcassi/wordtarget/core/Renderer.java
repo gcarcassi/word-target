@@ -8,6 +8,7 @@ package it.carcassi.wordtarget.core;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import static java.util.Map.entry;
 
 /**
  *
@@ -15,167 +16,158 @@ import java.util.Map;
  */
 public class Renderer {
 
-    private static final Map<Character, Integer> charsInCircle1 = new HashMap<>();
-    {
-        charsInCircle1.put('A', 5);
-        charsInCircle1.put('B', 5);
-        charsInCircle1.put('C', 5);
-        charsInCircle1.put('D', 5);
-        charsInCircle1.put('E', 5);
-        charsInCircle1.put('F', 5);
-        charsInCircle1.put('G', 5);
-        charsInCircle1.put('H', 5);
-        charsInCircle1.put('I', 12);
-        charsInCircle1.put('J', 6);
-        charsInCircle1.put('K', 5);
-        charsInCircle1.put('L', 6);
-        charsInCircle1.put('M', 4);
-        charsInCircle1.put('N', 5);
-        charsInCircle1.put('O', 5);
-        charsInCircle1.put('P', 5);
-        charsInCircle1.put('Q', 5);
-        charsInCircle1.put('R', 5);
-        charsInCircle1.put('S', 5);
-        charsInCircle1.put('T', 5);
-        charsInCircle1.put('U', 5);
-        charsInCircle1.put('V', 5);
-        charsInCircle1.put('W', 4);
-        charsInCircle1.put('X', 5);
-        charsInCircle1.put('Y', 5);
-        charsInCircle1.put('Z', 6);
-        charsInCircle1.put(' ', 12);
-    }
+    private static final Map<Character, Integer> charsInCircle1 = Map.ofEntries(
+            entry('A', 5),
+            entry('B', 5),
+            entry('C', 5),
+            entry('D', 5),
+            entry('E', 5),
+            entry('F', 5),
+            entry('G', 5),
+            entry('H', 5),
+            entry('I', 12),
+            entry('J', 6),
+            entry('K', 5),
+            entry('L', 6),
+            entry('M', 4),
+            entry('N', 5),
+            entry('O', 5),
+            entry('P', 5),
+            entry('Q', 5),
+            entry('R', 5),
+            entry('S', 5),
+            entry('T', 5),
+            entry('U', 5),
+            entry('V', 5),
+            entry('W', 4),
+            entry('X', 5),
+            entry('Y', 5),
+            entry('Z', 6),
+            entry(' ', 12)
+    );
+
+    private static final Map<Character, Integer> charsInCircle2 = Map.ofEntries(
+            entry('A', 24),
+            entry('B', 24),
+            entry('C', 22),
+            entry('D', 22),
+            entry('E', 24),
+            entry('F', 26),
+            entry('G', 21),
+            entry('H', 22),
+            entry('I', 59),
+            entry('J', 32),
+            entry('K', 24),
+            entry('L', 29),
+            entry('M', 19),
+            entry('N', 22),
+            entry('O', 21),
+            entry('P', 24),
+            entry('Q', 21),
+            entry('R', 22),
+            entry('S', 24),
+            entry('T', 26),
+            entry('U', 22),
+            entry('V', 24),
+            entry('W', 17),
+            entry('X', 24),
+            entry('Y', 24),
+            entry('Z', 26),
+            entry(' ', 59)
+    );
+
+    private static final Map<Character, Integer> charsInCircle3 = Map.ofEntries(
+            entry('A', 44),
+            entry('B', 44),
+            entry('C', 41),
+            entry('D', 41),
+            entry('E', 44),
+            entry('F', 48),
+            entry('G', 38),
+            entry('H', 41),
+            entry('I', 105),
+            entry('J', 59),
+            entry('K', 44),
+            entry('L', 53),
+            entry('M', 35),
+            entry('N', 41),
+            entry('O', 38),
+            entry('P', 44),
+            entry('Q', 38),
+            entry('R', 41),
+            entry('S', 44),
+            entry('T', 48),
+            entry('U', 41),
+            entry('V', 44),
+            entry('W', 31),
+            entry('X', 44),
+            entry('Y', 44),
+            entry('Z', 48),
+            entry(' ', 105)
+    );
     ;
 
-        private static final Map<Character, Integer> charsInCircle2 = new HashMap<>();
-    {
-        charsInCircle2.put('A', 24);
-        charsInCircle2.put('B', 24);
-        charsInCircle2.put('C', 22);
-        charsInCircle2.put('D', 22);
-        charsInCircle2.put('E', 24);
-        charsInCircle2.put('F', 26);
-        charsInCircle2.put('G', 21);
-        charsInCircle2.put('H', 22);
-        charsInCircle2.put('I', 59);
-        charsInCircle2.put('J', 32);
-        charsInCircle2.put('K', 24);
-        charsInCircle2.put('L', 29);
-        charsInCircle2.put('M', 19);
-        charsInCircle2.put('N', 22);
-        charsInCircle2.put('O', 21);
-        charsInCircle2.put('P', 24);
-        charsInCircle2.put('Q', 21);
-        charsInCircle2.put('R', 22);
-        charsInCircle2.put('S', 24);
-        charsInCircle2.put('T', 26);
-        charsInCircle2.put('U', 22);
-        charsInCircle2.put('V', 24);
-        charsInCircle2.put('W', 17);
-        charsInCircle2.put('X', 24);
-        charsInCircle2.put('Y', 24);
-        charsInCircle2.put('Z', 26);
-        charsInCircle2.put(' ', 59);
-    }
-    ;
+        private static final Map<Character, Integer> charsInCircle4 = Map.ofEntries(
+            entry('A', 62),
+            entry('B', 62),
+            entry('C', 57),
+            entry('D', 57),
+            entry('E', 62),
+            entry('F', 68),
+            entry('G', 53),
+            entry('H', 57),
+            entry('I', 149),
+            entry('J', 83),
+            entry('K', 62),
+            entry('L', 74),
+            entry('M', 49),
+            entry('N', 57),
+            entry('O', 53),
+            entry('P', 62),
+            entry('Q', 53),
+            entry('R', 57),
+            entry('S', 62),
+            entry('T', 68),
+            entry('U', 57),
+            entry('V', 62),
+            entry('W', 44),
+            entry('X', 62),
+            entry('Y', 62),
+            entry('Z', 68),
+            entry(' ', 149)
+    );
 
-        private static final Map<Character, Integer> charsInCircle3 = new HashMap<>();
-    {
-        charsInCircle3.put('A', 44);
-        charsInCircle3.put('B', 44);
-        charsInCircle3.put('C', 41);
-        charsInCircle3.put('D', 41);
-        charsInCircle3.put('E', 44);
-        charsInCircle3.put('F', 48);
-        charsInCircle3.put('G', 38);
-        charsInCircle3.put('H', 41);
-        charsInCircle3.put('I', 105);
-        charsInCircle3.put('J', 59);
-        charsInCircle3.put('K', 44);
-        charsInCircle3.put('L', 53);
-        charsInCircle3.put('M', 35);
-        charsInCircle3.put('N', 41);
-        charsInCircle3.put('O', 38);
-        charsInCircle3.put('P', 44);
-        charsInCircle3.put('Q', 38);
-        charsInCircle3.put('R', 41);
-        charsInCircle3.put('S', 44);
-        charsInCircle3.put('T', 48);
-        charsInCircle3.put('U', 41);
-        charsInCircle3.put('V', 44);
-        charsInCircle3.put('W', 31);
-        charsInCircle3.put('X', 44);
-        charsInCircle3.put('Y', 44);
-        charsInCircle3.put('Z', 48);
-        charsInCircle3.put(' ', 105);
-    }
-    ;
+    private static final Map<Character, Integer> charsInCircle5 = Map.ofEntries(
+            entry('A', 81),
+            entry('B', 81),
+            entry('C', 75),
+            entry('D', 75),
+            entry('E', 81),
+            entry('F', 88),
+            entry('G', 69),
+            entry('H', 75),
+            entry('I', 195),
+            entry('J', 108),
+            entry('K', 81),
+            entry('L', 91),
+            entry('M', 65),
+            entry('N', 75),
+            entry('O', 69),
+            entry('P', 81),
+            entry('Q', 69),
+            entry('R', 75),
+            entry('S', 81),
+            entry('T', 88),
+            entry('U', 76),
+            entry('V', 81),
+            entry('W', 57),
+            entry('X', 81),
+            entry('Y', 81),
+            entry('Z', 88),
+            entry(' ', 195)
+    );
 
-        private static final Map<Character, Integer> charsInCircle4 = new HashMap<>();
-    {
-        charsInCircle4.put('A', 62);
-        charsInCircle4.put('B', 62);
-        charsInCircle4.put('C', 57);
-        charsInCircle4.put('D', 57);
-        charsInCircle4.put('E', 62);
-        charsInCircle4.put('F', 68);
-        charsInCircle4.put('G', 53);
-        charsInCircle4.put('H', 57);
-        charsInCircle4.put('I', 149);
-        charsInCircle4.put('J', 83);
-        charsInCircle4.put('K', 62);
-        charsInCircle4.put('L', 74);
-        charsInCircle4.put('M', 49);
-        charsInCircle4.put('N', 57);
-        charsInCircle4.put('O', 53);
-        charsInCircle4.put('P', 62);
-        charsInCircle4.put('Q', 53);
-        charsInCircle4.put('R', 57);
-        charsInCircle4.put('S', 62);
-        charsInCircle4.put('T', 68);
-        charsInCircle4.put('U', 57);
-        charsInCircle4.put('V', 62);
-        charsInCircle4.put('W', 44);
-        charsInCircle4.put('X', 62);
-        charsInCircle4.put('Y', 62);
-        charsInCircle4.put('Z', 68);
-        charsInCircle4.put(' ', 149);
-    }
-    ;
-
-        private static final Map<Character, Integer> charsInCircle5 = new HashMap<>();
-    {
-        charsInCircle5.put('A', 81);
-        charsInCircle5.put('B', 81);
-        charsInCircle5.put('C', 75);
-        charsInCircle5.put('D', 75);
-        charsInCircle5.put('E', 81);
-        charsInCircle5.put('F', 88);
-        charsInCircle5.put('G', 69);
-        charsInCircle5.put('H', 75);
-        charsInCircle5.put('I', 195);
-        charsInCircle5.put('J', 108);
-        charsInCircle5.put('K', 81);
-        charsInCircle5.put('L', 91);
-        charsInCircle5.put('M', 65);
-        charsInCircle5.put('N', 75);
-        charsInCircle5.put('O', 69);
-        charsInCircle5.put('P', 81);
-        charsInCircle5.put('Q', 69);
-        charsInCircle5.put('R', 75);
-        charsInCircle5.put('S', 81);
-        charsInCircle5.put('T', 88);
-        charsInCircle5.put('U', 76);
-        charsInCircle5.put('V', 81);
-        charsInCircle5.put('W', 57);
-        charsInCircle5.put('X', 81);
-        charsInCircle5.put('Y', 81);
-        charsInCircle5.put('Z', 88);
-        charsInCircle5.put(' ', 195);
-    }
-    ;
-
-    private static final List<Map<Character, Integer>> charsInCircle = List.of(null, charsInCircle1, charsInCircle2, charsInCircle3, charsInCircle4, charsInCircle5);
+    private static final List<Map<Character, Integer>> charsInCircle = List.of(new HashMap<>(), charsInCircle1, charsInCircle2, charsInCircle3, charsInCircle4, charsInCircle5);
 
     private static final List<Double> minFracBetweenWords = List.of(0.0, 0.0, 20.0 / 360.0, 12.0 / 360.0, 10.0 / 360.0, 6.0 / 360.0);
 
@@ -235,7 +227,7 @@ public class Renderer {
     public static double fracForWord(String word, int circle) {
         word = word.toUpperCase();
         double frac = 0;
-        for (Character ch : word.toCharArray()) {
+        for (char ch : word.toCharArray()) {
             frac = frac + 1.0 / charsInCircle.get(circle).get(ch);
         }
         return frac;
@@ -326,4 +318,3 @@ public class Renderer {
         return str.toString();
     }
 }
-
