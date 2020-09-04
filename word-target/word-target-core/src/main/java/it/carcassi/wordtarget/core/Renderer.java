@@ -241,80 +241,84 @@ public class Renderer {
   <style>
     .text1 { fill: black; font: 50px sans-serif; }
     .text2 { fill: white; font: 50px sans-serif; }
-    .line2 { stroke: white; stroke - width:5; }
+    .line2 { stroke: white; stroke-width:5; }
     .text3 { fill: black; font: 50px sans-serif; }
-    .line3 { stroke: black; stroke - width:5; }
+    .line3 { stroke: black; stroke-width:5; }
     .text4 { fill: white; font: 50px sans-serif; }
-    .line4 { stroke: white; stroke - width:5; }
+    .line4 { stroke: white; stroke-width:5; }
     .text5 { fill: black; font: 50px sans-serif; }
-    .line5 { stroke: black; stroke - width:5; }
+    .line5 { stroke: black; stroke-width:5; }
   </style> 
-  <circle cx = "0" cy = "0" r = "505" fill = "black" />
-  <circle cx = "0" cy = "0" r = "500" fill = "white" />
-  <circle cx = "0" cy = "0" r = "400" fill = "black" />
-  <circle cx = "0" cy = "0" r = "300" fill = "white" />
-  <circle cx = "0" cy = "0" r = "200" fill = "black" />
-  <circle cx = "0" cy = "0" r = "100" fill = "white" />
-  <line x1 = "-415" y1 = "-415" x2 = "-390" y2 = "-390 stroke = "black" stroke-width = "20"/>
-  <polygon points = "-375 -415, -415 -375, -360 -360" />
 
-  <path id = "circle2" fill = "transparent"
-      d = "
+  <circle cx="0" cy="0" r="505" fill="black" />
+  <circle cx="0" cy="0" r="500" fill="white" />
+  <circle cx="0" cy="0" r="400" fill="black" />
+  <circle cx="0" cy="0" r="300" fill="white" />
+  <circle cx="0" cy="0" r="200" fill="black" />
+  <circle cx="0" cy="0" r="100" fill="white" />
+  <line x1="-415" y1="-415" x2="-390" y2="-390" stroke="black" stroke-width="20"/>
+  <polygon points="-375 -415, -415 -375, -360 -360" />
+
+  <path id="circle2" fill="transparent"
+      d="
       M 0 0
       m -130, 0
       a 130,130 0 1,1 260,0
       a 130,130 0 1,1 -260,0
       "
   />
-  <path id = "circle3" fill = "transparent"
-      d = "
+  <path id="circle3" fill="transparent"
+      d="
       M 0 0
-      m - 230, 0
+      m -230, 0
       a 230,230 0 1,1 460,0
       a 230,230 0 1,1 -460,0
       "
   />
-  <path id = "circle4" fill = "transparent"
-      d = "
+  <path id="circle4" fill="transparent"
+      d="
       M 0 0
-      m - 330, 0
+      m -330, 0
       a 330,330 0 1,1 660,0
       a 330,330 0 1,1 -660,0
       "
   />
-  <path id = "circle5" fill = "transparent"
-      d = "
+  <path id="circle5" fill="transparent"
+      d="
       M 0 0
-      m - 430, 0
+      m -430, 0
       a 430,430 0 1,1 860,0
       a 430,430 0 1,1 -860,0
       "
   />
 
   <!-- First circle -->
-");
-            str.append(LayoutWordCenter(layout.WordInCenter));
-            str.append(@"
+""");
+            str.append(layoutWordCenter(layout.getWordInCenter()));
+            str.append("""
+                       
   <!-- Second circle -->
-");
-            str.append(LayoutWord(layout, 2));
-            str.append(@"
+""");
+            str.append(layoutWord(layout, 2));
+            str.append("""
+                       
   <!-- Third circle -->
-");
-            str.append(LayoutWord(layout, 3));
-            str.append(@"
+""");
+            str.append(layoutWord(layout, 3));
+            str.append("""
+                       
   <!-- Fourth circle -->
-");
-            str.append(LayoutWord(layout, 4));
-            str.append(@"
+""");
+            str.append(layoutWord(layout, 4));
+            str.append("""
+                       
   <!-- Fifth circle -->
-");
-            str.append(LayoutWord(layout, 5));
-            str.append(@"
-</svg >
-        ");
-                   """);
-
+""");
+            str.append(layoutWord(layout, 5));
+            str.append("""
+                       
+</svg>
+""");
         return str.toString();
     }
 }
