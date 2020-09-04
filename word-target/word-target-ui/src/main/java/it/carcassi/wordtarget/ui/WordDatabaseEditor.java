@@ -38,7 +38,7 @@ import javax.swing.event.DocumentListener;
  *
  * @author carcassi
  */
-public class WordDatabaseEditor extends javax.swing.JFrame {
+public class WordDatabaseEditor extends javax.swing.JDialog {
 
     /**
      * Creates new form WordDatabaseEditor
@@ -132,7 +132,7 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         deleteLinkButton = new javax.swing.JButton();
         deleteWordButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Word Database Editor");
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
@@ -457,8 +457,12 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
             Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public WordDatabase getDb() {
+        return db;
+    }
     
-    private void setDb(WordDatabase db) {
+    public void setDb(WordDatabase db) {
         this.db = db;
         refreshDisplayedDb();
     }
@@ -523,12 +527,16 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
         }
     }
     
-    private void setCurrentFile(File file) {
+    public void setCurrentFile(File file) {
         currentFile = file;
         saveButton.setEnabled(file != null);
         if (file != null) {
             prefs.put(LAST_USED_FOLDER, file.getParent());
         }
+    }
+
+    public File getCurrentFile() {
+        return currentFile;
     }
     
     private void saveAs(File file) {
@@ -557,15 +565,11 @@ public class WordDatabaseEditor extends javax.swing.JFrame {
          */
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WordDatabaseEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WordDatabaseEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WordDatabaseEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(WordDatabaseEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
