@@ -202,6 +202,7 @@ public class WordDatabase {
                 writer.write("\n");
             }
         }
+        writer.flush();
     }
 
     public Chain findChain(Word start, Word end) {
