@@ -66,17 +66,20 @@ public class NewChainTest {
 
     @Test
     public void testValidChainAddingToEachOther() {
-        NewChain chain1 = new NewChain(cat);
-        chain1.add(catBat);
-        chain1.add(batBaseball);
-        chain1.add(baseballSport);
-        NewChain chain2 = new NewChain(sport);
-        chain2.add(sportPorts);
-        chain2.add(portsParts);
+        NewChain chain1 = NewChain.of(catBat, batBaseball, baseballSport);
+        NewChain chain2 = NewChain.of(sportPorts, portsParts);
         chain1.add(chain2);
         assertEquals(List.of(catBat, batBaseball, baseballSport, sportPorts, portsParts), chain1.links());
         assertEquals(List.of(cat, bat, baseball, sport, ports, parts), chain1.words());
     }
+    
+    @Test
+    public void testToString() {
+        assertEquals("CAT -> CAT [1]", new NewChain(cat).toString());
+        assertEquals("CAT -> SPORT [4]", NewChain.of(catBat, batBaseball, baseballSport).toString());
+    }
+    
+    // TODO: use NewChain.of in all tests
 
     @Test
     public void testInvalidChainAddingToEachOther() {
@@ -116,20 +119,18 @@ public class NewChainTest {
         });
     }
 
-//    @Test
-//    public void testAddingChainToEmptyChain() {
-//        Chain chain1 = new Chain();
-//        chain1.add(catBat);
-//        chain1.add(batBaseball);
-//        chain1.add(baseballSport);
-//        Chain chain2 = new Chain();
-//        chain2.add(chain1);
-//        assertEquals(3, chain2.size());
-//        assertEquals(catBat, chain2.get(0));
-//        assertEquals(batBaseball, chain2.get(1));
-//        assertEquals(baseballSport, chain2.get(2));
-//    }
-//
+    @Test
+    public void testAddingChainToEmptyChain() {
+        NewChain chain1 = new NewChain(cat);
+        chain1.add(catBat);
+        chain1.add(batBaseball);
+        chain1.add(baseballSport);
+        NewChain chain2 = new NewChain(cat);
+        chain2.add(chain1);
+        assertEquals(List.of(catBat, batBaseball, baseballSport), chain1.links());
+        assertEquals(List.of(cat, bat, baseball, sport), chain1.words());
+    }
+
 //    @Test
 //    public void testValidChainAddingAtTheBeginning() {
 //        Chain chain1 = new Chain();
@@ -178,17 +179,6 @@ public class NewChainTest {
 //    public void testEmptyChainInversion() {
 //        Chain chain2 = new Chain();
 //        chain2.reverse();
-//        assertEquals("", chain2.toString());
-//    }
-//
-//    @Test
-//    public void testChainToStringConversion() {
-//        Chain chain1 = new Chain();
-//        chain1.add(catBat);
-//        chain1.add(batBaseball);
-//        chain1.add(baseballSport);
-//        assertEquals("CAT-BAT-BASEBALL-SPORT", chain1.toString());
-//        Chain chain2 = new Chain();
 //        assertEquals("", chain2.toString());
 //    }
 //

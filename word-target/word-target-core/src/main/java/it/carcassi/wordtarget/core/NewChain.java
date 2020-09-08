@@ -23,6 +23,15 @@ public class NewChain {
         this.initialWord = initialWord;
     }
     
+    public static NewChain of(Link firstLink, Link... links) {
+        NewChain chain = new NewChain(firstLink.getWordA());
+        chain.add(firstLink);
+        for (Link link : links) {
+            chain.add(link);
+        }
+        return chain;
+    }
+    
     public Word getInitialWord() {
         return initialWord;
     }
@@ -100,17 +109,7 @@ public class NewChain {
 
     @Override
     public String toString() {
-        if (this.links.size() == 0) {
-            return "";
-        }
-        String chainString = "";
-        int i = 0;
-        for (; i < this.links.size(); i++) {
-            chainString = chainString + this.links.get(i).getWordA().toString() + "-";
-
-        }
-        chainString = chainString + this.links.get(i - 1).getWordB().toString();
-        return chainString;
+        return getInitialWord() + " -> " + getFinalWord() + " [" + words().size() + "]";
     }
 
     public void removeFirst() {
