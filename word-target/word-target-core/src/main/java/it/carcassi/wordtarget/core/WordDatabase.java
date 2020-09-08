@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -122,6 +123,14 @@ public class WordDatabase {
     }
 
     public Set<Link> getLinksFor(Word word) {
+        if (linksByWord.containsKey(word)) {
+            return linksByWord.get(word);
+        } else {
+            return new HashSet<>();
+        }
+    }
+
+    public Set<Link> getLinksFor(Word word, Collection<Word> excluded) {
         if (linksByWord.containsKey(word)) {
             return linksByWord.get(word);
         } else {

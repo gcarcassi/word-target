@@ -15,6 +15,8 @@ import java.util.List;
  * @author Matteo
  */
 public class NewChainTest {
+    
+    // TODO: make sure you can't create a loop (i.e. link to a word already included in the chain
 
     @Test
     public void testValidChainCreation() {

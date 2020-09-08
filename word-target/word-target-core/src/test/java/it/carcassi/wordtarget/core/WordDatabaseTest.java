@@ -170,4 +170,6 @@ SPORT PORTS Anagram
             db.removeLink(portsParts);
         });
     }
+    
+    // TODO: test excluded words for getLinksFor
 }
