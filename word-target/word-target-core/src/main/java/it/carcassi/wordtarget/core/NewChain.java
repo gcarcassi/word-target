@@ -23,6 +23,18 @@ public class NewChain {
         this.initialWord = initialWord;
     }
     
+    public Word getInitialWord() {
+        return initialWord;
+    }
+    
+    public Word getFinalWord() {
+        if (links.isEmpty()) {
+            return initialWord;
+        } else {
+            return links.get(links.size() - 1).getWordB();
+        }
+    }
+    
     public List<Link> links() {
         return Collections.unmodifiableList(links);
     }
@@ -60,12 +72,8 @@ public class NewChain {
     }
 
     public void add(NewChain newChain) {
-        if (newChain.size() == 0) {
-            return;
-        }
-
-        if (this.size() != 0 && this.links.get(links.size() - 1).getWordB() != newChain.links.get(0).getWordA()) {
-            throw new IllegalArgumentException(this.links.get(links.size() - 1) + " is not a valid link with " + newChain.links.get(0));
+        if (!newChain.getInitialWord().equals(getFinalWord())) {
+            throw new IllegalArgumentException(this + " is not a valid chain with " + newChain);
         }
 
         links.addAll(newChain.links);
@@ -73,6 +81,7 @@ public class NewChain {
 
     public void prepend(Link newLink) {
         links.add(0, newLink);
+        initialWord = newLink.getWordA();
     }
 
     public void prepend(NewChain newChain) {

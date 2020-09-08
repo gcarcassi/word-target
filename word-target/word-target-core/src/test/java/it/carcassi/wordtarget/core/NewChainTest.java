@@ -24,6 +24,18 @@ public class NewChainTest {
         assertEquals(3, chain.size());
         assertEquals(List.of(catBat, batBaseball), chain.links());
         assertEquals(List.of(cat, bat, baseball), chain.words());
+        assertEquals(cat, chain.getInitialWord());
+        assertEquals(baseball, chain.getFinalWord());
+    }
+
+    @Test
+    public void testValidEmptyChainCreation() {
+        NewChain chain = new NewChain(cat);
+        assertEquals(1, chain.size());
+        assertEquals(List.of(), chain.links());
+        assertEquals(List.of(cat), chain.words());
+        assertEquals(cat, chain.getInitialWord());
+        assertEquals(cat, chain.getFinalWord());
     }
 
     @Test
@@ -42,61 +54,68 @@ public class NewChainTest {
             chain.add(catBat);
         });
     }
-//
-//    @Test
-//    public void testValidChainAdding() {
-//        Chain chain = new Chain();
-//        chain.add(batBaseball);
-//        chain.prepend(catBat);
-//        assertEquals(catBat, chain.get(0));
-//    }
-//
-//    @Test
-//    public void testValidChainAddingToEachOther() {
-//        Chain chain1 = new Chain();
-//        chain1.add(catBat);
-//        chain1.add(batBaseball);
-//        chain1.add(baseballSport);
-//        Chain chain2 = new Chain();
-//        chain2.add(sportPorts);
-//        chain2.add(portsParts);
-//        chain1.add(chain2);
-//        assertEquals(5, chain1.size());
-//        assertEquals(catBat, chain1.get(0));
-//        assertEquals(batBaseball, chain1.get(1));
-//        assertEquals(baseballSport, chain1.get(2));
-//        assertEquals(sportPorts, chain1.get(3));
-//        assertEquals(portsParts, chain1.get(4));
-//    }
-//
-//    @Test
-//    public void testInvalidChainAddingToEachOther() {
-//        Chain chain1 = new Chain();
-//        chain1.add(catBat);
-//        chain1.add(batBaseball);
-//        chain1.add(baseballSport);
-//        Chain chain2 = new Chain();
-//        chain2.add(sportPorts);
-//        chain2.add(portsParts);
-//        assertThrows(IllegalArgumentException.class, () -> {
-//            chain2.add(chain1);
-//        });
-//        }
-//
-//        @Test
-//    public void testAddingEmptyChainToChain() {
-//        Chain chain1 = new Chain();
-//        chain1.add(catBat);
-//        chain1.add(batBaseball);
-//        chain1.add(baseballSport);
-//        Chain chain2 = new Chain();
-//        chain1.add(chain2);
-//        assertEquals(3, chain1.size());
-//        assertEquals(catBat, chain1.get(0));
-//        assertEquals(batBaseball, chain1.get(1));
-//        assertEquals(baseballSport, chain1.get(2));
-//    }
-//
+
+    @Test
+    public void testValidChainAdding() {
+        NewChain chain = new NewChain(bat);
+        chain.add(batBaseball);
+        chain.prepend(catBat);
+        assertEquals(List.of(catBat, batBaseball), chain.links());
+        assertEquals(List.of(cat, bat, baseball), chain.words());
+    }
+
+    @Test
+    public void testValidChainAddingToEachOther() {
+        NewChain chain1 = new NewChain(cat);
+        chain1.add(catBat);
+        chain1.add(batBaseball);
+        chain1.add(baseballSport);
+        NewChain chain2 = new NewChain(sport);
+        chain2.add(sportPorts);
+        chain2.add(portsParts);
+        chain1.add(chain2);
+        assertEquals(List.of(catBat, batBaseball, baseballSport, sportPorts, portsParts), chain1.links());
+        assertEquals(List.of(cat, bat, baseball, sport, ports, parts), chain1.words());
+    }
+
+    @Test
+    public void testInvalidChainAddingToEachOther() {
+        NewChain chain1 = new NewChain(cat);
+        chain1.add(catBat);
+        chain1.add(batBaseball);
+        chain1.add(baseballSport);
+        NewChain chain2 = new NewChain(sport);
+        chain2.add(sportPorts);
+        chain2.add(portsParts);
+        assertThrows(IllegalArgumentException.class, () -> {
+            chain2.add(chain1);
+        });
+    }
+
+    @Test
+    public void testAddingEmptyChainToChain() {
+        NewChain chain1 = new NewChain(cat);
+        chain1.add(catBat);
+        chain1.add(batBaseball);
+        chain1.add(baseballSport);
+        NewChain chain2 = new NewChain(sport);
+        chain1.add(chain2);
+        assertEquals(List.of(catBat, batBaseball, baseballSport), chain1.links());
+        assertEquals(List.of(cat, bat, baseball, sport), chain1.words());
+    }
+
+    @Test
+    public void testAddingInvalidEmptyChainToChain() {
+        NewChain chain1 = new NewChain(cat);
+        chain1.add(catBat);
+        chain1.add(batBaseball);
+        chain1.add(baseballSport);
+        NewChain chain2 = new NewChain(ports);
+        assertThrows(IllegalArgumentException.class, () -> {
+            chain2.add(chain1);
+        });
+    }
+
 //    @Test
 //    public void testAddingChainToEmptyChain() {
 //        Chain chain1 = new Chain();
