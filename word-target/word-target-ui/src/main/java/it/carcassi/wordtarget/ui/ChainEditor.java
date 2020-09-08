@@ -8,6 +8,7 @@ package it.carcassi.wordtarget.ui;
 
 import it.carcassi.wordtarget.core.Chain;
 import it.carcassi.wordtarget.core.Link;
+import it.carcassi.wordtarget.core.LinkType;
 import it.carcassi.wordtarget.core.NewChain;
 import it.carcassi.wordtarget.core.Word;
 import it.carcassi.wordtarget.core.WordDatabase;
@@ -30,6 +31,7 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.UIManager;
 
@@ -102,7 +104,7 @@ public class ChainEditor extends javax.swing.JFrame {
         selectedChainList = new javax.swing.JList<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nextWordField = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         linksList = new javax.swing.JList<>();
 
@@ -155,6 +157,12 @@ public class ChainEditor extends javax.swing.JFrame {
 
         jLabel2.setText("Next word:");
 
+        nextWordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextWordFieldActionPerformed(evt);
+            }
+        });
+
         linksList.setModel(linksModel);
         linksList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -170,14 +178,14 @@ public class ChainEditor extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                .addComponent(nextWordField, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nextWordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3))
@@ -251,6 +259,10 @@ public class ChainEditor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_linksListMouseClicked
 
+    private void nextWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextWordFieldActionPerformed
+        nextWord(Word.of(nextWordField.getText()));
+    }//GEN-LAST:event_nextWordFieldActionPerformed
+
     public void setCurrentFile(File currentFile) {
         this.currentFile = currentFile;
         if (currentFile != null) {
@@ -290,6 +302,21 @@ public class ChainEditor extends javax.swing.JFrame {
         setCurrentChain(currentChain);
         selectedChainList.setSelectedIndex(currentChain.words().size() - 1);
     }
+
+    private void nextWord(Word nextWord) {
+        db.addWord(nextWord);
+        if (!db.containsLink(currentChain.getFinalWord(), nextWord)) {
+            Object[] options = { LinkType.WordAssociation, LinkType.Synonym, LinkType.Antonym, "CANCEL" };
+            int choice = JOptionPane.showOptionDialog(this, "Select link type", "New Link...",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                    null, options, options[0]);
+            if (choice < 0 || choice > 2) {
+                return;
+            }
+            db.addLink(new Link(currentChain.getFinalWord(), nextWord, (LinkType) options[choice]));
+        }
+        addLink(db.getLinkBetween(currentChain.getFinalWord(), nextWord));
+    }
     
     /**
      * @param args the command line arguments
@@ -325,8 +352,8 @@ public class ChainEditor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JList<Link> linksList;
+    private javax.swing.JTextField nextWordField;
     private javax.swing.JList<Word> selectedChainList;
     private javax.swing.JTextField targetWordField;
     // End of variables declaration//GEN-END:variables
