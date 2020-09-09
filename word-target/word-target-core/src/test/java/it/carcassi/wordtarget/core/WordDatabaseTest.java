@@ -171,5 +171,13 @@ SPORT PORTS Anagram
         });
     }
     
-    // TODO: test excluded words for getLinksFor
+    public void testGetLinkForWithExclusions() {
+        WordDatabase db = new WordDatabase();
+        db.addWords(Arrays.asList(cat, bat, baseball, sport, ports, port));
+        db.addLink(batBaseball);
+        db.addLink(baseballSport);
+        assertEquals(Set.of(catBat.reverse(), batBaseball), db.getLinksFor(bat, Set.of()));
+        assertEquals(Set.of(batBaseball), db.getLinksFor(bat, Set.of(cat)));
+        assertEquals(Set.of(), db.getLinksFor(bat, Set.of(cat, baseball)));
+    }
 }

@@ -130,9 +130,19 @@ public class WordDatabase {
         }
     }
 
+    /**
+     * Returns all the links that start with word but do not end with an
+     * excluded word.
+     * 
+     * @param word the word that has to match wordA in the link
+     * @param excluded the words that cannot be wordB in the link
+     * @return the set of links that match the criteria
+     */
     public Set<Link> getLinksFor(Word word, Collection<Word> excluded) {
         if (linksByWord.containsKey(word)) {
-            return linksByWord.get(word);
+            return linksByWord.get(word).stream()
+                    .filter(x -> { return !excluded.contains(x.getWordB()); })
+                    .collect(Collectors.toSet());
         } else {
             return new HashSet<>();
         }
