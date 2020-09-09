@@ -318,7 +318,7 @@ public class ChainEditor extends javax.swing.JFrame {
     public void setCurrentWord(Word currentWord) {
         this.currentWord = currentWord;
         linksModel.clear();
-        linksModel.addAll(db.getLinksFor(currentWord));
+        linksModel.addAll(db.getLinksFor(currentWord, currentChain.words()));
     }
     
     public void addLink(Link link) {
