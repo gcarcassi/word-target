@@ -181,6 +181,7 @@ public class WordDatabase {
     }
 
     public void serialize(BufferedWriter writer) throws IOException {
+        // TODO: more effient if doesn't write the automatic linkTypes and write only one ordered pair for the others
         writer.write("Words:\n");
         List<Word> sortedWords = words.stream().sorted(Comparator.comparing(Word::getText)).collect(Collectors.toList());
         Boolean addComma = false;
