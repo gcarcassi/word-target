@@ -18,7 +18,9 @@ import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -84,6 +86,7 @@ public class ChainEditor extends javax.swing.JFrame {
     private Word targetWord;
     private NewChain currentChain;
     private Word currentWord;
+    private boolean dbChanged;
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -107,6 +110,7 @@ public class ChainEditor extends javax.swing.JFrame {
         nextWordField = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         linksList = new javax.swing.JList<>();
+        saveDbButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -191,6 +195,14 @@ public class ChainEditor extends javax.swing.JFrame {
                 .addComponent(jScrollPane3))
         );
 
+        saveDbButton.setText("Save db");
+        saveDbButton.setEnabled(false);
+        saveDbButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveDbButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -198,7 +210,10 @@ public class ChainEditor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(editDbButton)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(editDbButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(saveDbButton))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -223,7 +238,9 @@ public class ChainEditor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(editDbButton))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(editDbButton)
+                            .addComponent(saveDbButton)))
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -263,6 +280,10 @@ public class ChainEditor extends javax.swing.JFrame {
         nextWord(Word.of(nextWordField.getText()));
     }//GEN-LAST:event_nextWordFieldActionPerformed
 
+    private void saveDbButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveDbButtonActionPerformed
+        saveDb();
+    }//GEN-LAST:event_saveDbButtonActionPerformed
+
     public void setCurrentFile(File currentFile) {
         this.currentFile = currentFile;
         if (currentFile != null) {
@@ -275,6 +296,10 @@ public class ChainEditor extends javax.swing.JFrame {
             return;
         }
         this.targetWord = targetWord;
+        if (!db.containsWord(targetWord)) {
+            db.addWord(targetWord);
+            setDbChanged(true);
+        }
         chainsModel.addElement(new NewChain(targetWord));
     }
 
@@ -304,7 +329,10 @@ public class ChainEditor extends javax.swing.JFrame {
     }
 
     private void nextWord(Word nextWord) {
-        db.addWord(nextWord);
+        if (!db.containsWord(nextWord)) {
+            db.addWord(nextWord);
+            setDbChanged(true);
+        }
         if (!db.containsLink(currentChain.getFinalWord(), nextWord)) {
             Object[] options = { LinkType.WordAssociation, LinkType.Synonym, LinkType.Antonym, "CANCEL" };
             int choice = JOptionPane.showOptionDialog(this, "Select link type", "New Link...",
@@ -314,9 +342,29 @@ public class ChainEditor extends javax.swing.JFrame {
                 return;
             }
             db.addLink(new Link(currentChain.getFinalWord(), nextWord, (LinkType) options[choice]));
+            setDbChanged(true);
         }
         addLink(db.getLinkBetween(currentChain.getFinalWord(), nextWord));
     }
+
+    public void setDbChanged(boolean dbChanged) {
+        this.dbChanged = dbChanged;
+        saveDbButton.setEnabled(dbChanged && currentFile != null);
+    }
+    
+    private void saveDb() {
+        if (!dbChanged || currentFile == null) {
+            throw new IllegalStateException("Shouldn't be able to save db if not changed or no valid file was chosen");
+        }
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(currentFile))) {
+            db.serialize(writer);
+            setDbChanged(false);
+        } catch (Exception ex) {
+            Logger.getLogger(ChainEditor.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
+    
     
     /**
      * @param args the command line arguments
@@ -354,6 +402,7 @@ public class ChainEditor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<Link> linksList;
     private javax.swing.JTextField nextWordField;
+    private javax.swing.JButton saveDbButton;
     private javax.swing.JList<Word> selectedChainList;
     private javax.swing.JTextField targetWordField;
     // End of variables declaration//GEN-END:variables
