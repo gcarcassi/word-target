@@ -77,6 +77,9 @@ public class NewChain {
         if (links.size() != 0 && !(links.get(links.size() - 1).getWordB().equals(newLink.getWordA()))) {
             throw new IllegalArgumentException(links.get(links.size() - 1) + " is not a valid link with " + newLink);
         }
+        if (words().contains(newLink.getWordB())) {
+            throw new IllegalArgumentException(words().get(size() - 1) + " is already found in the chain");
+        }
         links.add(newLink);
     }
 
