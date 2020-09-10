@@ -132,6 +132,21 @@ public class LinkTypes {
     public static boolean isOneLetterAddOrRemove(String textA, String textB) {
         return isOneLetterAdd(textA, textB) || isOneLetterRemove(textA, textB);
     }
+    
+    public static LinkType calculateLinkType(Word word1, Word word2) {
+        if (LinkTypes.isOneLetterAddOrRemove(word1.toString(), word2.toString())) {
+            return LinkType.OneLetterAddOrRemove;
+        }
+        if (LinkTypes.isOneLetterChange(word1.toString(), word2.toString())) {
+            return LinkType.OneLetterChange;
+        }
+        if (LinkTypes.isAnagram(word1.toString(), word2.toString())) {
+            return LinkType.Anagram;
+        }
+        else {
+            return null;
+        }
+    }
 
 //    public static LinkType fromString(String token) {
 //        switch (token) {

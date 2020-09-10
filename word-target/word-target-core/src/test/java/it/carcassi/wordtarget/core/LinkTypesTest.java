@@ -94,6 +94,14 @@ public class LinkTypesTest {
         assertEquals("Antonym", LinkType.Antonym.toString());
         assertEquals("WordAssociation", LinkType.WordAssociation.toString());
     }
+    
+    @Test
+    public void testCalculateLinkType() {
+        assertEquals(LinkType.OneLetterChange, LinkTypes.calculateLinkType(cat, bat));
+        assertEquals(LinkType.Anagram, LinkTypes.calculateLinkType(sport, ports));
+        assertEquals(LinkType.OneLetterAddOrRemove, LinkTypes.calculateLinkType(port, ports));
+        assertEquals(null, LinkTypes.calculateLinkType(bat, baseball));
+    }
 
 ////        @Test
 ////        public void fromString1() {
@@ -106,4 +114,5 @@ public class LinkTypesTest {
 ////        Assert.ThrowsException<System.Exception>
 ////        (() => LinkTypes.fromString("Wrong"));
 //        }
+
 }

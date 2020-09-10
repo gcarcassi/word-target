@@ -49,14 +49,10 @@ Words:
 BASEBALL, BAT, CAT, PORT, PORTS, SPORT
 
 Links:
-BAT CAT OneLetterChange
-CAT BAT OneLetterChange
-PORT PORTS OneLetterAddOrRemove
-PORT SPORT OneLetterAddOrRemove
-PORTS PORT OneLetterAddOrRemove
-PORTS SPORT Anagram
-SPORT PORT OneLetterAddOrRemove
-SPORT PORTS Anagram
+BAT CAT
+PORT PORTS 
+PORT SPORT 
+PORTS SPORT
         """;
         StringWriter sw = new StringWriter();
         BufferedWriter writer = new BufferedWriter(sw);
@@ -75,15 +71,10 @@ BASEBALL, BAT, CAT, PORT, PORTS, SPORT
 
 Links:
 BASEBALL BAT WordAssociation
-BAT BASEBALL WordAssociation
-BAT CAT OneLetterChange
-CAT BAT OneLetterChange
-PORT PORTS OneLetterAddOrRemove
-PORT SPORT OneLetterAddOrRemove
-PORTS PORT OneLetterAddOrRemove
-PORTS SPORT Anagram
-SPORT PORT OneLetterAddOrRemove
-SPORT PORTS Anagram
+BAT CAT
+PORT PORTS
+PORT SPORT
+PORTS SPORT
         """;
 
         StringReader sr = new StringReader(expected);
