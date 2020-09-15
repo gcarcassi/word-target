@@ -212,8 +212,8 @@ public class WordDatabase {
     }
 
     public Chain findChain(Word start, Word end) {
-        Chain chain = new Chain();
-        boolean result = completeChain(chain, start, end);
+        Chain chain = new Chain(start);
+        boolean result = completeChain(chain, end);
         if (result) {
             return chain;
         } else {
@@ -221,8 +221,8 @@ public class WordDatabase {
         }
     }
 
-    private boolean completeChain(Chain chain, Word lastWord, Word end) {
-        Set<Link> newLinks = getLinksFor(lastWord);
+    private boolean completeChain(Chain chain, Word end) {
+        Set<Link> newLinks = getLinksFor(chain.getFinalWord(), chain.words());
         for (Link link : newLinks) {
             Word newLastWord = link.getWordB();
 
@@ -232,14 +232,9 @@ public class WordDatabase {
                 return true;
             }
 
-            // Check the new word does not repeat
-            if (chain.contains(newLastWord)) {
-                continue;
-            }
-
             // Try completing the chain
             chain.add(link);
-            boolean result = completeChain(chain, newLastWord, end);
+            boolean result = completeChain(chain, end);
             if (result) {
                 return true;
             }

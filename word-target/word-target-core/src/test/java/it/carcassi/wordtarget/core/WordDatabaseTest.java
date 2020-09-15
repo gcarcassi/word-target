@@ -85,11 +85,11 @@ BASEBALL BAT WordAssociation
         db.addLink(batBaseball);
         db.addLink(new Link(sport, baseball, LinkType.WordAssociation));
         Chain chain = db.findChain(cat, ports);
-        assertEquals(4, chain.size());
-        assertEquals(catBat, chain.get(0));
-        assertEquals(batBaseball, chain.get(1));
-        assertEquals(baseballSport, chain.get(2));
-        assertEquals(sportPorts, chain.get(3));
+        assertEquals(5, chain.size());
+        assertEquals(catBat, chain.links().get(0));
+        assertEquals(batBaseball, chain.links().get(1));
+        assertEquals(baseballSport, chain.links().get(2));
+        assertEquals(sportPorts, chain.links().get(3));
     }
 
     @Test
