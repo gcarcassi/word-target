@@ -187,11 +187,12 @@ public class WordDatabase {
             String[] tokens = line.split(" ");
             db.addLink(new Link(new Word(tokens[0]), new Word(tokens[1]), LinkType.valueOf(tokens[2])));
         }
+
         return db;
     }
 
     public void serialize(BufferedWriter writer) throws IOException {
-        // TODO: more effient if doesn't write the automatic linkTypes and write only one ordered pair for the others
+        List<Link> storedLinks = new ArrayList<>();
         writer.write("Words:\n");
         List<Word> sortedWords = words.stream().sorted(Comparator.comparing(Word::getText)).collect(Collectors.toList());
         Boolean addComma = false;
@@ -214,12 +215,17 @@ public class WordDatabase {
             }))
                     .collect(Collectors.toList());
             for (Link link : sortedLinks) {
-                writer.write(link.getWordA().getText());
-                writer.write(" ");
-                writer.write(link.getWordB().getText());
-                writer.write(" ");
-                writer.write(link.getType().toString());
-                writer.write("\n");
+                if (!storedLinks.contains(link.reverse())) {
+                    if (!link.getType().isAutomatic()) {
+                        writer.write(link.getWordA().getText());
+                        writer.write(" ");
+                        writer.write(link.getWordB().getText());
+                        writer.write(" ");
+                        writer.write(link.getType().toString());
+                        writer.write("\n");
+                        storedLinks.add(link);
+                    }
+                }
             }
         }
         writer.flush();
