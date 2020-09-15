@@ -49,10 +49,6 @@ Words:
 BASEBALL, BAT, CAT, PORT, PORTS, SPORT
 
 Links:
-BAT CAT
-PORT PORTS 
-PORT SPORT 
-PORTS SPORT
         """;
         StringWriter sw = new StringWriter();
         BufferedWriter writer = new BufferedWriter(sw);
@@ -71,10 +67,6 @@ BASEBALL, BAT, CAT, PORT, PORTS, SPORT
 
 Links:
 BASEBALL BAT WordAssociation
-BAT CAT
-PORT PORTS
-PORT SPORT
-PORTS SPORT
         """;
 
         StringReader sr = new StringReader(expected);

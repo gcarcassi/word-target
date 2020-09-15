@@ -175,22 +175,13 @@ public class WordDatabase {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] tokens = line.split(" ");
-            if (tokens.length == 3){
-                db.addLink(new Link(new Word(tokens[0]), new Word(tokens[1]), LinkType.valueOf(tokens[2])));
-                db.addLink(new Link(new Word(tokens[0]), new Word(tokens[1]), LinkType.valueOf(tokens[2])).reverse());
-            }
-            else {
-                db.addLink(new Link(new Word(tokens[0]), new Word(tokens[1])
-                        , LinkTypes.calculateLinkType(new Word(tokens[0]), new Word(tokens[1]))));
-                db.addLink(new Link(new Word(tokens[0]), new Word(tokens[1])
-                        , LinkTypes.calculateLinkType(new Word(tokens[0]), new Word(tokens[1]))).reverse());
-            }
+            db.addLink(new Link(new Word(tokens[0]), new Word(tokens[1]), LinkType.valueOf(tokens[2])));
         }
+
         return db;
     }
 
     public void serialize(BufferedWriter writer) throws IOException {
-        // TODO: more effient if doesn't write the automatic linkTypes and write only one ordered pair for the others
         List<Link> storedLinks = new ArrayList<>();
         writer.write("Words:\n");
         List<Word> sortedWords = words.stream().sorted(Comparator.comparing(Word::getText)).collect(Collectors.toList());
@@ -215,15 +206,15 @@ public class WordDatabase {
                     .collect(Collectors.toList());
             for (Link link : sortedLinks) {
                 if (!storedLinks.contains(link.reverse())) {
-                    writer.write(link.getWordA().getText());
-                    writer.write(" ");
-                    writer.write(link.getWordB().getText());
                     if (!link.getType().isAutomatic()) {
+                        writer.write(link.getWordA().getText());
+                        writer.write(" ");
+                        writer.write(link.getWordB().getText());
                         writer.write(" ");
                         writer.write(link.getType().toString());
+                        writer.write("\n");
+                        storedLinks.add(link);
                     }
-                    writer.write("\n");
-                    storedLinks.add(link);
                 }
             }
         }
