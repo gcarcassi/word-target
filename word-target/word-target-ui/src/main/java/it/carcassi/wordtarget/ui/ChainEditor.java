@@ -9,7 +9,7 @@ package it.carcassi.wordtarget.ui;
 import it.carcassi.wordtarget.core.Chain;
 import it.carcassi.wordtarget.core.Link;
 import it.carcassi.wordtarget.core.LinkType;
-import it.carcassi.wordtarget.core.NewChain;
+import it.carcassi.wordtarget.core.Chain;
 import it.carcassi.wordtarget.core.Word;
 import it.carcassi.wordtarget.core.WordDatabase;
 import java.awt.Color;
@@ -60,31 +60,16 @@ public class ChainEditor extends javax.swing.JFrame {
             db = new WordDatabase();
         }
     }
-    private DefaultListModel<NewChain> chainsModel = new DefaultListModel<>();
+    private DefaultListModel<Chain> chainsModel = new DefaultListModel<>();
     private DefaultListModel<Word> chainModel = new DefaultListModel<>();
     private DefaultListModel<Link> linksModel = new DefaultListModel<>();
-    private ListCellRenderer<Object> chainEndsRenderer = new DefaultListCellRenderer() {
-        @Override
-        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            if (value instanceof Chain) {
-                Chain chain = (Chain) value;
-                String text = targetWord + " - ";
-                if (chain.size() > 0) {
-                    text = chain.get(0).getWordA().toString() + " - " + chain.get(chain.size() - 1).getWordB().toString();
-                }
-                return super.getListCellRendererComponent(list, text, index, isSelected, cellHasFocus);
-            } else {
-                return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            }
-        }
-    };
 
     private Preferences prefs;
     private static String LAST_USED_DB = "LAST_USED_DB";
     private File currentFile;
     private WordDatabase db;
     private Word targetWord;
-    private NewChain currentChain;
+    private Chain currentChain;
     private Word currentWord;
     private boolean dbChanged;
 
@@ -130,7 +115,6 @@ public class ChainEditor extends javax.swing.JFrame {
         jLabel1.setText("Target word:");
 
         chainsList.setModel(chainsModel);
-        chainsList.setCellRenderer(chainEndsRenderer);
         chainsList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 chainsListValueChanged(evt);
@@ -300,10 +284,10 @@ public class ChainEditor extends javax.swing.JFrame {
             db.addWord(targetWord);
             setDbChanged(true);
         }
-        chainsModel.addElement(new NewChain(targetWord));
+        chainsModel.addElement(new Chain(targetWord));
     }
 
-    public void setCurrentChain(NewChain chain) {
+    public void setCurrentChain(Chain chain) {
         this.currentChain = chain;
         chainModel.clear();
         if (targetWord != null) {
@@ -391,7 +375,7 @@ public class ChainEditor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<NewChain> chainsList;
+    private javax.swing.JList<it.carcassi.wordtarget.core.Chain> chainsList;
     private javax.swing.JButton editDbButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
