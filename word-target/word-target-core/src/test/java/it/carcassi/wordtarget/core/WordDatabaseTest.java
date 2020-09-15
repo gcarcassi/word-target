@@ -67,6 +67,7 @@ BASEBALL, BAT, CAT, PORT, PORTS, SPORT
 
 Links:
 BASEBALL BAT WordAssociation
+BASEBALL SPORT WordAssociation
         """;
 
         StringReader sr = new StringReader(expected);

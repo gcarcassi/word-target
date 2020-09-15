@@ -5,6 +5,8 @@
  */
 package it.carcassi.wordtarget.core;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -128,6 +130,19 @@ public class Chain {
             throw new IllegalArgumentException("Cannot remove elements from an empty chain");
         }
         this.links.remove(links.size() - 1);
+    }
+
+    void serialize(BufferedWriter writer) throws IOException{
+        List<Link> storedLinks = new ArrayList<>();
+        storedLinks = this.links();
+        for (Link link : storedLinks) {
+            writer.write(link.getWordA().toString());
+            writer.write(" ");
+            writer.write(link.getWordB().toString());
+            writer.write(" ");
+            writer.write(link.getType().toString());
+            writer.write("\n");
+        }
     }
 }
 

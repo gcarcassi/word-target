@@ -8,6 +8,9 @@ package it.carcassi.wordtarget.core;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static it.carcassi.wordtarget.core.CommonTestObjects.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.List;
 
 /**
@@ -136,7 +139,7 @@ public class ChainTest {
         });
     }
 
-        @Test
+    @Test
     public void testValidChainInversion() {
         Chain chain1 = Chain.of(catBat, batBaseball, baseballSport);
         chain1.reverse();
@@ -169,19 +172,36 @@ public class ChainTest {
         });
         assertThrows(IllegalArgumentException.class, () -> {
             chain1.removeLast();
-                });
-        }
+        });
+    }
 
-        @Test
+    @Test
     public void testContains() {
         Chain chain1 = new Chain(cat);
         assertTrue(chain1.words().contains(cat));
-        chain1.add(catBat); 
+        chain1.add(catBat);
         chain1.add(batBaseball);
         assertTrue(chain1.words().contains(cat));
         assertTrue(chain1.words().contains(bat));
         assertTrue(chain1.words().contains(baseball));
         assertFalse(chain1.words().contains(sport));
         assertFalse(chain1.words().contains(ports));
+    }
+
+    @Test
+    public void testSerializeChain() throws IOException {
+        Chain chain = Chain.of(catBat, batBaseball, baseballSport, sportPorts, portsPort);
+        String expected = """
+CAT BAT OneLetterChange
+BAT BASEBALL WordAssociation
+BASEBALL SPORT WordAssociation
+SPORT PORTS Anagram
+PORTS PORT OneLetterAddOrRemove
+                          """;
+        StringWriter sw = new StringWriter();
+        BufferedWriter writer = new BufferedWriter(sw);
+        chain.serialize(writer);
+        writer.flush();
+
     }
 }
