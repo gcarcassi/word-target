@@ -73,9 +73,9 @@ BASEBALL BAT WordAssociation
         BufferedReader reader = new BufferedReader(sr);
         WordDatabase db = WordDatabase.deserialize(reader);
         assertEquals(Set.of(baseball, bat, cat, sport, ports, port), db.getAllWords());
-        assertTrue(db.containsLink("BASEBALL", "BAT"));
-        assertTrue(db.containsLink("BAT", "BASEBALL"));
-        assertTrue(db.containsLink("PORTS", "SPORT"));
+        assertTrue(db.containsLink(baseball, bat));
+        assertTrue(db.containsLink(bat, baseball));
+        assertTrue(db.containsLink(ports, sport));
     }
 
     @Test
@@ -107,11 +107,11 @@ BASEBALL BAT WordAssociation
         WordDatabase db = new WordDatabase();
         db.addWords(Arrays.asList(cat, bat, baseball));
         assertTrue(db.containsWord(cat));
-        assertTrue(db.containsWord("BAT"));
+        assertTrue(db.containsWord(bat));
         assertTrue(db.containsWord(baseball));
         assertFalse(db.containsWord(ports));
-        assertFalse(db.containsWord("SPORT"));
-        assertFalse(db.containsWord(""));
+        assertFalse(db.containsWord(sport));
+        assertFalse(db.containsWord(null));
     }
 
     @Test
@@ -122,9 +122,9 @@ BASEBALL BAT WordAssociation
         assertTrue(db.containsLink(cat, bat));
         assertTrue(db.containsLink(bat, cat));
         assertTrue(db.containsLink(bat, baseball));
-        assertTrue(db.containsLink("SPORT", "PORTS"));
+        assertTrue(db.containsLink(sport, ports));
         assertFalse(db.containsLink(cat, sport));
-        assertFalse(db.containsLink("CAT", "RAT"));
+        assertFalse(db.containsLink(cat, Word.of("RAT")));
     }
 
     @Test
@@ -137,7 +137,7 @@ BASEBALL BAT WordAssociation
         assertEquals(baseballSport, db.getLinkBetween(baseball, sport));
         assertEquals(null, db.getLinkBetween(cat, baseball));
         assertEquals(null, db.getLinkBetween(car, cat));
-        assertEquals(null, db.getLinkBetween("", "CAT"));
+        assertEquals(null, db.getLinkBetween(null, cat));
     }
 
     @Test

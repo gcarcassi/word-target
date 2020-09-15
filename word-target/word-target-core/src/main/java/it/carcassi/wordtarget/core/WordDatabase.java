@@ -30,10 +30,6 @@ public class WordDatabase {
     private final Set<Link> links = new HashSet<>();
     private Map<Word, Set<Link>> linksByWord = new HashMap<>();
 
-    public void addWord(String word) {
-        addWord(new Word(word));
-    }
-
     public void addWord(Word word) {
         if (words.contains(word)) {
             return;
@@ -57,30 +53,14 @@ public class WordDatabase {
         }
     }
 
-    public boolean containsWord(String word) {
-        return containsWord(new Word(word));
-    }
-
     public boolean containsWord(Word word) {
         return words.contains(word);
-    }
-
-    public boolean containsLink(String wordA, String wordB) {
-        Word theWordA = new Word(wordA);
-        Word theWordB = new Word(wordB);
-        return containsLink(theWordA, theWordB);
     }
 
     public boolean containsLink(Word wordA, Word wordB) {
         return words.contains(wordA) && getLinksFor(wordA).stream().anyMatch((x) -> {
             return x.getWordB().equals(wordB);
         });
-    }
-
-    public Link getLinkBetween(String wordA, String wordB) {
-        Word theWordA = new Word(wordA);
-        Word theWordB = new Word(wordB);
-        return getLinkBetween(theWordA, theWordB);
     }
 
     public Link getLinkBetween(Word wordA, Word wordB) {
@@ -177,7 +157,7 @@ public class WordDatabase {
         WordDatabase db = new WordDatabase();
         reader.readLine();
         for (String word : reader.readLine().split(",")) {
-            db.addWord(word.trim());
+            db.addWord(Word.of(word));
         }
 
         reader.readLine();

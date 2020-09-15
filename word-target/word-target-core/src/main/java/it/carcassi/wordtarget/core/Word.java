@@ -24,7 +24,7 @@ public class Word {
         if (text == null)
             throw new NullPointerException("The text of the word cannot be null");
         
-        this.text = text.toUpperCase();
+        this.text = text.trim().toUpperCase();
     }
 
     /**
