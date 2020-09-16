@@ -85,6 +85,8 @@ public class LinkTest {
         assertEquals(cat, link2.getWordB());
     }
     
+    // TODO Implement and use when parsing a file
+    
 //    @Test
 //    public void testLinkOf1() {
 //        Link link = Link.of("CAT BAT OneLetterChange");
