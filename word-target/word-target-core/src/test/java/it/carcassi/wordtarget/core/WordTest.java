@@ -25,7 +25,7 @@ public class WordTest {
 //    @Test
 //    public void testToString() {
 //        assertEquals("CAT", Word.of("CAT").toString());
-//        assertEquals("'VITAMIN A'", Word.of("vitamin A").toString());
+//        assertEquals("VITAMIN A", Word.of("vitamin A").toString());
 //    }
 //
 //    @Test
@@ -34,9 +34,7 @@ public class WordTest {
 //        assertEquals(null, Word.of(""));
 //        assertEquals(null, Word.of(" "));
 //        assertEquals("CAT", Word.of("cat").getText());
-//        assertEquals("CAT", Word.of("\"cat\"").getText());
 //        assertEquals("VITAMIN A", Word.of("vitamin A").getText());
-//        assertEquals("VITAMIN A", Word.of("\"vitamin A\"").getText());
 //    }
     
 }
