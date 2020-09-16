@@ -8,8 +8,10 @@ package it.carcassi.wordtarget.core;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static it.carcassi.wordtarget.core.CommonTestObjects.*;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.List;
 
@@ -202,6 +204,22 @@ PORTS PORT OneLetterAddOrRemove
         BufferedWriter writer = new BufferedWriter(sw);
         chain.serialize(writer);
         writer.flush();
-
+        assertEquals(expected, sw.toString());
+    }
+    
+    @Test
+    public void testDeserialzeChain() throws IOException {
+        String savedChain = """
+CAT BAT OneLetterChange
+BAT BASEBALL WordAssociation
+BASEBALL SPORT WordAssociation
+SPORT PORTS Anagram
+PORTS PORT OneLetterAddOrRemove
+                          """;
+        StringReader sr = new StringReader(savedChain);
+        BufferedReader reader = new BufferedReader(sr);
+        Chain chain = Chain.deserialize(reader);
+        Chain chain2 = Chain.of(catBat, batBaseball, baseballSport, sportPorts, portsPort);
+        assertEquals(chain2, chain);
     }
 }
