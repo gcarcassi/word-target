@@ -5,18 +5,22 @@
  */
 package it.carcassi.wordtarget.core;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
  * @author Matteo
  */
 public class Chain {
+
+
 
     private Word initialWord;
     private final List<Link> links = new ArrayList<>();
@@ -132,7 +136,7 @@ public class Chain {
         this.links.remove(links.size() - 1);
     }
 
-    void serialize(BufferedWriter writer) throws IOException{
+    public void serialize(BufferedWriter writer) throws IOException{
         List<Link> storedLinks = new ArrayList<>();
         storedLinks = this.links();
         for (Link link : storedLinks) {
@@ -144,5 +148,50 @@ public class Chain {
             writer.write("\n");
         }
     }
+    
+    public static Chain deserialize(BufferedReader reader) throws IOException{
+        List<Link> links = new ArrayList<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] tokens = line.split(" ");
+            links.add(new Link(new Word(tokens[0]), new Word(tokens[1]), LinkType.valueOf(tokens[2])));
+        }
+        Chain chain = Chain.of(links.get(0));
+        for (int i = 1; i < links.size(); i++) {
+            chain.add(links.get(i));
+        }
+
+        return chain;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 11 * hash + Objects.hashCode(this.initialWord);
+        hash = 11 * hash + Objects.hashCode(this.links);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Chain other = (Chain) obj;
+        if (!Objects.equals(this.initialWord, other.initialWord)) {
+            return false;
+        }
+        if (!Objects.equals(this.links, other.links)) {
+            return false;
+        }
+        return true;
+    }
+    
 }
 
