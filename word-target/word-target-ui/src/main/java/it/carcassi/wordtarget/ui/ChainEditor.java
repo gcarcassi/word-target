@@ -59,13 +59,20 @@ public class ChainEditor extends javax.swing.JFrame {
         } else {
             db = new WordDatabase();
         }
+        
+        // Prepare the FileChooser
+        chainFileChooser = new JFileChooser(prefs.get(CHAIN_FOLDER, new File(".").getAbsolutePath()));
     }
+
+    private JFileChooser chainFileChooser;
+    
     private DefaultListModel<Chain> chainsModel = new DefaultListModel<>();
     private DefaultListModel<Word> chainModel = new DefaultListModel<>();
     private DefaultListModel<Link> linksModel = new DefaultListModel<>();
 
     private Preferences prefs;
     private static String LAST_USED_DB = "LAST_USED_DB";
+    private static String CHAIN_FOLDER = "CHAIN_FOLDER";
     private File currentFile;
     private WordDatabase db;
     private Word targetWord;
@@ -99,7 +106,7 @@ public class ChainEditor extends javax.swing.JFrame {
         saveDbButton = new javax.swing.JButton();
         loadChainButton = new javax.swing.JButton();
         saveChainButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        saveChainAsButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -195,7 +202,12 @@ public class ChainEditor extends javax.swing.JFrame {
 
         saveChainButton.setText("Save chain");
 
-        jButton1.setText("Save chain as...");
+        saveChainAsButton.setText("Save chain as...");
+        saveChainAsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveChainAsButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -207,7 +219,7 @@ public class ChainEditor extends javax.swing.JFrame {
                     .addComponent(saveDbButton)
                     .addComponent(loadChainButton)
                     .addComponent(saveChainButton)
-                    .addComponent(jButton1))
+                    .addComponent(saveChainAsButton))
                 .addGap(0, 5, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -221,7 +233,7 @@ public class ChainEditor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saveChainButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(saveChainAsButton)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -301,6 +313,13 @@ public class ChainEditor extends javax.swing.JFrame {
     private void saveDbButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveDbButtonActionPerformed
         saveDb();
     }//GEN-LAST:event_saveDbButtonActionPerformed
+
+    private void saveChainAsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChainAsButtonActionPerformed
+        int returnVal = chainFileChooser.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            saveCurrentChainAs(chainFileChooser.getSelectedFile());
+        }
+    }//GEN-LAST:event_saveChainAsButtonActionPerformed
 
     public void setCurrentFile(File currentFile) {
         this.currentFile = currentFile;
@@ -383,6 +402,16 @@ public class ChainEditor extends javax.swing.JFrame {
         } 
     }
     
+    private void saveCurrentChainAs(File file) {
+        if (file != null) {
+            prefs.put(CHAIN_FOLDER, file.getParent());
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                currentChain.serialize(writer);
+            } catch (IOException ex) {
+                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     
     /**
      * @param args the command line arguments
@@ -411,7 +440,6 @@ public class ChainEditor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<it.carcassi.wordtarget.core.Chain> chainsList;
     private javax.swing.JButton editDbButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -423,6 +451,7 @@ public class ChainEditor extends javax.swing.JFrame {
     private javax.swing.JList<Link> linksList;
     private javax.swing.JButton loadChainButton;
     private javax.swing.JTextField nextWordField;
+    private javax.swing.JButton saveChainAsButton;
     private javax.swing.JButton saveChainButton;
     private javax.swing.JButton saveDbButton;
     private javax.swing.JList<Word> selectedChainList;
