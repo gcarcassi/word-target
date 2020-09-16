@@ -147,6 +147,7 @@ public class Chain {
             writer.write(link.getType().toString());
             writer.write("\n");
         }
+        writer.flush();
     }
     
     public static Chain deserialize(BufferedReader reader) throws IOException{
