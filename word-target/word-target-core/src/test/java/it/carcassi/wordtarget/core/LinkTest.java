@@ -84,5 +84,27 @@ public class LinkTest {
         assertEquals(bat, link2.getWordA());
         assertEquals(cat, link2.getWordB());
     }
+    
+//    @Test
+//    public void testLinkOf1() {
+//        Link link = Link.of("CAT BAT OneLetterChange");
+//        assertEquals(cat, link.getWordA());
+//        assertEquals(bat, link.getWordA());
+//        assertEquals(LinkType.OneLetterChange, link.getType());
+//    }
+//    @Test
+//    public void testLinkOf2() {
+//        Link link = Link.of("CAT 'BAT' OneLetterChange");
+//        assertEquals(cat, link.getWordA());
+//        assertEquals(bat, link.getWordA());
+//        assertEquals(LinkType.OneLetterChange, link.getType());
+//    }
+//    @Test
+//    public void testLinkOf3() {
+//        Link link = Link.of("SIGHT 'VITAMIN A' WordAssociation");
+//        assertEquals(Word.of("SIGHT"), link.getWordA());
+//        assertEquals(Word.of("VITAMIN A"), link.getWordA());
+//        assertEquals(LinkType.WordAssociation, link.getType());
+//    }
 }
 
