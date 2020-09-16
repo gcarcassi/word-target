@@ -84,5 +84,23 @@ public class LinkTest {
         assertEquals(bat, link2.getWordA());
         assertEquals(cat, link2.getWordB());
     }
+    
+    // TODO Implement and use when parsing a file
+    
+//    @Test
+//    public void testToFullString() {
+//        assertEquals("CAT-BAT-OneLetterChange", catBat.toFullString());
+//        assertEquals("BAT-BASEBALL-WordAssociation", batBaseball.toFullString());
+//    }
+//    
+//    @Test
+//    public void testLinkOf1() {
+//        assertEquals(catBat, Link.of("CAT-BAT-OneLetterChange"));
+//        assertEquals(batBaseball, Link.of("BAT-BASEBALL-WordAssociation"));    
+//        Link link = Link.of("SIGHT-VITAMIN A-WordAssociation");
+//        assertEquals(Word.of("SIGHT"), link.getWordA());
+//        assertEquals(Word.of("VITAMIN A"), link.getWordA());
+//        assertEquals(LinkType.WordAssociation, link.getType());
+//    }
 }
 
