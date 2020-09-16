@@ -10,8 +10,10 @@ import it.carcassi.wordtarget.core.Chain;
 import it.carcassi.wordtarget.core.Link;
 import it.carcassi.wordtarget.core.LinkType;
 import it.carcassi.wordtarget.core.Chain;
+import it.carcassi.wordtarget.core.Renderer;
 import it.carcassi.wordtarget.core.Word;
 import it.carcassi.wordtarget.core.WordDatabase;
+import it.carcassi.wordtarget.core.WordTargetLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
@@ -24,11 +26,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
+import java.util.stream.Collectors;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
@@ -107,6 +112,7 @@ public class ChainEditor extends javax.swing.JFrame {
         loadChainButton = new javax.swing.JButton();
         saveChainButton = new javax.swing.JButton();
         saveChainAsButton = new javax.swing.JButton();
+        exportChainButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -209,6 +215,13 @@ public class ChainEditor extends javax.swing.JFrame {
             }
         });
 
+        exportChainButton.setText("Export...");
+        exportChainButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportChainButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -219,7 +232,8 @@ public class ChainEditor extends javax.swing.JFrame {
                     .addComponent(saveDbButton)
                     .addComponent(loadChainButton)
                     .addComponent(saveChainButton)
-                    .addComponent(saveChainAsButton))
+                    .addComponent(saveChainAsButton)
+                    .addComponent(exportChainButton))
                 .addGap(0, 5, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -234,6 +248,8 @@ public class ChainEditor extends javax.swing.JFrame {
                 .addComponent(saveChainButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saveChainAsButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(exportChainButton)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -320,6 +336,13 @@ public class ChainEditor extends javax.swing.JFrame {
             saveCurrentChainAs(chainFileChooser.getSelectedFile());
         }
     }//GEN-LAST:event_saveChainAsButtonActionPerformed
+
+    private void exportChainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportChainButtonActionPerformed
+        int returnVal = chainFileChooser.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            exportChainAs(chainFileChooser.getSelectedFile());
+        }
+    }//GEN-LAST:event_exportChainButtonActionPerformed
 
     public void setCurrentFile(File currentFile) {
         this.currentFile = currentFile;
@@ -413,6 +436,21 @@ public class ChainEditor extends javax.swing.JFrame {
         }
     }
     
+    private void exportChainAs(File file) {
+        if (file != null) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                List<String> words = new ArrayList<>(currentChain.words().stream().map(x -> x.getText()).collect(Collectors.toList()));
+                Collections.reverse(words);
+                WordTargetLayout layout = new WordTargetLayout(words);
+                layout.doLayout(new Random());
+                writer.write(Renderer.renderWordTarget(layout));
+                writer.flush();
+            } catch (IOException ex) {
+                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -440,6 +478,7 @@ public class ChainEditor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<it.carcassi.wordtarget.core.Chain> chainsList;
     private javax.swing.JButton editDbButton;
+    private javax.swing.JButton exportChainButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
