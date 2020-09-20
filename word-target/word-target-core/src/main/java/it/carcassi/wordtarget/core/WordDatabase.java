@@ -10,6 +10,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import static it.carcassi.wordtarget.core.LetterCounter.*;
 
 /**
  *
@@ -29,28 +31,89 @@ public class WordDatabase {
     private final Set<Word> words = new HashSet<>();
     private final Set<Link> links = new HashSet<>();
     private Map<Word, Set<Link>> linksByWord = new HashMap<>();
+    public Map<BigInteger, Set<Word>> wordsByHist = new HashMap<>();
 
     public void addWord(Word word) {
         if (words.contains(word)) {
             return;
         }
         words.add(word);
-
-        // Check if word can be linked to others
-        for (Word other : words) {
-            if (LinkTypes.isOneLetterChange(word.getText(), other.getText())) {
-                Link link = new Link(word, other, LinkType.OneLetterChange);
-                addLink(link);
+        LetterCounter counter = LetterCounter.countLetters(word);
+        BigInteger index = counter.toBigInteger();
+        
+        Set<Word> similarWords = wordsByHist.get(index);
+        if (similarWords == null) {
+            similarWords = new HashSet<>();
+            wordsByHist.put(index, similarWords);
+        }
+        
+        for (Word other : similarWords) {
+            Link link = new Link(word, other, LinkType.Anagram);
+            addLink(link);
+        }
+        
+        similarWords.add(word);
+        
+        for (int i = 0; i < 26; i++) {
+            // Checks for one letter add
+            BigInteger otherIndex = index.multiply(BigInteger.valueOf(CHAR_TO_PRIME[i]));
+            similarWords = wordsByHist.get(otherIndex);
+            if (similarWords != null) {
+                for (Word other : similarWords) {
+                    if (LinkTypes.isOneLetterAdd(word.getText(), other.getText())) {
+                        Link link = new Link(word, other, LinkType.OneLetterAddOrRemove);
+                        addLink(link);
+                    }
+                }
             }
-            if (LinkTypes.isOneLetterAddOrRemove(word.getText(), other.getText())) {
-                Link link = new Link(word, other, LinkType.OneLetterAddOrRemove);
-                addLink(link);
+            
+            // Checks for one letter remove
+            if (counter.countFor((char) ('A' + i)) != 0) {
+                otherIndex = index.divide(BigInteger.valueOf(CHAR_TO_PRIME[i]));
+                similarWords = wordsByHist.get(otherIndex);
+                if (similarWords != null) {
+                    for (Word other : similarWords) {
+                        if (LinkTypes.isOneLetterRemove(word.getText(), other.getText())) {
+                            Link link = new Link(word, other, LinkType.OneLetterAddOrRemove);
+                            addLink(link);
+                        }
+                    }
+                }
             }
-            if (LinkTypes.isAnagram(word.getText(), other.getText())) {
-                Link link = new Link(word, other, LinkType.Anagram);
-                addLink(link);
+            
+            // Check for one letter change
+            if (counter.countFor((char) ('A' + i)) != 0) {
+                otherIndex = index.divide(BigInteger.valueOf(CHAR_TO_PRIME[i]));
+                for (int j = 0; j < 26; j++) {
+                    BigInteger indexAdded = otherIndex.multiply(BigInteger.valueOf(CHAR_TO_PRIME[j]));
+                    similarWords = wordsByHist.get(indexAdded);
+                    if (similarWords != null) {
+                        for (Word other : similarWords) {
+                            if (LinkTypes.isOneLetterChange(word.getText(), other.getText())) {
+                                Link link = new Link(word, other, LinkType.OneLetterChange);
+                                addLink(link);
+                            }
+                        }
+                    }
+                }
             }
         }
+
+        // Check if word can be linked to others
+//        for (Word other : words) {
+//            if (LinkTypes.isOneLetterChange(word.getText(), other.getText())) {
+//                Link link = new Link(word, other, LinkType.OneLetterChange);
+//                addLink(link);
+//            }
+//            if (LinkTypes.isOneLetterAddOrRemove(word.getText(), other.getText())) {
+//                Link link = new Link(word, other, LinkType.OneLetterAddOrRemove);
+//                addLink(link);
+//            }
+//            if (LinkTypes.isAnagram(word.getText(), other.getText())) {
+//                Link link = new Link(word, other, LinkType.Anagram);
+//                addLink(link);
+//            }
+//        }
     }
 
     public boolean containsWord(Word word) {
