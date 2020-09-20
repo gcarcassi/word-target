@@ -84,7 +84,7 @@ public class WordDatabase {
             // Check for one letter change
             if (counter.countFor((char) ('A' + i)) != 0) {
                 otherIndex = index.divide(BigInteger.valueOf(CHAR_TO_PRIME[i]));
-                for (int j = 0; j < 26; j++) {
+                for (int j = i + 1; j < 26; j++) {
                     BigInteger indexAdded = otherIndex.multiply(BigInteger.valueOf(CHAR_TO_PRIME[j]));
                     similarWords = wordsByHist.get(indexAdded);
                     if (similarWords != null) {
