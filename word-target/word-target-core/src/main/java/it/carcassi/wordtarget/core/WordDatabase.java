@@ -84,7 +84,7 @@ public class WordDatabase {
             // Check for one letter change
             if (counter.countFor((char) ('A' + i)) != 0) {
                 otherIndex = index.divide(BigInteger.valueOf(CHAR_TO_PRIME[i]));
-                for (int j = i + 1; j < 26; j++) {
+                for (int j = 0; j < 26; j++) {
                     BigInteger indexAdded = otherIndex.multiply(BigInteger.valueOf(CHAR_TO_PRIME[j]));
                     similarWords = wordsByHist.get(indexAdded);
                     if (similarWords != null) {
@@ -98,22 +98,71 @@ public class WordDatabase {
                 }
             }
         }
-
-        // Check if word can be linked to others
-//        for (Word other : words) {
-//            if (LinkTypes.isOneLetterChange(word.getText(), other.getText())) {
-//                Link link = new Link(word, other, LinkType.OneLetterChange);
-//                addLink(link);
-//            }
-//            if (LinkTypes.isOneLetterAddOrRemove(word.getText(), other.getText())) {
-//                Link link = new Link(word, other, LinkType.OneLetterAddOrRemove);
-//                addLink(link);
-//            }
-//            if (LinkTypes.isAnagram(word.getText(), other.getText())) {
-//                Link link = new Link(word, other, LinkType.Anagram);
-//                addLink(link);
-//            }
-//        }
+    }
+    
+    public static WordDatabase of(Collection<Word> words) {
+        WordDatabase db = new WordDatabase();
+        db.words.addAll(words);
+        
+        for (Word word : words) {
+            BigInteger index = countLetters(word).toBigInteger();
+            Set<Word> set = db.wordsByHist.get(index);
+            if (set == null) {
+                set = new HashSet<>();
+                db.wordsByHist.put(index, set);
+            }
+            set.add(word);
+        }
+        
+        for (Map.Entry<BigInteger, Set<Word>> entry : db.wordsByHist.entrySet()) {
+            BigInteger index = entry.getKey();
+            Set<Word> wordASet = entry.getValue();
+            Set<Word> anagramWordBSet = wordASet;
+            
+            for (Word wordA : wordASet) {
+                for (Word wordB : anagramWordBSet) {
+                    if (!wordA.equals(wordB)) {
+                        Link link = new Link(wordA, wordB, LinkType.Anagram);
+                        db.addLink(link);
+                    }
+                }
+            }
+            
+            for (int i = 0; i < 26; i++) {
+                BigInteger otherIndex = index.multiply(BigInteger.valueOf(CHAR_TO_PRIME[i]));
+                Set<Word> letterAddWordBSet = db.wordsByHist.get(otherIndex);
+                if (letterAddWordBSet != null) {
+                    for (Word wordA : wordASet) {
+                        for (Word wordB : letterAddWordBSet) {
+                            if (LinkTypes.isOneLetterAdd(wordA.getText(), wordB.getText())) {
+                                Link link = new Link(wordA, wordB, LinkType.OneLetterAddOrRemove);
+                                db.addLink(link);
+                            }
+                        }
+                    }
+                }
+                
+                BigInteger[] result = index.divideAndRemainder(BigInteger.valueOf(CHAR_TO_PRIME[i]));
+                if (result[1].equals(BigInteger.ZERO)) {
+                    for (int j = i + 1; j < 26; j++) {
+                        BigInteger indexAdded = result[0].multiply(BigInteger.valueOf(CHAR_TO_PRIME[j]));
+                        Set<Word> letterChangeWordBSet = db.wordsByHist.get(indexAdded);
+                        if (letterChangeWordBSet != null) {
+                            for (Word wordA : wordASet) {
+                                for (Word wordB : letterChangeWordBSet) {
+                                    if (LinkTypes.isOneLetterChange(wordA.getText(), wordB.getText())) {
+                                        Link link = new Link(wordA, wordB, LinkType.OneLetterChange);
+                                        db.addLink(link);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return db;
     }
 
     public boolean containsWord(Word word) {
@@ -217,11 +266,12 @@ public class WordDatabase {
     }
 
     public static WordDatabase deserialize(BufferedReader reader) throws IOException {
-        WordDatabase db = new WordDatabase();
         reader.readLine();
+        List<Word> words = new ArrayList<>();
         for (String word : reader.readLine().split(",")) {
-            db.addWord(Word.of(word));
+            words.add(Word.of(word));
         }
+        WordDatabase db = of(words);
 
         reader.readLine();
         reader.readLine();
