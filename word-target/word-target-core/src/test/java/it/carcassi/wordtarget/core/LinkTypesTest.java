@@ -16,41 +16,6 @@ import static it.carcassi.wordtarget.core.CommonTestObjects.*;
 public class LinkTypesTest {
 
     @Test
-    public void testCountLetters() {
-        LinkTypes.LetterCounter letterCount = LinkTypes.countLetters("system");
-        assertEquals(2, letterCount.countFor('s'));
-        assertEquals(1, letterCount.countFor('y'));
-        assertEquals(1, letterCount.countFor('t'));
-        assertEquals(1, letterCount.countFor('e'));
-        assertEquals(1, letterCount.countFor('m'));
-        assertEquals(0, letterCount.countFor('a'));
-        assertEquals(0, letterCount.countFor('b'));
-    }
-
-    @Test
-    public void testCompareLetterCount() {
-        LinkTypes.LetterCounter letterCount1 = LinkTypes.countLetters("system");
-        LinkTypes.LetterCounter letterCount2 = LinkTypes.countLetters("system");
-        assertEquals(letterCount1, letterCount2);
-
-        letterCount1 = LinkTypes.countLetters("system");
-        letterCount2 = LinkTypes.countLetters("sytem");
-        assertNotEquals(letterCount1, letterCount2);
-
-        letterCount1 = LinkTypes.countLetters("system");
-        letterCount2 = LinkTypes.countLetters("yetmss");
-        assertEquals(letterCount1, letterCount2);
-
-        letterCount1 = LinkTypes.countLetters("abc");
-        letterCount2 = LinkTypes.countLetters("cde");
-        assertNotEquals(letterCount1, letterCount2);
-
-        letterCount1 = LinkTypes.countLetters("abcd");
-        letterCount2 = LinkTypes.countLetters("aaaa");
-        assertNotEquals(letterCount1, letterCount2);
-    }
-
-    @Test
     public void testIsAnagram() {
         assertTrue(LinkTypes.isAnagram("bat", "tab"));
         assertTrue(LinkTypes.isAnagram("angel", "angle"));

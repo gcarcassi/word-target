@@ -8,6 +8,7 @@ package it.carcassi.wordtarget.core;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import static it.carcassi.wordtarget.core.LetterCounter.*;
 
 /**
  *
@@ -15,75 +16,20 @@ import java.util.Objects;
  */
 public class LinkTypes {
 
-    public static class LetterCounter {
-
-        private Map<Character, Integer> counter = new HashMap<>();
-
-        public void addLetter(char letter) {
-            if (counter.containsKey(letter)) {
-                counter.put(letter, counter.get(letter) + 1);
-            } else {
-                counter.put(letter, 1);
-            }
-        }
-
-        public int countFor(char letter) {
-            if (counter.containsKey(letter)) {
-                return counter.get(letter);
-            } else {
-                return 0;
-            }
-        }
-
-        @Override
-        public int hashCode() {
-            int hash = 3;
-            hash = 37 * hash + Objects.hashCode(this.counter);
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj) {
-                return true;
-            }
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final LetterCounter other = (LetterCounter) obj;
-            if (!Objects.equals(this.counter, other.counter)) {
-                return false;
-            }
-            return true;
-        }
-
-        @Override
-        public String toString() {
-            return counter.toString();
-        }
-    }
-
-    public static LetterCounter countLetters(String text) {
-        LetterCounter counter = new LetterCounter();
-        for (char c : text.toCharArray()) {
-            counter.addLetter(c);
-        }
-        return counter;
-    }
-
     public static boolean isAnagram(String textA, String textB) {
-        if (textA.length() != textB.length()) {
+        return isAnagram(Word.of(textA), Word.of(textB));
+    }
+    
+    public static boolean isAnagram(Word wordA, Word wordB) {
+        if (wordA.getText().length() != wordB.getText().length()) {
             return false;
         }
 
-        if (textA == textB) {
+        if (wordA.equals(wordB)) {
             return false;
         }
 
-        return countLetters(textA).equals(countLetters(textB));
+        return countLetters(wordA).equals(countLetters(wordB));
     }
 
     public static boolean isOneLetterChange(String textA, String textB) {
