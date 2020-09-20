@@ -5,6 +5,7 @@
  */
 package it.carcassi.wordtarget.core;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -62,6 +63,15 @@ public class LetterCounter {
     public String toString() {
         return counter.toString();
     }
+
+    public BigInteger toBigInteger() {
+        BigInteger index = BigInteger.ONE;
+        for (int j = 0; j < 26; j++) {
+            long factor = pow(CHAR_TO_PRIME[j], countFor((char) ('A' + j)));
+            index = index.multiply(BigInteger.valueOf(factor));
+        }
+        return index;
+    }
     
     public static LetterCounter countLetters(String text) {
         return countLetters(Word.of(text));
@@ -73,6 +83,48 @@ public class LetterCounter {
             counter.addLetter(c);
         }
         return counter;
+    }
+    
+    public static final int[] CHAR_TO_PRIME = charToPrime();
+    private static int[] charToPrime() {
+        int[] primes = new int[26];
+        int i = 0;
+        int n = 2;
+        while (i < 26) {
+            boolean isPrime = true;
+            for (int j = 2; j <= n / 2; j++) {
+                // If divisible, not prime
+                if (n % j == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+
+            if (isPrime) {
+                primes[i] = n;
+                i++;
+            }
+            n++;
+        }
+
+        return primes;
+    }
+    
+    public static long pow(long a, int b) {
+        if (b < 0) {
+            throw new IllegalArgumentException("The exponent can't be negative");
+        }
+        if (b == 0) {
+            return 1;
+        }
+        if (b == 1) {
+            return a;
+        }
+        long result = 1;
+        for (int i = 0; i < b; i++) {
+            result *= a;
+        }
+        return result;
     }
     
 }
