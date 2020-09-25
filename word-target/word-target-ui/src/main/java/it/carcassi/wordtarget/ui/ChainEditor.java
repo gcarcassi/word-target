@@ -26,10 +26,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
@@ -377,8 +380,11 @@ public class ChainEditor extends javax.swing.JFrame {
 
     public void setCurrentWord(Word currentWord) {
         this.currentWord = currentWord;
+        Function<Link, Word> function = Link::getWordB;
         linksModel.clear();
-        linksModel.addAll(db.getLinksFor(currentWord, currentChain.words()));
+        linksModel.addAll(db.getLinksFor(currentWord, currentChain.words()).stream()
+                .sorted(Comparator.comparing(x -> x.getWordB().getText()))
+                .collect(Collectors.toList()));
     }
     
     public void addLink(Link link) {
