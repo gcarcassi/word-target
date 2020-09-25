@@ -364,6 +364,8 @@ public class ChainEditor extends javax.swing.JFrame {
             setDbChanged(true);
         }
         chainsModel.addElement(new Chain(targetWord));
+        chainsList.setSelectedIndex(chainsModel.size() - 1);
+        selectedChainList.setSelectedIndex(0);
     }
 
     public void setCurrentChain(Chain chain) {
@@ -380,7 +382,6 @@ public class ChainEditor extends javax.swing.JFrame {
 
     public void setCurrentWord(Word currentWord) {
         this.currentWord = currentWord;
-        Function<Link, Word> function = Link::getWordB;
         linksModel.clear();
         linksModel.addAll(db.getLinksFor(currentWord, currentChain.words()).stream()
                 .sorted(Comparator.comparing(x -> x.getWordB().getText()))
@@ -388,10 +389,22 @@ public class ChainEditor extends javax.swing.JFrame {
     }
     
     public void addLink(Link link) {
-        currentChain.add(link);
-        chainsModel.set(chainsModel.indexOf(currentChain), currentChain);
-        setCurrentChain(currentChain);
-        selectedChainList.setSelectedIndex(currentChain.words().size() - 1);
+        int index = selectedChainList.getSelectedIndex();
+        if (index == currentChain.size() -1) {
+            currentChain.add(link);
+            chainsModel.set(chainsModel.indexOf(currentChain), currentChain);
+            setCurrentChain(currentChain);
+            selectedChainList.setSelectedIndex(currentChain.words().size() - 1);
+        } else {
+            Chain newChain = new Chain(currentChain.getInitialWord());
+            for (int i = 0; i < index; i++) {
+                newChain.add(currentChain.links().get(i));
+            }
+            newChain.add(link);
+            chainsModel.addElement(newChain);
+            chainsList.setSelectedIndex(chainsModel.size() - 1);
+            selectedChainList.setSelectedIndex(currentChain.words().size() - 1);
+        }
     }
 
     private void nextWord(Word nextWord) {
