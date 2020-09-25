@@ -72,6 +72,11 @@ public class Chain {
         };
     }
 
+    /**
+     * The size of the chain in number of words.
+     * 
+     * @return the number of words; cannot be less than 1
+     */
     public int size() {
         return links.size() + 1;
     }
