@@ -85,9 +85,7 @@ public class ChainEditor extends javax.swing.JFrame {
     private File currentDbFile;
     private File currentChainFile;
     private WordDatabase db;
-    private Word targetWord;
     private Chain currentChain;
-    private Word currentWord;
     private boolean dbChanged;
 
     /** This method is called from within the constructor to
@@ -325,7 +323,7 @@ public class ChainEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_editDbButtonActionPerformed
 
     private void targetWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_targetWordFieldActionPerformed
-        setTargetWord(Word.of(targetWordField.getText()));
+        createNewChain(Word.of(targetWordField.getText()));
     }//GEN-LAST:event_targetWordFieldActionPerformed
 
     private void chainsListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_chainsListValueChanged
@@ -333,7 +331,7 @@ public class ChainEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_chainsListValueChanged
 
     private void selectedChainListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectedChainListValueChanged
-        setCurrentWord(selectedChainList.getSelectedValue());
+        changeCurrentWord(selectedChainList.getSelectedValue());
     }//GEN-LAST:event_selectedChainListValueChanged
 
     private void linksListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linksListMouseClicked
@@ -396,34 +394,38 @@ public class ChainEditor extends javax.swing.JFrame {
         }
     }
 
-    public void setTargetWord(Word targetWord) {
-        if (targetWord == null || targetWord.equals(this.targetWord)) {
+    public void createNewChain(Word targetWord) {
+        if (targetWord == null) {
             return;
         }
-        this.targetWord = targetWord;
-        if (!db.containsWord(targetWord)) {
-            db.addWord(targetWord);
+        addNewWordToDb(targetWord);
+        addNewChain(new Chain(targetWord));
+    }
+    
+    private void addNewChain(Chain newChain) {
+        chainsModel.addElement(newChain);
+        chainsList.setSelectedIndex(chainsModel.size() - 1);
+        selectedChainList.setSelectedIndex(chainModel.size() - 1);
+    }
+    
+    private void addNewWordToDb(Word newWord) {
+        if (!db.containsWord(newWord)) {
+            db.addWord(newWord);
             setDbChanged(true);
         }
-        chainsModel.addElement(new Chain(targetWord));
-        chainsList.setSelectedIndex(chainsModel.size() - 1);
-        selectedChainList.setSelectedIndex(0);
     }
 
     public void setCurrentChain(Chain chain) {
         this.currentChain = chain;
         chainModel.clear();
-        if (targetWord != null) {
-            if (chain != null) {
-                for (Word word : chain.words()) {
-                    chainModel.addElement(word);
-                }
+        if (chain != null) {
+            for (Word word : chain.words()) {
+                chainModel.addElement(word);
             }
         }
     }
 
-    public void setCurrentWord(Word currentWord) {
-        this.currentWord = currentWord;
+    public void changeCurrentWord(Word currentWord) {
         linksModel.clear();
         linksModel.addAll(db.getLinksFor(currentWord, currentChain.words()).stream()
                 .sorted(Comparator.comparing(x -> x.getWordB().getText()))
@@ -511,8 +513,7 @@ public class ChainEditor extends javax.swing.JFrame {
         if (file != null) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 Chain newChain = Chain.deserialize(reader);
-                chainsModel.addElement(newChain);
-                chainsList.setSelectedIndex(chainsModel.size() - 1);
+                addNewChain(newChain);
             } catch (IOException ex) {
                 Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
             }
