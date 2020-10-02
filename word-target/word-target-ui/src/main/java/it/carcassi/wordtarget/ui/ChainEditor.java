@@ -16,6 +16,7 @@ import it.carcassi.wordtarget.core.WordDatabase;
 import it.carcassi.wordtarget.core.WordTargetLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -136,6 +137,11 @@ public class ChainEditor extends javax.swing.JFrame {
         jScrollPane1.setViewportView(chainsList);
 
         selectedChainList.setModel(chainModel);
+        selectedChainList.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                selectedChainListKeyReleased(evt);
+            }
+        });
         selectedChainList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 selectedChainListValueChanged(evt);
@@ -347,6 +353,12 @@ public class ChainEditor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_exportChainButtonActionPerformed
 
+    private void selectedChainListKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_selectedChainListKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+            removeLastLink();
+        }
+    }//GEN-LAST:event_selectedChainListKeyReleased
+
     public void setCurrentFile(File currentFile) {
         this.currentFile = currentFile;
         if (currentFile != null) {
@@ -403,6 +415,15 @@ public class ChainEditor extends javax.swing.JFrame {
             newChain.add(link);
             chainsModel.addElement(newChain);
             chainsList.setSelectedIndex(chainsModel.size() - 1);
+            selectedChainList.setSelectedIndex(currentChain.words().size() - 1);
+        }
+    }
+    
+    public void removeLastLink() {
+        if (currentChain != null && currentChain.size() > 1) {
+            currentChain.removeLast();
+            chainsModel.set(chainsModel.indexOf(currentChain), currentChain);
+            setCurrentChain(currentChain);
             selectedChainList.setSelectedIndex(currentChain.words().size() - 1);
         }
     }
