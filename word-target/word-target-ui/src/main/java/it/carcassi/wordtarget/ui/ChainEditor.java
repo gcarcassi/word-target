@@ -58,8 +58,8 @@ public class ChainEditor extends javax.swing.JFrame {
         prefs = Preferences.userRoot().node(getClass().getName());
         String filename = prefs.get(LAST_USED_DB, null);
         if (filename != null) {
-            currentFile = new File(filename);
-            try (BufferedReader reader = new BufferedReader(new FileReader(currentFile))) {
+            currentDbFile = new File(filename);
+            try (BufferedReader reader = new BufferedReader(new FileReader(currentDbFile))) {
                 db = WordDatabase.deserialize(reader);
             } catch (IOException ex) {
                 Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,7 +82,8 @@ public class ChainEditor extends javax.swing.JFrame {
     private Preferences prefs;
     private static String LAST_USED_DB = "LAST_USED_DB";
     private static String CHAIN_FOLDER = "CHAIN_FOLDER";
-    private File currentFile;
+    private File currentDbFile;
+    private File currentChainFile;
     private WordDatabase db;
     private Word targetWord;
     private Chain currentChain;
@@ -214,8 +215,18 @@ public class ChainEditor extends javax.swing.JFrame {
         });
 
         loadChainButton.setText("Load chain...");
+        loadChainButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadChainButtonActionPerformed(evt);
+            }
+        });
 
         saveChainButton.setText("Save chain");
+        saveChainButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveChainButtonActionPerformed(evt);
+            }
+        });
 
         saveChainAsButton.setText("Save chain as...");
         saveChainAsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -305,11 +316,11 @@ public class ChainEditor extends javax.swing.JFrame {
 
     private void editDbButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDbButtonActionPerformed
         WordDatabaseEditor dbEditor = new WordDatabaseEditor();
-        dbEditor.setCurrentFile(currentFile);
+        dbEditor.setCurrentFile(currentDbFile);
         dbEditor.setDb(db);
         dbEditor.setModal(true);
         dbEditor.setVisible(true);
-        setCurrentFile(dbEditor.getCurrentFile());
+        setCurrentDbFile(dbEditor.getCurrentFile());
         db = dbEditor.getDb();
     }//GEN-LAST:event_editDbButtonActionPerformed
 
@@ -359,10 +370,29 @@ public class ChainEditor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_selectedChainListKeyReleased
 
-    public void setCurrentFile(File currentFile) {
-        this.currentFile = currentFile;
+    private void loadChainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadChainButtonActionPerformed
+        int returnVal = chainFileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            loadChain(chainFileChooser.getSelectedFile());
+        }
+    }//GEN-LAST:event_loadChainButtonActionPerformed
+
+    private void saveChainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChainButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveChainButtonActionPerformed
+
+    public void setCurrentDbFile(File currentFile) {
+        this.currentDbFile = currentFile;
         if (currentFile != null) {
             prefs.put(LAST_USED_DB, currentFile.getPath());
+        }
+    }
+
+    public void setCurrentChainFile(File currentChainFile) {
+        this.currentChainFile = currentChainFile;
+        if (currentChainFile != null) {
+            prefs.put(CHAIN_FOLDER, currentChainFile.getPath());
+            saveChainButton.setEnabled(true);
         }
     }
 
@@ -449,15 +479,15 @@ public class ChainEditor extends javax.swing.JFrame {
 
     public void setDbChanged(boolean dbChanged) {
         this.dbChanged = dbChanged;
-        saveDbButton.setEnabled(dbChanged && currentFile != null);
+        saveDbButton.setEnabled(dbChanged && currentDbFile != null);
     }
     
     private void saveDb() {
-        if (!dbChanged || currentFile == null) {
+        if (!dbChanged || currentDbFile == null) {
             throw new IllegalStateException("Shouldn't be able to save db if not changed or no valid file was chosen");
         }
         
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(currentFile))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(currentDbFile))) {
             db.serialize(writer);
             setDbChanged(false);
         } catch (Exception ex) {
@@ -466,10 +496,23 @@ public class ChainEditor extends javax.swing.JFrame {
     }
     
     private void saveCurrentChainAs(File file) {
+        setCurrentChainFile(file);
         if (file != null) {
-            prefs.put(CHAIN_FOLDER, file.getParent());
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 currentChain.serialize(writer);
+            } catch (IOException ex) {
+                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private void loadChain(File file) {
+        setCurrentChainFile(file);
+        if (file != null) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                Chain newChain = Chain.deserialize(reader);
+                chainsModel.addElement(newChain);
+                chainsList.setSelectedIndex(chainsModel.size() - 1);
             } catch (IOException ex) {
                 Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
             }
