@@ -221,7 +221,7 @@ public class RendererTest {
     @Test
     public void RenderWordTarget() {
         String expected = """
-  <svg width="500" height="500" viewBox="-700 -700 1400 1400" xmlns="http://www.w3.org/2000/svg">
+  <svg width="500" height="500" viewBox="-550 -550 1100 1100" xmlns="http://www.w3.org/2000/svg">
   <style>
     .text1 { fill: black; font: 50px sans-serif; }
     .text2 { fill: white; font: 50px sans-serif; }
