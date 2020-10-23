@@ -359,6 +359,11 @@ public class ChainEditor extends javax.swing.JFrame {
         int returnVal = chainFileChooser.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             exportChainAs(chainFileChooser.getSelectedFile());
+            try {
+                Process proc = Runtime.getRuntime().exec("cmd /c start " + chainFileChooser.getSelectedFile().getPath());
+            } catch (IOException ex) {
+                Logger.getLogger(ChainEditor.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_exportChainButtonActionPerformed
 
