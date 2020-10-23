@@ -379,6 +379,11 @@ public class ChainEditor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_saveChainButtonActionPerformed
 
+    public Word getCurrentSelectedWord() {
+        int index = selectedChainList.getSelectedIndex();
+        return currentChain.words().get(index);
+    }
+    
     public void setCurrentDbFile(File currentFile) {
         this.currentDbFile = currentFile;
         if (currentFile != null) {
@@ -465,7 +470,7 @@ public class ChainEditor extends javax.swing.JFrame {
             db.addWord(nextWord);
             setDbChanged(true);
         }
-        if (!db.containsLink(currentChain.getFinalWord(), nextWord)) {
+        if (!db.containsLink(getCurrentSelectedWord(), nextWord)) {
             Object[] options = { LinkType.WordAssociation, LinkType.Synonym, LinkType.Antonym, "CANCEL" };
             int choice = JOptionPane.showOptionDialog(this, "Select link type", "New Link...",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -473,10 +478,10 @@ public class ChainEditor extends javax.swing.JFrame {
             if (choice < 0 || choice > 2) {
                 return;
             }
-            db.addLink(new Link(currentChain.getFinalWord(), nextWord, (LinkType) options[choice]));
+            db.addLink(new Link(getCurrentSelectedWord(), nextWord, (LinkType) options[choice]));
             setDbChanged(true);
         }
-        addLink(db.getLinkBetween(currentChain.getFinalWord(), nextWord));
+        addLink(db.getLinkBetween(getCurrentSelectedWord(), nextWord));
     }
 
     public void setDbChanged(boolean dbChanged) {
