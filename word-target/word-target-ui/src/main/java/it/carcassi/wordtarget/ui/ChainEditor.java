@@ -69,11 +69,13 @@ public class ChainEditor extends javax.swing.JFrame {
             db = new WordDatabase();
         }
         
-        // Prepare the FileChooser
+        // Prepare the FileChoosers
         chainFileChooser = new JFileChooser(prefs.get(CHAIN_FOLDER, new File(".").getAbsolutePath()));
+        exportFileChooser = new JFileChooser(prefs.get(EXPORT_FOLDER, new File(".").getAbsolutePath()));
     }
 
     private JFileChooser chainFileChooser;
+    private JFileChooser exportFileChooser;
     
     private DefaultListModel<Chain> chainsModel = new DefaultListModel<>();
     private DefaultListModel<Word> chainModel = new DefaultListModel<>();
@@ -82,6 +84,7 @@ public class ChainEditor extends javax.swing.JFrame {
     private Preferences prefs;
     private static String LAST_USED_DB = "LAST_USED_DB";
     private static String CHAIN_FOLDER = "CHAIN_FOLDER";
+    private static String EXPORT_FOLDER = "EXPORT_FOLDER";
     private File currentDbFile;
     private File currentChainFile;
     private WordDatabase db;
@@ -356,11 +359,11 @@ public class ChainEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_saveChainAsButtonActionPerformed
 
     private void exportChainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportChainButtonActionPerformed
-        int returnVal = chainFileChooser.showSaveDialog(this);
+        int returnVal = exportFileChooser.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            exportChainAs(chainFileChooser.getSelectedFile());
+            exportChainAs(exportFileChooser.getSelectedFile());
             try {
-                Process proc = Runtime.getRuntime().exec("cmd /c start " + chainFileChooser.getSelectedFile().getPath());
+                Process proc = Runtime.getRuntime().exec("cmd /c start " + exportFileChooser.getSelectedFile().getPath());
             } catch (IOException ex) {
                 Logger.getLogger(ChainEditor.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -532,12 +535,28 @@ public class ChainEditor extends javax.swing.JFrame {
     
     private void exportChainAs(File file) {
         if (file != null) {
+            prefs.put(EXPORT_FOLDER, file.getPath());
+            
+            File solutionFile = new File(file.getParentFile(), file.getName().substring(0, file.getName().length() - 4) + ".txt");
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 List<String> words = new ArrayList<>(currentChain.words().stream().map(x -> x.getText()).collect(Collectors.toList()));
                 Collections.reverse(words);
                 WordTargetLayout layout = new WordTargetLayout(words);
                 layout.doLayout(new Random());
                 writer.write(Renderer.renderWordTarget(layout));
+                writer.flush();
+            } catch (IOException ex) {
+                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(solutionFile))) {
+                List<String> words = new ArrayList<>(currentChain.words().stream().map(x -> x.getText()).collect(Collectors.toList()));
+                Collections.reverse(words);
+                writer.write(words.get(0));
+                for (int i = 1; i < words.size(); i++) {
+                    writer.write("\n");
+                    writer.write(words.get(i));
+                }
                 writer.flush();
             } catch (IOException ex) {
                 Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
