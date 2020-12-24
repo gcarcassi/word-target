@@ -145,7 +145,7 @@ public class ChainTest {
     public void testValidChainInversion() {
         Chain chain1 = Chain.of(catBat, batBaseball, baseballSport);
         chain1.reverse();
-        assertEquals(List.of(baseballSport, batBaseball, catBat), chain1.links());
+        assertEquals(List.of(sportBaseball, baseballBat, batCat), chain1.links());
     }
 
     @Test

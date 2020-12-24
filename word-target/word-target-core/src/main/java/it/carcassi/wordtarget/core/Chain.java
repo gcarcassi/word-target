@@ -117,8 +117,11 @@ public class Chain {
         links.addAll(0, newChain.links);
     }
 
-    public void reverse() {
+    public void reverse() {        
         Collections.reverse(links);
+        for (int i = 0; i < links.size(); i++) {
+            links.set(i, links.get(i).reverse());
+        }
     }
 
     @Override
