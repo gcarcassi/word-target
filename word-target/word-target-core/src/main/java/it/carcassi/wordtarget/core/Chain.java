@@ -122,6 +122,10 @@ public class Chain {
         for (int i = 0; i < links.size(); i++) {
             links.set(i, links.get(i).reverse());
         }
+        
+        if (!links.isEmpty()) {
+            initialWord = links.get(0).getWordA();
+        }
     }
 
     @Override

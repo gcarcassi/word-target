@@ -13,6 +13,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -146,6 +147,14 @@ public class ChainTest {
         Chain chain1 = Chain.of(catBat, batBaseball, baseballSport);
         chain1.reverse();
         assertEquals(List.of(sportBaseball, baseballBat, batCat), chain1.links());
+        assertEquals(List.of(sport, baseball, bat, cat), chain1.words());
+        assertEquals(sport, chain1.getInitialWord());
+        
+        Chain chain2 = new Chain(cat);
+        chain2.reverse();
+        assertEquals(Collections.EMPTY_LIST, chain2.links());
+        assertEquals(List.of(cat), chain2.words());
+        assertEquals(cat, chain2.getInitialWord());
     }
 
     @Test
