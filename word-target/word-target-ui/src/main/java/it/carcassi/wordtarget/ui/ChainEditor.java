@@ -119,6 +119,7 @@ public class ChainEditor extends javax.swing.JFrame {
         saveChainButton = new javax.swing.JButton();
         saveChainAsButton = new javax.swing.JButton();
         exportChainButton = new javax.swing.JButton();
+        reverseChainButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -243,6 +244,14 @@ public class ChainEditor extends javax.swing.JFrame {
             }
         });
 
+        reverseChainButton.setText("Reverse chain");
+        reverseChainButton.setEnabled(false);
+        reverseChainButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reverseChainButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -254,7 +263,8 @@ public class ChainEditor extends javax.swing.JFrame {
                     .addComponent(loadChainButton)
                     .addComponent(saveChainButton)
                     .addComponent(saveChainAsButton)
-                    .addComponent(exportChainButton))
+                    .addComponent(exportChainButton)
+                    .addComponent(reverseChainButton))
                 .addGap(0, 5, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -263,6 +273,8 @@ public class ChainEditor extends javax.swing.JFrame {
                 .addComponent(editDbButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saveDbButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reverseChainButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loadChainButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -387,6 +399,12 @@ public class ChainEditor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_saveChainButtonActionPerformed
 
+    private void reverseChainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reverseChainButtonActionPerformed
+        if (currentChain != null) {
+            reverseCurrentChain();
+        }
+    }//GEN-LAST:event_reverseChainButtonActionPerformed
+
     public Word getCurrentSelectedWord() {
         int index = selectedChainList.getSelectedIndex();
         return currentChain.words().get(index);
@@ -431,6 +449,7 @@ public class ChainEditor extends javax.swing.JFrame {
     public void setCurrentChain(Chain chain) {
         this.currentChain = chain;
         chainModel.clear();
+        reverseChainButton.setEnabled(chain != null);
         if (chain != null) {
             for (Word word : chain.words()) {
                 chainModel.addElement(word);
@@ -443,6 +462,12 @@ public class ChainEditor extends javax.swing.JFrame {
         linksModel.addAll(db.getLinksFor(currentWord, currentChain.words()).stream()
                 .sorted(Comparator.comparing(x -> x.getWordB().getText()))
                 .collect(Collectors.toList()));
+    }
+    
+    public void reverseCurrentChain() {
+        currentChain.reverse();
+        chainsModel.set(chainsModel.indexOf(currentChain), currentChain);
+        setCurrentChain(currentChain);
     }
     
     public void addLink(Link link) {
@@ -603,6 +628,7 @@ public class ChainEditor extends javax.swing.JFrame {
     private javax.swing.JList<Link> linksList;
     private javax.swing.JButton loadChainButton;
     private javax.swing.JTextField nextWordField;
+    private javax.swing.JButton reverseChainButton;
     private javax.swing.JButton saveChainAsButton;
     private javax.swing.JButton saveChainButton;
     private javax.swing.JButton saveDbButton;
