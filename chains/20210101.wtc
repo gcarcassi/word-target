@@ -11,13 +11,14 @@ LEVEL LEVER OneLetterChange
 LEVER LAVER OneLetterChange
 LAVER LATER OneLetterChange
 LATER LATTER OneLetterAddOrRemove
-LATTER FORMER Antonym
+LATTER FORMER WordAssociation
 FORMER FORME OneLetterAddOrRemove
 FORME FORM OneLetterAddOrRemove
-FORM SHAPE WordAssociation
+FORM SHAPE Synonym
 SHAPE SCAPE OneLetterChange
 SCAPE CAPE OneLetterAddOrRemove
 CAPE PACE Anagram
 PACE PEACE OneLetterAddOrRemove
 PEACE WAR Antonym
 WAR WEAPON WordAssociation
+WEAPON DESTRUCTION WordAssociation
