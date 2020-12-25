@@ -570,7 +570,8 @@ public class ChainEditor extends javax.swing.JFrame {
                 layout.doLayout(new Random());
                 writer.write(Renderer.renderWordTarget(layout));
                 writer.flush();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex, "Can't export chain...", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
             }
             
