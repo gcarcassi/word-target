@@ -120,6 +120,7 @@ public class ChainEditor extends javax.swing.JFrame {
         saveChainAsButton = new javax.swing.JButton();
         exportChainButton = new javax.swing.JButton();
         reverseChainButton = new javax.swing.JButton();
+        largeTargetWordCheck = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -252,6 +253,10 @@ public class ChainEditor extends javax.swing.JFrame {
             }
         });
 
+        largeTargetWordCheck.setText("Target word too big");
+        largeTargetWordCheck.setEnabled(false);
+        largeTargetWordCheck.setFocusable(false);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -265,11 +270,14 @@ public class ChainEditor extends javax.swing.JFrame {
                     .addComponent(saveChainAsButton)
                     .addComponent(exportChainButton)
                     .addComponent(reverseChainButton))
-                .addGap(0, 5, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(largeTargetWordCheck, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(largeTargetWordCheck)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(editDbButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saveDbButton)
@@ -451,9 +459,15 @@ public class ChainEditor extends javax.swing.JFrame {
         chainModel.clear();
         reverseChainButton.setEnabled(chain != null);
         if (chain != null) {
+            boolean targetFits = Renderer.wordFitsInCenter(chain.getInitialWord().toString());
+            largeTargetWordCheck.setSelected(!targetFits);
+            exportChainButton.setEnabled(targetFits);
             for (Word word : chain.words()) {
                 chainModel.addElement(word);
             }
+        } else {
+            largeTargetWordCheck.setSelected(false);
+            exportChainButton.setSelected(false);
         }
     }
 
@@ -626,6 +640,7 @@ public class ChainEditor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JCheckBox largeTargetWordCheck;
     private javax.swing.JList<Link> linksList;
     private javax.swing.JButton loadChainButton;
     private javax.swing.JTextField nextWordField;

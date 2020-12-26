@@ -46,7 +46,12 @@ public class WordDatabaseTest {
     public void testSerializeDatabase() throws IOException {
         String expected = """
 Words:
-BASEBALL, BAT, CAT, PORT, PORTS, SPORT
+BASEBALL
+BAT
+CAT
+PORT
+PORTS
+SPORT
 
 Links:
         """;
@@ -63,11 +68,16 @@ Links:
     public void testDeserializeDatabase() throws IOException {
         String expected = """
 Words:
-BASEBALL, BAT, CAT, PORT, PORTS, SPORT
+BASEBALL
+BAT
+CAT
+PORT
+PORTS
+SPORT
 
 Links:
-BASEBALL BAT WordAssociation
-BASEBALL SPORT WordAssociation
+BASEBALL, BAT, WordAssociation
+BASEBALL, SPORT, WordAssociation
         """;
 
         StringReader sr = new StringReader(expected);
@@ -77,6 +87,39 @@ BASEBALL SPORT WordAssociation
         assertTrue(db.containsLink(baseball, bat));
         assertTrue(db.containsLink(bat, baseball));
         assertTrue(db.containsLink(ports, sport));
+    }
+
+    @Test
+    public void testDeserializeDatabase1() throws IOException {
+        String expected = """
+Words:
+NURSED
+RED SUN
+SIGHT
+TOWN
+VITAMIN A
+WON'T
+
+Links:
+VITAMIN A, SIGHT, WordAssociation
+        """;
+
+        StringReader sr = new StringReader(expected);
+        BufferedReader reader = new BufferedReader(sr);
+        WordDatabase db = WordDatabase.deserialize(reader);
+        Word nursed = Word.of("NURSED");
+        Word redSun = Word.of("RED SUN");
+        Word vitaminA = Word.of("VITAMIN A");
+        Word sight = Word.of("SIGHT");
+        Word town = Word.of("TOWN");
+        Word wont = Word.of("WON'T");
+        assertEquals(Set.of(nursed, redSun, vitaminA, sight, wont, town), db.getAllWords());
+        assertTrue(db.containsLink(vitaminA, sight));
+        assertTrue(db.containsLink(sight, vitaminA));
+        assertTrue(db.containsLink(nursed, redSun));
+        assertTrue(db.containsLink(redSun, nursed));
+        assertTrue(db.containsLink(wont, town));
+        assertTrue(db.containsLink(town, wont));
     }
 
     @Test

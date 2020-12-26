@@ -181,6 +181,11 @@ public class Renderer {
 
     private static final List<Double> minFracBetweenWords = List.of(0.0, 0.0, 20.0 / 360.0, 12.0 / 360.0, 10.0 / 360.0, 6.0 / 360.0);
 
+    public static boolean wordFitsInCenter(String word) {
+        double frac = fracForWord(word, 1);
+        return frac <= 1;
+    }
+    
     public static String layoutWordCenter(String word) {
         double frac = fracForWord(word, 1);
         if (frac > 1) {
