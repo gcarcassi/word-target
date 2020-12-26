@@ -46,7 +46,12 @@ public class WordDatabaseTest {
     public void testSerializeDatabase() throws IOException {
         String expected = """
 Words:
-BASEBALL, BAT, CAT, PORT, PORTS, SPORT
+BASEBALL
+BAT
+CAT
+PORT
+PORTS
+SPORT
 
 Links:
         """;
@@ -63,11 +68,16 @@ Links:
     public void testDeserializeDatabase() throws IOException {
         String expected = """
 Words:
-BASEBALL, BAT, CAT, PORT, PORTS, SPORT
+BASEBALL
+BAT
+CAT
+PORT
+PORTS
+SPORT
 
 Links:
-BASEBALL BAT WordAssociation
-BASEBALL SPORT WordAssociation
+BASEBALL, BAT, WordAssociation
+BASEBALL, SPORT, WordAssociation
         """;
 
         StringReader sr = new StringReader(expected);

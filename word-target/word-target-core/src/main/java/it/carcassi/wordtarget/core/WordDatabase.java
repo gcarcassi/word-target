@@ -268,17 +268,17 @@ public class WordDatabase {
     public static WordDatabase deserialize(BufferedReader reader) throws IOException {
         reader.readLine();
         List<Word> words = new ArrayList<>();
-        for (String word : reader.readLine().split(",")) {
+        String word;
+        while (!(word = reader.readLine()).isEmpty()) {
             words.add(Word.of(word));
         }
         WordDatabase db = of(words);
 
         reader.readLine();
-        reader.readLine();
         String line;
         while ((line = reader.readLine()) != null) {
-            String[] tokens = line.split(" ");
-            db.addLink(new Link(new Word(tokens[0]), new Word(tokens[1]), LinkType.valueOf(tokens[2])));
+            String[] tokens = line.split(",");
+            db.addLink(new Link(new Word(tokens[0]), new Word(tokens[1]), LinkType.valueOf(tokens[2].trim())));
         }
 
         return db;
@@ -291,7 +291,7 @@ public class WordDatabase {
         Boolean addComma = false;
         for (Word word : sortedWords) {
             if (addComma) {
-                writer.write(", ");
+                writer.write("\n");
             }
 
             writer.write(word.getText());
