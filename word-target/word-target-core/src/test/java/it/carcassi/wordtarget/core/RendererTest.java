@@ -23,6 +23,7 @@ public class RendererTest {
         assertEquals(0.733, Renderer.fracForWord("BALL", 1), 0.001);
         assertEquals(0.903, Renderer.fracForWord("WON'T", 1), 0.001);
         assertEquals(0.883, Renderer.fracForWord("HO HO", 1), 0.001);
+        assertEquals(0.891, Renderer.fracForWord("YO-YO", 1), 0.001);
     }
     
     @Test
@@ -34,6 +35,7 @@ public class RendererTest {
         assertEquals(0.319, Renderer.fracForWord("BASEBALL", 2), 0.001);
         assertEquals(0.314, Renderer.fracForWord("COULDN'T", 2), 0.001);
         assertEquals(0.363, Renderer.fracForWord("TREE FROG", 2), 0.001);
+        assertEquals(0.439, Renderer.fracForWord("LEFT-HANDED", 2), 0.001);
     }
 
     @Test
@@ -108,6 +110,8 @@ public class RendererTest {
         assertEquals(0.174, Renderer.fracForWord("BASEBALL", 3), 0.001);
         assertEquals(0.170, Renderer.fracForWord("COULDN'T", 3), 0.001);
         assertEquals(0.198, Renderer.fracForWord("TREE FROG", 3), 0.001);
+        assertEquals(0.238, Renderer.fracForWord("LEFT-HANDED", 3), 0.001);
+
     }
 
     @Test
@@ -146,6 +150,8 @@ public class RendererTest {
         assertEquals(0.124, Renderer.fracForWord("BASEBALL", 4), 0.001);
         assertEquals(0.122, Renderer.fracForWord("COULDN'T", 4), 0.001);
         assertEquals(0.141, Renderer.fracForWord("TREE FROG", 4), 0.001);
+        assertEquals(0.170, Renderer.fracForWord("LEFT-HANDED", 4), 0.001);
+
     }
 
     @Test
@@ -192,6 +198,7 @@ public class RendererTest {
         assertEquals(0.096, Renderer.fracForWord("BASEBALL", 5), 0.001);
         assertEquals(0.094, Renderer.fracForWord("COULDN'T", 5), 0.001);
         assertEquals(0.108, Renderer.fracForWord("TREE FROG", 5), 0.001);
+        assertEquals(0.130, Renderer.fracForWord("LEFT-HANDED", 5), 0.001);
 
     }
 
