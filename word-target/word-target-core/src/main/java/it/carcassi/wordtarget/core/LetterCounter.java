@@ -19,6 +19,10 @@ public class LetterCounter {
     private Map<Character, Integer> counter = new HashMap<>();
 
     public void addLetter(char letter) {
+        if (letter < 'A' || letter > 'Z') {
+            return;
+        }
+        
         if (counter.containsKey(letter)) {
             counter.put(letter, counter.get(letter) + 1);
         } else {

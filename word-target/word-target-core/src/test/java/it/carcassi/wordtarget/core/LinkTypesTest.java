@@ -21,6 +21,10 @@ public class LinkTypesTest {
         assertTrue(LinkTypes.isAnagram("angel", "angle"));
         assertFalse(LinkTypes.isAnagram("cat", "angle"));
         assertFalse(LinkTypes.isAnagram("cat", "cat"));
+        assertTrue(LinkTypes.isAnagram("red sun", "nursed"));
+        assertTrue(LinkTypes.isAnagram("nursed", "red sun"));
+        assertTrue(LinkTypes.isAnagram("won't", "town"));
+        assertTrue(LinkTypes.isAnagram("town", "won't"));
     }
 
     @Test

@@ -21,7 +21,11 @@ public class LinkTypes {
     }
     
     public static boolean isAnagram(Word wordA, Word wordB) {
-        if (wordA.getText().length() != wordB.getText().length()) {
+        if (!wordA.getText().contains(" ") &&
+            !wordB.getText().contains(" ") &&
+            !wordA.getText().contains("'") &&
+            !wordB.getText().contains("'") &&
+                wordA.getText().length() != wordB.getText().length()) {
             return false;
         }
 
