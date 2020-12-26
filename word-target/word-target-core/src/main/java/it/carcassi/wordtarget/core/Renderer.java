@@ -43,7 +43,8 @@ public class Renderer {
             entry('X', 5),
             entry('Y', 5),
             entry('Z', 6),
-            entry(' ', 12)
+            entry(' ', 12),
+            entry('\'', 19)
     );
 
     private static final Map<Character, Integer> charsInCircle2 = Map.ofEntries(
@@ -73,7 +74,8 @@ public class Renderer {
             entry('X', 24),
             entry('Y', 24),
             entry('Z', 26),
-            entry(' ', 59)
+            entry(' ', 59),
+            entry('\'', 85)
     );
 
     private static final Map<Character, Integer> charsInCircle3 = Map.ofEntries(
@@ -103,7 +105,8 @@ public class Renderer {
             entry('X', 44),
             entry('Y', 44),
             entry('Z', 48),
-            entry(' ', 105)
+            entry(' ', 105),
+            entry('\'', 151)
     );
     ;
 
@@ -134,7 +137,8 @@ public class Renderer {
             entry('X', 62),
             entry('Y', 62),
             entry('Z', 68),
-            entry(' ', 149)
+            entry(' ', 149),
+            entry('\'', 217)
     );
 
     private static final Map<Character, Integer> charsInCircle5 = Map.ofEntries(
@@ -164,7 +168,8 @@ public class Renderer {
             entry('X', 81),
             entry('Y', 81),
             entry('Z', 88),
-            entry(' ', 195)
+            entry(' ', 195),
+            entry('\'', 283)
     );
 
     private static final List<Map<Character, Integer>> charsInCircle = List.of(new HashMap<>(), charsInCircle1, charsInCircle2, charsInCircle3, charsInCircle4, charsInCircle5);
