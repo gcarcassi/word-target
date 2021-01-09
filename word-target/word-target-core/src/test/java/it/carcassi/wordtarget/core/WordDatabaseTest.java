@@ -65,6 +65,31 @@ Links:
     }
 
     @Test
+    public void testSerializeDatabase1() throws IOException {
+        String expected = """
+Words:
+NURSED
+RED SUN
+SIGHT
+TOWN
+VITAMIN A
+WON'T
+
+Links:
+SIGHT, VITAMIN A, WordAssociation
+        """;
+
+        StringWriter sw = new StringWriter();
+        BufferedWriter writer = new BufferedWriter(sw);
+        WordDatabase db = new WordDatabase();
+        db.addWords(Word.of("NURSED", "RED SUN", "SIGHT", "TOWN", "VITAMIN A", "WON'T"));
+        db.addLink(new Link(Word.of("VITAMIN A"), Word.of("SIGHT"), LinkType.WordAssociation));
+        db.serialize(writer);
+        writer.flush();
+        assertEquals(expected, sw.toString());
+    }
+
+    @Test
     public void testDeserializeDatabase() throws IOException {
         String expected = """
 Words:

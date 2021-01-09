@@ -5,6 +5,8 @@
  */
 package it.carcassi.wordtarget.core;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -81,6 +83,17 @@ public class Word {
         } else {
             return new Word(text);
         }
+    }
+
+    public static List<Word> of(String... texts) {
+        List<Word> words = new ArrayList<>();
+        for (String text : texts) {
+            Word word = Word.of(text);
+            if (word != null) {
+                words.add(word);
+            }
+        }
+        return words;
     }
     
 }

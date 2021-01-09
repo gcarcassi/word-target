@@ -311,9 +311,9 @@ public class WordDatabase {
                 if (!storedLinks.contains(link.reverse())) {
                     if (!link.getType().isAutomatic()) {
                         writer.write(link.getWordA().getText());
-                        writer.write(" ");
+                        writer.write(", ");
                         writer.write(link.getWordB().getText());
-                        writer.write(" ");
+                        writer.write(", ");
                         writer.write(link.getType().toString());
                         writer.write("\n");
                         storedLinks.add(link);
