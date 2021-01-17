@@ -71030,6 +71030,7 @@ EDIFYING
 EDIFYINGLY
 EDILE
 EDILES
+EDISON
 EDIT
 EDITABLE
 EDITED
@@ -174864,6 +174865,7 @@ PLURALIZES
 PLURALIZING
 PLURALLY
 PLURALS
+PLURI
 PLURILITERAL
 PLURILOCULAR
 PLURIPARA
@@ -237741,6 +237743,7 @@ THOLOBATES
 THOLOI
 THOLOS
 THOLUS
+THOMAS
 THON
 THONDER
 THONG
@@ -267771,6 +267774,7 @@ ALAN, TURING, WordAssociation
 ALLOY, BRASS, WordAssociation
 AMERICA, ASIA, WordAssociation
 AMERICAN, FOOTBALL, WordAssociation
+ANGLE, RADIAN, WordAssociation
 ANGLE, RIGHT, WordAssociation
 ANIMATION, CARTOON, WordAssociation
 ANKLE, JOINT, WordAssociation
@@ -267782,8 +267786,10 @@ AUTUMN, SPRING, WordAssociation
 BACTERIA, CYANO, WordAssociation
 BASEBALL, PITCH, WordAssociation
 BASEBALL, SPORT, WordAssociation
+BIODIVERSITY, ECOSYSTEM, WordAssociation
 BIOLOGIST, MARINE, WordAssociation
 BIOLOGY, MARINE, WordAssociation
+BISTRO, RESTAURANT, WordAssociation
 BLEATS, SHEEP, WordAssociation
 BOSON, FERMION, WordAssociation
 BOVINE, COW, Synonym
@@ -267825,6 +267831,9 @@ DRAFT, MILITARY, WordAssociation
 DREAM, SLEEP, WordAssociation
 EARTH, PLANET, WordAssociation
 EAST, WEST, WordAssociation
+ECOSYSTEM, RAINFOREST, WordAssociation
+EDISON, LIGHTBULB, WordAssociation
+EDISON, THOMAS, WordAssociation
 ELDER, TRIBE, WordAssociation
 ELECTRIC, GUITAR, WordAssociation
 ELECTRIC, POWER, WordAssociation
@@ -267844,11 +267853,14 @@ FOOTBALL, NOSEGUARD, WordAssociation
 FORECAST, WEATHER, WordAssociation
 FORM, SHAPE, Synonym
 FORMER, LATTER, WordAssociation
+FOUL, OFFSIDE, WordAssociation
+FOWL, WATER, WordAssociation
 FREEZE, THAW, Antonym
 FUN, GAMES, WordAssociation
 GAMMA, RAY, WordAssociation
 GAS, IDEAL, WordAssociation
 GENERAL, MILITARY, WordAssociation
+GEOSTATIONARY, ORBIT, WordAssociation
 GHOST, HAUNTING, WordAssociation
 GOLGI, ORGANELLE, WordAssociation
 GUITAR, STRINGS, WordAssociation
@@ -267857,12 +267869,15 @@ HEIGHT, WIDTH, WordAssociation
 HISTAMINE, REAGIN, WordAssociation
 IMPROVISATION, JAZZ, WordAssociation
 IMPROVISE, JAZZ, WordAssociation
+INCANDESCENT, LIGHTBULB, WordAssociation
+INCANDESCENT, RADIANT, Synonym
 INTRODUCE, PRESENT, Synonym
 JAMES, WATT, WordAssociation
 JAZZ, SWING, WordAssociation
 JELLY, ROYAL, WordAssociation
 JOUST, KNIGHT, WordAssociation
 JOUST, KNIGHTS, WordAssociation
+JUNGLE, RAINFOREST, WordAssociation
 KING, MONARCH, Synonym
 LARVA, METAMORPHOSIS, WordAssociation
 LAVA, MAGMA, Synonym
@@ -267870,7 +267885,11 @@ LIGHT, SWITCH, WordAssociation
 LOSER, WINNER, WordAssociation
 MAGMA, VOLCANO, WordAssociation
 MARS, PLANET, WordAssociation
+MONO, PLURI, Antonym
+MOON, SATELLITE, WordAssociation
 MOTION, REST, Antonym
+OFFSIDE, ONSIDE, Antonym
+ORBIT, SATELLITE, WordAssociation
 ORDER, SORT, WordAssociation
 OTTER, RIVER, WordAssociation
 OVER, UNDER, Antonym
@@ -267881,6 +267900,7 @@ PEACE, WAR, Antonym
 PLANE, WRIGHT, WordAssociation
 POLARIS, STAR, WordAssociation
 PREJUDICE, PRIDE, WordAssociation
+RESTAURANT, WAITER, WordAssociation
 SIGHT, VISION, Synonym
 SLEEP, SLUMBER, WordAssociation
 SPACE, STATION, WordAssociation
