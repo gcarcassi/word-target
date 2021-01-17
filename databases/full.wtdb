@@ -267785,6 +267785,7 @@ BIOLOGY, MARINE, WordAssociation
 BLEATS, SHEEP, WordAssociation
 BOSON, FERMION, WordAssociation
 BOVINE, COW, Synonym
+BREEZE, WIND, Synonym
 BRIBE, CORRUPTION, WordAssociation
 BRIDE, GROOM, WordAssociation
 BROOM, SWEEP, WordAssociation
@@ -267793,6 +267794,8 @@ BUTTERFLY, METAMORPHOSIS, WordAssociation
 BUTTERFLY, MONARCH, WordAssociation
 CAMILLO, GOLGI, WordAssociation
 CAPER, PRANK, Synonym
+CAR, ENGINE, WordAssociation
+CAR, VEHICLE, WordAssociation
 CARBON, DIAMOND, WordAssociation
 CAULDRON, WITCH, WordAssociation
 CELL, JAIL, WordAssociation
@@ -267815,10 +267818,12 @@ DESTRUCTION, WEAPON, WordAssociation
 DIAMOND, DUST, WordAssociation
 DREAM, SLEEP, WordAssociation
 EARTH, PLANET, WordAssociation
+EAST, WEST, WordAssociation
 ELDER, TRIBE, WordAssociation
 EMOTION, FEELING, Synonym
 ENERGY, LEVEL, WordAssociation
 ENERGY, SOURCE, WordAssociation
+ENGINE, STEAM, WordAssociation
 ENGINEER, MECHANICAL, WordAssociation
 ENGINEER, NUCLEAR, WordAssociation
 ENGINEER, SOFTWARE, WordAssociation
@@ -267831,6 +267836,7 @@ FOOTBALL, NOSEGUARD, WordAssociation
 FORECAST, WEATHER, WordAssociation
 FORM, SHAPE, Synonym
 FORMER, LATTER, WordAssociation
+FREEZE, THAW, Antonym
 FUN, GAMES, WordAssociation
 GAMMA, RAY, WordAssociation
 GAS, IDEAL, WordAssociation
@@ -267841,9 +267847,12 @@ HEIGHT, WIDTH, WordAssociation
 HISTAMINE, REAGIN, WordAssociation
 IMPROVISATION, JAZZ, WordAssociation
 IMPROVISE, JAZZ, WordAssociation
+INTRODUCE, PRESENT, Synonym
 JAMES, WATT, WordAssociation
 JAZZ, SWING, WordAssociation
 JELLY, ROYAL, WordAssociation
+JOUST, KNIGHT, WordAssociation
+JOUST, KNIGHTS, WordAssociation
 KING, MONARCH, Synonym
 LARVA, METAMORPHOSIS, WordAssociation
 LAVA, MAGMA, Synonym
@@ -267854,6 +267863,9 @@ MOTION, REST, Antonym
 ORDER, SORT, WordAssociation
 OTTER, RIVER, WordAssociation
 OVER, UNDER, Antonym
+OXIDATION, REDUCTION, WordAssociation
+OXIDATION, RUST, WordAssociation
+PAST, PRESENT, Antonym
 PEACE, WAR, Antonym
 PLANE, WRIGHT, WordAssociation
 POLARIS, STAR, WordAssociation
@@ -267861,7 +267873,10 @@ PREJUDICE, PRIDE, WordAssociation
 SIGHT, VISION, Synonym
 SLEEP, SLUMBER, WordAssociation
 SPACE, STATION, WordAssociation
+THAT, THIS, WordAssociation
+TRANSPORTATION, VEHICLE, WordAssociation
 UNCLEAR, VAGUE, Synonym
+VACUOLE, VESICLE, WordAssociation
 VALUE, VARIABLE, WordAssociation
 WAR, WEAPON, WordAssociation
 WELL, WISHING, WordAssociation
