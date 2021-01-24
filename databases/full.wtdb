@@ -67191,6 +67191,7 @@ DOPPING
 DOPPINGS
 DOPPIO
 DOPPIOS
+DOPPLER
 DOPPLERITE
 DOPPLERITES
 DOPS
@@ -267807,6 +267808,7 @@ CAPER, PRANK, Synonym
 CAR, ENGINE, WordAssociation
 CAR, VEHICLE, WordAssociation
 CARBON, DIAMOND, WordAssociation
+CASTLE, PALACE, Synonym
 CAULDRON, WITCH, WordAssociation
 CELL, JAIL, WordAssociation
 CELL, ORGANELLE, WordAssociation
@@ -267827,6 +267829,10 @@ DECIMAL, NUMBER, WordAssociation
 DEDICATION, DEVOTION, Synonym
 DESTRUCTION, WEAPON, WordAssociation
 DIAMOND, DUST, WordAssociation
+DIGRESSION, DISCURSION, WordAssociation
+DISCUSSION, PANEL, WordAssociation
+DOPPLER, EFFECT, WordAssociation
+DOPPLER, RADAR, WordAssociation
 DRAFT, MILITARY, WordAssociation
 DREAM, SLEEP, WordAssociation
 EARTH, PLANET, WordAssociation
@@ -267834,6 +267840,7 @@ EAST, WEST, WordAssociation
 ECOSYSTEM, RAINFOREST, WordAssociation
 EDISON, LIGHTBULB, WordAssociation
 EDISON, THOMAS, WordAssociation
+EFFECT, SPECIAL, WordAssociation
 ELDER, TRIBE, WordAssociation
 ELECTRIC, GUITAR, WordAssociation
 ELECTRIC, POWER, WordAssociation
@@ -267882,12 +267889,14 @@ KING, MONARCH, Synonym
 LARVA, METAMORPHOSIS, WordAssociation
 LAVA, MAGMA, Synonym
 LIGHT, SWITCH, WordAssociation
+LINEAR, REGRESSION, WordAssociation
 LOSER, WINNER, WordAssociation
 MAGMA, VOLCANO, WordAssociation
 MARS, PLANET, WordAssociation
 MONO, PLURI, Antonym
 MOON, SATELLITE, WordAssociation
 MOTION, REST, Antonym
+MOVIE, TRAILER, WordAssociation
 OFFSIDE, ONSIDE, Antonym
 ORBIT, SATELLITE, WordAssociation
 ORDER, SORT, WordAssociation
@@ -267895,16 +267904,19 @@ OTTER, RIVER, WordAssociation
 OVER, UNDER, Antonym
 OXIDATION, REDUCTION, WordAssociation
 OXIDATION, RUST, WordAssociation
+PANEL, SOLAR, WordAssociation
 PAST, PRESENT, Antonym
 PEACE, WAR, Antonym
 PLANE, WRIGHT, WordAssociation
 POLARIS, STAR, WordAssociation
 PREJUDICE, PRIDE, WordAssociation
+RADAR, SONAR, WordAssociation
 RESTAURANT, WAITER, WordAssociation
 SIGHT, VISION, Synonym
 SLEEP, SLUMBER, WordAssociation
 SPACE, STATION, WordAssociation
 SPRING, SUMMER, WordAssociation
+STONE, TABLET, WordAssociation
 THAT, THIS, WordAssociation
 TRANSPORTATION, VEHICLE, WordAssociation
 UNCLEAR, VAGUE, Synonym
