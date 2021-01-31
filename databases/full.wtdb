@@ -267773,6 +267773,9 @@ ADDED, SUMMED, Synonym
 ADJUST, CALIBRATE, Synonym
 AID, MEDICAL, WordAssociation
 ALAN, TURING, WordAssociation
+ALGORITHMIC, PROCEDURAL, Synonym
+ALLOCATION, DISTRIBUTION, Synonym
+ALLOCATION, RESOURCE, WordAssociation
 ALLOY, BRASS, WordAssociation
 AMERICA, ASIA, WordAssociation
 AMERICAN, FOOTBALL, WordAssociation
@@ -267784,6 +267787,8 @@ ANNOY, BOTHER, Synonym
 ANYON, QUASIPARTICLE, WordAssociation
 ARIA, OPERA, WordAssociation
 ARMED, DANGEROUS, WordAssociation
+ARTIFICIAL, FAKE, Synonym
+ARTIFICIAL, NATURAL, Antonym
 AUTUMN, SPRING, WordAssociation
 BACTERIA, CYANO, WordAssociation
 BASEBALL, PITCH, WordAssociation
@@ -267815,6 +267820,8 @@ CASTLE, PALACE, Synonym
 CAULDRON, WITCH, WordAssociation
 CELL, JAIL, WordAssociation
 CELL, ORGANELLE, WordAssociation
+CHILDREN, PARENTS, WordAssociation
+CHILDREN, YOUTH, WordAssociation
 CLEAN, UNCLEAN, Antonym
 COARSE, GRAINED, WordAssociation
 CODE, MORSE, WordAssociation
@@ -267838,6 +267845,7 @@ DIGRESSION, DISCURSION, WordAssociation
 DINOSAUR, JURASSIC, WordAssociation
 DINOSAUR, TITANOSAUR, WordAssociation
 DISCUSSION, PANEL, WordAssociation
+DISTRIBUTION, LOGARITHMIC, WordAssociation
 DOPPLER, EFFECT, WordAssociation
 DOPPLER, RADAR, WordAssociation
 DRAFT, MILITARY, WordAssociation
@@ -267863,6 +267871,7 @@ ENSIFORM, LEAF, WordAssociation
 EQUILATERAL, TRIANGLE, WordAssociation
 EXPERIMENTAL, TEST, WordAssociation
 FISHING, HUNTING, WordAssociation
+FLAKE, SNOW, WordAssociation
 FLEETING, MOMENT, WordAssociation
 FLINT, STEEL, WordAssociation
 FOOTBALL, NOSEGUARD, WordAssociation
@@ -267870,6 +267879,7 @@ FORECAST, WEATHER, WordAssociation
 FORM, SHAPE, Synonym
 FORMER, LATTER, WordAssociation
 FOUL, OFFSIDE, WordAssociation
+FOUNTAIN, YOUTH, WordAssociation
 FOWL, WATER, WordAssociation
 FREEZE, THAW, Antonym
 FUN, GAMES, WordAssociation
@@ -267914,8 +267924,11 @@ MARS, PLANET, WordAssociation
 MONO, PLURI, Antonym
 MOON, SATELLITE, WordAssociation
 MOTION, REST, Antonym
+MOUNTAIN, PEAK, WordAssociation
 MOVIE, TRAILER, WordAssociation
 MUZZLE, SNOUT, Synonym
+NATURAL, RESOURCE, WordAssociation
+NORTH, SOUTH, Antonym
 OFFSIDE, ONSIDE, Antonym
 ORBIT, SATELLITE, WordAssociation
 ORDER, SORT, WordAssociation
@@ -267931,9 +267944,11 @@ PAST, PRESENT, Antonym
 PEACE, WAR, Antonym
 PLANE, WRIGHT, WordAssociation
 POLARIS, STAR, WordAssociation
+POTENT, STRONG, Synonym
 PREJUDICE, PRIDE, WordAssociation
 PROBLEM, PUZZLE, Synonym
 PROBLEM, SOLUTION, WordAssociation
+PROCEDURAL, PROGRAMMING, WordAssociation
 RADAR, SONAR, WordAssociation
 RASCAL, SCOUNDREL, Synonym
 RESTAURANT, WAITER, WordAssociation
