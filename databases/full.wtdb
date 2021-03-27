@@ -267811,6 +267811,7 @@ BRIBE, CORRUPTION, WordAssociation
 BRIDE, GROOM, WordAssociation
 BROOM, SWEEP, WordAssociation
 BROTHERS, WRIGHT, WordAssociation
+BUNNY, EASTER, WordAssociation
 BUTTERFLY, METAMORPHOSIS, WordAssociation
 BUTTERFLY, MONARCH, WordAssociation
 CAMILLO, GOLGI, WordAssociation
@@ -267829,6 +267830,7 @@ CHIPS, FISH, WordAssociation
 CLEAN, UNCLEAN, Antonym
 COARSE, GRAINED, WordAssociation
 CODE, MORSE, WordAssociation
+COMICAL, FUNNY, Synonym
 COMMA, PERIOD, WordAssociation
 COMPETITION, COOPERATION, Antonym
 COMPETITION, RACE, WordAssociation
@@ -267841,6 +267843,7 @@ CRANKY, GRUMPY, Synonym
 CURE, MEDICATION, WordAssociation
 CURIE, MARIE, WordAssociation
 CURL, GRADIENT, WordAssociation
+CYNICAL, PESSIMISTIC, Synonym
 DECIMAL, NUMBER, WordAssociation
 DEDICATION, DEVOTION, Synonym
 DESTRUCTION, WEAPON, WordAssociation
@@ -267876,11 +267879,13 @@ ENIGMA, TURING, WordAssociation
 ENSIFORM, LEAF, WordAssociation
 EQUILATERAL, TRIANGLE, WordAssociation
 EXPERIMENTAL, TEST, WordAssociation
+FASTER, SLOWER, Antonym
 FISH, SALMON, WordAssociation
 FISHING, HUNTING, WordAssociation
 FLAKE, SNOW, WordAssociation
 FLEETING, MOMENT, WordAssociation
 FLINT, STEEL, WordAssociation
+FLOWERS, PANSIES, WordAssociation
 FOOTBALL, NOSEGUARD, WordAssociation
 FORECAST, WEATHER, WordAssociation
 FORM, SHAPE, Synonym
@@ -267891,6 +267896,7 @@ FOWL, WATER, WordAssociation
 FREEZE, THAW, Antonym
 FUN, GAMES, WordAssociation
 FUNCTION, GRAPH, WordAssociation
+FUNNY, HILARIOUS, Synonym
 GAMMA, RAY, WordAssociation
 GAS, IDEAL, WordAssociation
 GENERAL, MILITARY, WordAssociation
@@ -267905,12 +267911,14 @@ HEAD, TAIL, WordAssociation
 HEIGHT, WIDTH, WordAssociation
 HISTAMINE, REAGIN, WordAssociation
 HOAX, SHAM, Synonym
+HOMO, SAPIENS, WordAssociation
 HORSE, STEED, Synonym
 IMPROVISATION, JAZZ, WordAssociation
 IMPROVISE, JAZZ, WordAssociation
 INCANDESCENT, LIGHTBULB, WordAssociation
 INCANDESCENT, RADIANT, Synonym
 INTRODUCE, PRESENT, Synonym
+IRON, MAIDEN, WordAssociation
 JAM, TOAST, WordAssociation
 JAMES, WATT, WordAssociation
 JAZZ, SWING, WordAssociation
@@ -267922,6 +267930,7 @@ JUNGLE, RAINFOREST, WordAssociation
 JURASSIC, PERIOD, WordAssociation
 KING, MONARCH, Synonym
 LARVA, METAMORPHOSIS, WordAssociation
+LASER, PRINTER, WordAssociation
 LAVA, MAGMA, Synonym
 LENGTH, MILE, WordAssociation
 LIGHT, SWITCH, WordAssociation
@@ -267932,6 +267941,7 @@ LOSER, WINNER, WordAssociation
 MAGMA, VOLCANO, WordAssociation
 MANTA, RAY, WordAssociation
 MARS, PLANET, WordAssociation
+MEDIAN, MODE, WordAssociation
 MILKY, WAY, WordAssociation
 MONO, PLURI, Antonym
 MOON, SATELLITE, WordAssociation
@@ -267958,6 +267968,7 @@ PLANE, WRIGHT, WordAssociation
 POLARIS, STAR, WordAssociation
 POTENT, STRONG, Synonym
 PREJUDICE, PRIDE, WordAssociation
+PRION, PROTEIN, WordAssociation
 PRIVATE, SERGEANT, WordAssociation
 PROBLEM, PUZZLE, Synonym
 PROBLEM, SOLUTION, WordAssociation
