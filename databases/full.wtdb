@@ -205421,6 +205421,7 @@ SCHRECKLICH
 SCHRIK
 SCHRIKS
 SCHROD
+SCHRODINGER
 SCHRODS
 SCHTICK
 SCHTICKS
@@ -267799,6 +267800,8 @@ ANKLE, JOINT, WordAssociation
 ANNOY, BOTHER, Synonym
 ANTOINE, LAVOISIER, WordAssociation
 ANYON, QUASIPARTICLE, WordAssociation
+APPARATUS, EXPERIMENTAL, WordAssociation
+APPARATUS, GOLGI, WordAssociation
 ARCHIMEDES, LEVER, WordAssociation
 ARCHIMEDES, SCREW, WordAssociation
 ARIA, OPERA, WordAssociation
@@ -267811,6 +267814,7 @@ BACTERIA, CYANO, WordAssociation
 BASEBALL, PITCH, WordAssociation
 BASEBALL, SPORT, WordAssociation
 BEER, BREW, WordAssociation
+BIAS, CONFIRMATION, WordAssociation
 BIODIVERSITY, ECOSYSTEM, WordAssociation
 BIOLOGIST, MARINE, WordAssociation
 BIOLOGY, MARINE, WordAssociation
@@ -267836,6 +267840,7 @@ CAR, ENGINE, WordAssociation
 CAR, VEHICLE, WordAssociation
 CARBON, DIAMOND, WordAssociation
 CASTLE, PALACE, Synonym
+CAT, SCHRODINGER, WordAssociation
 CAULDRON, WITCH, WordAssociation
 CELL, JAIL, WordAssociation
 CELL, ORGANELLE, WordAssociation
@@ -267846,12 +267851,14 @@ CHILDREN, YOUTH, WordAssociation
 CHIMP, PRIMATE, WordAssociation
 CHIPS, FISH, WordAssociation
 CLEAN, UNCLEAN, Antonym
+CLUE, EVIDENCE, Synonym
 COARSE, GRAINED, WordAssociation
 CODE, MORSE, WordAssociation
 COMICAL, FUNNY, Synonym
 COMMA, PERIOD, WordAssociation
 COMPETITION, COOPERATION, Antonym
 COMPETITION, RACE, WordAssociation
+CONFIRMATION, EVIDENCE, Synonym
 CONTINENTAL, DRIFT, WordAssociation
 COORDINATES, POLAR, WordAssociation
 CORE, NUCLEAR, WordAssociation
@@ -267905,7 +267912,9 @@ ENGINEER, SOFTWARE, WordAssociation
 ENIGMA, TURING, WordAssociation
 ENSIFORM, LEAF, WordAssociation
 EQUILATERAL, TRIANGLE, WordAssociation
+EVIDENCE, EXPERIMENTAL, WordAssociation
 EXPERIMENTAL, TEST, WordAssociation
+EXPERIMENTAL, THEORETICAL, Antonym
 FASTER, SLOWER, Antonym
 FISH, SALMON, WordAssociation
 FISHING, HUNTING, WordAssociation
