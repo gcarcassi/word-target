@@ -47759,6 +47759,7 @@ COPEPODS
 COPER
 COPERED
 COPERING
+COPERNICUS
 COPERS
 COPES
 COPESETIC
@@ -103411,6 +103412,7 @@ HELIO
 HELIOCENTRIC
 HELIOCENTRICISM
 HELIOCENTRICITY
+HELIOCENTRISM
 HELIOCHROME
 HELIOCHROMES
 HELIOCHROMIC
@@ -175452,6 +175454,7 @@ POLACCA
 POLACCAS
 POLACRE
 POLACRES
+POLAND
 POLAR
 POLARIMETER
 POLARIMETERS
@@ -267849,7 +267852,9 @@ CHEMISTRY, REACTION, WordAssociation
 CHILDREN, PARENTS, WordAssociation
 CHILDREN, YOUTH, WordAssociation
 CHIMP, PRIMATE, WordAssociation
+CHIP, MICRO, WordAssociation
 CHIPS, FISH, WordAssociation
+CHIRP, CRICKET, WordAssociation
 CLEAN, UNCLEAN, Antonym
 CLUE, EVIDENCE, Synonym
 COARSE, GRAINED, WordAssociation
@@ -267861,11 +267866,14 @@ COMPETITION, RACE, WordAssociation
 CONFIRMATION, EVIDENCE, Synonym
 CONTINENTAL, DRIFT, WordAssociation
 COORDINATES, POLAR, WordAssociation
+COPERNICUS, HELIOCENTRISM, WordAssociation
+COPERNICUS, POLAND, WordAssociation
 CORE, NUCLEAR, WordAssociation
 COW, LEATHER, WordAssociation
 COW, UDDER, WordAssociation
 CRANKY, GRUMPY, Synonym
 CREATION, DESTRUCTION, Antonym
+CRICKET, SPORT, WordAssociation
 CRIMINAL, OFFENSE, WordAssociation
 CRIMINAL, THIEF, WordAssociation
 CURE, MEDICATION, WordAssociation
@@ -267949,6 +267957,7 @@ GRIFFIN, MANTICORE, WordAssociation
 GUITAR, STRINGS, WordAssociation
 HEAD, TAIL, WordAssociation
 HEIGHT, WIDTH, WordAssociation
+HELIOCENTRISM, SUN, WordAssociation
 HISTAMINE, REAGIN, WordAssociation
 HOAX, SHAM, Synonym
 HOMO, SAPIENS, WordAssociation
@@ -267976,10 +267985,13 @@ LENGTH, MILE, WordAssociation
 LIGHT, SWITCH, WordAssociation
 LINEAR, REGRESSION, WordAssociation
 LIVING, ROOM, WordAssociation
+LIZARD, REPTILE, WordAssociation
 LOCOMOTIVE, TRAIN, WordAssociation
 LOSER, WINNER, WordAssociation
 LUIGI, MARIO, WordAssociation
 MADRID, SPAIN, WordAssociation
+MAGE, WIZARD, Synonym
+MAGES, WIZARDS, Synonym
 MAGMA, VOLCANO, WordAssociation
 MANTA, RAY, WordAssociation
 MARS, PLANET, WordAssociation
@@ -267994,6 +268006,7 @@ MUZZLE, SNOUT, Synonym
 NATURAL, RESOURCE, WordAssociation
 NORTH, SOUTH, Antonym
 OFFSIDE, ONSIDE, Antonym
+OMICRON, SIGMA, WordAssociation
 ORBIT, SATELLITE, WordAssociation
 ORDER, SORT, WordAssociation
 ORIGIN, POINT, WordAssociation
@@ -268007,7 +268020,9 @@ PASCAL, TRIANGLE, WordAssociation
 PAST, PRESENT, Antonym
 PEACE, WAR, Antonym
 PLANE, WRIGHT, WordAssociation
+POLAND, POLE, WordAssociation
 POLARIS, STAR, WordAssociation
+POLE, SOUTH, WordAssociation
 POTENT, STRONG, Synonym
 PREJUDICE, PRIDE, WordAssociation
 PRION, PROTEIN, WordAssociation
