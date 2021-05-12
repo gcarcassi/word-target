@@ -101332,6 +101332,7 @@ HANDCUFFS
 HANDED
 HANDEDNESS
 HANDEDNESSES
+HANDEL
 HANDER
 HANDERS
 HANDFAST
@@ -199079,6 +199080,7 @@ RIMU
 RIMUS
 RIMY
 RIN
+RINALDO
 RIND
 RINDED
 RINDERPEST
@@ -200033,6 +200035,7 @@ ROMPISHNESS
 ROMPISHNESSES
 ROMPS
 ROMS
+RONALDO
 RONCADOR
 RONCADORS
 RONDACHE
@@ -267827,6 +267830,7 @@ BOSON, FERMION, WordAssociation
 BOTTLE, GENIE, WordAssociation
 BOTTLE, KLEIN, WordAssociation
 BOVINE, COW, Synonym
+BRASS, COPPER, WordAssociation
 BREAKFAST, CONTINENTAL, WordAssociation
 BREAKFAST, DINNER, WordAssociation
 BREEZE, WIND, Synonym
@@ -267842,6 +267846,8 @@ CAPER, PRANK, Synonym
 CAR, ENGINE, WordAssociation
 CAR, VEHICLE, WordAssociation
 CARBON, DIAMOND, WordAssociation
+CARDINAL, DIRECTION, WordAssociation
+CARDINAL, ORDINAL, WordAssociation
 CASTLE, PALACE, Synonym
 CAT, SCHRODINGER, WordAssociation
 CAULDRON, WITCH, WordAssociation
@@ -267855,6 +267861,7 @@ CHIMP, PRIMATE, WordAssociation
 CHIP, MICRO, WordAssociation
 CHIPS, FISH, WordAssociation
 CHIRP, CRICKET, WordAssociation
+CHOPPER, HELICOPTER, Synonym
 CLEAN, UNCLEAN, Antonym
 CLUE, EVIDENCE, Synonym
 COARSE, GRAINED, WordAssociation
@@ -267891,6 +267898,7 @@ DIAMOND, DUST, WordAssociation
 DIGRESSION, DISCURSION, WordAssociation
 DINOSAUR, JURASSIC, WordAssociation
 DINOSAUR, TITANOSAUR, WordAssociation
+DIRECTION, MAGNITUDE, WordAssociation
 DISCUSSION, PANEL, WordAssociation
 DISTANCE, MILE, WordAssociation
 DISTANCE, WALKING, WordAssociation
@@ -267924,6 +267932,7 @@ EVIDENCE, EXPERIMENTAL, WordAssociation
 EXPERIMENTAL, TEST, WordAssociation
 EXPERIMENTAL, THEORETICAL, Antonym
 FASTER, SLOWER, Antonym
+FIBER, GLASS, WordAssociation
 FISH, SALMON, WordAssociation
 FISHING, HUNTING, WordAssociation
 FLAKE, SNOW, WordAssociation
@@ -267955,8 +267964,10 @@ GOLGI, ORGANELLE, WordAssociation
 GRAVE, TOMB, Synonym
 GRIFFIN, MANTICORE, WordAssociation
 GUITAR, STRINGS, WordAssociation
+HANDEL, RINALDO, WordAssociation
 HEAD, TAIL, WordAssociation
 HEIGHT, WIDTH, WordAssociation
+HELICOPTER, PILOT, WordAssociation
 HELIOCENTRISM, SUN, WordAssociation
 HISTAMINE, REAGIN, WordAssociation
 HOAX, SHAM, Synonym
@@ -267966,6 +267977,7 @@ IMPROVISATION, JAZZ, WordAssociation
 IMPROVISE, JAZZ, WordAssociation
 INCANDESCENT, LIGHTBULB, WordAssociation
 INCANDESCENT, RADIANT, Synonym
+INSIGNIFICANCE, SIGNIFICANCE, Antonym
 INTRODUCE, PRESENT, Synonym
 IRON, MAIDEN, WordAssociation
 JAM, TOAST, WordAssociation
@@ -267978,6 +267990,8 @@ JUNCTION, TRAIN, WordAssociation
 JUNGLE, RAINFOREST, WordAssociation
 JURASSIC, PERIOD, WordAssociation
 KING, MONARCH, Synonym
+LADDER, RUNG, WordAssociation
+LANDER, LUNAR, WordAssociation
 LARVA, METAMORPHOSIS, WordAssociation
 LASER, PRINTER, WordAssociation
 LAVA, MAGMA, Synonym
@@ -267993,6 +268007,8 @@ MADRID, SPAIN, WordAssociation
 MAGE, WIZARD, Synonym
 MAGES, WIZARDS, Synonym
 MAGMA, VOLCANO, WordAssociation
+MAGNITUDE, SIGNIFICANCE, Synonym
+MAGNITUDE, SIZE, Synonym
 MANTA, RAY, WordAssociation
 MARS, PLANET, WordAssociation
 MEDIAN, MODE, WordAssociation
@@ -268002,11 +268018,14 @@ MOON, SATELLITE, WordAssociation
 MOTION, REST, Antonym
 MOUNTAIN, PEAK, WordAssociation
 MOVIE, TRAILER, WordAssociation
+MUSIC, OPERA, WordAssociation
 MUZZLE, SNOUT, Synonym
 NATURAL, RESOURCE, WordAssociation
 NORTH, SOUTH, Antonym
 OFFSIDE, ONSIDE, Antonym
 OMICRON, SIGMA, WordAssociation
+OPERA, RINALDO, WordAssociation
+OPERA, SINGER, WordAssociation
 ORBIT, SATELLITE, WordAssociation
 ORDER, SORT, WordAssociation
 ORIGIN, POINT, WordAssociation
@@ -268016,10 +268035,12 @@ OVER, UNDER, Antonym
 OXIDATION, REDUCTION, WordAssociation
 OXIDATION, RUST, WordAssociation
 PANEL, SOLAR, WordAssociation
+PANORAMIC, VIEW, WordAssociation
 PASCAL, TRIANGLE, WordAssociation
 PAST, PRESENT, Antonym
 PEACE, WAR, Antonym
 PLANE, WRIGHT, WordAssociation
+POINT, VIEW, WordAssociation
 POLAND, POLE, WordAssociation
 POLARIS, STAR, WordAssociation
 POLE, SOUTH, WordAssociation
@@ -268034,6 +268055,7 @@ RADAR, SONAR, WordAssociation
 RASCAL, SCOUNDREL, Synonym
 REACTION, REAGENTS, WordAssociation
 RESTAURANT, WAITER, WordAssociation
+RULE, SLIDE, WordAssociation
 SATURATION, SOLUBILITY, WordAssociation
 SATURATION, SOLUTION, WordAssociation
 SIGHT, VISION, Synonym
