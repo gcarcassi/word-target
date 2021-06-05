@@ -3685,6 +3685,7 @@ AFRAID
 AFREET
 AFREETS
 AFRESH
+AFRICA
 AFRIT
 AFRITS
 AFRO
@@ -133037,6 +133038,7 @@ MACUMBAS
 MAD
 MADAFU
 MADAFUS
+MADAGASCAR
 MADAM
 MADAME
 MADAMED
@@ -267791,6 +267793,8 @@ ACCOMPLISHMENT, FEAT, Synonym
 ACID, BASE, Antonym
 ADDED, SUMMED, Synonym
 ADJUST, CALIBRATE, Synonym
+AFRICA, CONTINENT, WordAssociation
+AFRICA, MADAGASCAR, WordAssociation
 AID, MEDICAL, WordAssociation
 ALAN, TURING, WordAssociation
 ALESSANDRO, VOLTA, WordAssociation
@@ -267835,12 +267839,14 @@ BISTRO, RESTAURANT, WordAssociation
 BLACK, WHITE, Antonym
 BLEATS, SHEEP, WordAssociation
 BLOCK, DIFFERENTIAL, WordAssociation
+BONE, FEMUR, WordAssociation
 BOOLE, BOOLEAN, WordAssociation
 BOOLE, GEORGE, WordAssociation
 BOSON, FERMION, WordAssociation
 BOTTLE, GENIE, WordAssociation
 BOTTLE, KLEIN, WordAssociation
 BOVINE, COW, Synonym
+BOXER, PUNCHER, Synonym
 BRASS, COPPER, WordAssociation
 BREAKFAST, CONTINENTAL, WordAssociation
 BREAKFAST, DINNER, WordAssociation
@@ -267853,6 +267859,7 @@ BUNNY, EASTER, WordAssociation
 BUTTERFLY, METAMORPHOSIS, WordAssociation
 BUTTERFLY, MONARCH, WordAssociation
 CAMILLO, GOLGI, WordAssociation
+CANCER, TUMOR, Synonym
 CAPER, PRANK, Synonym
 CAR, ENGINE, WordAssociation
 CAR, VEHICLE, WordAssociation
@@ -267865,6 +267872,7 @@ CAULDRON, WITCH, WordAssociation
 CELEBRATION, FEAST, Synonym
 CELL, JAIL, WordAssociation
 CELL, ORGANELLE, WordAssociation
+CHANCE, PROBABILITY, Synonym
 CHEMISTRY, LAVOISIER, WordAssociation
 CHEMISTRY, REACTION, WordAssociation
 CHILDREN, PARENTS, WordAssociation
@@ -267882,6 +267890,8 @@ COMICAL, FUNNY, Synonym
 COMMA, PERIOD, WordAssociation
 COMPETITION, COOPERATION, Antonym
 COMPETITION, RACE, WordAssociation
+CONDITIONAL, CONTINGENT, Synonym
+CONDITIONAL, PROBABILITY, WordAssociation
 CONFIRMATION, EVIDENCE, Synonym
 CONTINENTAL, DRIFT, WordAssociation
 COORDINATES, POLAR, WordAssociation
@@ -267945,6 +267955,7 @@ EVIDENCE, EXPERIMENTAL, WordAssociation
 EXPERIMENTAL, TEST, WordAssociation
 EXPERIMENTAL, THEORETICAL, Antonym
 EXPLOIT, FEAT, Synonym
+EYE, HURRICANE, WordAssociation
 FAST, SLOW, Antonym
 FASTER, SLOWER, Antonym
 FAT, OIL, WordAssociation
@@ -267984,6 +267995,7 @@ GUITAR, STRINGS, WordAssociation
 GUNPOWDER, NITER, WordAssociation
 HANDEL, RINALDO, WordAssociation
 HEAD, TAIL, WordAssociation
+HEARSAY, RUMOR, Synonym
 HEIGHT, WIDTH, WordAssociation
 HELICOPTER, PILOT, WordAssociation
 HELIOCENTRISM, SUN, WordAssociation
@@ -268013,6 +268025,7 @@ LANDER, LUNAR, WordAssociation
 LARVA, METAMORPHOSIS, WordAssociation
 LASER, PRINTER, WordAssociation
 LAVA, MAGMA, Synonym
+LEMUR, MADAGASCAR, WordAssociation
 LENGTH, MILE, WordAssociation
 LIGHT, SWITCH, WordAssociation
 LINEAR, REGRESSION, WordAssociation
