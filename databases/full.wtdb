@@ -93913,6 +93913,7 @@ GEOPONICS
 GEOPRESSURED
 GEOPROBE
 GEOPROBES
+GEORG
 GEORGE
 GEORGETTE
 GEORGETTES
@@ -173999,6 +174000,7 @@ PLATITUDINIZES
 PLATITUDINIZING
 PLATITUDINOUS
 PLATITUDINOUSLY
+PLATO
 PLATONIC
 PLATONICALLY
 PLATONICS
@@ -267860,15 +267862,18 @@ BUTTERFLY, METAMORPHOSIS, WordAssociation
 BUTTERFLY, MONARCH, WordAssociation
 CAMILLO, GOLGI, WordAssociation
 CANCER, TUMOR, Synonym
+CANTOR, GEORG, WordAssociation
 CAPER, PRANK, Synonym
 CAR, ENGINE, WordAssociation
 CAR, VEHICLE, WordAssociation
+CARBON, COAL, WordAssociation
 CARBON, DIAMOND, WordAssociation
 CARDINAL, DIRECTION, WordAssociation
 CARDINAL, ORDINAL, WordAssociation
 CASTLE, PALACE, Synonym
 CAT, SCHRODINGER, WordAssociation
 CAULDRON, WITCH, WordAssociation
+CAVE, PLATO, WordAssociation
 CELEBRATION, FEAST, Synonym
 CELL, JAIL, WordAssociation
 CELL, ORGANELLE, WordAssociation
@@ -267892,12 +267897,15 @@ COMPETITION, COOPERATION, Antonym
 COMPETITION, RACE, WordAssociation
 CONDITIONAL, CONTINGENT, Synonym
 CONDITIONAL, PROBABILITY, WordAssociation
+CONFETTI, PARTY, WordAssociation
 CONFIRMATION, EVIDENCE, Synonym
 CONTINENTAL, DRIFT, WordAssociation
 COORDINATES, POLAR, WordAssociation
 COPERNICUS, HELIOCENTRISM, WordAssociation
 COPERNICUS, POLAND, WordAssociation
+CORAL, REEF, WordAssociation
 CORE, NUCLEAR, WordAssociation
+COVEN, WITCHES, WordAssociation
 COW, LEATHER, WordAssociation
 COW, UDDER, WordAssociation
 CRANKY, GRUMPY, Synonym
@@ -267919,6 +267927,7 @@ DESTRUCTION, WEAPON, WordAssociation
 DIAMOND, DUST, WordAssociation
 DIFFERENTIAL, EQUATION, WordAssociation
 DIGRESSION, DISCURSION, WordAssociation
+DILEMMA, PRISONER, WordAssociation
 DINOSAUR, JURASSIC, WordAssociation
 DINOSAUR, TITANOSAUR, WordAssociation
 DIRECTION, MAGNITUDE, WordAssociation
@@ -267974,6 +267983,7 @@ FORMER, LATTER, WordAssociation
 FOUL, OFFSIDE, WordAssociation
 FOUNTAIN, YOUTH, WordAssociation
 FOWL, WATER, WordAssociation
+FREE, GRATIS, Synonym
 FREEZE, THAW, Antonym
 FUN, GAMES, WordAssociation
 FUNCTION, GRAPH, WordAssociation
@@ -267983,6 +267993,7 @@ GALVANI, LUIGI, WordAssociation
 GALVANIZATION, ZINC, WordAssociation
 GAMMA, RAY, WordAssociation
 GAS, IDEAL, WordAssociation
+GATES, SWITCHES, Synonym
 GENERAL, MILITARY, WordAssociation
 GENUS, SPECIES, WordAssociation
 GEOSTATIONARY, ORBIT, WordAssociation
@@ -268068,14 +268079,17 @@ OXIDATION, REDUCTION, WordAssociation
 OXIDATION, RUST, WordAssociation
 PANEL, SOLAR, WordAssociation
 PANORAMIC, VIEW, WordAssociation
+PARTY, POLITICAL, WordAssociation
 PASCAL, TRIANGLE, WordAssociation
 PAST, PRESENT, Antonym
 PEACE, WAR, Antonym
 PLANE, WRIGHT, WordAssociation
+PLATE, TECTONIC, WordAssociation
 POINT, VIEW, WordAssociation
 POLAND, POLE, WordAssociation
 POLARIS, STAR, WordAssociation
 POLE, SOUTH, WordAssociation
+POLITICAL, PRISONER, WordAssociation
 POTENT, STRONG, Synonym
 PREJUDICE, PRIDE, WordAssociation
 PRION, PROTEIN, WordAssociation
