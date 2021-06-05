@@ -168,6 +168,10 @@ public class WordDatabase {
     public boolean containsWord(Word word) {
         return words.contains(word);
     }
+    
+    public boolean containsLink(Link link) {
+        return links.contains(link);
+    }
 
     public boolean containsLink(Word wordA, Word wordB) {
         return words.contains(wordA) && getLinksFor(wordA).stream().anyMatch((x) -> {

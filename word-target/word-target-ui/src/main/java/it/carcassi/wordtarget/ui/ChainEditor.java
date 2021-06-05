@@ -566,6 +566,18 @@ public class ChainEditor extends javax.swing.JFrame {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 Chain newChain = Chain.deserialize(reader);
                 addNewChain(newChain);
+                for (Word word : newChain.words()) {
+                    if (!db.containsWord(word)) {
+                        db.addWord(word);
+                        setDbChanged(true);
+                    }
+                }
+                for (Link link : newChain.links()) {
+                    if (!db.containsLink(link)) {
+                        db.addLink(link);
+                        setDbChanged(true);
+                    }
+                }
             } catch (IOException ex) {
                 Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
             }
