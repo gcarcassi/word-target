@@ -198591,6 +198591,7 @@ RIBBIER
 RIBBIEST
 RIBBING
 RIBBINGS
+RIBBIT
 RIBBON
 RIBBONED
 RIBBONFISH
@@ -267809,6 +267810,7 @@ ALGORITHMIC, PROCEDURAL, Synonym
 ALLOCATION, DISTRIBUTION, Synonym
 ALLOCATION, RESOURCE, WordAssociation
 ALLOY, BRASS, WordAssociation
+ALTERNATIVE, OPTION, Synonym
 ALWAYS, NEVER, Antonym
 AMERICA, ASIA, WordAssociation
 AMERICAN, FOOTBALL, WordAssociation
@@ -267910,6 +267912,7 @@ CONDITIONAL, CONTINGENT, Synonym
 CONDITIONAL, PROBABILITY, WordAssociation
 CONFETTI, PARTY, WordAssociation
 CONFIRMATION, EVIDENCE, Synonym
+CONIFER, TREE, WordAssociation
 CONSTANT, PLANCK, WordAssociation
 CONSTANT, VARIABLE, Antonym
 CONTINENTAL, DRIFT, WordAssociation
@@ -268004,6 +268007,7 @@ FOUNTAIN, YOUTH, WordAssociation
 FOWL, WATER, WordAssociation
 FREE, GRATIS, Synonym
 FREEZE, THAW, Antonym
+FROG, RIBBIT, WordAssociation
 FUN, GAMES, WordAssociation
 FUNCTION, GRAPH, WordAssociation
 FUNNY, HILARIOUS, Synonym
@@ -268027,6 +268031,7 @@ GRIFFIN, MANTICORE, WordAssociation
 GUITAR, STRINGS, WordAssociation
 GUNPOWDER, NITER, WordAssociation
 HANDEL, RINALDO, WordAssociation
+HARE, RABBIT, WordAssociation
 HEAD, TAIL, WordAssociation
 HEARSAY, RUMOR, Synonym
 HEIGHT, WIDTH, WordAssociation
@@ -268066,6 +268071,8 @@ LAW, ORDER, WordAssociation
 LEMUR, MADAGASCAR, WordAssociation
 LENGTH, MILE, WordAssociation
 LIGHT, SWITCH, WordAssociation
+LINE, QUEUE, WordAssociation
+LINE, SEGMENT, WordAssociation
 LINEAR, REGRESSION, WordAssociation
 LIVING, ROOM, WordAssociation
 LIZARD, REPTILE, WordAssociation
@@ -268123,6 +268130,7 @@ POLAND, POLE, WordAssociation
 POLARIS, STAR, WordAssociation
 POLE, SOUTH, WordAssociation
 POLITICAL, PRISONER, WordAssociation
+PORTION, SEGMENT, Synonym
 POTENT, STRONG, Synonym
 PREJUDICE, PRIDE, WordAssociation
 PRION, PROTEIN, WordAssociation
@@ -268131,6 +268139,7 @@ PROBLEM, PUZZLE, Synonym
 PROBLEM, SOLUTION, WordAssociation
 PROBLEM, SOLVER, WordAssociation
 PROCEDURAL, PROGRAMMING, WordAssociation
+QUEEN, THRONE, WordAssociation
 RADAR, SONAR, WordAssociation
 RADIOACTIVE, URANIUM, WordAssociation
 RASCAL, SCOUNDREL, Synonym
