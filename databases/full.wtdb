@@ -82231,6 +82231,7 @@ FARSE
 FARSED
 FARSEEING
 FARSES
+FARSI
 FARSIDE
 FARSIDES
 FARSIGHTED
@@ -89226,6 +89227,7 @@ FRANCHISES
 FRANCHISING
 FRANCHISOR
 FRANCHISORS
+FRANCIS
 FRANCISE
 FRANCISED
 FRANCISES
@@ -169242,6 +169244,7 @@ PERSEVERED
 PERSEVERES
 PERSEVERING
 PERSEVERINGLY
+PERSIAN
 PERSICARIA
 PERSICARIAS
 PERSICO
@@ -267837,6 +267840,8 @@ ATTACK, OFFENSIVE, Synonym
 ATTACK, PANIC, WordAssociation
 AUTUMN, SPRING, WordAssociation
 AXON, NERVE, WordAssociation
+BACON, FRANCIS, WordAssociation
+BACON, PORK, WordAssociation
 BACTERIA, CYANO, WordAssociation
 BASEBALL, PITCH, WordAssociation
 BASEBALL, SPORT, WordAssociation
@@ -267849,6 +267854,7 @@ BIOLOGY, MARINE, WordAssociation
 BIOTIC, FACTOR, WordAssociation
 BISTRO, RESTAURANT, WordAssociation
 BLACK, WHITE, Antonym
+BLADE, KNIFE, Synonym
 BLEATS, SHEEP, WordAssociation
 BLOCK, DIFFERENTIAL, WordAssociation
 BONE, FEMUR, WordAssociation
@@ -267941,6 +267947,7 @@ DEFENSE, ZONE, WordAssociation
 DELTA, GAMMA, WordAssociation
 DERIVATIVE, INTEGRAL, WordAssociation
 DERIVATIVES, OPTIONS, WordAssociation
+DESIRE, WISH, Synonym
 DESTRUCTION, WEAPON, WordAssociation
 DIALECT, JARGON, WordAssociation
 DIAMOND, DUST, WordAssociation
@@ -267980,17 +267987,22 @@ ENGINEER, NUCLEAR, WordAssociation
 ENGINEER, SOFTWARE, WordAssociation
 ENIGMA, TURING, WordAssociation
 ENSIFORM, LEAF, WordAssociation
+ENTICE, LURE, Synonym
+ENTIRE, WHOLE, Synonym
 EQUILATERAL, TRIANGLE, WordAssociation
 EVIDENCE, EXPERIMENTAL, WordAssociation
+EVOLUTION, SPECIES, WordAssociation
 EXPERIMENTAL, TEST, WordAssociation
 EXPERIMENTAL, THEORETICAL, Antonym
 EXPLOIT, FEAT, Synonym
 EYE, HURRICANE, WordAssociation
 FACTORY, WORKER, WordAssociation
+FARSI, PERSIAN, Synonym
 FAST, SLOW, Antonym
 FASTER, SLOWER, Antonym
 FAT, OIL, WordAssociation
 FIBER, GLASS, WordAssociation
+FIELD, FORCE, WordAssociation
 FISH, SALMON, WordAssociation
 FISHING, HUNTING, WordAssociation
 FLAKE, SNOW, WordAssociation
@@ -268000,13 +268012,17 @@ FLOWERS, PANSIES, WordAssociation
 FOLDER, MANILA, WordAssociation
 FOOTBALL, NOSEGUARD, WordAssociation
 FORECAST, WEATHER, WordAssociation
+FOREST, WEALD, Synonym
+FORK, KNIFE, WordAssociation
 FORM, SHAPE, Synonym
 FORMER, LATTER, WordAssociation
 FOUL, OFFSIDE, WordAssociation
 FOUNTAIN, YOUTH, WordAssociation
 FOWL, WATER, WordAssociation
+FRANC, SWISS, WordAssociation
 FREE, GRATIS, Synonym
 FREEZE, THAW, Antonym
+FRISKED, SEARCHED, Synonym
 FROG, RIBBIT, WordAssociation
 FUN, GAMES, WordAssociation
 FUNCTION, GRAPH, WordAssociation
@@ -268014,9 +268030,11 @@ FUNNY, HILARIOUS, Synonym
 GALVANI, GALVANIZATION, WordAssociation
 GALVANI, LUIGI, WordAssociation
 GALVANIZATION, ZINC, WordAssociation
+GAMBLED, RISKED, Synonym
 GAMMA, RAY, WordAssociation
 GAS, IDEAL, WordAssociation
 GAS, NOBLE, WordAssociation
+GASTROPOD, SNAIL, WordAssociation
 GATES, SWITCHES, Synonym
 GENERAL, MILITARY, WordAssociation
 GENUS, SPECIES, WordAssociation
@@ -268030,7 +268048,9 @@ GRAVE, TOMB, Synonym
 GRIFFIN, MANTICORE, WordAssociation
 GUITAR, STRINGS, WordAssociation
 GUNPOWDER, NITER, WordAssociation
+HAMMER, NAILS, WordAssociation
 HANDEL, RINALDO, WordAssociation
+HARDER, SOFTER, Antonym
 HARE, RABBIT, WordAssociation
 HEAD, TAIL, WordAssociation
 HEARSAY, RUMOR, Synonym
@@ -268118,6 +268138,7 @@ OXIDATION, REDUCTION, WordAssociation
 OXIDATION, RUST, WordAssociation
 PANEL, SOLAR, WordAssociation
 PANORAMIC, VIEW, WordAssociation
+PANZER, TANK, WordAssociation
 PARTY, POLITICAL, WordAssociation
 PASCAL, TRIANGLE, WordAssociation
 PAST, PRESENT, Antonym
@@ -268144,10 +268165,13 @@ RADAR, SONAR, WordAssociation
 RADIOACTIVE, URANIUM, WordAssociation
 RASCAL, SCOUNDREL, Synonym
 REACTION, REAGENTS, WordAssociation
+RESEARCH, SCIENTIFIC, WordAssociation
 RESTAURANT, WAITER, WordAssociation
+REVOLUTION, SCIENTIFIC, WordAssociation
 RULE, SLIDE, WordAssociation
 SATURATION, SOLUBILITY, WordAssociation
 SATURATION, SOLUTION, WordAssociation
+SHARK, WHALE, WordAssociation
 SIGHT, VISION, Synonym
 SKUNK, SMELL, WordAssociation
 SLEEP, SLUMBER, WordAssociation
