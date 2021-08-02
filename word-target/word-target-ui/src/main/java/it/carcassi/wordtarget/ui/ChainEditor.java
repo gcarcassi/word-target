@@ -126,6 +126,10 @@ public class ChainEditor extends javax.swing.JFrame {
         reverseChainButton = new javax.swing.JButton();
         largeTargetWordCheck = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -303,6 +307,18 @@ public class ChainEditor extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+
+        jMenuItem1.setAction(removeWordFromCurrentListAction());
+        jMenu2.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -515,8 +531,7 @@ public class ChainEditor extends javax.swing.JFrame {
         }
     }
     
-    public Action removeWordFromCurrentListAction() {
-        return new AbstractAction("Remove words") {
+    private final Action removeWordFromCurrentListAction = new AbstractAction("Remove words") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Word currentWord = getCurrentSelectedWord();
@@ -528,6 +543,9 @@ public class ChainEditor extends javax.swing.JFrame {
                 }
             }
         };
+
+    public Action removeWordFromCurrentListAction() {
+        return removeWordFromCurrentListAction;
     }
     
     public void removeLastLink() {
@@ -674,6 +692,10 @@ public class ChainEditor extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
