@@ -232,4 +232,19 @@ VITAMIN A, SIGHT, WordAssociation
         assertEquals(Set.of(batBaseball), db.getLinksFor(bat, Set.of(cat)));
         assertEquals(Set.of(), db.getLinksFor(bat, Set.of(cat, baseball)));
     }
+    
+    @Test
+    public void testAddFromChain() {
+        WordDatabase db = new WordDatabase();
+        db.addWords(Arrays.asList(cat, bat, baseball));
+        db.addLink(batBaseball);
+        db.addLink(baseballSport);
+
+        Chain chain = Chain.of(catBat, batBaseball, baseballSport, sportPorts);
+        assertTrue(db.addFromChain(chain));
+        assertEquals(Set.of(cat, bat, baseball, sport, ports), db.getAllWords());
+        for (Link link : chain.links()) {
+            assertTrue(db.containsLink(link));
+        }
+    }
 }

@@ -360,4 +360,27 @@ public class WordDatabase {
 
         return false;
     }
+
+    /**
+     * Adds all the words and links from the chain that are not already in the database.
+     * 
+     * @param chain a chain
+     * @return true if the db was changed
+     */
+    public boolean addFromChain(Chain chain) {
+        boolean changed = false;
+        for (Word word : chain.words()) {
+            if (!containsWord(word)) {
+                addWord(word);
+                changed = true;
+            }
+        }
+        for (Link link : chain.links()) {
+            if (!containsLink(link)) {
+                addLink(link);
+                changed =true;
+            }
+        }
+        return changed;
+    }
 }
