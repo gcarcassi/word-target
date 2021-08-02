@@ -16,6 +16,7 @@ import it.carcassi.wordtarget.core.WordDatabase;
 import it.carcassi.wordtarget.core.WordTargetLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -38,8 +39,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -121,6 +125,7 @@ public class ChainEditor extends javax.swing.JFrame {
         exportChainButton = new javax.swing.JButton();
         reverseChainButton = new javax.swing.JButton();
         largeTargetWordCheck = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -257,21 +262,24 @@ public class ChainEditor extends javax.swing.JFrame {
         largeTargetWordCheck.setEnabled(false);
         largeTargetWordCheck.setFocusable(false);
 
+        jButton1.setAction(removeWordFromCurrentListAction());
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(largeTargetWordCheck, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(editDbButton)
                     .addComponent(saveDbButton)
                     .addComponent(loadChainButton)
                     .addComponent(saveChainButton)
-                    .addComponent(saveChainAsButton)
+                    .addComponent(saveChainAsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(exportChainButton)
-                    .addComponent(reverseChainButton))
+                    .addComponent(reverseChainButton)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(largeTargetWordCheck, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,6 +299,8 @@ public class ChainEditor extends javax.swing.JFrame {
                 .addComponent(saveChainAsButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exportChainButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -319,14 +329,16 @@ public class ChainEditor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(29, 29, 29))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(targetWordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1)
                         .addGap(32, 32, 32))
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -503,6 +515,21 @@ public class ChainEditor extends javax.swing.JFrame {
         }
     }
     
+    public Action removeWordFromCurrentListAction() {
+        return new AbstractAction("Remove words") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Word currentWord = getCurrentSelectedWord();
+                if (currentWord != null) {
+                    currentChain.removeFrom(currentWord);
+                    chainsModel.set(chainsModel.indexOf(currentChain), currentChain);
+                    setCurrentChain(currentChain);
+                    selectedChainList.setSelectedIndex(currentChain.words().size() - 1);
+                }
+            }
+        };
+    }
+    
     public void removeLastLink() {
         if (currentChain != null && currentChain.size() > 1) {
             currentChain.removeLast();
@@ -644,6 +671,7 @@ public class ChainEditor extends javax.swing.JFrame {
     private javax.swing.JList<it.carcassi.wordtarget.core.Chain> chainsList;
     private javax.swing.JButton editDbButton;
     private javax.swing.JButton exportChainButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
