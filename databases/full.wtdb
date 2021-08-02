@@ -267896,10 +267896,12 @@ CELEBRATION, FEAST, Synonym
 CELL, JAIL, WordAssociation
 CELL, ORGANELLE, WordAssociation
 CHANCE, PROBABILITY, Synonym
+CHEAP, EXPENSIVE, Antonym
 CHEMISTRY, LAVOISIER, WordAssociation
 CHEMISTRY, REACTION, WordAssociation
 CHILDREN, PARENTS, WordAssociation
 CHILDREN, YOUTH, WordAssociation
+CHILI, PEPPER, WordAssociation
 CHIMP, PRIMATE, WordAssociation
 CHIP, MICRO, WordAssociation
 CHIPS, FISH, WordAssociation
@@ -267927,6 +267929,8 @@ COPERNICUS, HELIOCENTRISM, WordAssociation
 COPERNICUS, POLAND, WordAssociation
 CORAL, REEF, WordAssociation
 CORE, NUCLEAR, WordAssociation
+CORPS, PEACE, WordAssociation
+CORPSE, ZOMBIE, WordAssociation
 COVEN, WITCHES, WordAssociation
 COW, LEATHER, WordAssociation
 COW, UDDER, WordAssociation
@@ -267967,6 +267971,8 @@ DOPPLER, EFFECT, WordAssociation
 DOPPLER, RADAR, WordAssociation
 DRAFT, MILITARY, WordAssociation
 DREAM, SLEEP, WordAssociation
+DWARF, SHORT, WordAssociation
+DWARF, WHITE, WordAssociation
 EARTH, PLANET, WordAssociation
 EAST, WEST, WordAssociation
 ECOSYSTEM, RAINFOREST, WordAssociation
@@ -268061,6 +268067,7 @@ HISTAMINE, REAGIN, WordAssociation
 HOAX, SHAM, Synonym
 HOMO, SAPIENS, WordAssociation
 HONOR, VALOR, WordAssociation
+HORDE, ZOMBIE, WordAssociation
 HORSE, STEED, Synonym
 IMPROVISATION, JAZZ, WordAssociation
 IMPROVISE, JAZZ, WordAssociation
@@ -268143,6 +268150,7 @@ PARTY, POLITICAL, WordAssociation
 PASCAL, TRIANGLE, WordAssociation
 PAST, PRESENT, Antonym
 PEACE, WAR, Antonym
+PEPPER, SALT, WordAssociation
 PLANE, WRIGHT, WordAssociation
 PLATE, TECTONIC, WordAssociation
 PLAY, RECORD, Antonym
@@ -268175,8 +268183,10 @@ SHARK, WHALE, WordAssociation
 SIGHT, VISION, Synonym
 SKUNK, SMELL, WordAssociation
 SLEEP, SLUMBER, WordAssociation
+SNOW, WINTER, WordAssociation
 SPACE, STATION, WordAssociation
 SPRING, SUMMER, WordAssociation
+SPRING, WINTER, WordAssociation
 STEAM, VAPOR, WordAssociation
 STONE, TABLET, WordAssociation
 THAT, THIS, WordAssociation
