@@ -231,4 +231,20 @@ PORTS PORT OneLetterAddOrRemove
         Chain chain2 = Chain.of(catBat, batBaseball, baseballSport, sportPorts, portsPort);
         assertEquals(chain2, chain);
     }
+    
+    @Test
+    public void testRemoveFrom() {
+        Chain chain = Chain.of(catBat, batBaseball, baseballSport, sportPorts, portsPort);
+        chain.removeFrom(sport);
+        Chain chain2 = Chain.of(catBat, batBaseball);
+        assertEquals(chain2, chain);
+    }
+    
+    @Test
+    public void testRemoveFrom2() {
+        Chain chain = Chain.of(catBat, batBaseball);
+        assertThrows(IllegalArgumentException.class, () -> {
+            chain.removeFrom(port);
+        });
+    }
 }

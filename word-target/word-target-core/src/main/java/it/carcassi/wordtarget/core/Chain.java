@@ -205,6 +205,24 @@ public class Chain {
         }
         return true;
     }
+
+    /**
+     * Removes a word and all the following.
+     * 
+     * @param word the word to remove
+     * @throws IllegalArgumentException if the word is not in the chain
+     */
+    public void removeFrom(Word word) {
+        int index = words().indexOf(word);
+        if (index == -1) {
+            throw new IllegalArgumentException("The word " + word + " is not in the chain");
+        }
+        
+        while (!getFinalWord().equals(word)) {
+            removeLast();
+        }
+        removeLast();
+    }
     
 }
 
