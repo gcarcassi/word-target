@@ -104,6 +104,7 @@ public class ChainEditor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem2 = new javax.swing.JMenuItem();
         targetWordField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -128,8 +129,11 @@ public class ChainEditor extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+
+        jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -309,6 +313,10 @@ public class ChainEditor extends javax.swing.JFrame {
         );
 
         jMenu1.setText("File");
+
+        jMenuItem3.setAction(getSaveNewLinks());
+        jMenu1.add(jMenuItem3);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -581,6 +589,35 @@ public class ChainEditor extends javax.swing.JFrame {
         saveDbButton.setEnabled(dbChanged && currentDbFile != null);
     }
     
+    private Action saveNewLinks = new AbstractAction("Save new links") {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (currentDbFile == null) {
+                throw new IllegalStateException("No valid database file selected");
+            }
+
+            try (BufferedReader reader = new BufferedReader(new FileReader(currentDbFile))) {
+                db = WordDatabase.deserialize(reader);
+            } catch (IOException ex) {
+                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+                db = new WordDatabase();
+            }
+            
+            db.addFromChain(currentChain);
+            
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(currentDbFile))) {
+                db.serialize(writer);
+                setDbChanged(false);
+            } catch (Exception ex) {
+                Logger.getLogger(ChainEditor.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
+    };
+
+    public Action getSaveNewLinks() {
+        return saveNewLinks;
+    }
+    
     private void saveDb() {
         if (!dbChanged || currentDbFile == null) {
             throw new IllegalStateException("Shouldn't be able to save db if not changed or no valid file was chosen");
@@ -611,18 +648,7 @@ public class ChainEditor extends javax.swing.JFrame {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 Chain newChain = Chain.deserialize(reader);
                 addNewChain(newChain);
-                for (Word word : newChain.words()) {
-                    if (!db.containsWord(word)) {
-                        db.addWord(word);
-                        setDbChanged(true);
-                    }
-                }
-                for (Link link : newChain.links()) {
-                    if (!db.containsLink(link)) {
-                        db.addLink(link);
-                        setDbChanged(true);
-                    }
-                }
+                setDbChanged(db.addFromChain(newChain));
             } catch (IOException ex) {
                 Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -696,6 +722,8 @@ public class ChainEditor extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
