@@ -19,6 +19,9 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeListenerProxy;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -539,7 +542,23 @@ public class ChainEditor extends javax.swing.JFrame {
         }
     }
     
-    private final Action removeWordFromCurrentListAction = new AbstractAction("Remove words") {
+    private Action removeWordFromCurrentListAction;
+    
+    private final Action createRemoveWordFromCurrentListAction(final JList<Word> list) {
+        
+        return new AbstractAction("Remove words") {
+        
+            {
+                updateEnabled();
+                list.getSelectionModel().addListSelectionListener((e) -> {
+                    updateEnabled();
+                });
+            }
+        
+            private void updateEnabled() {
+                setEnabled(list.getSelectedIndex() > 0);
+            }
+            
             @Override
             public void actionPerformed(ActionEvent e) {
                 Word currentWord = getCurrentSelectedWord();
@@ -547,12 +566,16 @@ public class ChainEditor extends javax.swing.JFrame {
                     currentChain.removeFrom(currentWord);
                     chainsModel.set(chainsModel.indexOf(currentChain), currentChain);
                     setCurrentChain(currentChain);
-                    selectedChainList.setSelectedIndex(currentChain.words().size() - 1);
+                    list.setSelectedIndex(currentChain.words().size() - 1);
                 }
             }
         };
+    }
 
     public Action removeWordFromCurrentListAction() {
+        if (removeWordFromCurrentListAction == null) {
+            removeWordFromCurrentListAction = createRemoveWordFromCurrentListAction(selectedChainList);
+        }
         return removeWordFromCurrentListAction;
     }
     
