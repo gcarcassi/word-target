@@ -150504,6 +150504,7 @@ NIKAU
 NIKAUS
 NIKETHAMIDE
 NIKETHAMIDES
+NIKOLA
 NIL
 NILGAI
 NILGAIS
@@ -267872,6 +267873,7 @@ BREAKFAST, DINNER, WordAssociation
 BREEZE, WIND, Synonym
 BRIBE, CORRUPTION, WordAssociation
 BRIDE, GROOM, WordAssociation
+BRIGHTEN, ILLUMINATE, Synonym
 BROOM, SWEEP, WordAssociation
 BROTHERS, WRIGHT, WordAssociation
 BUNNY, EASTER, WordAssociation
@@ -267910,8 +267912,11 @@ CHOPPER, HELICOPTER, Synonym
 CITADEL, STRONGHOLD, Synonym
 CLEAN, UNCLEAN, Antonym
 CLUE, EVIDENCE, Synonym
+COAL, COLLIER, WordAssociation
 COARSE, GRAINED, WordAssociation
 CODE, MORSE, WordAssociation
+COIL, TESLA, WordAssociation
+COLLIDER, HADRON, WordAssociation
 COMICAL, FUNNY, Synonym
 COMMA, PERIOD, WordAssociation
 COMPETITION, COOPERATION, Antonym
@@ -267969,6 +267974,7 @@ DISTRIBUTION, LOGARITHMIC, WordAssociation
 DONOR, ORGAN, WordAssociation
 DOPPLER, EFFECT, WordAssociation
 DOPPLER, RADAR, WordAssociation
+DOPPLER, SHIFT, WordAssociation
 DRAFT, MILITARY, WordAssociation
 DREAM, SLEEP, WordAssociation
 DWARF, SHORT, WordAssociation
@@ -268028,6 +268034,7 @@ FOWL, WATER, WordAssociation
 FRANC, SWISS, WordAssociation
 FREE, GRATIS, Synonym
 FREEZE, THAW, Antonym
+FRIGHTEN, SPOOK, Synonym
 FRISKED, SEARCHED, Synonym
 FROG, RIBBIT, WordAssociation
 FUN, GAMES, WordAssociation
@@ -268054,6 +268061,7 @@ GRAVE, TOMB, Synonym
 GRIFFIN, MANTICORE, WordAssociation
 GUITAR, STRINGS, WordAssociation
 GUNPOWDER, NITER, WordAssociation
+HADRON, QUARK, WordAssociation
 HAMMER, NAILS, WordAssociation
 HANDEL, RINALDO, WordAssociation
 HARDER, SOFTER, Antonym
@@ -268069,6 +268077,7 @@ HOMO, SAPIENS, WordAssociation
 HONOR, VALOR, WordAssociation
 HORDE, ZOMBIE, WordAssociation
 HORSE, STEED, Synonym
+ILLUMINATE, LIGHT, WordAssociation
 IMPROVISATION, JAZZ, WordAssociation
 IMPROVISE, JAZZ, WordAssociation
 INCANDESCENT, LIGHTBULB, WordAssociation
@@ -268130,6 +268139,7 @@ MYSTERY, PROBLEM, Synonym
 NARCOTIZE, SEDATE, Synonym
 NATURAL, RESOURCE, WordAssociation
 NIGHT, OWL, WordAssociation
+NIKOLA, TESLA, WordAssociation
 NORTH, SOUTH, Antonym
 OFFSIDE, ONSIDE, Antonym
 OMICRON, SIGMA, WordAssociation
@@ -268143,6 +268153,7 @@ OTTER, RIVER, WordAssociation
 OVER, UNDER, Antonym
 OXIDATION, REDUCTION, WordAssociation
 OXIDATION, RUST, WordAssociation
+PAMPER, SPOIL, Synonym
 PANEL, SOLAR, WordAssociation
 PANORAMIC, VIEW, WordAssociation
 PANZER, TANK, WordAssociation
@@ -268169,6 +268180,7 @@ PROBLEM, SOLUTION, WordAssociation
 PROBLEM, SOLVER, WordAssociation
 PROCEDURAL, PROGRAMMING, WordAssociation
 QUEEN, THRONE, WordAssociation
+QUICK, SWIFT, Synonym
 RADAR, SONAR, WordAssociation
 RADIOACTIVE, URANIUM, WordAssociation
 RASCAL, SCOUNDREL, Synonym
