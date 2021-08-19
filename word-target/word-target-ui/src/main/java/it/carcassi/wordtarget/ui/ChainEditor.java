@@ -51,6 +51,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.UIManager;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 
 /**
  *
@@ -65,6 +67,31 @@ public class ChainEditor extends javax.swing.JFrame {
      */
     public ChainEditor() {
         initComponents();
+        model.getWordModel().addListDataListener(new ListDataListener() {
+            @Override
+            public void intervalAdded(ListDataEvent e) {
+                refresh();
+            }
+
+            @Override
+            public void intervalRemoved(ListDataEvent e) {
+                refresh();
+            }
+
+            @Override
+            public void contentsChanged(ListDataEvent e) {
+                refresh();
+            }
+            
+            private void refresh() {
+                if (model.getCurrentChain() != null) {
+                    boolean targetFits = Renderer.wordFitsInCenter(model.getCurrentChain().getInitialWord().toString());
+                    largeTargetWordCheck.setSelected(!targetFits);
+                } else {
+                    largeTargetWordCheck.setSelected(false);
+                }
+            }
+        });
     }
 
     /**
