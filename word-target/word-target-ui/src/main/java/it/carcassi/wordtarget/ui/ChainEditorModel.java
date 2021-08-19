@@ -7,6 +7,7 @@ package it.carcassi.wordtarget.ui;
 
 import it.carcassi.wordtarget.core.Chain;
 import it.carcassi.wordtarget.core.Link;
+import it.carcassi.wordtarget.core.LinkType;
 import it.carcassi.wordtarget.core.Word;
 import it.carcassi.wordtarget.core.WordDatabase;
 import java.awt.event.ActionEvent;
@@ -26,6 +27,7 @@ import javax.swing.AbstractListModel;
 import javax.swing.Action;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListDataEvent;
@@ -159,6 +161,10 @@ public class ChainEditorModel {
         }
         return chain.words().get(wordSelectionModel.getLeadSelectionIndex());
     }
+
+    public WordDatabase getDb() {
+        return db;
+    }
     
     public ChainEditorModel() {
         // TODO initialize the database
@@ -283,4 +289,33 @@ public class ChainEditorModel {
         return removeWordFromCurrentListAction;
     }
     
+    private boolean dbChanged = false;
+
+    public boolean isDbChanged() {
+        return dbChanged;
+    }
+
+    public void setDbChanged(boolean dbChanged) {
+        this.dbChanged = dbChanged;
+    }
+    
+    public void addWordToSelectedChain(Word nextWord) {
+        if (!db.containsWord(nextWord)) {
+            db.addWord(nextWord);
+            setDbChanged(true);
+        }
+        if (!db.containsLink(getCurrentWord(), nextWord)) {
+            Object[] options = {LinkType.WordAssociation, LinkType.Synonym, LinkType.Antonym, "CANCEL"};
+            int choice = JOptionPane.showOptionDialog(null, "Select link type", "New Link...",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                    null, options, options[0]);
+            if (choice < 0 || choice > 2) {
+                return;
+            }
+            db.addLink(new Link(getCurrentWord(), nextWord, (LinkType) options[choice]));
+            setDbChanged(true);
+        }
+        addLinkToSelectedChain(db.getLinkBetween(getCurrentWord(), nextWord));
+    }
+
 }
