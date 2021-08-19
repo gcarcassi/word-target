@@ -8,16 +8,22 @@ package it.carcassi.wordtarget.ui;
 import it.carcassi.wordtarget.core.Chain;
 import it.carcassi.wordtarget.core.Link;
 import it.carcassi.wordtarget.core.LinkType;
+import it.carcassi.wordtarget.core.Renderer;
 import it.carcassi.wordtarget.core.Word;
 import it.carcassi.wordtarget.core.WordDatabase;
+import it.carcassi.wordtarget.core.WordTargetLayout;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
@@ -27,6 +33,7 @@ import javax.swing.AbstractListModel;
 import javax.swing.Action;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
@@ -317,5 +324,139 @@ public class ChainEditorModel {
         }
         addLinkToSelectedChain(db.getLinkBetween(getCurrentWord(), nextWord));
     }
+    
+    private Action saveNewLinksAction = new AbstractAction("Save new links") {
+
+        {
+            updateEnabled();
+            chainSelectionModel.addListSelectionListener((e) -> {
+                updateEnabled();
+            });
+        }
+
+        private void updateEnabled() {
+            setEnabled(chainSelectionModel.getLeadSelectionIndex() >= 0);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (files.getDatabaseFilename() == null) {
+                throw new IllegalStateException("No valid database file selected");
+            }
+
+            try ( BufferedReader reader = new BufferedReader(new FileReader(files.getDatabaseFilename()))) {
+                db = WordDatabase.deserialize(reader);
+            } catch (IOException ex) {
+                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+                db = new WordDatabase();
+            }
+
+            db.addFromChain(getCurrentChain());
+
+            try ( BufferedWriter writer = new BufferedWriter(new FileWriter(files.getDatabaseFilename()))) {
+                db.serialize(writer);
+                setDbChanged(false);
+            } catch (Exception ex) {
+                Logger.getLogger(ChainEditor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    };
+
+    public Action saveNewLinksAction() {
+        return saveNewLinksAction;
+    }
+
+    private JFileChooser chainFileChooser = new JFileChooser(files.getChainFolder());
+    private JFileChooser exportFileChooser = new JFileChooser(files.getExportFolder());
+    
+    private Action saveChainAsAction = new AbstractAction("Save chain as...") {
+
+        {
+            updateEnabled();
+            chainSelectionModel.addListSelectionListener((e) -> {
+                updateEnabled();
+            });
+        }
+
+        private void updateEnabled() {
+            setEnabled(chainSelectionModel.getLeadSelectionIndex() >= 0);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int returnVal = chainFileChooser.showSaveDialog(null);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = chainFileChooser.getSelectedFile();
+                if (file != null) {
+                    try ( BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                        getCurrentChain().serialize(writer);
+                    } catch (IOException ex) {
+                        Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+    };
+
+    public Action getSaveChainAsAction() {
+        return saveChainAsAction;
+    }
+    
+    private Action loadChainAction = new AbstractAction("Load chain...") {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int returnVal = chainFileChooser.showOpenDialog(null);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = chainFileChooser.getSelectedFile();
+                if (file != null) {
+                    try ( BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                        Chain newChain = Chain.deserialize(reader);
+                        chainModel.addChain(newChain);
+                        setDbChanged(db.addFromChain(newChain));
+                    } catch (IOException ex) {
+                        Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+    };
+
+    public Action getLoadChainAction() {
+        return loadChainAction;
+    }
+    
+    public void exportChainAs(File file) {
+        if (file != null) {
+            files.setExportFolder(file.getPath());
+
+            File solutionFile = new File(file.getParentFile(), file.getName().substring(0, file.getName().length() - 4) + ".txt");
+            try ( BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                List<String> words = new ArrayList<>(getCurrentChain().words().stream().map(x -> x.getText()).collect(Collectors.toList()));
+                Collections.reverse(words);
+                WordTargetLayout layout = new WordTargetLayout(words);
+                layout.doLayout(new Random());
+                writer.write(Renderer.renderWordTarget(layout));
+                writer.flush();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex, "Can't export chain...", JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try ( BufferedWriter writer = new BufferedWriter(new FileWriter(solutionFile))) {
+                List<String> words = new ArrayList<>(getCurrentChain().words().stream().map(x -> x.getText()).collect(Collectors.toList()));
+                Collections.reverse(words);
+                writer.write(words.get(0));
+                for (int i = 1; i < words.size(); i++) {
+                    writer.write("\n");
+                    writer.write(words.get(i));
+                }
+                writer.flush();
+            } catch (IOException ex) {
+                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
 
 }

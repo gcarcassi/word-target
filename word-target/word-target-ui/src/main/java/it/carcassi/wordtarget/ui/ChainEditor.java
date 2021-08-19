@@ -136,7 +136,7 @@ public class ChainEditor extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        saveLinksItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         removeWordItem = new javax.swing.JMenuItem();
         reverseChainItem = new javax.swing.JMenuItem();
@@ -225,12 +225,8 @@ public class ChainEditor extends javax.swing.JFrame {
             }
         });
 
+        loadChainButton.setAction(model.getLoadChainAction());
         loadChainButton.setText("Load chain...");
-        loadChainButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadChainButtonActionPerformed(evt);
-            }
-        });
 
         saveChainButton.setText("Save chain");
         saveChainButton.addActionListener(new java.awt.event.ActionListener() {
@@ -239,12 +235,8 @@ public class ChainEditor extends javax.swing.JFrame {
             }
         });
 
+        saveChainAsButton.setAction(model.getSaveChainAsAction());
         saveChainAsButton.setText("Save chain as...");
-        saveChainAsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveChainAsButtonActionPerformed(evt);
-            }
-        });
 
         exportChainButton.setText("Export...");
         exportChainButton.addActionListener(new java.awt.event.ActionListener() {
@@ -305,8 +297,8 @@ public class ChainEditor extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
-        jMenuItem3.setAction(getSaveNewLinks());
-        jMenu1.add(jMenuItem3);
+        saveLinksItem.setAction(model.saveNewLinksAction());
+        jMenu1.add(saveLinksItem);
 
         jMenuBar1.add(jMenu1);
 
@@ -393,17 +385,10 @@ public class ChainEditor extends javax.swing.JFrame {
         saveDb();
     }//GEN-LAST:event_saveDbButtonActionPerformed
 
-    private void saveChainAsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChainAsButtonActionPerformed
-        int returnVal = chainFileChooser.showSaveDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            saveCurrentChainAs(chainFileChooser.getSelectedFile());
-        }
-    }//GEN-LAST:event_saveChainAsButtonActionPerformed
-
     private void exportChainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportChainButtonActionPerformed
         int returnVal = exportFileChooser.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            exportChainAs(exportFileChooser.getSelectedFile());
+            model.exportChainAs(exportFileChooser.getSelectedFile());
             try {
                 Process proc = Runtime.getRuntime().exec("cmd /c start " + exportFileChooser.getSelectedFile().getPath());
             } catch (IOException ex) {
@@ -411,13 +396,6 @@ public class ChainEditor extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_exportChainButtonActionPerformed
-
-    private void loadChainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadChainButtonActionPerformed
-        int returnVal = chainFileChooser.showOpenDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            loadChain(chainFileChooser.getSelectedFile());
-        }
-    }//GEN-LAST:event_loadChainButtonActionPerformed
 
     private void saveChainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChainButtonActionPerformed
         // TODO add your handling code here:
@@ -441,35 +419,6 @@ public class ChainEditor extends javax.swing.JFrame {
     public void setDbChanged(boolean dbChanged) {
         this.dbChanged = dbChanged;
         saveDbButton.setEnabled(dbChanged && currentDbFile != null);
-    }
-
-    private Action saveNewLinks = new AbstractAction("Save new links") {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (currentDbFile == null) {
-                throw new IllegalStateException("No valid database file selected");
-            }
-
-            try ( BufferedReader reader = new BufferedReader(new FileReader(currentDbFile))) {
-                db = WordDatabase.deserialize(reader);
-            } catch (IOException ex) {
-                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
-                db = new WordDatabase();
-            }
-
-            db.addFromChain(currentChain);
-
-            try ( BufferedWriter writer = new BufferedWriter(new FileWriter(currentDbFile))) {
-                db.serialize(writer);
-                setDbChanged(false);
-            } catch (Exception ex) {
-                Logger.getLogger(ChainEditor.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    };
-
-    public Action getSaveNewLinks() {
-        return saveNewLinks;
     }
 
     private void saveDb() {
@@ -503,38 +452,6 @@ public class ChainEditor extends javax.swing.JFrame {
                 Chain newChain = Chain.deserialize(reader);
 //                addNewChain(newChain);
                 setDbChanged(db.addFromChain(newChain));
-            } catch (IOException ex) {
-                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
-    private void exportChainAs(File file) {
-        if (file != null) {
-            prefs.put(EXPORT_FOLDER, file.getPath());
-
-            File solutionFile = new File(file.getParentFile(), file.getName().substring(0, file.getName().length() - 4) + ".txt");
-            try ( BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                List<String> words = new ArrayList<>(currentChain.words().stream().map(x -> x.getText()).collect(Collectors.toList()));
-                Collections.reverse(words);
-                WordTargetLayout layout = new WordTargetLayout(words);
-                layout.doLayout(new Random());
-                writer.write(Renderer.renderWordTarget(layout));
-                writer.flush();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex, "Can't export chain...", JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            try ( BufferedWriter writer = new BufferedWriter(new FileWriter(solutionFile))) {
-                List<String> words = new ArrayList<>(currentChain.words().stream().map(x -> x.getText()).collect(Collectors.toList()));
-                Collections.reverse(words);
-                writer.write(words.get(0));
-                for (int i = 1; i < words.size(); i++) {
-                    writer.write("\n");
-                    writer.write(words.get(i));
-                }
-                writer.flush();
             } catch (IOException ex) {
                 Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -576,7 +493,6 @@ public class ChainEditor extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -593,6 +509,7 @@ public class ChainEditor extends javax.swing.JFrame {
     private javax.swing.JButton saveChainAsButton;
     private javax.swing.JButton saveChainButton;
     private javax.swing.JButton saveDbButton;
+    private javax.swing.JMenuItem saveLinksItem;
     private javax.swing.JList<Word> selectedChainList;
     private javax.swing.JTextField targetWordField;
     // End of variables declaration//GEN-END:variables

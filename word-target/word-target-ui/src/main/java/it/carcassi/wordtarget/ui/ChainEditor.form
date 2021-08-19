@@ -14,10 +14,10 @@
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="saveLinksItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="getSaveNewLinks()" type="code"/>
+                  <Connection code="model.saveNewLinksAction()" type="code"/>
                 </Property>
               </Properties>
             </MenuItem>
@@ -318,11 +318,11 @@
         </Component>
         <Component class="javax.swing.JButton" name="loadChainButton">
           <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="model.getLoadChainAction()" type="code"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Load chain..."/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loadChainButtonActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="saveChainButton">
           <Properties>
@@ -334,11 +334,11 @@
         </Component>
         <Component class="javax.swing.JButton" name="saveChainAsButton">
           <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="model.getSaveChainAsAction()" type="code"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Save chain as..."/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveChainAsButtonActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="exportChainButton">
           <Properties>
