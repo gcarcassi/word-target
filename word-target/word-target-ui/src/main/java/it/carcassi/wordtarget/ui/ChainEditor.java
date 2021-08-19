@@ -58,6 +58,8 @@ import javax.swing.UIManager;
  * @author carcassi
  */
 public class ChainEditor extends javax.swing.JFrame {
+    
+    private ChainEditorModel model = new ChainEditorModel();
 
     /** Creates new form ChainEditor */
     public ChainEditor() {
@@ -67,7 +69,8 @@ public class ChainEditor extends javax.swing.JFrame {
         if (filename != null) {
             currentDbFile = new File(filename);
             try (BufferedReader reader = new BufferedReader(new FileReader(currentDbFile))) {
-                db = WordDatabase.deserialize(reader);
+                //db = WordDatabase.deserialize(reader);
+                db = new WordDatabase();
             } catch (IOException ex) {
                 Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
                 db = new WordDatabase();
@@ -134,7 +137,8 @@ public class ChainEditor extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        removeWordItem = new javax.swing.JMenuItem();
+        reverseChainItem = new javax.swing.JMenuItem();
 
         jMenuItem2.setText("jMenuItem2");
 
@@ -148,7 +152,8 @@ public class ChainEditor extends javax.swing.JFrame {
 
         jLabel1.setText("Target word:");
 
-        chainsList.setModel(chainsModel);
+        chainsList.setModel(model.getChainModel());
+        chainsList.setSelectionModel(model.getChainSelectionModel());
         chainsList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 chainsListValueChanged(evt);
@@ -156,7 +161,8 @@ public class ChainEditor extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(chainsList);
 
-        selectedChainList.setModel(chainModel);
+        selectedChainList.setModel(model.getWordModel());
+        selectedChainList.setSelectionModel(model.getWordSelectionModel());
         selectedChainList.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 selectedChainListKeyReleased(evt);
@@ -190,7 +196,7 @@ public class ChainEditor extends javax.swing.JFrame {
             }
         });
 
-        linksList.setModel(linksModel);
+        linksList.setModel(model.getSuggestionsModel());
         linksList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 linksListMouseClicked(evt);
@@ -261,19 +267,15 @@ public class ChainEditor extends javax.swing.JFrame {
             }
         });
 
+        reverseChainButton.setAction(model.getReverseCurrentChainAction());
         reverseChainButton.setText("Reverse chain");
         reverseChainButton.setEnabled(false);
-        reverseChainButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reverseChainButtonActionPerformed(evt);
-            }
-        });
 
         largeTargetWordCheck.setText("Target word too big");
         largeTargetWordCheck.setEnabled(false);
         largeTargetWordCheck.setFocusable(false);
 
-        jButton1.setAction(removeWordFromCurrentListAction());
+        jButton1.setAction(model.removeWordFromCurrentListAction());
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -324,8 +326,11 @@ public class ChainEditor extends javax.swing.JFrame {
 
         jMenu2.setText("Edit");
 
-        jMenuItem1.setAction(removeWordFromCurrentListAction());
-        jMenu2.add(jMenuItem1);
+        removeWordItem.setAction(model.removeWordFromCurrentListAction());
+        jMenu2.add(removeWordItem);
+
+        reverseChainItem.setAction(model.getReverseCurrentChainAction());
+        jMenu2.add(reverseChainItem);
 
         jMenuBar1.add(jMenu2);
 
@@ -385,7 +390,7 @@ public class ChainEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_editDbButtonActionPerformed
 
     private void targetWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_targetWordFieldActionPerformed
-        createNewChain(Word.of(targetWordField.getText()));
+        model.addNewChain(targetWordField.getText());
     }//GEN-LAST:event_targetWordFieldActionPerformed
 
     private void chainsListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_chainsListValueChanged
@@ -398,7 +403,7 @@ public class ChainEditor extends javax.swing.JFrame {
 
     private void linksListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linksListMouseClicked
         if (evt.getClickCount() > 1 && evt.getButton() == MouseEvent.BUTTON1) {
-            addLink(linksList.getSelectedValue());
+            model.addLinkToSelectedChain(linksList.getSelectedValue());
         }
     }//GEN-LAST:event_linksListMouseClicked
 
@@ -441,16 +446,10 @@ public class ChainEditor extends javax.swing.JFrame {
             loadChain(chainFileChooser.getSelectedFile());
         }
     }//GEN-LAST:event_loadChainButtonActionPerformed
-
+    
     private void saveChainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChainButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_saveChainButtonActionPerformed
-
-    private void reverseChainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reverseChainButtonActionPerformed
-        if (currentChain != null) {
-            reverseCurrentChain();
-        }
-    }//GEN-LAST:event_reverseChainButtonActionPerformed
 
     public Word getCurrentSelectedWord() {
         int index = selectedChainList.getSelectedIndex();
@@ -540,43 +539,6 @@ public class ChainEditor extends javax.swing.JFrame {
             chainsList.setSelectedIndex(chainsModel.size() - 1);
             selectedChainList.setSelectedIndex(currentChain.words().size() - 1);
         }
-    }
-    
-    private Action removeWordFromCurrentListAction;
-    
-    private final Action createRemoveWordFromCurrentListAction(final JList<Word> list) {
-        
-        return new AbstractAction("Remove words") {
-        
-            {
-                updateEnabled();
-                list.getSelectionModel().addListSelectionListener((e) -> {
-                    updateEnabled();
-                });
-            }
-        
-            private void updateEnabled() {
-                setEnabled(list.getSelectedIndex() > 0);
-            }
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Word currentWord = getCurrentSelectedWord();
-                if (currentWord != null) {
-                    currentChain.removeFrom(currentWord);
-                    chainsModel.set(chainsModel.indexOf(currentChain), currentChain);
-                    setCurrentChain(currentChain);
-                    list.setSelectedIndex(currentChain.words().size() - 1);
-                }
-            }
-        };
-    }
-
-    public Action removeWordFromCurrentListAction() {
-        if (removeWordFromCurrentListAction == null) {
-            removeWordFromCurrentListAction = createRemoveWordFromCurrentListAction(selectedChainList);
-        }
-        return removeWordFromCurrentListAction;
     }
     
     public void removeLastLink() {
@@ -744,7 +706,6 @@ public class ChainEditor extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
@@ -757,7 +718,9 @@ public class ChainEditor extends javax.swing.JFrame {
     private javax.swing.JList<Link> linksList;
     private javax.swing.JButton loadChainButton;
     private javax.swing.JTextField nextWordField;
+    private javax.swing.JMenuItem removeWordItem;
     private javax.swing.JButton reverseChainButton;
+    private javax.swing.JMenuItem reverseChainItem;
     private javax.swing.JButton saveChainAsButton;
     private javax.swing.JButton saveChainButton;
     private javax.swing.JButton saveDbButton;
