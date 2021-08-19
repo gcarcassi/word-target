@@ -65,42 +65,7 @@ public class ChainEditor extends javax.swing.JFrame {
      */
     public ChainEditor() {
         initComponents();
-        prefs = Preferences.userRoot().node(getClass().getName());
-        String filename = prefs.get(LAST_USED_DB, null);
-        if (filename != null) {
-            currentDbFile = new File(filename);
-            try ( BufferedReader reader = new BufferedReader(new FileReader(currentDbFile))) {
-                //db = WordDatabase.deserialize(reader);
-                db = new WordDatabase();
-            } catch (IOException ex) {
-                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
-                db = new WordDatabase();
-            }
-        } else {
-            db = new WordDatabase();
-        }
-
-        // Prepare the FileChoosers
-        chainFileChooser = new JFileChooser(prefs.get(CHAIN_FOLDER, new File(".").getAbsolutePath()));
-        exportFileChooser = new JFileChooser(prefs.get(EXPORT_FOLDER, new File(".").getAbsolutePath()));
     }
-
-    private JFileChooser chainFileChooser;
-    private JFileChooser exportFileChooser;
-
-    private DefaultListModel<Chain> chainsModel = new DefaultListModel<>();
-    private DefaultListModel<Word> chainModel = new DefaultListModel<>();
-    private DefaultListModel<Link> linksModel = new DefaultListModel<>();
-
-    private Preferences prefs;
-    private static String LAST_USED_DB = "LAST_USED_DB";
-    private static String CHAIN_FOLDER = "CHAIN_FOLDER";
-    private static String EXPORT_FOLDER = "EXPORT_FOLDER";
-    private File currentDbFile;
-    private File currentChainFile;
-    private WordDatabase db;
-    private Chain currentChain;
-    private boolean dbChanged;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -238,12 +203,8 @@ public class ChainEditor extends javax.swing.JFrame {
         saveChainAsButton.setAction(model.getSaveChainAsAction());
         saveChainAsButton.setText("Save chain as...");
 
+        exportChainButton.setAction(model.getExportChainAction());
         exportChainButton.setText("Export...");
-        exportChainButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exportChainButtonActionPerformed(evt);
-            }
-        });
 
         reverseChainButton.setAction(model.getReverseCurrentChainAction());
         reverseChainButton.setText("Reverse chain");
@@ -358,13 +319,13 @@ public class ChainEditor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void editDbButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDbButtonActionPerformed
-        WordDatabaseEditor dbEditor = new WordDatabaseEditor();
-        dbEditor.setCurrentFile(currentDbFile);
-        dbEditor.setDb(db);
-        dbEditor.setModal(true);
-        dbEditor.setVisible(true);
-        setCurrentDbFile(dbEditor.getCurrentFile());
-        db = dbEditor.getDb();
+//        WordDatabaseEditor dbEditor = new WordDatabaseEditor();
+//        dbEditor.setCurrentFile(currentDbFile);
+//        dbEditor.setDb(db);
+//        dbEditor.setModal(true);
+//        dbEditor.setVisible(true);
+//        setCurrentDbFile(dbEditor.getCurrentFile());
+//        db = dbEditor.getDb();
     }//GEN-LAST:event_editDbButtonActionPerformed
 
     private void targetWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_targetWordFieldActionPerformed
@@ -382,81 +343,26 @@ public class ChainEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_nextWordFieldActionPerformed
 
     private void saveDbButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveDbButtonActionPerformed
-        saveDb();
+        //saveDb();
     }//GEN-LAST:event_saveDbButtonActionPerformed
-
-    private void exportChainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportChainButtonActionPerformed
-        int returnVal = exportFileChooser.showSaveDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            model.exportChainAs(exportFileChooser.getSelectedFile());
-            try {
-                Process proc = Runtime.getRuntime().exec("cmd /c start " + exportFileChooser.getSelectedFile().getPath());
-            } catch (IOException ex) {
-                Logger.getLogger(ChainEditor.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_exportChainButtonActionPerformed
 
     private void saveChainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChainButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_saveChainButtonActionPerformed
 
-    public void setCurrentDbFile(File currentFile) {
-        this.currentDbFile = currentFile;
-        if (currentFile != null) {
-            prefs.put(LAST_USED_DB, currentFile.getPath());
-        }
-    }
+//    private void saveDb() {
+//        if (!dbChanged || currentDbFile == null) {
+//            throw new IllegalStateException("Shouldn't be able to save db if not changed or no valid file was chosen");
+//        }
+//
+//        try ( BufferedWriter writer = new BufferedWriter(new FileWriter(currentDbFile))) {
+//            db.serialize(writer);
+//            setDbChanged(false);
+//        } catch (Exception ex) {
+//            Logger.getLogger(ChainEditor.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
-    public void setCurrentChainFile(File currentChainFile) {
-        this.currentChainFile = currentChainFile;
-        if (currentChainFile != null) {
-            prefs.put(CHAIN_FOLDER, currentChainFile.getPath());
-            saveChainButton.setEnabled(true);
-        }
-    }
-
-    public void setDbChanged(boolean dbChanged) {
-        this.dbChanged = dbChanged;
-        saveDbButton.setEnabled(dbChanged && currentDbFile != null);
-    }
-
-    private void saveDb() {
-        if (!dbChanged || currentDbFile == null) {
-            throw new IllegalStateException("Shouldn't be able to save db if not changed or no valid file was chosen");
-        }
-
-        try ( BufferedWriter writer = new BufferedWriter(new FileWriter(currentDbFile))) {
-            db.serialize(writer);
-            setDbChanged(false);
-        } catch (Exception ex) {
-            Logger.getLogger(ChainEditor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void saveCurrentChainAs(File file) {
-        setCurrentChainFile(file);
-        if (file != null) {
-            try ( BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                currentChain.serialize(writer);
-            } catch (IOException ex) {
-                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
-    private void loadChain(File file) {
-        setCurrentChainFile(file);
-        if (file != null) {
-            try ( BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                Chain newChain = Chain.deserialize(reader);
-//                addNewChain(newChain);
-                setDbChanged(db.addFromChain(newChain));
-            } catch (IOException ex) {
-                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
 
     /**
      * @param args the command line arguments

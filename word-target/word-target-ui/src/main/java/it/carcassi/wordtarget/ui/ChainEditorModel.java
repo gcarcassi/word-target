@@ -426,36 +426,67 @@ public class ChainEditorModel {
         return loadChainAction;
     }
     
-    public void exportChainAs(File file) {
-        if (file != null) {
-            files.setExportFolder(file.getPath());
+    private Action exportChainAction = new AbstractAction("Export chain...") {
 
-            File solutionFile = new File(file.getParentFile(), file.getName().substring(0, file.getName().length() - 4) + ".txt");
-            try ( BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                List<String> words = new ArrayList<>(getCurrentChain().words().stream().map(x -> x.getText()).collect(Collectors.toList()));
-                Collections.reverse(words);
-                WordTargetLayout layout = new WordTargetLayout(words);
-                layout.doLayout(new Random());
-                writer.write(Renderer.renderWordTarget(layout));
-                writer.flush();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex, "Can't export chain...", JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        {
+            updateEnabled();
+            chainSelectionModel.addListSelectionListener((e) -> {
+                updateEnabled();
+            });
+        }
 
-            try ( BufferedWriter writer = new BufferedWriter(new FileWriter(solutionFile))) {
-                List<String> words = new ArrayList<>(getCurrentChain().words().stream().map(x -> x.getText()).collect(Collectors.toList()));
-                Collections.reverse(words);
-                writer.write(words.get(0));
-                for (int i = 1; i < words.size(); i++) {
-                    writer.write("\n");
-                    writer.write(words.get(i));
+        private void updateEnabled() {
+            setEnabled(chainSelectionModel.getLeadSelectionIndex() >= 0);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int returnVal = exportFileChooser.showSaveDialog(null);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = exportFileChooser.getSelectedFile();
+                if (file != null) {
+                    files.setExportFolder(file.getPath());
+
+                    File solutionFile = new File(file.getParentFile(), file.getName().substring(0, file.getName().length() - 4) + ".txt");
+                    try ( BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                        List<String> words = new ArrayList<>(getCurrentChain().words().stream().map(x -> x.getText()).collect(Collectors.toList()));
+                        Collections.reverse(words);
+                        WordTargetLayout layout = new WordTargetLayout(words);
+                        layout.doLayout(new Random());
+                        writer.write(Renderer.renderWordTarget(layout));
+                        writer.flush();
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, ex, "Can't export chain...", JOptionPane.ERROR_MESSAGE);
+                        Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    try ( BufferedWriter writer = new BufferedWriter(new FileWriter(solutionFile))) {
+                        List<String> words = new ArrayList<>(getCurrentChain().words().stream().map(x -> x.getText()).collect(Collectors.toList()));
+                        Collections.reverse(words);
+                        writer.write(words.get(0));
+                        for (int i = 1; i < words.size(); i++) {
+                            writer.write("\n");
+                            writer.write(words.get(i));
+                        }
+                        writer.flush();
+                    } catch (IOException ex) {
+                        Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-                writer.flush();
-            } catch (IOException ex) {
-                Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+                try {
+                    Process proc = Runtime.getRuntime().exec("cmd /c start " + exportFileChooser.getSelectedFile().getPath());
+                } catch (IOException ex) {
+                    Logger.getLogger(ChainEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
+    };
+
+    public Action getExportChainAction() {
+        return exportChainAction;
+    }
+    
+    public void exportChainAs(File file) {
     }
 
 
