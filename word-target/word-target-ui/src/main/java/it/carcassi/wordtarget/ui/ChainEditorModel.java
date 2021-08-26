@@ -62,8 +62,8 @@ public class ChainEditorModel {
             return chains.get(index);
         }
         
-        public void addChain(String word) {
-            Chain chain = new Chain(Word.of(word));
+        public void addChain(Word word) {
+            Chain chain = new Chain(word);
             chains.add(chain);
             fireIntervalAdded(this, chains.size() - 1, chains.size() - 1);
         }
@@ -208,7 +208,11 @@ public class ChainEditorModel {
     }
     
     public void addNewChain(String word) {
-        chainModel.addChain(word);
+        Word newWord = Word.of(word);
+        if (newWord != null) {
+            addWordToDatabaseIfMissing(newWord);
+            chainModel.addChain(newWord);
+        }
     }
     
     public void addLinkToSelectedChain(Link link) {
@@ -306,11 +310,15 @@ public class ChainEditorModel {
         this.dbChanged = dbChanged;
     }
     
-    public void addWordToSelectedChain(Word nextWord) {
-        if (!db.containsWord(nextWord)) {
-            db.addWord(nextWord);
+    private void addWordToDatabaseIfMissing(Word word) {
+        if (!db.containsWord(word)) {
+            db.addWord(word);
             setDbChanged(true);
         }
+    }
+    
+    public void addWordToSelectedChain(Word nextWord) {
+        addWordToDatabaseIfMissing(nextWord);
         if (!db.containsLink(getCurrentWord(), nextWord)) {
             Object[] options = {LinkType.WordAssociation, LinkType.Synonym, LinkType.Antonym, "CANCEL"};
             int choice = JOptionPane.showOptionDialog(null, "Select link type", "New Link...",
