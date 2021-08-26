@@ -213,6 +213,8 @@ public class ChainEditorModel {
             addWordToDatabaseIfMissing(newWord);
             chainModel.addChain(newWord);
         }
+        int last = chains.size() - 1;
+        chainSelectionModel.setSelectionInterval(last, last);
     }
     
     public void addLinkToSelectedChain(Link link) {
