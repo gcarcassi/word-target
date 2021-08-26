@@ -209,13 +209,9 @@ public class ChainEditor extends javax.swing.JFrame {
             }
         });
 
+        saveDbButton.setAction(model.getSaveDbAction());
         saveDbButton.setText("Save db");
         saveDbButton.setEnabled(false);
-        saveDbButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveDbButtonActionPerformed(evt);
-            }
-        });
 
         loadChainButton.setAction(model.getLoadChainAction());
         loadChainButton.setText("Load chain...");
@@ -368,10 +364,6 @@ public class ChainEditor extends javax.swing.JFrame {
     private void nextWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextWordFieldActionPerformed
         model.addWordToSelectedChain(Word.of(nextWordField.getText()));
     }//GEN-LAST:event_nextWordFieldActionPerformed
-
-    private void saveDbButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveDbButtonActionPerformed
-        //saveDb();
-    }//GEN-LAST:event_saveDbButtonActionPerformed
 
     private void saveChainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChainButtonActionPerformed
         // TODO add your handling code here:

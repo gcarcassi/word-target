@@ -303,13 +303,27 @@ public class ChainEditorModel {
     }
     
     private boolean dbChanged = false;
+    public static final String PROP_DBCHANGED = "dbChanged";
+    private transient final java.beans.PropertyChangeSupport propertyChangeSupport = new java.beans.PropertyChangeSupport(this);
 
     public boolean isDbChanged() {
         return dbChanged;
     }
 
     public void setDbChanged(boolean dbChanged) {
+        boolean oldDbChanged = this.dbChanged;
         this.dbChanged = dbChanged;
+        propertyChangeSupport.firePropertyChange(PROP_DBCHANGED, oldDbChanged, dbChanged);
+    }
+
+    public void addPropertyChangeListener(java.beans.PropertyChangeListener listener )
+    {
+        propertyChangeSupport.addPropertyChangeListener( listener );
+    }
+
+    public void removePropertyChangeListener(java.beans.PropertyChangeListener listener )
+    {
+        propertyChangeSupport.removePropertyChangeListener( listener );
     }
     
     private void addWordToDatabaseIfMissing(Word word) {
@@ -374,6 +388,32 @@ public class ChainEditorModel {
 
     public Action saveNewLinksAction() {
         return saveNewLinksAction;
+    }
+    
+    private Action saveDbAction = new AbstractAction("Save db") {
+
+        {
+            updateEnabled();
+            ChainEditorModel.this.addPropertyChangeListener((evt) -> {
+                if (evt.getPropertyName() == PROP_DBCHANGED) {
+                    updateEnabled();
+                }
+            });
+        }
+
+        private void updateEnabled() {
+            setEnabled(isDbChanged());
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            files.saveDatabase(db);
+            setDbChanged(false);
+        }
+    };
+
+    public Action getSaveDbAction() {
+        return saveDbAction;
     }
 
     private JFileChooser chainFileChooser = new JFileChooser(files.getChainFolder());

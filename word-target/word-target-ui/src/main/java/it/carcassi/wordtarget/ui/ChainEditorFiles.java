@@ -53,6 +53,19 @@ public class ChainEditorFiles {
             return new WordDatabase();
         }
     }
+    
+    public void saveDatabase(WordDatabase db) {
+        if (databaseFilename == null) {
+            throw new IllegalStateException("Shouldn't be able to save db if no valid file was chosen");
+        }
+
+        try ( BufferedWriter writer = new BufferedWriter(new FileWriter(databaseFilename))) {
+            db.serialize(writer);
+        } catch (Exception ex) {
+            Logger.getLogger(ChainEditor.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Couldn't save db", ex);
+        }
+    }
 
     public String getDatabaseFilename() {
         return databaseFilename;

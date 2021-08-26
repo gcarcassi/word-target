@@ -309,12 +309,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="saveDbButton">
           <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="model.getSaveDbAction()" type="code"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Save db"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveDbButtonActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="loadChainButton">
           <Properties>
