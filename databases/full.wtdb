@@ -267874,6 +267874,7 @@ BREEZE, WIND, Synonym
 BRIBE, CORRUPTION, WordAssociation
 BRIDE, GROOM, WordAssociation
 BRIGHTEN, ILLUMINATE, Synonym
+BRIGHTEN, LIGHTEN, Synonym
 BROOM, SWEEP, WordAssociation
 BROTHERS, WRIGHT, WordAssociation
 BUNNY, EASTER, WordAssociation
@@ -268046,6 +268047,7 @@ GALVANIZATION, ZINC, WordAssociation
 GAMBLED, RISKED, Synonym
 GAMMA, RAY, WordAssociation
 GAS, IDEAL, WordAssociation
+GAS, LIGHTER, WordAssociation
 GAS, NOBLE, WordAssociation
 GASTROPOD, SNAIL, WordAssociation
 GATES, SWITCHES, Synonym
