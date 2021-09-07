@@ -148327,6 +148327,7 @@ NASALLY
 NASALS
 NASARD
 NASARDS
+NASCAR
 NASCENCE
 NASCENCES
 NASCENCIES
@@ -267885,6 +267886,7 @@ BRIGHTEN, LIGHTEN, Synonym
 BROOM, SWEEP, WordAssociation
 BROTHERS, WRIGHT, WordAssociation
 BUNNY, EASTER, WordAssociation
+BUTCHER, CLEAVER, WordAssociation
 BUTTERFLY, METAMORPHOSIS, WordAssociation
 BUTTERFLY, MONARCH, WordAssociation
 CAMILLO, GOLGI, WordAssociation
@@ -267896,10 +267898,12 @@ CAR, ENGINE, WordAssociation
 CAR, VEHICLE, WordAssociation
 CARBON, COAL, WordAssociation
 CARBON, DIAMOND, WordAssociation
+CARBON, DIOXIDE, WordAssociation
 CARDINAL, DIRECTION, WordAssociation
 CARDINAL, ORDINAL, WordAssociation
 CASTLE, PALACE, Synonym
 CAT, SCHRODINGER, WordAssociation
+CATCHER, PITCHER, WordAssociation
 CAULDRON, WITCH, WordAssociation
 CAVE, PLATO, WordAssociation
 CELEBRATION, FEAST, Synonym
@@ -267959,6 +267963,7 @@ CURL, GRADIENT, WordAssociation
 CYNICAL, PESSIMISTIC, Synonym
 DECIMAL, NUMBER, WordAssociation
 DEDICATION, DEVOTION, Synonym
+DEDUCE, PROVE, Synonym
 DEFENSE, OFFENSE, Antonym
 DEFENSE, ZONE, WordAssociation
 DELTA, GAMMA, WordAssociation
@@ -268073,8 +268078,11 @@ GENUS, SPECIES, WordAssociation
 GEOSTATIONARY, ORBIT, WordAssociation
 GHOST, HAUNTING, WordAssociation
 GIVING, TAKING, Antonym
+GOLD, SILVER, WordAssociation
 GOLF, HANDICAP, WordAssociation
 GOLGI, ORGANELLE, WordAssociation
+GRAIL, HOLY, WordAssociation
+GRAIN, RICE, WordAssociation
 GRAMMAR, TRIVIUM, WordAssociation
 GRAVE, TOMB, Synonym
 GRIFFIN, MANTICORE, WordAssociation
@@ -268085,6 +268093,7 @@ HAMMER, NAILS, WordAssociation
 HANDEL, RINALDO, WordAssociation
 HARDER, SOFTER, Antonym
 HARE, RABBIT, WordAssociation
+HATRED, LOVE, Antonym
 HEAD, TAIL, WordAssociation
 HEARSAY, RUMOR, Synonym
 HEIGHT, WIDTH, WordAssociation
@@ -268101,6 +268110,8 @@ IMPROVISATION, JAZZ, WordAssociation
 IMPROVISE, JAZZ, WordAssociation
 INCANDESCENT, LIGHTBULB, WordAssociation
 INCANDESCENT, RADIANT, Synonym
+INJECT, SYRINGE, WordAssociation
+INSECTS, SWARMS, WordAssociation
 INSIGNIFICANCE, SIGNIFICANCE, Antonym
 INTRODUCE, PRESENT, Synonym
 IONIC, SOLID, WordAssociation
@@ -268143,6 +268154,7 @@ MAGNITUDE, SIGNIFICANCE, Synonym
 MAGNITUDE, SIZE, Synonym
 MANTA, RAY, WordAssociation
 MARS, PLANET, WordAssociation
+MARS, PROBE, WordAssociation
 MAX, PLANCK, WordAssociation
 MEDIA, PUNDIT, WordAssociation
 MEDIAN, MODE, WordAssociation
@@ -268157,7 +268169,10 @@ MUSIC, OPERA, WordAssociation
 MUZZLE, SNOUT, Synonym
 MYSTERY, PROBLEM, Synonym
 NARCOTIZE, SEDATE, Synonym
+NASCAR, RACE, WordAssociation
 NATURAL, RESOURCE, WordAssociation
+NEEDLE, SYRINGE, WordAssociation
+NEEDLE, THREAD, WordAssociation
 NIGHT, OWL, WordAssociation
 NIKOLA, TESLA, WordAssociation
 NOODLES, RAMEN, WordAssociation
@@ -268174,6 +268189,7 @@ OTTER, RIVER, WordAssociation
 OVER, UNDER, Antonym
 OXIDATION, REDUCTION, WordAssociation
 OXIDATION, RUST, WordAssociation
+OXIDISE, REDUCE, Antonym
 PAMPER, SPOIL, Synonym
 PANEL, SOLAR, WordAssociation
 PANORAMIC, VIEW, WordAssociation
@@ -268214,6 +268230,7 @@ ROCKET, SPACE, WordAssociation
 RULE, SLIDE, WordAssociation
 SATURATION, SOLUBILITY, WordAssociation
 SATURATION, SOLUTION, WordAssociation
+SCALAR, VECTOR, WordAssociation
 SHARK, WHALE, WordAssociation
 SIGHT, VISION, Synonym
 SKUNK, SMELL, WordAssociation
