@@ -96206,6 +96206,7 @@ GODDAMNEDEST
 GODDAMNING
 GODDAMNS
 GODDAMS
+GODDARD
 GODDAUGHTER
 GODDAUGHTERS
 GODDED
@@ -107073,6 +107074,7 @@ HOOKAHS
 HOOKAS
 HOOKCHECK
 HOOKCHECKS
+HOOKE
 HOOKED
 HOOKEDNESS
 HOOKEDNESSES
@@ -199627,6 +199629,7 @@ ROBE
 ROBED
 ROBERDSMAN
 ROBERDSMEN
+ROBERT
 ROBERTSMAN
 ROBERTSMEN
 ROBES
@@ -267823,6 +267826,7 @@ ALTERNATIVE, OPTION, Synonym
 ALWAYS, NEVER, Antonym
 AMERICA, ASIA, WordAssociation
 AMERICAN, FOOTBALL, WordAssociation
+ANCESTRIES, DESCENDANTS, WordAssociation
 ANGLE, RADIAN, WordAssociation
 ANGLE, RIGHT, WordAssociation
 ANGLO, SAXON, WordAssociation
@@ -267831,10 +267835,13 @@ ANIMATION, CARTOON, WordAssociation
 ANION, CATION, Antonym
 ANKLE, JOINT, WordAssociation
 ANNOY, BOTHER, Synonym
+ANTIBIOTIC, BACTERIA, WordAssociation
+ANTIBIOTIC, RESISTANCE, WordAssociation
 ANTOINE, LAVOISIER, WordAssociation
 ANYON, QUASIPARTICLE, WordAssociation
 APPARATUS, EXPERIMENTAL, WordAssociation
 APPARATUS, GOLGI, WordAssociation
+APPLE, CIDER, WordAssociation
 ARCHIMEDES, LEVER, WordAssociation
 ARCHIMEDES, SCREW, WordAssociation
 AREA, PERIMETER, WordAssociation
@@ -267850,6 +267857,7 @@ AXON, NERVE, WordAssociation
 BACON, FRANCIS, WordAssociation
 BACON, PORK, WordAssociation
 BACTERIA, CYANO, WordAssociation
+BACTERIA, VIBRIOS, WordAssociation
 BANDIT, OUTLAW, Synonym
 BASEBALL, PITCH, WordAssociation
 BASEBALL, SPORT, WordAssociation
@@ -267861,6 +267869,7 @@ BIOLOGIST, MARINE, WordAssociation
 BIOLOGY, MARINE, WordAssociation
 BIOTIC, FACTOR, WordAssociation
 BISTRO, RESTAURANT, WordAssociation
+BIT, BYTE, WordAssociation
 BLACK, WHITE, Antonym
 BLADE, KNIFE, Synonym
 BLEATS, SHEEP, WordAssociation
@@ -267890,7 +267899,9 @@ BUTCHER, CLEAVER, WordAssociation
 BUTTERFLY, METAMORPHOSIS, WordAssociation
 BUTTERFLY, MONARCH, WordAssociation
 CAMILLO, GOLGI, WordAssociation
+CAN, TIN, WordAssociation
 CANCER, TUMOR, Synonym
+CANINE, DINGO, WordAssociation
 CANTOR, GEORG, WordAssociation
 CAPACITY, CONTAINER, WordAssociation
 CAPER, PRANK, Synonym
@@ -267901,6 +267912,7 @@ CARBON, DIAMOND, WordAssociation
 CARBON, DIOXIDE, WordAssociation
 CARDINAL, DIRECTION, WordAssociation
 CARDINAL, ORDINAL, WordAssociation
+CARING, SHARING, WordAssociation
 CASTLE, PALACE, Synonym
 CAT, SCHRODINGER, WordAssociation
 CATCHER, PITCHER, WordAssociation
@@ -267961,7 +267973,9 @@ CURE, MEDICATION, WordAssociation
 CURIE, MARIE, WordAssociation
 CURL, GRADIENT, WordAssociation
 CYNICAL, PESSIMISTIC, Synonym
+DECEASING, DYING, Synonym
 DECIMAL, NUMBER, WordAssociation
+DECREASING, DESCENDANT, Synonym
 DEDICATION, DEVOTION, Synonym
 DEDUCE, PROVE, Synonym
 DEFENSE, OFFENSE, Antonym
@@ -268006,6 +268020,7 @@ EFFECT, SPECIAL, WordAssociation
 ELDER, TRIBE, WordAssociation
 ELECTRIC, GUITAR, WordAssociation
 ELECTRIC, POWER, WordAssociation
+ELECTRON, MICROSCOPE, WordAssociation
 ELECTRON, POSITRON, WordAssociation
 ELECTRON, SPIN, WordAssociation
 EMOTION, FEELING, Synonym
@@ -268026,6 +268041,7 @@ EXPERIMENTAL, TEST, WordAssociation
 EXPERIMENTAL, THEORETICAL, Antonym
 EXPLOIT, FEAT, Synonym
 EYE, HURRICANE, WordAssociation
+EYE, SOCKET, WordAssociation
 FACTORY, WORKER, WordAssociation
 FARSI, PERSIAN, Synonym
 FAST, SLOW, Antonym
@@ -268069,6 +268085,7 @@ GAMBLED, RISKED, Synonym
 GAMMA, RAY, WordAssociation
 GAS, IDEAL, WordAssociation
 GAS, LIGHTER, WordAssociation
+GAS, NATURAL, WordAssociation
 GAS, NOBLE, WordAssociation
 GASTROPOD, SNAIL, WordAssociation
 GATES, SWITCHES, Synonym
@@ -268078,6 +268095,8 @@ GENUS, SPECIES, WordAssociation
 GEOSTATIONARY, ORBIT, WordAssociation
 GHOST, HAUNTING, WordAssociation
 GIVING, TAKING, Antonym
+GODDARD, ROBERT, WordAssociation
+GODDARD, ROCKET, WordAssociation
 GOLD, SILVER, WordAssociation
 GOLF, HANDICAP, WordAssociation
 GOLGI, ORGANELLE, WordAssociation
@@ -268103,8 +268122,11 @@ HISTAMINE, REAGIN, WordAssociation
 HOAX, SHAM, Synonym
 HOMO, SAPIENS, WordAssociation
 HONOR, VALOR, WordAssociation
+HOOKE, MICROSCOPE, WordAssociation
+HOOKE, ROBERT, WordAssociation
 HORDE, ZOMBIE, WordAssociation
 HORSE, STEED, Synonym
+HYPOTHESIS, THEORY, WordAssociation
 ILLUMINATE, LIGHT, WordAssociation
 IMPROVISATION, JAZZ, WordAssociation
 IMPROVISE, JAZZ, WordAssociation
@@ -268171,9 +268193,11 @@ MYSTERY, PROBLEM, Synonym
 NARCOTIZE, SEDATE, Synonym
 NASCAR, RACE, WordAssociation
 NATURAL, RESOURCE, WordAssociation
+NATURAL, SELECTION, WordAssociation
 NEEDLE, SYRINGE, WordAssociation
 NEEDLE, THREAD, WordAssociation
 NIGHT, OWL, WordAssociation
+NIGHT, VISION, WordAssociation
 NIKOLA, TESLA, WordAssociation
 NOODLES, RAMEN, WordAssociation
 NORTH, SOUTH, Antonym
@@ -268221,7 +268245,9 @@ QUEEN, THRONE, WordAssociation
 QUICK, SWIFT, Synonym
 RADAR, SONAR, WordAssociation
 RADIOACTIVE, URANIUM, WordAssociation
+RAFT, RIVER, WordAssociation
 RASCAL, SCOUNDREL, Synonym
+RAY, STING, WordAssociation
 REACTION, REAGENTS, WordAssociation
 RESEARCH, SCIENTIFIC, WordAssociation
 RESTAURANT, WAITER, WordAssociation
@@ -268242,6 +268268,7 @@ SPRING, SUMMER, WordAssociation
 SPRING, WINTER, WordAssociation
 STEAM, VAPOR, WordAssociation
 STONE, TABLET, WordAssociation
+STRING, THEORY, WordAssociation
 THAT, THIS, WordAssociation
 TRANSPORTATION, VEHICLE, WordAssociation
 UNCLEAR, VAGUE, Synonym
