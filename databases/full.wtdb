@@ -151001,6 +151001,7 @@ NOES
 NOESES
 NOESIS
 NOESISES
+NOETHER
 NOETIC
 NOG
 NOGAKU
@@ -267813,6 +267814,7 @@ ADDED, SUMMED, Synonym
 ADJUST, CALIBRATE, Synonym
 AFRICA, CONTINENT, WordAssociation
 AFRICA, MADAGASCAR, WordAssociation
+AGREEMENT, DEAL, WordAssociation
 AID, MEDICAL, WordAssociation
 ALAN, TURING, WordAssociation
 ALESSANDRO, VOLTA, WordAssociation
@@ -267853,6 +267855,7 @@ ARTIFICIAL, NATURAL, Antonym
 ATTACK, OFFENSIVE, Synonym
 ATTACK, PANIC, WordAssociation
 AUTUMN, SPRING, WordAssociation
+AWARD, EMMY, WordAssociation
 AXON, NERVE, WordAssociation
 BACON, FRANCIS, WordAssociation
 BACON, PORK, WordAssociation
@@ -267863,6 +267866,7 @@ BASEBALL, PITCH, WordAssociation
 BASEBALL, SPORT, WordAssociation
 BEE, WAX, WordAssociation
 BEER, BREW, WordAssociation
+BELL, CHIME, WordAssociation
 BIAS, CONFIRMATION, WordAssociation
 BIODIVERSITY, ECOSYSTEM, WordAssociation
 BIOLOGIST, MARINE, WordAssociation
@@ -267874,6 +267878,7 @@ BLACK, WHITE, Antonym
 BLADE, KNIFE, Synonym
 BLEATS, SHEEP, WordAssociation
 BLOCK, DIFFERENTIAL, WordAssociation
+BOND, POLAR, WordAssociation
 BONE, FEMUR, WordAssociation
 BOOLE, BOOLEAN, WordAssociation
 BOOLE, GEORGE, WordAssociation
@@ -267881,8 +267886,10 @@ BORDER, PERIMETER, Synonym
 BOSON, FERMION, WordAssociation
 BOTTLE, GENIE, WordAssociation
 BOTTLE, KLEIN, WordAssociation
+BOUND, STATE, WordAssociation
 BOVINE, COW, Synonym
 BOXER, PUNCHER, Synonym
+BRAIN, HEMISPHERE, WordAssociation
 BRAIN, STEM, WordAssociation
 BRASS, COPPER, WordAssociation
 BREAKFAST, CONTINENTAL, WordAssociation
@@ -267901,6 +267908,7 @@ BUTTERFLY, MONARCH, WordAssociation
 CAMILLO, GOLGI, WordAssociation
 CAN, TIN, WordAssociation
 CANCER, TUMOR, Synonym
+CANDY, CANE, WordAssociation
 CANINE, DINGO, WordAssociation
 CANTOR, GEORG, WordAssociation
 CAPACITY, CONTAINER, WordAssociation
@@ -267952,6 +267960,8 @@ CONFIRMATION, EVIDENCE, Synonym
 CONIFER, TREE, WordAssociation
 CONSTANT, PLANCK, WordAssociation
 CONSTANT, VARIABLE, Antonym
+CONSTRUCTION, CRANE, WordAssociation
+CONSTRUCTION, WORKER, WordAssociation
 CONTINENTAL, DRIFT, WordAssociation
 COORDINATES, POLAR, WordAssociation
 COPERNICUS, HELIOCENTRISM, WordAssociation
@@ -267972,6 +267982,8 @@ CRIMINAL, THIEF, WordAssociation
 CURE, MEDICATION, WordAssociation
 CURIE, MARIE, WordAssociation
 CURL, GRADIENT, WordAssociation
+CURRENT, ELECTRICITY, WordAssociation
+CURRENT, OCEAN, WordAssociation
 CYNICAL, PESSIMISTIC, Synonym
 DECEASING, DYING, Synonym
 DECIMAL, NUMBER, WordAssociation
@@ -268020,9 +268032,11 @@ EFFECT, SPECIAL, WordAssociation
 ELDER, TRIBE, WordAssociation
 ELECTRIC, GUITAR, WordAssociation
 ELECTRIC, POWER, WordAssociation
+ELECTRICITY, STATIC, WordAssociation
 ELECTRON, MICROSCOPE, WordAssociation
 ELECTRON, POSITRON, WordAssociation
 ELECTRON, SPIN, WordAssociation
+EMMY, NOETHER, WordAssociation
 EMOTION, FEELING, Synonym
 ENERGY, LEVEL, WordAssociation
 ENERGY, SOURCE, WordAssociation
@@ -268043,6 +268057,7 @@ EXPLOIT, FEAT, Synonym
 EYE, HURRICANE, WordAssociation
 EYE, SOCKET, WordAssociation
 FACTORY, WORKER, WordAssociation
+FAINT, QUIET, Synonym
 FARSI, PERSIAN, Synonym
 FAST, SLOW, Antonym
 FASTER, SLOWER, Antonym
@@ -268062,6 +268077,7 @@ FORCE, NORMAL, WordAssociation
 FORECAST, WEATHER, WordAssociation
 FOREIGN, INDIGENOUS, Antonym
 FOREST, WEALD, Synonym
+FORGET, REMEMBER, Antonym
 FORK, KNIFE, WordAssociation
 FORM, SHAPE, Synonym
 FORMAT, LAYOUT, Synonym
@@ -268077,6 +268093,8 @@ FRISKED, SEARCHED, Synonym
 FROG, RIBBIT, WordAssociation
 FUN, GAMES, WordAssociation
 FUNCTION, GRAPH, WordAssociation
+FUNCTION, LINEAR, WordAssociation
+FUNCTION, WAVE, WordAssociation
 FUNNY, HILARIOUS, Synonym
 GALVANI, GALVANIZATION, WordAssociation
 GALVANI, LUIGI, WordAssociation
@@ -268118,6 +268136,8 @@ HEARSAY, RUMOR, Synonym
 HEIGHT, WIDTH, WordAssociation
 HELICOPTER, PILOT, WordAssociation
 HELIOCENTRISM, SUN, WordAssociation
+HEMISPHERE, NORTHERN, WordAssociation
+HIND, LEGS, WordAssociation
 HISTAMINE, REAGIN, WordAssociation
 HOAX, SHAM, Synonym
 HOMO, SAPIENS, WordAssociation
@@ -268126,7 +268146,9 @@ HOOKE, MICROSCOPE, WordAssociation
 HOOKE, ROBERT, WordAssociation
 HORDE, ZOMBIE, WordAssociation
 HORSE, STEED, Synonym
+HYDROPHOBIC, NONPOLAR, WordAssociation
 HYPOTHESIS, THEORY, WordAssociation
+IDEAL, MARKET, WordAssociation
 ILLUMINATE, LIGHT, WordAssociation
 IMPROVISATION, JAZZ, WordAssociation
 IMPROVISE, JAZZ, WordAssociation
@@ -268156,6 +268178,9 @@ LARVA, METAMORPHOSIS, WordAssociation
 LASER, PRINTER, WordAssociation
 LAVA, MAGMA, Synonym
 LAW, ORDER, WordAssociation
+LEAP, YEAR, WordAssociation
+LEAST, MOST, Antonym
+LEAST, SQUARES, WordAssociation
 LEMUR, MADAGASCAR, WordAssociation
 LENGTH, MILE, WordAssociation
 LIGHT, SWITCH, WordAssociation
@@ -268175,12 +268200,16 @@ MAGMA, VOLCANO, WordAssociation
 MAGNITUDE, SIGNIFICANCE, Synonym
 MAGNITUDE, SIZE, Synonym
 MANTA, RAY, WordAssociation
+MARKET, SQUARE, WordAssociation
 MARS, PLANET, WordAssociation
 MARS, PROBE, WordAssociation
 MAX, PLANCK, WordAssociation
 MEDIA, PUNDIT, WordAssociation
 MEDIAN, MODE, WordAssociation
+MEMORY, RAM, WordAssociation
+MEMORY, REMEMBER, WordAssociation
 MILKY, WAY, WordAssociation
+MINERAL, ROCK, WordAssociation
 MOBILE, PHONE, WordAssociation
 MONO, PLURI, Antonym
 MOON, SATELLITE, WordAssociation
@@ -268199,6 +268228,7 @@ NEEDLE, THREAD, WordAssociation
 NIGHT, OWL, WordAssociation
 NIGHT, VISION, WordAssociation
 NIKOLA, TESLA, WordAssociation
+NONPOLAR, POLAR, WordAssociation
 NOODLES, RAMEN, WordAssociation
 NORTH, SOUTH, Antonym
 OFFSIDE, ONSIDE, Antonym
@@ -268214,6 +268244,8 @@ OVER, UNDER, Antonym
 OXIDATION, REDUCTION, WordAssociation
 OXIDATION, RUST, WordAssociation
 OXIDISE, REDUCE, Antonym
+OYSTER, PEARL, WordAssociation
+OYSTER, SHELL, WordAssociation
 PAMPER, SPOIL, Synonym
 PANEL, SOLAR, WordAssociation
 PANORAMIC, VIEW, WordAssociation
@@ -268246,6 +268278,7 @@ QUICK, SWIFT, Synonym
 RADAR, SONAR, WordAssociation
 RADIOACTIVE, URANIUM, WordAssociation
 RAFT, RIVER, WordAssociation
+RANK, STATUS, Synonym
 RASCAL, SCOUNDREL, Synonym
 RAY, STING, WordAssociation
 REACTION, REAGENTS, WordAssociation
@@ -268257,7 +268290,9 @@ RULE, SLIDE, WordAssociation
 SATURATION, SOLUBILITY, WordAssociation
 SATURATION, SOLUTION, WordAssociation
 SCALAR, VECTOR, WordAssociation
+SEAL, WAX, WordAssociation
 SHARK, WHALE, WordAssociation
+SHELL, TORTOISE, WordAssociation
 SIGHT, VISION, Synonym
 SKUNK, SMELL, WordAssociation
 SLEEP, SLUMBER, WordAssociation
