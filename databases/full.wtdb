@@ -94374,6 +94374,7 @@ GIBBOUS
 GIBBOUSLY
 GIBBOUSNESS
 GIBBOUSNESSES
+GIBBS
 GIBBSITE
 GIBBSITES
 GIBE
@@ -267824,6 +267825,8 @@ ALAN, TURING, WordAssociation
 ALESSANDRO, VOLTA, WordAssociation
 ALGEBRA, BOOLEAN, WordAssociation
 ALGEBRA, EQUATION, WordAssociation
+ALGORITHM, GREEDY, WordAssociation
+ALGORITHM, PROCEDURE, Synonym
 ALGORITHMIC, PROCEDURAL, Synonym
 ALLOCATION, DISTRIBUTION, Synonym
 ALLOCATION, RESOURCE, WordAssociation
@@ -267868,6 +267871,7 @@ BACON, PORK, WordAssociation
 BACTERIA, CYANO, WordAssociation
 BACTERIA, VIBRIOS, WordAssociation
 BANDIT, OUTLAW, Synonym
+BARBER, HAIRDRESSER, Synonym
 BASEBALL, PITCH, WordAssociation
 BASEBALL, SPORT, WordAssociation
 BEE, WAX, WordAssociation
@@ -267901,6 +267905,7 @@ BRAIN, STEM, WordAssociation
 BRASS, COPPER, WordAssociation
 BREAKFAST, CONTINENTAL, WordAssociation
 BREAKFAST, DINNER, WordAssociation
+BREED, REPRODUCE, Synonym
 BREEZE, WIND, Synonym
 BRIBE, CORRUPTION, WordAssociation
 BRIDE, GROOM, WordAssociation
@@ -267914,6 +267919,8 @@ BUNNY, EASTER, WordAssociation
 BUTCHER, CLEAVER, WordAssociation
 BUTTERFLY, METAMORPHOSIS, WordAssociation
 BUTTERFLY, MONARCH, WordAssociation
+CAGE, FARADAY, WordAssociation
+CAGE, RIB, WordAssociation
 CAMILLO, GOLGI, WordAssociation
 CAN, TIN, WordAssociation
 CANCER, TUMOR, Synonym
@@ -268047,6 +268054,9 @@ ELECTRON, POSITRON, WordAssociation
 ELECTRON, SPIN, WordAssociation
 EMMY, NOETHER, WordAssociation
 EMOTION, FEELING, Synonym
+ENDOCRINE, GLAND, WordAssociation
+ENDOCRINE, SYSTEM, WordAssociation
+ENERGY, GIBBS, WordAssociation
 ENERGY, LEVEL, WordAssociation
 ENERGY, SOURCE, WordAssociation
 ENGINE, STEAM, WordAssociation
@@ -268066,7 +268076,10 @@ EXPLOIT, FEAT, Synonym
 EYE, HURRICANE, WordAssociation
 EYE, SOCKET, WordAssociation
 FACTORY, WORKER, WordAssociation
+FAILURE, MARKET, WordAssociation
+FAILURE, SYSTEM, WordAssociation
 FAINT, QUIET, Synonym
+FARAWAY, LAND, WordAssociation
 FARSI, PERSIAN, Synonym
 FAST, SLOW, Antonym
 FASTER, SLOWER, Antonym
