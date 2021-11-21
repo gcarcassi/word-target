@@ -267857,6 +267857,8 @@ ARCHIMEDES, SCREW, WordAssociation
 AREA, PERIMETER, WordAssociation
 ARIA, OPERA, WordAssociation
 ARIAL, FONT, WordAssociation
+ARISTOCRACY, ELITE, Synonym
+ARISTOCRACY, NOBILITY, WordAssociation
 ARMED, DANGEROUS, WordAssociation
 ARTIFICIAL, FAKE, Synonym
 ARTIFICIAL, NATURAL, Antonym
@@ -267889,6 +267891,7 @@ BLACK, WHITE, Antonym
 BLADE, KNIFE, Synonym
 BLEATS, SHEEP, WordAssociation
 BLOCK, DIFFERENTIAL, WordAssociation
+BLOOD, DONER, WordAssociation
 BOND, POLAR, WordAssociation
 BONE, FEMUR, WordAssociation
 BOOLE, BOOLEAN, WordAssociation
@@ -267973,6 +267976,8 @@ COMPETITION, COOPERATION, Antonym
 COMPETITION, RACE, WordAssociation
 CONDITIONAL, CONTINGENT, Synonym
 CONDITIONAL, PROBABILITY, WordAssociation
+CONDUCTOR, SUPER, WordAssociation
+CONDUCTOR, TRAIN, WordAssociation
 CONFETTI, PARTY, WordAssociation
 CONFIRMATION, EVIDENCE, Synonym
 CONIFER, TREE, WordAssociation
@@ -267981,6 +267986,7 @@ CONSTANT, VARIABLE, Antonym
 CONSTRUCTION, CRANE, WordAssociation
 CONSTRUCTION, WORKER, WordAssociation
 CONTINENTAL, DRIFT, WordAssociation
+CONTOUR, LINE, WordAssociation
 COORDINATES, POLAR, WordAssociation
 COPERNICUS, HELIOCENTRISM, WordAssociation
 COPERNICUS, POLAND, WordAssociation
@@ -268021,6 +268027,7 @@ DIAMOND, DUST, WordAssociation
 DIFFERENTIAL, EQUATION, WordAssociation
 DIGRESSION, DISCURSION, WordAssociation
 DILEMMA, PRISONER, WordAssociation
+DINNER, SUPPER, Synonym
 DINOSAUR, JURASSIC, WordAssociation
 DINOSAUR, TITANOSAUR, WordAssociation
 DIRECTION, MAGNITUDE, WordAssociation
@@ -268053,7 +268060,9 @@ ELECTRIC, GUITAR, WordAssociation
 ELECTRIC, POWER, WordAssociation
 ELECTRICITY, STATIC, WordAssociation
 ELECTRON, MICROSCOPE, WordAssociation
+ELECTRON, MOBILITY, WordAssociation
 ELECTRON, POSITRON, WordAssociation
+ELECTRON, PROTON, WordAssociation
 ELECTRON, SPIN, WordAssociation
 EMMY, NOETHER, WordAssociation
 EMOTION, FEELING, Synonym
@@ -268091,6 +268100,7 @@ FAT, OIL, WordAssociation
 FELINE, SERVAL, WordAssociation
 FIBER, GLASS, WordAssociation
 FIELD, FORCE, WordAssociation
+FINE, PENALTY, WordAssociation
 FISH, SALMON, WordAssociation
 FISHING, HUNTING, WordAssociation
 FLAKE, SNOW, WordAssociation
@@ -268338,6 +268348,7 @@ SPRING, SUMMER, WordAssociation
 SPRING, WINTER, WordAssociation
 STEAM, VAPOR, WordAssociation
 STONE, TABLET, WordAssociation
+STRAIN, TENSILE, WordAssociation
 STRING, THEORY, WordAssociation
 THAT, THIS, WordAssociation
 TRANSPORTATION, VEHICLE, WordAssociation
