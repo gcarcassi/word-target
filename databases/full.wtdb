@@ -267947,6 +267947,8 @@ CELL, JAIL, WordAssociation
 CELL, ORGANELLE, WordAssociation
 CHANCE, PROBABILITY, Synonym
 CHEAP, EXPENSIVE, Antonym
+CHEMICAL, ENGINEERING, WordAssociation
+CHEMICAL, FORMULA, WordAssociation
 CHEMISTRY, LAVOISIER, WordAssociation
 CHEMISTRY, REACTION, WordAssociation
 CHILDREN, PARENTS, WordAssociation
@@ -267984,6 +267986,7 @@ COPERNICUS, HELIOCENTRISM, WordAssociation
 COPERNICUS, POLAND, WordAssociation
 CORAL, REEF, WordAssociation
 CORE, NUCLEAR, WordAssociation
+CORNEA, EYE, WordAssociation
 CORPS, PEACE, WordAssociation
 CORPSE, ZOMBIE, WordAssociation
 COVEN, WITCHES, WordAssociation
@@ -268063,6 +268066,7 @@ ENGINE, STEAM, WordAssociation
 ENGINEER, MECHANICAL, WordAssociation
 ENGINEER, NUCLEAR, WordAssociation
 ENGINEER, SOFTWARE, WordAssociation
+ENGINEERING, REVERSE, WordAssociation
 ENIGMA, TURING, WordAssociation
 ENSIFORM, LEAF, WordAssociation
 ENTICE, LURE, Synonym
@@ -268113,6 +268117,7 @@ FREEZE, THAW, Antonym
 FRIGHTEN, SPOOK, Synonym
 FRISKED, SEARCHED, Synonym
 FROG, RIBBIT, WordAssociation
+FUMAROLE, GEYSER, WordAssociation
 FUN, GAMES, WordAssociation
 FUNCTION, GRAPH, WordAssociation
 FUNCTION, LINEAR, WordAssociation
@@ -268167,6 +268172,7 @@ HONOR, VALOR, WordAssociation
 HOOKE, MICROSCOPE, WordAssociation
 HOOKE, ROBERT, WordAssociation
 HORDE, ZOMBIE, WordAssociation
+HORNET, NEST, WordAssociation
 HORSE, STEED, Synonym
 HYDROPHOBIC, NONPOLAR, WordAssociation
 HYPOTHESIS, THEORY, WordAssociation
@@ -268184,6 +268190,7 @@ IONIC, SOLID, WordAssociation
 IRON, MAIDEN, WordAssociation
 ISOTOPE, RADIOACTIVE, WordAssociation
 ISOTOPE, TRITIUM, WordAssociation
+JAM, PRESERVE, WordAssociation
 JAM, TOAST, WordAssociation
 JAMES, WATT, WordAssociation
 JAZZ, SWING, WordAssociation
@@ -268201,6 +268208,7 @@ LASER, PRINTER, WordAssociation
 LAVA, MAGMA, Synonym
 LAVA, VOLCANO, WordAssociation
 LAW, ORDER, WordAssociation
+LAW, THERMODYNAMICS, WordAssociation
 LEAP, YEAR, WordAssociation
 LEAST, MOST, Antonym
 LEAST, SQUARES, WordAssociation
@@ -268231,6 +268239,7 @@ MEDIA, PUNDIT, WordAssociation
 MEDIAN, MODE, WordAssociation
 MEMORY, RAM, WordAssociation
 MEMORY, REMEMBER, WordAssociation
+MESSY, NEAT, Antonym
 MILKY, WAY, WordAssociation
 MINERAL, ROCK, WordAssociation
 MOBILE, PHONE, WordAssociation
