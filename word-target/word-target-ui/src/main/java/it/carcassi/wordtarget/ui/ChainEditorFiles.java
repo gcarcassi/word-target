@@ -26,18 +26,21 @@ import javax.swing.Action;
 public class ChainEditorFiles {
 
     private final Preferences prefs = Preferences.userRoot().node(ChainEditor.class.getName());
-    private static String LAST_USED_DB = "LAST_USED_DB";
-    private static String CHAIN_FOLDER = "CHAIN_FOLDER";
-    private static String EXPORT_FOLDER = "EXPORT_FOLDER";
+    private static final String LAST_USED_DB = "LAST_USED_DB";
+    private static final String CHAIN_FOLDER = "CHAIN_FOLDER";
+    private static final String CHAIN_NAME = "CHAIN_NAME";
+    private static final String EXPORT_FOLDER = "EXPORT_FOLDER";
 
     private String databaseFilename;
     private String exportFolder;
     private String chainFolder;
+    private String chainName;
 
     public ChainEditorFiles() {
         databaseFilename = prefs.get(LAST_USED_DB, null);
         exportFolder = prefs.get(EXPORT_FOLDER, new File(".").getAbsolutePath());
         chainFolder = prefs.get(CHAIN_FOLDER, new File(".").getAbsolutePath());
+        chainName = prefs.get(CHAIN_NAME, "");
     }
 
     public WordDatabase loadDatabase() {
@@ -87,6 +90,15 @@ public class ChainEditorFiles {
     public void setChainFolder(String chainFolder) {
         this.chainFolder = chainFolder;
         prefs.put(CHAIN_FOLDER, chainFolder);
+    }
+
+    public String getChainName() {
+        return chainName;
+    }
+
+    public void setChainName(String chainName) {
+        this.chainName = chainName;
+        prefs.put(CHAIN_NAME, chainName);
     }
 
 }

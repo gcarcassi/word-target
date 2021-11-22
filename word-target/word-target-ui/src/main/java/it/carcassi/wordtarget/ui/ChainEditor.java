@@ -226,7 +226,7 @@ public class ChainEditor extends javax.swing.JFrame {
         saveChainAsButton.setAction(model.getSaveChainAsAction());
         saveChainAsButton.setText("Save chain as...");
 
-        exportChainButton.setAction(model.getExportChainAction());
+        exportChainButton.setAction(model.getExportDialogAction());
         exportChainButton.setText("Export...");
 
         reverseChainButton.setAction(model.getReverseCurrentChainAction());
@@ -368,20 +368,6 @@ public class ChainEditor extends javax.swing.JFrame {
     private void saveChainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChainButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_saveChainButtonActionPerformed
-
-//    private void saveDb() {
-//        if (!dbChanged || currentDbFile == null) {
-//            throw new IllegalStateException("Shouldn't be able to save db if not changed or no valid file was chosen");
-//        }
-//
-//        try ( BufferedWriter writer = new BufferedWriter(new FileWriter(currentDbFile))) {
-//            db.serialize(writer);
-//            setDbChanged(false);
-//        } catch (Exception ex) {
-//            Logger.getLogger(ChainEditor.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-
 
     /**
      * @param args the command line arguments

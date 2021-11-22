@@ -538,6 +538,100 @@ public class ChainEditorModel {
     
     public void exportChainAs(File file) {
     }
+    
+    private Action exportAndSaveChainAction = new AbstractAction("Export") {
 
+        {
+            updateEnabled();
+            chainSelectionModel.addListSelectionListener((e) -> {
+                updateEnabled();
+            });
+        }
+
+        private void updateEnabled() {
+            setEnabled(chainSelectionModel.getLeadSelectionIndex() >= 0);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (files.getChainName() != null && !files.getChainName().isBlank()) {
+                File chainFolder = new File(files.getChainFolder());
+                File exportFolder = new File(files.getExportFolder());
+                
+                File chainFile = new File(chainFolder, files.getChainName() + ".wtc");
+                File imageFile = new File(exportFolder, files.getChainName() + ".svg");
+                File solutionFile = new File(exportFolder, files.getChainName() + ".txt");
+                
+                try ( BufferedWriter writer = new BufferedWriter(new FileWriter(chainFile))) {
+                    getCurrentChain().serialize(writer);
+                } catch (IOException ex) {
+                    Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                try ( BufferedWriter writer = new BufferedWriter(new FileWriter(imageFile))) {
+                    List<String> words = new ArrayList<>(getCurrentChain().words().stream().map(x -> x.getText()).collect(Collectors.toList()));
+                    Collections.reverse(words);
+                    WordTargetLayout layout = new WordTargetLayout(words);
+                    layout.doLayout(new Random());
+                    writer.write(Renderer.renderWordTarget(layout));
+                    writer.flush();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex, "Can't export chain...", JOptionPane.ERROR_MESSAGE);
+                    Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                try ( BufferedWriter writer = new BufferedWriter(new FileWriter(solutionFile))) {
+                    List<String> words = new ArrayList<>(getCurrentChain().words().stream().map(x -> x.getText()).collect(Collectors.toList()));
+                    Collections.reverse(words);
+                    writer.write(words.get(0));
+                    for (int i = 1; i < words.size(); i++) {
+                        writer.write("\n");
+                        writer.write(words.get(i));
+                    }
+                    writer.flush();
+                } catch (IOException ex) {
+                    Logger.getLogger(WordDatabaseEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                try {
+                    Process proc = Runtime.getRuntime().exec("cmd /c start " + imageFile.getPath());
+                } catch (IOException ex) {
+                    Logger.getLogger(ChainEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    };
+
+    public Action getExportAndSaveChainAction() {
+        return exportAndSaveChainAction;
+    }
+    
+    private Action exportDialogAction = new AbstractAction("Export...") {
+
+        {
+            updateEnabled();
+            chainSelectionModel.addListSelectionListener((e) -> {
+                updateEnabled();
+            });
+        }
+
+        private void updateEnabled() {
+            setEnabled(chainSelectionModel.getLeadSelectionIndex() >= 0);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            ChainExportDialog dialog = new ChainExportDialog(null, true, ChainEditorModel.this);
+            dialog.setVisible(true);                    
+        }
+    };
+
+    public Action getExportDialogAction() {
+        return exportDialogAction;
+    }
+
+    public ChainEditorFiles getFiles() {
+        return files;
+    }
 
 }
