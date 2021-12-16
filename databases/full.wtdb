@@ -12037,6 +12037,7 @@ ARMREST
 ARMRESTS
 ARMS
 ARMSFUL
+ARMSTRONG
 ARMURE
 ARMURES
 ARMY
@@ -149154,6 +149155,7 @@ NEIGHBOURS
 NEIGHED
 NEIGHING
 NEIGHS
+NEIL
 NEINEI
 NEINEIS
 NEIST
@@ -267838,6 +267840,8 @@ ALWAYS, NEVER, Antonym
 AMERICA, ASIA, WordAssociation
 AMERICAN, FOOTBALL, WordAssociation
 ANCESTRIES, DESCENDANTS, WordAssociation
+ANGEL, DEMON, Antonym
+ANGER, MANAGEMENT, WordAssociation
 ANGLE, RADIAN, WordAssociation
 ANGLE, RIGHT, WordAssociation
 ANGLO, SAXON, WordAssociation
@@ -267862,10 +267866,13 @@ ARIAL, FONT, WordAssociation
 ARISTOCRACY, ELITE, Synonym
 ARISTOCRACY, NOBILITY, WordAssociation
 ARMED, DANGEROUS, WordAssociation
+ARMSTRONG, NEIL, WordAssociation
+ARMSTRONG, TRUMPET, WordAssociation
 ARTIFICIAL, FAKE, Synonym
 ARTIFICIAL, NATURAL, Antonym
 ATTACK, OFFENSIVE, Synonym
 ATTACK, PANIC, WordAssociation
+AUTISM, SPECTRUM, WordAssociation
 AUTUMN, SPRING, WordAssociation
 AWARD, EMMY, WordAssociation
 AXON, NERVE, WordAssociation
@@ -267988,6 +267995,7 @@ CONDITIONAL, CONTINGENT, Synonym
 CONDITIONAL, PROBABILITY, WordAssociation
 CONDUCTOR, SUPER, WordAssociation
 CONDUCTOR, TRAIN, WordAssociation
+CONES, RODS, WordAssociation
 CONFETTI, PARTY, WordAssociation
 CONFIRMATION, EVIDENCE, Synonym
 CONIFER, TREE, WordAssociation
@@ -268005,6 +268013,7 @@ CORE, NUCLEAR, WordAssociation
 CORNEA, EYE, WordAssociation
 CORPS, PEACE, WordAssociation
 CORPSE, ZOMBIE, WordAssociation
+COSINE, SINE, WordAssociation
 COVEN, WITCHES, WordAssociation
 COW, LEATHER, WordAssociation
 COW, UDDER, WordAssociation
@@ -268232,6 +268241,7 @@ LAW, THERMODYNAMICS, WordAssociation
 LEAP, YEAR, WordAssociation
 LEAST, MOST, Antonym
 LEAST, SQUARES, WordAssociation
+LEMON, ZEST, WordAssociation
 LEMUR, MADAGASCAR, WordAssociation
 LENGTH, MILE, WordAssociation
 LIGHT, SWITCH, WordAssociation
@@ -268330,6 +268340,7 @@ PROBLEM, SOLUTION, WordAssociation
 PROBLEM, SOLVER, WordAssociation
 PROCEDURAL, PROGRAMMING, WordAssociation
 PROOF, THEOREM, WordAssociation
+PROPOSE, SUBMIT, Synonym
 PUBLIC, TRANSPORT, WordAssociation
 QUEEN, THRONE, WordAssociation
 QUICK, SWIFT, Synonym
@@ -268340,6 +268351,7 @@ RANK, STATUS, Synonym
 RASCAL, SCOUNDREL, Synonym
 RAY, STING, WordAssociation
 REACTION, REAGENTS, WordAssociation
+REPOSE, REST, Synonym
 RESEARCH, SCIENTIFIC, WordAssociation
 RESTAURANT, WAITER, WordAssociation
 REVOLUTION, SCIENTIFIC, WordAssociation
