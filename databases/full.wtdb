@@ -132377,6 +132377,7 @@ LUTETIUMS
 LUTEUM
 LUTFISK
 LUTFISKS
+LUTHER
 LUTHERN
 LUTHERNS
 LUTHIER
@@ -267920,6 +267921,7 @@ BOXER, PUNCHER, Synonym
 BRAIN, HEMISPHERE, WordAssociation
 BRAIN, STEM, WordAssociation
 BRASS, COPPER, WordAssociation
+BREADED, SHRIMP, WordAssociation
 BREAKFAST, CONTINENTAL, WordAssociation
 BREAKFAST, DINNER, WordAssociation
 BREED, REPRODUCE, Synonym
@@ -267983,6 +267985,8 @@ CLEAN, UNCLEAN, Antonym
 CLUE, EVIDENCE, Synonym
 COAL, COLLIER, WordAssociation
 COARSE, GRAINED, WordAssociation
+COCKTAIL, MARTINI, WordAssociation
+COCKTAIL, SHRIMP, WordAssociation
 CODE, MORSE, WordAssociation
 COEFFICIENT, FRICTION, WordAssociation
 COIL, TESLA, WordAssociation
@@ -268063,6 +268067,7 @@ DOPPLER, RADAR, WordAssociation
 DOPPLER, SHIFT, WordAssociation
 DRAFT, MILITARY, WordAssociation
 DRAW, ILLUSTRATE, Synonym
+DREADED, FEARED, Synonym
 DREAM, SLEEP, WordAssociation
 DWARF, SHORT, WordAssociation
 DWARF, WHITE, WordAssociation
@@ -268087,9 +268092,11 @@ EMMY, NOETHER, WordAssociation
 EMOTION, FEELING, Synonym
 ENDOCRINE, GLAND, WordAssociation
 ENDOCRINE, SYSTEM, WordAssociation
+ENERGY, FREE, WordAssociation
 ENERGY, GIBBS, WordAssociation
 ENERGY, LEVEL, WordAssociation
 ENERGY, SOURCE, WordAssociation
+ENERGY, TRANSFER, WordAssociation
 ENGINE, STEAM, WordAssociation
 ENGINEER, MECHANICAL, WordAssociation
 ENGINEER, NUCLEAR, WordAssociation
@@ -268102,6 +268109,8 @@ ENTIRE, WHOLE, Synonym
 EQUILATERAL, TRIANGLE, WordAssociation
 EVIDENCE, EXPERIMENTAL, WordAssociation
 EVOLUTION, SPECIES, WordAssociation
+EXPANSION, GROWTH, Synonym
+EXPANSION, UNIVERSE, WordAssociation
 EXPERIMENTAL, TEST, WordAssociation
 EXPERIMENTAL, THEORETICAL, Antonym
 EXPLOIT, FEAT, Synonym
@@ -268179,6 +268188,7 @@ GRAIN, RICE, WordAssociation
 GRAMMAR, TRIVIUM, WordAssociation
 GRAVE, TOMB, Synonym
 GRIFFIN, MANTICORE, WordAssociation
+GROWTH, STUNTED, WordAssociation
 GUITAR, STRINGS, WordAssociation
 GUNPOWDER, NITER, WordAssociation
 HADRON, QUARK, WordAssociation
@@ -268234,6 +268244,7 @@ LADDER, RUNG, WordAssociation
 LANDER, LUNAR, WordAssociation
 LARVA, METAMORPHOSIS, WordAssociation
 LASER, PRINTER, WordAssociation
+LATHER, SOAP, WordAssociation
 LAVA, MAGMA, Synonym
 LAVA, VOLCANO, WordAssociation
 LAW, ORDER, WordAssociation
@@ -268253,6 +268264,7 @@ LIZARD, REPTILE, WordAssociation
 LOCOMOTIVE, TRAIN, WordAssociation
 LOSER, WINNER, WordAssociation
 LUIGI, MARIO, WordAssociation
+LUTHER, MARTIN, WordAssociation
 MADRID, SPAIN, WordAssociation
 MAGE, WIZARD, Synonym
 MAGES, WIZARDS, Synonym
@@ -268278,7 +268290,9 @@ MOON, SATELLITE, WordAssociation
 MOTION, REST, Antonym
 MOUNTAIN, PEAK, WordAssociation
 MOVIE, TRAILER, WordAssociation
+MUSIC, NOTE, WordAssociation
 MUSIC, OPERA, WordAssociation
+MUSIC, SOUL, WordAssociation
 MUZZLE, SNOUT, Synonym
 MYSTERY, PROBLEM, Synonym
 NARCOTIZE, SEDATE, Synonym
@@ -268375,6 +268389,7 @@ STEAM, VAPOR, WordAssociation
 STONE, TABLET, WordAssociation
 STRAIN, TENSILE, WordAssociation
 STRING, THEORY, WordAssociation
+STUDENT, TRANSFER, WordAssociation
 THAT, THIS, WordAssociation
 TRANSPORTATION, VEHICLE, WordAssociation
 UNCLEAR, VAGUE, Synonym
