@@ -267998,6 +267998,7 @@ COCKTAIL, MARTINI, WordAssociation
 COCKTAIL, SHRIMP, WordAssociation
 CODE, MORSE, WordAssociation
 COEFFICIENT, FRICTION, WordAssociation
+COIL, SOLENOID, WordAssociation
 COIL, TESLA, WordAssociation
 COLD, PRESSED, WordAssociation
 COLLIDER, HADRON, WordAssociation
@@ -268022,6 +268023,7 @@ CONTOUR, LINE, WordAssociation
 COORDINATES, POLAR, WordAssociation
 COPERNICUS, HELIOCENTRISM, WordAssociation
 COPERNICUS, POLAND, WordAssociation
+COPY, REPRODUCE, Synonym
 CORAL, REEF, WordAssociation
 CORE, NUCLEAR, WordAssociation
 CORNEA, EYE, WordAssociation
@@ -268068,6 +268070,8 @@ DISABILITY, HANDICAP, WordAssociation
 DISCUSSION, PANEL, WordAssociation
 DISTANCE, MILE, WordAssociation
 DISTANCE, WALKING, WordAssociation
+DISTANT, FUTURE, WordAssociation
+DISTANT, REMOTE, Synonym
 DISTRIBUTION, LOGARITHMIC, WordAssociation
 DOG, POODLE, WordAssociation
 DONOR, ORGAN, WordAssociation
@@ -268242,6 +268246,8 @@ INCANDESCENT, RADIANT, Synonym
 INJECT, SYRINGE, WordAssociation
 INSECTS, SWARMS, WordAssociation
 INSIGNIFICANCE, SIGNIFICANCE, Antonym
+INTERNET, INTRANET, WordAssociation
+INTERNET, PROTOCOL, WordAssociation
 INTESTINE, LARGE, WordAssociation
 INTESTINE, ORGAN, WordAssociation
 INTRODUCE, PRESENT, Synonym
@@ -268290,6 +268296,8 @@ MAGE, WIZARD, Synonym
 MAGES, WIZARDS, Synonym
 MAGIC, SPELL, WordAssociation
 MAGMA, VOLCANO, WordAssociation
+MAGNET, PERMANENT, WordAssociation
+MAGNET, SOLENOID, WordAssociation
 MAGNITUDE, SIGNIFICANCE, Synonym
 MAGNITUDE, SIZE, Synonym
 MANTA, RAY, WordAssociation
@@ -268302,9 +268310,11 @@ MEDIAN, MODE, WordAssociation
 MEMORY, RAM, WordAssociation
 MEMORY, REMEMBER, WordAssociation
 MESSY, NEAT, Antonym
+METER, MILE, WordAssociation
 MILKY, WAY, WordAssociation
 MILL, STUART, WordAssociation
 MINERAL, ROCK, WordAssociation
+MISSILE, SILO, WordAssociation
 MOBILE, PHONE, WordAssociation
 MONO, PLURI, Antonym
 MOON, SATELLITE, WordAssociation
@@ -268355,6 +268365,7 @@ PASCAL, TRIANGLE, WordAssociation
 PAST, PRESENT, Antonym
 PEACE, WAR, Antonym
 PEPPER, SALT, WordAssociation
+PERMANENT, TRANSIENT, Antonym
 PLANE, WRIGHT, WordAssociation
 PLATE, TECTONIC, WordAssociation
 PLAY, RECORD, Antonym
@@ -268376,6 +268387,7 @@ PROBLEM, PUZZLE, Synonym
 PROBLEM, SOLUTION, WordAssociation
 PROBLEM, SOLVER, WordAssociation
 PROCEDURAL, PROGRAMMING, WordAssociation
+PROCEDURE, PROTOCOL, WordAssociation
 PROOF, THEOREM, WordAssociation
 PROPOSE, SUBMIT, Synonym
 PUBLIC, TRANSPORT, WordAssociation
