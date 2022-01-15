@@ -78590,6 +78590,8 @@ EUROMARKET
 EUROMARKETS
 EURONOTE
 EURONOTES
+EUROPA
+EUROPE
 EUROPEANISE
 EUROPEANISED
 EUROPEANISES
@@ -121787,6 +121789,7 @@ JUPATI
 JUPATIS
 JUPE
 JUPES
+JUPITER
 JUPON
 JUPONS
 JURA
@@ -267874,6 +267877,8 @@ ARISTOCRACY, NOBILITY, WordAssociation
 ARMED, DANGEROUS, WordAssociation
 ARMSTRONG, NEIL, WordAssociation
 ARMSTRONG, TRUMPET, WordAssociation
+ARRANGEMENT, FLORAL, WordAssociation
+ARRANGEMENT, MUSIC, WordAssociation
 ARTIFICIAL, FAKE, Synonym
 ARTIFICIAL, NATURAL, Antonym
 ATTACK, OFFENSIVE, Synonym
@@ -268018,7 +268023,9 @@ CONSTANT, PLANCK, WordAssociation
 CONSTANT, VARIABLE, Antonym
 CONSTRUCTION, CRANE, WordAssociation
 CONSTRUCTION, WORKER, WordAssociation
+CONTINENT, EUROPE, WordAssociation
 CONTINENTAL, DRIFT, WordAssociation
+CONTINGENT, TROOP, WordAssociation
 CONTOUR, LINE, WordAssociation
 COORDINATES, POLAR, WordAssociation
 COPERNICUS, HELIOCENTRISM, WordAssociation
@@ -268073,6 +268080,7 @@ DISTANCE, WALKING, WordAssociation
 DISTANT, FUTURE, WordAssociation
 DISTANT, REMOTE, Synonym
 DISTRIBUTION, LOGARITHMIC, WordAssociation
+DOE, FAWN, WordAssociation
 DOG, POODLE, WordAssociation
 DONOR, ORGAN, WordAssociation
 DOOR, LOCKED, WordAssociation
@@ -268085,6 +268093,7 @@ DRAFT, MILITARY, WordAssociation
 DRAW, ILLUSTRATE, Synonym
 DREADED, FEARED, Synonym
 DREAM, SLEEP, WordAssociation
+DROP, EYE, WordAssociation
 DWARF, SHORT, WordAssociation
 DWARF, WHITE, WordAssociation
 EARTH, PLANET, WordAssociation
@@ -268125,6 +268134,7 @@ ENTIRE, WHOLE, Synonym
 EQUILATERAL, TRIANGLE, WordAssociation
 EQUINOX, FALL, WordAssociation
 EQUINOX, SOLSTICE, WordAssociation
+EUROPA, JUPITER, WordAssociation
 EVIDENCE, EXPERIMENTAL, WordAssociation
 EVOLUTION, SPECIES, WordAssociation
 EXPANSION, GROWTH, Synonym
@@ -268143,6 +268153,7 @@ FARSI, PERSIAN, Synonym
 FAST, SLOW, Antonym
 FASTER, SLOWER, Antonym
 FAT, OIL, WordAssociation
+FAUNA, FLORA, WordAssociation
 FELINE, SERVAL, WordAssociation
 FIBER, GLASS, WordAssociation
 FIELD, FORCE, WordAssociation
@@ -268264,6 +268275,7 @@ JOUST, KNIGHT, WordAssociation
 JOUST, KNIGHTS, WordAssociation
 JUNCTION, TRAIN, WordAssociation
 JUNGLE, RAINFOREST, WordAssociation
+JUPITER, PIONEER, WordAssociation
 JURASSIC, PERIOD, WordAssociation
 KING, MONARCH, Synonym
 LADDER, RUNG, WordAssociation
@@ -268366,6 +268378,7 @@ PAST, PRESENT, Antonym
 PEACE, WAR, Antonym
 PEPPER, SALT, WordAssociation
 PERMANENT, TRANSIENT, Antonym
+PIONEER, SETTLER, WordAssociation
 PLANE, WRIGHT, WordAssociation
 PLATE, TECTONIC, WordAssociation
 PLAY, RECORD, Antonym
