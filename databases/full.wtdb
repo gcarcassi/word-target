@@ -267949,6 +267949,7 @@ BROOM, SWEEP, WordAssociation
 BROTH, SOUP, WordAssociation
 BROTHERS, WRIGHT, WordAssociation
 BUNNY, EASTER, WordAssociation
+BURROW, DEN, Synonym
 BUTCHER, CLEAVER, WordAssociation
 BUTTERFLY, METAMORPHOSIS, WordAssociation
 BUTTERFLY, MONARCH, WordAssociation
@@ -267980,6 +267981,8 @@ CELL, JAIL, WordAssociation
 CELL, ORGANELLE, WordAssociation
 CELL, SOLAR, WordAssociation
 CHANCE, PROBABILITY, Synonym
+CHANGE, CLIMATE, WordAssociation
+CHARGE, STATIC, WordAssociation
 CHEAP, EXPENSIVE, Antonym
 CHEMICAL, ENGINEERING, WordAssociation
 CHEMICAL, FORMULA, WordAssociation
@@ -268040,6 +268043,7 @@ COSINE, SINE, WordAssociation
 COVEN, WITCHES, WordAssociation
 COW, LEATHER, WordAssociation
 COW, UDDER, WordAssociation
+CRAMP, MUSCLE, WordAssociation
 CRANIUM, SKULL, WordAssociation
 CRANKY, GRUMPY, Synonym
 CREATION, DESTRUCTION, Antonym
@@ -268082,6 +268086,7 @@ DISTANT, REMOTE, Synonym
 DISTRIBUTION, LOGARITHMIC, WordAssociation
 DOE, FAWN, WordAssociation
 DOG, POODLE, WordAssociation
+DOG, THERAPY, WordAssociation
 DONOR, ORGAN, WordAssociation
 DOOR, LOCKED, WordAssociation
 DOPPLER, EFFECT, WordAssociation
@@ -268156,6 +268161,7 @@ FAT, OIL, WordAssociation
 FAUNA, FLORA, WordAssociation
 FELINE, SERVAL, WordAssociation
 FIBER, GLASS, WordAssociation
+FIBER, MUSCLE, WordAssociation
 FIELD, FORCE, WordAssociation
 FINE, PENALTY, WordAssociation
 FINISH, START, Antonym
@@ -268219,6 +268225,7 @@ GRAIL, HOLY, WordAssociation
 GRAIN, RICE, WordAssociation
 GRAMMAR, TRIVIUM, WordAssociation
 GRAVE, TOMB, Synonym
+GRIEF, SORROW, Synonym
 GRIFFIN, MANTICORE, WordAssociation
 GROWTH, STUNTED, WordAssociation
 GUITAR, STRINGS, WordAssociation
@@ -268313,12 +268320,14 @@ MAGNET, SOLENOID, WordAssociation
 MAGNITUDE, SIGNIFICANCE, Synonym
 MAGNITUDE, SIZE, Synonym
 MANTA, RAY, WordAssociation
+MANTIS, SHRIMP, WordAssociation
 MARKET, SQUARE, WordAssociation
 MARS, PLANET, WordAssociation
 MARS, PROBE, WordAssociation
 MAX, PLANCK, WordAssociation
 MEDIA, PUNDIT, WordAssociation
 MEDIAN, MODE, WordAssociation
+MEDICAL, TREATMENT, WordAssociation
 MEMORY, RAM, WordAssociation
 MEMORY, REMEMBER, WordAssociation
 MESSY, NEAT, Antonym
@@ -268442,6 +268451,7 @@ STRAIN, TENSILE, WordAssociation
 STRING, THEORY, WordAssociation
 STUDENT, TRANSFER, WordAssociation
 THAT, THIS, WordAssociation
+THERAPY, TREATMENT, Synonym
 TRANSPORTATION, VEHICLE, WordAssociation
 UNCLEAR, VAGUE, Synonym
 VACUOLE, VESICLE, WordAssociation
